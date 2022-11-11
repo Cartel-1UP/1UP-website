@@ -17,6 +17,9 @@ module.exports = {
     'next',
     'next/core-web-vitals',
   ],
+  globals: {
+    React: 'readonly',
+  },
   rules: {
     'prettier/prettier': 'error',
     'react/react-in-jsx-scope': 'off',

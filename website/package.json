@@ -9,7 +9,13 @@
     "serve": "next start",
     "analyze": "cross-env ANALYZE=true next build",
     "lint": "next lint --fix --dir pages --dir components --dir lib --dir layouts --dir scripts",
+    "prettier": "prettier --write .",
     "prepare": "husky install"
+  },
+  "engines": {
+    "node": ">=14.0.0",
+    "yarn": ">=1.22.0",
+    "npm": "please-use-yarn"
   },
   "dependencies": {
     "@fontsource/inter": "4.5.2",
@@ -58,7 +64,7 @@
     "eslint-plugin-prettier": "^3.3.1",
     "file-loader": "^6.0.0",
     "globby": "11.0.3",
-    "husky": "^6.0.0",
+    "husky": "^8.0.2",
     "inquirer": "^8.1.1",
     "lint-staged": "^11.0.0",
     "next-remote-watch": "^1.0.0",
