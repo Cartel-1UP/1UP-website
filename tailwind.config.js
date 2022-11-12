@@ -1,18 +1,18 @@
 /** @type {import('tailwindcss').Config} */
-import { fontFamily as _fontFamily } from 'tailwindcss/defaultTheme';
-import { teal, neutral } from 'tailwindcss/colors';
+import { fontFamily as _fontFamily } from 'tailwindcss/defaultTheme'
+import { teal, neutral } from 'tailwindcss/colors'
 
 export const experimental = {
   optimizeUniversalDefaults: true,
-};
+}
 export const content = [
   './pages/**/*.js',
   './components/**/*.js',
   './layouts/**/*.js',
   './lib/**/*.js',
   './data/**/*.mdx',
-];
-export const darkMode = 'class';
+]
+export const darkMode = 'class'
 export const theme = {
   extend: {
     spacing: {
@@ -163,8 +163,5 @@ export const theme = {
       },
     }),
   },
-};
-export const plugins = [
-  require('@tailwindcss/forms'),
-  require('@tailwindcss/typography'),
-];
+}
+export const plugins = [require('@tailwindcss/forms'), require('@tailwindcss/typography')]
