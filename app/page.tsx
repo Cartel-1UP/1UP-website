@@ -1,7 +1,14 @@
+import Image from 'next/image'
+import styles from './page.module.css'
+
 export default function Home() {
   return (
-    <div className="flex justify-center pt-10 text-xl ">
-      Hello to OneUp Cartel
+    <div>
+      <main>
+        Hello OneUp!
+      </main>
+      <footer>
+      </footer>
     </div>
   )
 }
