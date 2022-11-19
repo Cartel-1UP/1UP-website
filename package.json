@@ -16,6 +16,13 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@emotion/react": "^11.10.5",
+    "@mantine/core": "^5.8.2",
+    "@mantine/ds": "^5.8.2",
+    "@mantine/hooks": "^5.8.2",
+    "@mantine/prism": "^5.8.2",
+    "@mantine/styles": "^5.8.2",
+    "@tabler/icons": "^1.112.0",
     "@types/node": "18.11.9",
     "@types/react": "18.0.25",
     "@types/react-dom": "18.0.9",
