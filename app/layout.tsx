@@ -1,4 +1,4 @@
-import { WebHeader } from "../components/Header/Header";
+import { WebHeader } from '../components/Header/Header'
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -9,9 +9,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       */}
       <head />
       <body>
-        <WebHeader/>
+        <WebHeader />
         {children}
-        </body>
+      </body>
     </html>
   )
 }

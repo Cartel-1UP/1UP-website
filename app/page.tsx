@@ -1,8 +1,11 @@
+import { ArticlesCardsGrid } from "../components/CardsGrid/CardsGrid";
 
 export default function Home() {
   return (
     <div>
-      <main></main>
+      <main>
+        <ArticlesCardsGrid/>
+      </main>
       <footer></footer>
     </div>
   )
