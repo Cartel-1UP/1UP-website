@@ -1,11 +1,11 @@
 'use client'
 
-import { ActionIcon, useMantineColorScheme } from '@mantine/core';
-import { IconMoonStars, IconSun } from '@tabler/icons';
+import { ActionIcon, useMantineColorScheme } from '@mantine/core'
+import { IconMoonStars, IconSun } from '@tabler/icons'
 
 export function ToggleColor() {
-  const { colorScheme, toggleColorScheme } = useMantineColorScheme();
-  const dark = colorScheme === 'dark';
+  const { colorScheme, toggleColorScheme } = useMantineColorScheme()
+  const dark = colorScheme === 'dark'
 
   return (
     <ActionIcon
@@ -16,6 +16,5 @@ export function ToggleColor() {
     >
       {dark ? <IconSun size={18} /> : <IconMoonStars size={18} />}
     </ActionIcon>
-  );
+  )
 }
-

@@ -16,7 +16,7 @@ import {
   SimpleGrid,
   Text,
   ThemeIcon,
-  UnstyledButton
+  UnstyledButton,
 } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
 import { IconChevronDown } from '@tabler/icons'
@@ -110,7 +110,7 @@ export function WebHeader() {
 
           <Group className={classes.hiddenMobile}>
             <Button>Log in</Button>
-            <ToggleColor/>
+            <ToggleColor />
           </Group>
 
           <Burger opened={drawerOpened} onClick={toggleDrawer} className={classes.hiddenDesktop} />
