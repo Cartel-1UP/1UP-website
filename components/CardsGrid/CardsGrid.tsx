@@ -7,7 +7,7 @@ export function ArticlesCardsGrid() {
   const { classes, theme } = useStyles()
 
   const cards = mockdata.map((article) => (
-    <Card key={article.title} p="md" radius="md" component="a" href="#" className={classes.card} >
+    <Card key={article.title} p="md" radius="md" component="a" href="#" className={classes.card}>
       <Text color="dimmed" size="xs" transform="uppercase" weight={700} mt="md">
         Tags: [ {article.category} ]
       </Text>
