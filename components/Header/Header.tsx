@@ -16,13 +16,30 @@ import {
   SimpleGrid,
   Text,
   ThemeIcon,
-  UnstyledButton,
+  UnstyledButton
 } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
 import { IconChevronDown } from '@tabler/icons'
 import useStyles from '.'
 import { ToggleColor } from '../ToggleColor/ToggleColor'
 import { mockdata } from './data'
+
+
+declare global {
+  interface Window {
+    hive_keychain: any; // 👈️ turn off type checking
+  }
+}
+
+const send_handshake = async () =>
+{
+    let keychain = window.hive_keychain;
+
+    keychain.requestHandshake(function () {
+      console.log('Handshake received!');
+    });
+
+};
 
 export function WebHeader() {
   const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] = useDisclosure(false)
@@ -48,7 +65,7 @@ export function WebHeader() {
   ))
 
   return (
-    <Box pb={120}>
+    <Box pb={20}>
       <Header height={60} px="md">
         <Group position="apart" sx={{ height: '100%' }}>
           <Group sx={{ height: '100%' }} spacing={0} className={classes.hiddenMobile}>
@@ -109,7 +126,7 @@ export function WebHeader() {
           </Group>
 
           <Group className={classes.hiddenMobile}>
-            <Button>Log in</Button>
+            <Button onClick={send_handshake}>Log in</Button>
             <ToggleColor />
           </Group>
 
