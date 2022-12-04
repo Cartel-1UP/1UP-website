@@ -1,6 +1,5 @@
 import create from 'zustand';
-import { devtools } from 'zustand/middleware';
-import { immer } from '../immerMiddleware';
+import { immer } from 'zustand/middleware/immer';
 
 type AuthorizationStoreState = {
   authorized: boolean;
@@ -9,28 +8,25 @@ type AuthorizationStoreState = {
   setCurrentUserName: (name: string) => void;
   setAuthorized: (flag: boolean) => void;
 };
-export const useAuthorizationStore = create<AuthorizationStoreState>(
-  devtools(
-    immer((set) => ({
-      currentUserName: '',
-      authorized: false,
-      logoutUser: () => {
-        set((state) => {
-          state.authorized = false;
-        });
-      },
-      setCurrentUserName: (name) => {
-        set((state) => {
-          state.currentUserName = name;
-        });
-      },
-      setAuthorized: (flag) => {
-        set((state) => {
-          state.authorized = flag;
-        });
-      },
-    }))
-  )
-);
+
+const useAuthorizationStore = create<AuthorizationStoreState>()(immer((set) => ({
+  currentUserName: '',
+  authorized: false,
+  logoutUser: () => {
+    set((state) => {
+      state.authorized = false;
+    });
+  },
+  setCurrentUserName: (name) => {
+    set((state) => {
+      state.currentUserName = name;
+    });
+  },
+  setAuthorized: (flag) => {
+    set((state) => {
+      state.authorized = flag;
+    });
+  },
+})))
 
 export const { logoutUser, setCurrentUserName, setAuthorized } = useAuthorizationStore.getState();
