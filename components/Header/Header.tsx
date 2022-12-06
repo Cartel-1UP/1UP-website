@@ -23,23 +23,7 @@ import { IconChevronDown } from '@tabler/icons'
 import useStyles from '.'
 import { ToggleColor } from '../ToggleColor/ToggleColor'
 import { mockdata } from './data'
-
-
-declare global {
-  interface Window {
-    hive_keychain: any; // 👈️ turn off type checking
-  }
-}
-
-const send_handshake = async () =>
-{
-    let keychain = window.hive_keychain;
-
-    keychain.requestHandshake(function () {
-      console.log('Handshake received!');
-    });
-
-};
+import LoginButton from './LoginButton/LoginButton'
 
 export function WebHeader() {
   const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] = useDisclosure(false)
@@ -126,14 +110,13 @@ export function WebHeader() {
           </Group>
 
           <Group className={classes.hiddenMobile}>
-            <Button onClick={send_handshake}>Log in</Button>
+            <LoginButton/>
             <ToggleColor />
           </Group>
 
           <Burger opened={drawerOpened} onClick={toggleDrawer} className={classes.hiddenDesktop} />
         </Group>
       </Header>
-
       <Drawer
         opened={drawerOpened}
         onClose={closeDrawer}

@@ -1,10 +1,6 @@
 import Axios from 'axios';
 import { logoutUser } from '../zustand/stores/useAuthorizationStore';
 
-
-
-const baseURL = 'http://10.1.212.46:10770/api/';
-
 const api = Axios.create({
   baseURL: "http://localhost:4000",
   headers: {
