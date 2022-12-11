@@ -2,7 +2,8 @@
 
 import { Button, Dialog, Group, Text, TextInput } from "@mantine/core";
 import { useState } from "react";
-import api from "../../../utils/api";
+import { useMutation, useQueryClient } from "react-query";
+import loginKeychain from "../../../utils/actions/login";
 
 declare global {
   interface Window {
@@ -16,31 +17,39 @@ type Login = {
   loginType?: string
 }
 
+const isKeychain = () => {
+  return !!window.hive_keychain
+}
+
+
+
 function LoginButton() {
+
+  const queryClient = useQueryClient()
+  const mutation = useMutation('auth', () =>
+  fetch('/api/auth').then(res =>
+    res.json()
+  ),{
+    onSuccess: () => {
+      queryClient.invalidateQueries('auth')
+    },
+  })
+
   
   const [state, setState] = useState<Login>({username:'', error:'', loginType:''})
   const [opened, setOpened] = useState(false);
+  const [value, setValue] = useState('');
   
 
-  const sendLoginToken = async () =>
+
+  const loginUser = async () =>
   {
+    if(isKeychain()){
+      loginKeychain(value)
 
-      let keychain = window.hive_keychain;
-      let memo = (await api.post('/auth', {username: state.username})).data;
-
-      if (memo.status === "ok")
-      {
-          keychain.requestVerifyKey(state.username, memo.message, "Posting", (response: { success?: boolean; result?: any; }) => {
-              if (response.success === true)
-              {
-                console.log("Login")
-              }
-          });
-      } else
-      {
-        setState({error : "There was an error with the backend server, please try again"});
-      }
-
+    }else{
+      console.log("You have to install keychain")
+    }
   };
 
 
@@ -64,8 +73,8 @@ function LoginButton() {
       </Text>
 
       <Group align="flex-end">
-        <TextInput placeholder="username" style={{ flex: 1 }} />
-        <Button onClick={() => {setOpened(false); sendLoginToken()}}>Log in</Button>
+        <TextInput placeholder="username" value={value} style={{ flex: 1 }} onChange={(event) => setValue(event.currentTarget.value)}/>
+        <Button onClick={() => {setOpened(false); loginUser()}}>Log in</Button>
       </Group>
     </Dialog>
     </>

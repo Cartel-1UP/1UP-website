@@ -3,23 +3,23 @@ import { immer } from 'zustand/middleware/immer';
 
 type AuthorizationStoreState = {
   authorized: boolean;
-  currentUserName: string;
+  username: string;
   logoutUser: () => void;
-  setCurrentUserName: (name: string) => void;
+  setUsername: (name: string) => void;
   setAuthorized: (flag: boolean) => void;
 };
 
 const useAuthorizationStore = create<AuthorizationStoreState>()(immer((set) => ({
-  currentUserName: '',
+  username: '',
   authorized: false,
   logoutUser: () => {
     set((state) => {
       state.authorized = false;
     });
   },
-  setCurrentUserName: (name) => {
+  setUsername: (name) => {
     set((state) => {
-      state.currentUserName = name;
+      state.username = name;
     });
   },
   setAuthorized: (flag) => {
@@ -29,4 +29,4 @@ const useAuthorizationStore = create<AuthorizationStoreState>()(immer((set) => (
   },
 })))
 
-export const { logoutUser, setCurrentUserName, setAuthorized } = useAuthorizationStore.getState();
+export const { logoutUser, setUsername, setAuthorized } = useAuthorizationStore.getState();
