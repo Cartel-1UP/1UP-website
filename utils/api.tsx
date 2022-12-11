@@ -2,7 +2,7 @@ import Axios from 'axios';
 import { logoutUser } from '../zustand/stores/useAuthorizationStore';
 
 const api = Axios.create({
-  baseURL: "http://localhost:4000",
+  baseURL: "http://localhost:3000",
   headers: {
     'Content-Type': 'application/json',
     accept: 'application/json',
