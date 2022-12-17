@@ -9,7 +9,7 @@ type AuthorizationStoreState = {
   setAuthorized: (flag: boolean) => void;
 };
 
-const useAuthorizationStore = create<AuthorizationStoreState>()(immer((set) => ({
+export const useAuthorizationStore = create<AuthorizationStoreState>()(immer((set) => ({
   username: '',
   authorized: false,
   logoutUser: () => {
