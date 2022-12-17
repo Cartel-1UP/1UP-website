@@ -1,0 +1,58 @@
+export const mockdata = [
+  {
+    author: 'kwskicky',
+    category: 'Videos',
+    title: 'Top 10 places to visit in Norway this summer',
+    image: 'https://sm.ign.com/t/ign_pl/slotter/default/ddv_y85m.800.jpg',
+    date: 'August 18, 2022',
+  },
+  {
+    author: 'kwskicky2',
+    category: 'Games',
+    title: 'Best forests to visit in North America',
+    image: 'https://sm.ign.com/t/ign_pl/screenshot/default/death-stranding-is-a-game-about-walking-apparently-dtxa_k2ps.1280.jpg',
+    date: 'August 27, 2022',
+  },
+  {
+    author: 'kwskicky3',
+    category: 'Art',
+    title: 'Hawaii beaches review: better than you think',
+    image: 'https://sm.ign.com/t/ign_pl/slotter/8/8567/8567_xaxj.800.jpg',
+    date: 'September 9, 2022',
+  },
+  {
+    author: 'kwskicky4',
+    category: 'News',
+    title: 'Mountains at night: 12 best locations to enjoy the view',
+    image: 'https://sm.ign.com/t/ign_pl/blogroll/default/elden-ring-pic-1639688213822_24cr.800.jpg',
+    date: 'September 12, 2022',
+  },
+  {
+    author: 'kwskicky5',
+    category: 'News',
+    title: 'Mountains at night: 12 best locations to enjoy the view',
+    image: 'https://sm.ign.com/t/ign_pl/screenshot/default/diablo-iv_ek85.320.jpg',
+    date: 'September 12, 2022',
+  },
+  {
+    author: 'kwskicky6',
+    category: 'Games',
+    title: 'Mountains at night: 12 best locations to enjoy the view',
+    image: 'https://sm.ign.com/t/ign_pl/screenshot/default/3677_cyjs.1280.jpg',
+    date: 'September 12, 2022',
+  },
+  {
+    author: 'kwskicky7',
+    category: 'Music',
+    title: 'Mountains at night: 12 best locations to enjoy the view',
+    image: 'https://sm.ign.com/t/ign_pl/screenshot/default/hades-2-ann-12-08-22-768x432_yk4q.1280.jpg',
+    date: 'September 12, 2022',
+  },
+  {
+    author: 'kwskicky8',
+    category: 'News',
+    title: 'Mountains at night: 12 best locations to enjoy the view',
+    image: 'https://sm.ign.com/t/ign_pl/screenshot/default/baldurs-gate-iii-2022-12-08-22-001_c3uf.1280.jpg',
+    date: 'September 12, 2022',
+  },
+]

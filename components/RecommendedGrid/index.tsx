@@ -2,11 +2,10 @@ import { createStyles } from '@mantine/styles'
 
 const useStyles = createStyles((theme) => ({
   card: {
-    transition: 'transform 150ms ease, box-shadow 150ms ease',
+    transition: 'transform 450ms ease, box-shadow 450ms ease',
 
     '&:hover': {
-      transform: 'scale(1.01)',
-      boxShadow: theme.shadows.md,
+      transform: 'scale(1.03)',
     },
   },
 
