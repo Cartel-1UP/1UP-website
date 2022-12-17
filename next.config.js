@@ -5,6 +5,9 @@ const nextConfig = {
     // runtime: 'experimental-edge',
     appDir: true,
   },
+  api: {
+    bodyParser: true
+  }
 }
 
 module.exports = nextConfig
