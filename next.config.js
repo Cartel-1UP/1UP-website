@@ -2,9 +2,12 @@
 const nextConfig = {
   reactStrictMode: true,
   experimental: {
-    runtime: 'experimental-edge',
+    // runtime: 'experimental-edge',
     appDir: true,
   },
+  api: {
+    bodyParser: true
+  }
 }
 
 module.exports = nextConfig
