@@ -1,7 +1,7 @@
 'use client'
 import { AspectRatio, Card, Center, Container, Grid, Image, SimpleGrid, Space, Text, Title } from '@mantine/core'
 import useStyles from '.'
-import BlogPagination from '../Pagination/Pagination'
+import BlogPagination from '../../Pagination/Pagination'
 import { mockdata } from './data'
 
 export function ArticlesCardsGrid() {
