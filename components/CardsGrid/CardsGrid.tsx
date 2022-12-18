@@ -1,6 +1,7 @@
 'use client'
-import { Card, Container, Grid, Image, SimpleGrid, Space, Text, Title } from '@mantine/core'
+import { AspectRatio, Card, Center, Container, Grid, Image, SimpleGrid, Space, Text, Title } from '@mantine/core'
 import useStyles from '.'
+import BlogPagination from '../Pagination/Pagination'
 import { mockdata } from './data'
 
 export function ArticlesCardsGrid() {
@@ -11,16 +12,13 @@ export function ArticlesCardsGrid() {
       <Card key={article.title} p="md" radius="md" component="a" href="#" className={classes.card}>
         <Grid grow>        
           <Grid.Col span={3}>
-          <Image src={article.image} />
+          <AspectRatio ratio={4/3}>
+            <Image src={article.image} />
+          </AspectRatio>
           </Grid.Col>
           <Grid.Col span={9}>
             <Container>
-              <Text color="dimmed" size="xs" transform="uppercase" weight={700} mt="md">
-                Tags: [ {article.category} ]
-              </Text>
-            </Container>
-            <Container>
-              <Text color="dimmed" size="xs" transform="uppercase" weight={700} mt="md">
+              <Text color="dimmed" size="xs" transform="uppercase" weight={700}>
                 {article.author} - {article.date}
               </Text>
             </Container>
@@ -28,9 +26,17 @@ export function ArticlesCardsGrid() {
               <Text className={classes.title} mt={5}>
                 {article.title}
               </Text>
+              <Text color="dimmed" size="sm" weight={600}  mt={10}>
+                {article.body}
+              </Text>
             </Container>
             <Container>
-              <Text color="dimmed"  className={classes.price} mt={20}>
+              <Text color="dimmed" size="xs" transform="uppercase" weight={600} mt={20}>
+                Tags: [ {article.category} ]
+              </Text>
+            </Container>
+            <Container>
+              <Text color="dimmed"  className={classes.price} >
                 ${article.price} | comments: {article.comments}
               </Text>
             </Container>
@@ -48,6 +54,11 @@ export function ArticlesCardsGrid() {
       <SimpleGrid cols={1} breakpoints={[{ maxWidth: 'sm', cols: 1 }]}>
         {cards}
       </SimpleGrid>
+      <Container pt={25}>
+        <Center>
+          <BlogPagination/>
+        </Center>
+      </Container>
     </Container>
   )
 }

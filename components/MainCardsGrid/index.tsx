@@ -10,10 +10,11 @@ const useStyles = createStyles((theme) => ({
     backgroundSize: 'cover',
     backgroundPosition: 'center',
 
-    transition: 'transform 900ms ease, box-shadow 900ms ease',
+    transition: 'transform 900ms ease, box-shadow 900ms ease, filter 900ms ease',
     '&:hover': {
       transform: 'scale(1.02)',
       boxShadow: theme.shadows.md,
+      filter: 'brightness(70%)'
     },
   },
 
