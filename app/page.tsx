@@ -1,9 +1,9 @@
 'use client'
 
 
-import { ArticlesCardsGrid } from '../components/CardsGrid/CardsGrid';
-import { MainCardsGrid } from '../components/MainCardsGrid/MainCardsGrid';
-import { RecommendedCardsGrid } from '../components/RecommendedGrid/RecommendedGrid';
+import { ArticlesCardsGrid } from '../components/Grids/Default/DefaultSection';
+import { MainCardsGrid } from '../components/Grids/Main/MainSection';
+import { RecommendedCardsGrid } from '../components/Grids/Recommended/RecommendedSection';
 
 export const runtime = 'experimental-edge';
 

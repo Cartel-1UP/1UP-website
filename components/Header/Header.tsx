@@ -21,9 +21,9 @@ import {
 import { useDisclosure } from '@mantine/hooks'
 import { IconChevronDown } from '@tabler/icons'
 import useStyles from '.'
+import LoginButton from '../LoginButton/LoginButton'
 import { ToggleColor } from '../ToggleColor/ToggleColor'
 import { mockdata } from './data'
-import LoginButton from './LoginButton/LoginButton'
 
 export function WebHeader() {
   const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] = useDisclosure(false)
