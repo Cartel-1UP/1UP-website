@@ -41,8 +41,8 @@ function Card({ image, title, category }: CardProps) {
 export function MainCardsGrid() {
   const theme = useMantineTheme();
   const mobile = useMediaQuery(`(max-width: ${theme.breakpoints.sm}px)`);
-  const slides = mockdata.map((item) => (
-    <Carousel.Slide key={item.title}>
+  const slides = mockdata.map((item, index) => (
+    <Carousel.Slide key={index}>
       <Card {...item} />
     </Carousel.Slide>
   ));

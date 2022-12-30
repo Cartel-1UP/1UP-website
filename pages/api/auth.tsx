@@ -1,6 +1,5 @@
 import { Client, cryptoUtils, Signature } from '@hiveio/dhive';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { setAuthorized, setUsername } from '../../zustand/stores/useAuthorizationStore';
 
 const hiveClient  = new Client('https://api.hive.blog');
 
@@ -53,9 +52,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       console.log('działa')
       req.body.user = username
       req.body.smartlock = smartlock
-      setAuthorized(true)
-      setUsername(username)
-      return res.json({ username, smartlock })
+      let authorized = true
+      return res.json({ username, smartlock, authorized})
     }
   } catch (e : any) {
     res.status(500).json({ error: e.message })
