@@ -3,7 +3,6 @@
 import { Button, Dialog, Group, Text, TextInput } from "@mantine/core";
 import { useState } from "react";
 import loginKeychain from "../../utils/actions/login";
-import { logoutUser, useAuthorizationStore } from '../../zustand/stores/useAuthorizationStore';
 
 declare global {
   interface Window {
@@ -20,7 +19,6 @@ function LoginButton() {
 
   const [opened, setOpened] = useState(false);
   const [value, setValue] = useState('');
-  const authorized = useAuthorizationStore((state: { authorized: any; }) => state.authorized)
   
   const loginUser = async () =>
   {
@@ -52,7 +50,7 @@ function LoginButton() {
 
       <Group align="flex-end">
         <TextInput placeholder="username" value={value} style={{ flex: 1 }} onChange={(event) => setValue(event.currentTarget.value)}/>
-        {authorized ? <Button onClick={() => {logoutUser}}>Log out</Button> : <Button onClick={() => {setOpened(false); loginUser()}}>Log in</Button>}
+        <Button onClick={() => {setOpened(false); loginUser()}}>Log in</Button>
       </Group>
     </Dialog>
     </>

@@ -7,9 +7,9 @@ import { mockdata } from './data'
 export function ArticlesCardsGrid() {
   const { classes, theme } = useStyles()
 
-  const cards = mockdata.map((article) => (
+  const cards = mockdata.map((article, index) => (
     
-      <Card key={article.title} p="md" radius="md" component="a" href="#" className={classes.card}>
+      <Card key={index} p="md" radius="md" component="a" href="#" className={classes.card}>
         <Grid grow>        
           <Grid.Col span={3}>
           <AspectRatio ratio={4/3}>

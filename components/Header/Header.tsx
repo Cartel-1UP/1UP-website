@@ -12,6 +12,7 @@ import {
   Group,
   Header,
   HoverCard,
+  Menu,
   ScrollArea,
   SimpleGrid,
   Text,
@@ -19,19 +20,24 @@ import {
   UnstyledButton
 } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
-import { IconChevronDown } from '@tabler/icons'
+import { IconChevronDown, IconHeart, IconLogout, IconMessage, IconStar } from '@tabler/icons'
+import { useState } from 'react'
 import useStyles from '.'
+import { logoutUser, useAuthorizationStore } from '../../zustand/stores/useAuthorizationStore'
 import LoginButton from '../LoginButton/LoginButton'
 import { ToggleColor } from '../ToggleColor/ToggleColor'
+import { UserButton } from '../UserButton/UserButton'
 import { mockdata } from './data'
 
 export function WebHeader() {
   const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] = useDisclosure(false)
   const [linksOpened, { toggle: toggleLinks }] = useDisclosure(false)
   const { classes, theme } = useStyles()
-
-  const links = mockdata.map((item) => (
-    <UnstyledButton className={classes.subLink} key={item.title}>
+  const authorized = useAuthorizationStore((state: { authorized: any; }) => state.authorized)
+  const [userMenuOpened, setUserMenuOpened] = useState(false);
+  
+  const links = mockdata.map((item, index) => (
+    <UnstyledButton className={classes.subLink} key={index}>
       <Group noWrap align="flex-start">
         <ThemeIcon size={34} variant="default" radius="md">
           <item.icon size={22} color={theme.fn.primaryColor()} />
@@ -50,7 +56,7 @@ export function WebHeader() {
 
   return (
     <Box pb={20}>
-      <Header height={60} px="md">
+      <Header height={75} px="md">
         <Group position="apart" sx={{ height: '100%' }}>
           <Group sx={{ height: '100%' }} spacing={0} className={classes.hiddenMobile}>
             <a href="/news" className={classes.link}>
@@ -110,7 +116,38 @@ export function WebHeader() {
           </Group>
 
           <Group className={classes.hiddenMobile}>
+            {authorized ? 
+              <Menu 
+              width={260}
+              position="bottom-end"
+              transition="pop-top-right"
+              onClose={() => setUserMenuOpened(false)}
+              onOpen={() => setUserMenuOpened(true)}>
+              <Menu.Target>
+                <UserButton
+                  image="https://i.imgur.com/7OnTZBA.png"
+                  name="KWSKicky"
+                  email="kwskicky@outlook.com"
+                />
+              </Menu.Target>
+              <Menu.Dropdown>
+              <Menu.Item icon={<IconHeart size={14} color={theme.colors.red[6]} stroke={1.5} />}>
+                Liked posts
+              </Menu.Item>
+              <Menu.Item icon={<IconStar size={14} color={theme.colors.yellow[6]} stroke={1.5} />}>
+                Saved posts
+              </Menu.Item>
+              <Menu.Item icon={<IconMessage size={14} color={theme.colors.blue[6]} stroke={1.5} />}>
+                Your comments
+              </Menu.Item>
+              <Menu.Divider />
+              <Menu.Item onClick={() => logoutUser()} color="red" icon={<IconLogout size={14} stroke={1.5} />}>
+                Log out
+              </Menu.Item>
+            </Menu.Dropdown>
+            </Menu> :
             <LoginButton/>
+            }
             <ToggleColor />
           </Group>
 

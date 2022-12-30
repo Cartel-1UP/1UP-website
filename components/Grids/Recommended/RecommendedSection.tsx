@@ -6,8 +6,8 @@ import { mockdata } from './data'
 export function RecommendedCardsGrid() {
   const { classes, theme } = useStyles()
 
-  const cards = mockdata.map((article) => (
-    <Card key={article.title} p="md" radius="md" component="a" href="#" className={classes.card}>
+  const cards = mockdata.map((article, index) => (
+    <Card key={index} p="md" radius="md" component="a" href="#" className={classes.card}>
       <Container>
         <AspectRatio ratio={16/9}>
         <Image src={article.image} />
