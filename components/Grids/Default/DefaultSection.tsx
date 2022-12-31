@@ -1,14 +1,34 @@
 'use client'
 import { AspectRatio, Card, Center, Container, Grid, Image, SimpleGrid, Space, Text, Title } from '@mantine/core'
+import { useEffect } from 'react'
 import useStyles from '.'
+import api from '../../../utils/api'
 import BlogPagination from '../../Pagination/Pagination'
 import { mockdata } from './data'
 
 export function ArticlesCardsGrid() {
   const { classes, theme } = useStyles()
+  
+  async function getPosts({tag}: any) {
+    try {
+      const { data } = await api.post('trending', { tag } )
+      data.result.map((article: any)=>(
+        console.log(article.author),
+        console.log(article.title),
+        console.log(article.created),
+        console.log(article.category),
+        console.log(article.pending_payout_value)
+      ))
+    } catch (e:any) {
+      console.log(e)
+    }
+  }
+
+  useEffect(() => {
+    getPosts("hive-167922")
+  }, [])
 
   const cards = mockdata.map((article, index) => (
-    
       <Card key={index} p="md" radius="md" component="a" href="#" className={classes.card}>
         <Grid grow>        
           <Grid.Col span={3}>

@@ -49,7 +49,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
 
     if (validSignature) {
-      console.log('działa')
       req.body.user = username
       req.body.smartlock = smartlock
       let authorized = true

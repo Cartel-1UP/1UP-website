@@ -1,7 +1,7 @@
 import { setAuthorized } from '../../zustand/stores/useAuthorizationStore'
 import api from '../api'
 
-function loginKeychain(username: string) {
+function loginKeychain(username: string|null) {
     if (!username) { return }
     if (!window.hive_keychain) { return }
 
