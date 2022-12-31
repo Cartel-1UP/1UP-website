@@ -3,6 +3,7 @@
 import { Button, Dialog, Group, Text, TextInput } from "@mantine/core";
 import { useState } from "react";
 import loginKeychain from "../../utils/actions/login";
+import { useAuthorizationStore } from "../../zustand/stores/useAuthorizationStore";
 
 declare global {
   interface Window {
@@ -16,9 +17,14 @@ const isKeychain = () => {
 
 
 function LoginButton() {
-
+  const authorized = useAuthorizationStore((state: { authorized: any; }) => state.authorized)
   const [opened, setOpened] = useState(false);
   const [value, setValue] = useState('');
+
+  if(isKeychain() && localStorage.getItem('username') && !authorized){
+    const username = localStorage.getItem('username')
+    loginKeychain(username)
+  }
   
   const loginUser = async () =>
   {

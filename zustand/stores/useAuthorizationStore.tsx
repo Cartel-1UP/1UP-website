@@ -16,6 +16,7 @@ export const useAuthorizationStore = create<AuthorizationStoreState>()(immer((se
     set((state) => {
       state.authorized = false;
     });
+    localStorage.removeItem('username') 
   },
   setUsername: (name) => {
     set((state) => {
