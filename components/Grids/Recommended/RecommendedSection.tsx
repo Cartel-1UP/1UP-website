@@ -1,16 +1,32 @@
 'use client'
 import { AspectRatio, Card, Container, Image, SimpleGrid, Space, Text, Title } from '@mantine/core'
+import { useEffect, useState } from 'react'
 import useStyles from '.'
-import { mockdata } from './data'
+import api from '../../../utils/api'
 
 export function RecommendedCardsGrid() {
-  const { classes, theme } = useStyles()
+    const { classes, theme } = useStyles()
+  const [articles, setArticles] = useState<any>([])
+  
+  async function getPosts(tag: string) {
+    try {
+      const { data } = await api.post('hot', tag )      
+      setArticles(data.result)
 
-  const cards = mockdata.map((article, index) => (
-    <Card key={index} p="md" radius="md" component="a" href="#" className={classes.card}>
+    } catch (e:any) {
+      console.log(e)
+    }
+  }
+
+  useEffect(() => {
+    getPosts("hive-102223")
+  }, [])
+
+  const cards = articles.map((article: any) => (
+    <Card key={article.post_id} p="md" radius="md" component="a" href="#" className={classes.card}>
       <Container>
         <AspectRatio ratio={16/9}>
-        <Image src={article.image} />
+        <Image src={article.json_metadata.image[0]} />
         </AspectRatio> 
       </Container>
       <Container>
@@ -19,7 +35,7 @@ export function RecommendedCardsGrid() {
       </Text>
         
       <Text color="dimmed" size="xs" transform="uppercase" weight={700} mt="md">
-        {article.author} - {article.date}
+        {article.author} - {article.created}
       </Text>
       <Text className={classes.title} mt={5}>
         {article.title}

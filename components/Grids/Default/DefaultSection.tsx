@@ -1,45 +1,40 @@
 'use client'
 import { AspectRatio, Card, Center, Container, Grid, Image, SimpleGrid, Space, Text, Title } from '@mantine/core'
-import { useEffect } from 'react'
+import { Suspense, useEffect, useState } from 'react'
 import useStyles from '.'
 import api from '../../../utils/api'
 import BlogPagination from '../../Pagination/Pagination'
-import { mockdata } from './data'
 
 export function ArticlesCardsGrid() {
   const { classes, theme } = useStyles()
+  const [articles, setArticles] = useState<any>([])
   
-  async function getPosts({tag}: any) {
+  async function getPosts(tag: string) {
     try {
-      const { data } = await api.post('trending', { tag } )
-      data.result.map((article: any)=>(
-        console.log(article.author),
-        console.log(article.title),
-        console.log(article.created),
-        console.log(article.category),
-        console.log(article.pending_payout_value)
-      ))
+      const { data } = await api.post('trending', tag )      
+      setArticles(data.result)
+
     } catch (e:any) {
       console.log(e)
     }
   }
 
   useEffect(() => {
-    getPosts("hive-167922")
+    getPosts("hive-102223")
   }, [])
 
-  const cards = mockdata.map((article, index) => (
-      <Card key={index} p="md" radius="md" component="a" href="#" className={classes.card}>
+  const cards = articles.map((article: any) => (
+      <Card key={article.post_id} p="md" radius="md" component="a" href="#" className={classes.card}>
         <Grid grow>        
           <Grid.Col span={3}>
           <AspectRatio ratio={4/3}>
-            <Image src={article.image} />
+            <Image src={article.json_metadata.image[0]} />
           </AspectRatio>
           </Grid.Col>
           <Grid.Col span={9}>
             <Container>
               <Text color="dimmed" size="xs" transform="uppercase" weight={700}>
-                {article.author} - {article.date}
+                {article.author} - {article.created}
               </Text>
             </Container>
             <Container>
@@ -47,7 +42,7 @@ export function ArticlesCardsGrid() {
                 {article.title}
               </Text>
               <Text color="dimmed" size="sm" weight={600}  mt={10}>
-                {article.body}
+                {/* {article.body} */}
               </Text>
             </Container>
             <Container>
@@ -57,7 +52,7 @@ export function ArticlesCardsGrid() {
             </Container>
             <Container>
               <Text color="dimmed"  className={classes.price} >
-                ${article.price} | comments: {article.comments}
+                ${article.payout} | comments: {article.children}
               </Text>
             </Container>
           </Grid.Col>
@@ -71,9 +66,11 @@ export function ArticlesCardsGrid() {
       <Space h="xl" />
       <Title order={1}>Recent</Title>
       <Space h="xl" />
-      <SimpleGrid cols={1} breakpoints={[{ maxWidth: 'sm', cols: 1 }]}>
-        {cards}
-      </SimpleGrid>
+      <Suspense>
+        <SimpleGrid cols={1} breakpoints={[{ maxWidth: 'sm', cols: 1 }]}>
+          {cards}
+        </SimpleGrid>
+      </Suspense>
       <Container pt={25}>
         <Center>
           <BlogPagination/>
