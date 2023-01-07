@@ -13,7 +13,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         "jsonrpc": "2.0",
         "method": "bridge.get_ranked_posts",
         "params": {
-            "sort": "trending",
+            "sort": "hot",
             "tag": tag,
             "observer": "hive.blog",
             "limit": 4
