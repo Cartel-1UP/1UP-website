@@ -22,7 +22,15 @@ export function RecommendedCardsGrid() {
     getPosts("hive-102223")
   }, [])
 
-  const cards = articles.map((article: any) => (
+  const cards = articles.map((article: any) =>{ 
+    const date = new Date(article.created);
+    const formattedDate = date.toLocaleDateString('en-US', {
+      month: 'short',
+      day: 'numeric',
+      year: 'numeric'
+    });
+    
+    return(
     <Card key={article.post_id} p="md" radius="md" component="a" href="#" className={classes.card}>
       <Container>
         <AspectRatio ratio={16/9}>
@@ -35,14 +43,14 @@ export function RecommendedCardsGrid() {
       </Text>
         
       <Text color="dimmed" size="xs" transform="uppercase" weight={700} mt="md">
-        {article.author} - {article.created}
+        {article.author} - {formattedDate}
       </Text>
       <Text className={classes.title} mt={5}>
         {article.title}
       </Text>
       </Container>
     </Card>
-  ))
+  )})
 
   return (
     <>
