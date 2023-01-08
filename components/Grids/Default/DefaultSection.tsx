@@ -8,34 +8,8 @@ import BlogPagination from '../../Pagination/Pagination'
 export function ArticlesCardsGrid() {
   const { classes, theme } = useStyles()
   const posts = usePostsStore((state: { posts: any; }) => state.posts)
-  const lastUser = usePostsStore((state: { lastUser: any; }) => state.lastUser)
-  console.log(lastUser)
-  // type Posts = {
-  //   tag: string,
-  //   nextBlog?: {
-  //     start_author: string,
-  //     perma_link: string
-  //   }
-  // }
-  
-  // async function getPosts(props: Posts) {
-  //   try {
-  //     const { data } = await api.post('trending', {tag: props.tag} ) 
-  //     const user = {
-  //       author: data.result[3].author,
-  //       link: data.result[3].perma_link
-  //     }     
-  //     setPosts(data.result)
-  //     setLastUser(user)
+  const nextUser = usePostsStore((state: { nextUser: any; }) => state.nextUser)
 
-  //   } catch (e:any) {
-  //     console.log(e)
-  //   }
-  // }
-
-  // useEffect(() => {
-  //   getPosts({tag: "hive-102223"})
-  // }, [])
 
   const cards = posts.map((article: any) => {
     const date = new Date(article.created);
