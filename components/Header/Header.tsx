@@ -12,6 +12,7 @@ import {
   Group,
   Header,
   HoverCard,
+  Image,
   Menu,
   ScrollArea,
   SimpleGrid,
@@ -28,6 +29,9 @@ import LoginButton from '../LoginButton/LoginButton'
 import { ToggleColor } from '../ToggleColor/ToggleColor'
 import { UserButton } from '../UserButton/UserButton'
 import { mockdata } from './data'
+
+import oneuplogo from '../../images/oneuplogo.png'
+
 
 export function WebHeader() {
   const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] = useDisclosure(false)
@@ -58,6 +62,12 @@ export function WebHeader() {
     <Box pb={20}>
       <Header height={75} px="md">
         <Group position="apart" sx={{ height: '100%' }}>
+          <Image
+               src={oneuplogo.src}
+               alt="Logo"
+               width={380}
+               height={60}
+               />
           <Group sx={{ height: '100%' }} spacing={0} className={classes.hiddenMobile}>
             <a href="/news" className={classes.link}>
               News

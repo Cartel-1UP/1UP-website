@@ -3,12 +3,20 @@ import { immer } from 'zustand/middleware/immer';
 
 type PostsStoreState = {
   posts: [];
-  lastUser: {
+  nextUser: {
+    author: string,
+    link: string
+  };
+  recentUser: {
     author: string,
     link: string
   };
   setPosts: (post: []) => void;
-  setLastUser: (user: {
+  setNextUser: (user: {
+    author: string,
+    link: string
+  }) => void;
+  setRecentUser: (user: {
     author: string,
     link: string
   }) => void;
@@ -16,7 +24,11 @@ type PostsStoreState = {
 
 export const usePostsStore = create<PostsStoreState>()(immer((set) => ({
   posts: [],
-  lastUser: {
+  nextUser: {
+    author: '',
+    link: ''
+  },
+  recentUser: {
     author: '',
     link: ''
   },
@@ -25,11 +37,16 @@ export const usePostsStore = create<PostsStoreState>()(immer((set) => ({
       state.posts = post;
     });
   },
-  setLastUser: (user) => {
+  setNextUser: (user) => {
     set((state) => {
-      state.lastUser = user;
+      state.nextUser = user;
+    });
+  },
+  setRecentUser: (user) => {
+    set((state) => {
+      state.recentUser = user;
     });
   },
 })))
 
-export const { setPosts, setLastUser } = usePostsStore.getState();
+export const { setPosts, setNextUser, setRecentUser } = usePostsStore.getState();

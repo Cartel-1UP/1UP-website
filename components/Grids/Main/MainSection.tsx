@@ -48,7 +48,7 @@ export function MainCardsGrid() {
   ));
 
   return (
-    <Container fluid m={25} >
+    <Container fluid pl={mobile ? 10 : 200} pr={mobile ? 10 : 200} pt={mobile? 5 : 30}>
       <Carousel
         slideSize="25%"
         breakpoints={[{ maxWidth: 'sm', slideSize: '100%', slideGap: 4 }]}

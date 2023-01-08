@@ -15,7 +15,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         "method": "bridge.get_ranked_posts",
         "params": {
             "sort": "trending",
-            "tag": '',
+            "tag": 'hive-102223',
             "observer": "hive.blog",
             "limit": 4,
             "start_author": body.start ? body.start : '',
