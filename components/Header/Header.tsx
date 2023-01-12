@@ -59,7 +59,7 @@ export function WebHeader() {
   ))
 
   return (
-    <Box pb={20}>
+    <Box pb={0}>
       <Header height={75} px="md">
         <Group position="apart" sx={{ height: '100%' }}>
           <Image

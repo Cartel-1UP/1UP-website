@@ -18,6 +18,11 @@ const useStyles = createStyles((theme) => ({
     },
   },
 
+  containerLogos: {
+    backgroundColor: '#e2f6fa',
+    maxHeight: '5em',
+  }
+
 
 }))
 

@@ -56,8 +56,7 @@ export function RecommendedCardsGrid() {
     <>
     <Space h="xl" />
     <Space h="xl" />
-    <Space h="xl" />
-    <Container fluid sx={{backgroundColor: theme.colors.dark[6]}} pb={20} pt={20}>
+    <Container fluid sx={{backgroundColor: '#e2f6fa'}} pb={20} pt={20}>
       <Title order={1}>Recommended</Title>
         <Space h="xl" />
         <SimpleGrid cols={4} breakpoints={[{ maxWidth: 'sm', cols: 1 }]}>

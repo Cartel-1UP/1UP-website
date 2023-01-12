@@ -1,50 +1,45 @@
+import dcity from '../../../images/dcity.png'
+import dcrops from '../../../images/dcrops.svg'
+import mu from '../../../images/mu.png'
+import risingstar from '../../../images/risingstar.png'
+import splinterlands from '../../../images/splinterlands.svg'
+import woo from '../../../images/woo.png'
+
 export const mockdata = [
   {
-    image: 'https://d36mxiodymuqjm.cloudfront.net/website/icons/img_icon_splinterlands.svg',
+    image: splinterlands.src,
   },
   {
-    image: 'https://woo-prod-client.herokuapp.com/_nuxt/img/woologo.0ea18ab.png',
+    image: dcrops.src,
   },
   {
-    image: 'https://dcity.io/logo.png',
+    image: dcity.src,
   },
   {
-    image: 'https://www.dcrops.com/static/media/logo.8a267cfc.svg',
+    image: mu.src,
   },
   {
-    image: 'https://muterra.in/logo192.png',
+    image: risingstar.src,
   },
   {
-    image: 'https://dcity.io/logo.png',
+    image: woo.src,
   },
   {
-    image: 'https://d36mxiodymuqjm.cloudfront.net/website/icons/img_icon_splinterlands.svg',
+    image: splinterlands.src,
   },
   {
-    image: 'https://woo-prod-client.herokuapp.com/_nuxt/img/woologo.0ea18ab.png',
+    image: dcrops.src,
   },
   {
-    image: 'https://dcity.io/logo.png',
+    image: dcity.src,
   },
   {
-    image: 'https://www.dcrops.com/static/media/logo.8a267cfc.svg',
+    image: mu.src,
   },
   {
-    image: 'https://muterra.in/logo192.png',
+    image: risingstar.src,
   },
   {
-    image: 'https://dcity.io/logo.png',
-  },
-  {
-    image: 'https://dcity.io/logo.png',
-  },
-  {
-    image: 'https://www.dcrops.com/static/media/logo.8a267cfc.svg',
-  },
-  {
-    image: 'https://muterra.in/logo192.png',
-  },
-  {
-    image: 'https://dcity.io/logo.png',
+    image: woo.src,
   },
 ]

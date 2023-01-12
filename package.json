@@ -32,6 +32,7 @@
     "cookie-session": "^2.0.0",
     "csurf": "^1.11.0",
     "date-fns": "^2.29.3",
+    "embla-carousel-autoplay": "^7.0.5",
     "embla-carousel-react": "^7.0.5",
     "eslint": "8.28.0",
     "eslint-config-next": "13.0.4",
