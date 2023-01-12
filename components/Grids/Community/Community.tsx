@@ -2,6 +2,8 @@
 import { Carousel } from '@mantine/carousel';
 import { AspectRatio, Container, Image, useMantineTheme } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
+import Autoplay from 'embla-carousel-autoplay';
+import { useRef } from 'react';
 import useStyles from '.';
 import { mockdata } from './data';
 
@@ -14,15 +16,26 @@ function Card({ image}: CardProps) {
   const { classes } = useStyles();
 
   return (
-    <AspectRatio ratio={1/1}>
+    <AspectRatio ratio={1/1} sx={{maxWidth:'5em'}}>
       <Image src={image} className={classes.card}/>
     </AspectRatio>
 );
 }
 
 export function CommunityGrid() {
+  const autoplayOptions = {
+    delay: 100,
+    playOnInit: true,
+    stopOnInteraction: false,
+    rootNode: (emblaRoot: any) => emblaRoot.parentElement,
+  }
+  const { classes } = useStyles();
   const theme = useMantineTheme();
   const mobile = useMediaQuery(`(max-width: ${theme.breakpoints.sm}px)`);
+  const autoplay = useRef(Autoplay(autoplayOptions));
+  
+
+  
   const slides = mockdata.map((item, index) => (
     <Carousel.Slide key={index}>
       <Card {...item} />
@@ -30,17 +43,25 @@ export function CommunityGrid() {
   ));
 
   return (
-    <Container>
+    <Container fluid className={classes.containerLogos}>
+      <Container>
       <Carousel
         slideSize= "12.5%"
-        breakpoints={[{ maxWidth: 'sm', slideSize: '100%', slideGap: 8 }]}
+        breakpoints={[{ maxWidth: 'sm', slideSize: '100%', slideGap: 1 }]}
         slideGap="xl"
         align="start"
-        slidesToScroll={mobile ? 1 : 8}
+        slidesToScroll={mobile ? 1 : 1}
         loop
+        withControls={false}
+        plugins={[autoplay.current]}
+        onMouseEnter={autoplay.current.stop}
+        onMouseLeave={autoplay.current.reset}
+        dragFree={true}
+        speed={0.01}
       >
         {slides}
       </Carousel>
+      </Container>
     </Container>
   );
 }

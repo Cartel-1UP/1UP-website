@@ -1,6 +1,6 @@
 'use client'
 import { Carousel } from '@mantine/carousel';
-import { Button, Container, Paper, Text, Title, useMantineTheme } from '@mantine/core';
+import { Container, Paper, Text, Title, useMantineTheme } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
 import useStyles from '.';
 import { mockdata } from './data';
@@ -31,9 +31,6 @@ function Card({ image, title, category }: CardProps) {
           {title}
         </Title>
       </div>
-      <Button variant="white" color="dark">
-        Read article
-      </Button>
     </Paper>
   );
 }
