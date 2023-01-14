@@ -13,6 +13,17 @@ const useStyles = createStyles((theme) => ({
   title: {
     fontFamily: `Greycliff CF, ${theme.fontFamily}`,
     fontWeight: 600,
+    textOverflow: 'ellipsis',
+    overflowWrap: 'break-word',
+    wordWrap: 'break-word',
+    wordBreak: 'break-word',
+    hyphens: 'auto',
+    whiteSpace: 'normal',
+    overflow: 'hidden',
+    display: '-webkit-box',
+    WebkitLineClamp: 3,
+    WebkitBoxOrient: 'vertical',
+    maxHeight: '3em'
   },
 
   price: {

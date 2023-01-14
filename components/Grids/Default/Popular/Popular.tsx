@@ -19,6 +19,18 @@ export function Popular() {
       year: 'numeric'
     });
 
+    let forbiddenChars = ["!", "<", ">","[","]"];
+    let myString = article.body;
+    let words = myString.split(" ");
+    let newWords = words.filter(function(word: string) {
+        return !word.split('').some(function(char: string) {
+            return forbiddenChars.includes(char);
+        });
+    });
+    
+    let bodyOfArticle = newWords.join(" ");
+  
+
     return (
       <Card key={article.post_id} p="md" radius="md" component="a" href="#" className={classes.card}>
         <Grid grow>        
@@ -37,8 +49,8 @@ export function Popular() {
               <Text className={classes.title} mt={5}>
                 {article?.title}
               </Text>
-              <Text color="dimmed" size="sm" weight={600}  mt={10}>
-                {/* {article.body} */}
+              <Text color="dimmed" size="sm" weight={600}  mt={10} className={classes.turncate}>
+                {bodyOfArticle}
               </Text>
             </Container>
             <Container>
@@ -60,7 +72,7 @@ export function Popular() {
   return (
     <>
       <Space h="xl" />
-      <Title order={1}>Recent</Title>
+      <Title order={1}>Popular</Title>
       <Space h="xl" />
       <Suspense>
         <SimpleGrid cols={1} breakpoints={[{ maxWidth: 'sm', cols: 1 }]}>

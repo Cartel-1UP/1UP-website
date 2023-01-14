@@ -1,9 +1,18 @@
+import astralrevelations from '../../../images/astralrevelations.png'
+import craftInk from '../../../images/craftInk.png'
+import cryptocompany from '../../../images/cryptocompany.png'
 import dcity from '../../../images/dcity.png'
 import dcrops from '../../../images/dcrops.svg'
+import gls from '../../../images/gls.png'
+import hk from '../../../images/hk.png'
+import kod from '../../../images/kod.png'
 import mu from '../../../images/mu.png'
+import psyber from '../../../images/psyber.png'
 import risingstar from '../../../images/risingstar.png'
 import splinterlands from '../../../images/splinterlands.svg'
 import woo from '../../../images/woo.png'
+
+
 
 export const mockdata = [
   {
@@ -25,21 +34,24 @@ export const mockdata = [
     image: woo.src,
   },
   {
-    image: splinterlands.src,
+    image: astralrevelations.src,
   },
   {
-    image: dcrops.src,
+    image: craftInk.src,
   },
   {
-    image: dcity.src,
+    image: cryptocompany.src,
   },
   {
-    image: mu.src,
+    image: gls.src,
   },
   {
-    image: risingstar.src,
+    image: hk.src,
   },
   {
-    image: woo.src,
+    image: kod.src,
+  },
+  {
+    image: psyber.src,
   },
 ]

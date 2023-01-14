@@ -43,26 +43,29 @@ export function CommunityGrid() {
   ));
 
   return (
-    <Container fluid className={classes.containerLogos}>
-      <Container>
-      <Carousel
-        slideSize= "12.5%"
-        breakpoints={[{ maxWidth: 'sm', slideSize: '100%', slideGap: 1 }]}
-        slideGap="xl"
-        align="start"
-        slidesToScroll={mobile ? 1 : 1}
-        loop
-        withControls={false}
-        plugins={[autoplay.current]}
-        onMouseEnter={autoplay.current.stop}
-        onMouseLeave={autoplay.current.reset}
-        dragFree={true}
-        speed={0.01}
-      >
-        {slides}
-      </Carousel>
+    <>
+      <Container fluid className={classes.containerLogos}>
+        <Container size="xl">
+          <Carousel
+            slideSize="10%"
+            breakpoints={[{ maxWidth: 'sm', slideSize: '100%', slideGap: 1 }]}
+            slideGap="xl"
+            align="start"
+            slidesToScroll={mobile ? 1 : 1}
+            loop
+            withControls={false}
+            plugins={[autoplay.current]}
+            onMouseEnter={autoplay.current.stop}
+            onMouseLeave={autoplay.current.reset}
+            dragFree={true}
+            speed={0.01}
+          >
+            {slides}
+          </Carousel>
+        </Container>
       </Container>
-    </Container>
+      <Container fluid className={classes.gradientTop} pb={30} pt={20}/>
+    </>
   );
 }
 

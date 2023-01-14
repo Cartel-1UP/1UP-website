@@ -2501,6 +2501,11 @@ random-bytes@~1.0.0:
   resolved "https://registry.yarnpkg.com/random-bytes/-/random-bytes-1.0.0.tgz#4f68a1dc0ae58bd3fb95848c30324db75d64360b"
   integrity sha512-iv7LhNVO047HzYR3InF6pUcUsPQiHTM1Qal51DcGSuZFBil1aBBWG5eHPNek7bvILMaYJ/8RU1e8w1AMdHmLQQ==
 
+re@^0.1.4:
+  version "0.1.4"
+  resolved "https://registry.yarnpkg.com/re/-/re-0.1.4.tgz#d821067ee10b52011491ba1ad9342150f9ce7031"
+  integrity sha512-nnRiW20Jr9hv7Aw3OXd7vIYoq2+26T+QZYJBlC/HMSerJxFOn6AUCKDDB/JKxk5O8dO9wmPQ6qyhQbzIv/JtFw==
+
 react-dom@18.2.0:
   version "18.2.0"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-18.2.0.tgz#22aaf38708db2674ed9ada224ca4aa708d821e3d"
@@ -2772,6 +2777,11 @@ string.prototype.trimstart@^1.0.6:
     call-bind "^1.0.2"
     define-properties "^1.1.4"
     es-abstract "^1.20.4"
+
+string@^3.3.3:
+  version "3.3.3"
+  resolved "https://registry.yarnpkg.com/string/-/string-3.3.3.tgz#5ea211cd92d228e184294990a6cc97b366a77cb0"
+  integrity sha512-LbvprpPZT/39QKfNrlPX9vXtS7If80vqbPQ7clnHQb5oVOM5hz/cs3iQCCZjvQDwsAWl+HpLQX3gRgN6IC8t3g==
 
 string_decoder@^1.1.1:
   version "1.3.0"

@@ -19,6 +19,17 @@ export function Latest() {
       year: 'numeric'
     });
 
+    let forbiddenChars = ["!", "<", ">","[","]"];
+    let myString = article.body;
+    let words = myString.split(" ");
+    let newWords = words.filter(function(word: string) {
+        return !word.split('').some(function(char: string) {
+            return forbiddenChars.includes(char);
+        });
+    });
+    
+    let bodyOfArticle = newWords.join(" ");
+
     return (
       <Card key={article.post_id} p="md" radius="md" component="a" href="#" className={classes.card}>
         <Grid grow>        
@@ -31,9 +42,6 @@ export function Latest() {
             <Container>
               <Text className={classes.title} mt={5}>
                 {article?.title}
-              </Text>
-              <Text color="dimmed" size="sm" weight={600}  mt={10}>
-                {/* {article.body} */}
               </Text>
             </Container>
             <Container>
