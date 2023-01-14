@@ -19,6 +19,10 @@ const useStyles = createStyles((theme) => ({
     fontWeight: 400,
     fontSize: 12
   },
+
+  gradient: {
+    background: 'linear-gradient(to bottom, white, #e2f6fa);'
+}
 }))
 
 export default useStyles
