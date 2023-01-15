@@ -8,9 +8,10 @@ const useStyles = createStyles((theme) => ({
     paddingLeft: theme.spacing.md,
     paddingRight: theme.spacing.md,
     textDecoration: 'none',
-    color: theme.colorScheme === 'dark' ? theme.white : theme.black,
+    color: theme.colorScheme !== 'dark' ? theme.white : theme.black,
     fontWeight: 500,
-    fontSize: theme.fontSizes.sm,
+    fontSize: theme.fontSizes.md,
+    borderRadius: theme.radius.xs,
 
     [theme.fn.smallerThan('sm')]: {
       height: 42,
@@ -20,7 +21,8 @@ const useStyles = createStyles((theme) => ({
     },
 
     ...theme.fn.hover({
-      backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.gray[0],
+      backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[6] : '#084e5c',
+      color: theme.colorScheme !== 'dark' ? theme.colors.gray[4]  : theme.black,
     }),
   },
 
@@ -28,9 +30,9 @@ const useStyles = createStyles((theme) => ({
     width: '100%',
     padding: `${theme.spacing.xs}px ${theme.spacing.md}px`,
     borderRadius: theme.radius.md,
-
+    //color zastepczy 095261
     ...theme.fn.hover({
-      backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.colors.gray[0],
+      backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : '#072f37',
     }),
 
     '&:active': theme.activeStyles,
@@ -57,6 +59,11 @@ const useStyles = createStyles((theme) => ({
     [theme.fn.largerThan('sm')]: {
       display: 'none',
     },
+  },
+
+  header:{
+    backgroundColor: '#072f37',
+    border: 0
   },
 }))
 

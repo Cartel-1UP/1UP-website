@@ -44,7 +44,7 @@ export function CommunityGrid() {
 
   return (
     <>
-      <Container fluid className={classes.containerLogos}>
+      <Container fluid className={classes.containerLogos} pt={10}>
         <Container size="xl">
           <Carousel
             slideSize="10%"
@@ -64,7 +64,7 @@ export function CommunityGrid() {
           </Carousel>
         </Container>
       </Container>
-      <Container fluid className={classes.gradientTop} pb={30} pt={20}/>
+      {/* <Container fluid  pb={30} pt={20}/> */}
     </>
   );
 }

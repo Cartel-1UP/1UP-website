@@ -28,6 +28,10 @@ const useStyles = createStyles((theme) => ({
     marginTop: theme.spacing.xs,
   },
 
+  gradientBot: {
+    background: 'linear-gradient(to top, white, #072f37);'
+  },
+
   category: {
     color: theme.white,
     opacity: 0.7,

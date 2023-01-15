@@ -5,7 +5,7 @@ import apiHive from '../../utils/apiHive';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const {...body} = req.body
-  console.log(body)
+  console.log(body.number)
   if (req.method === 'POST') {
     try {
       
@@ -17,7 +17,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             "sort": "trending",
             "tag": 'hive-102223',
             "observer": "hive.blog",
-            "limit": 4,
+            "limit": body.number,
             "start_author": body.start ? body.start : '',
             "start_permlink": body.link ? body.link : ''
         }

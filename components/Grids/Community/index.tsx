@@ -19,16 +19,16 @@ const useStyles = createStyles((theme) => ({
   },
 
   containerLogos: {
-    backgroundColor: '#e2f6fa',
-    maxHeight: '5em',
+    backgroundColor: '#072f37',
+    maxHeight: '7em',
   },
 
   gradientTop: {
-    background: 'linear-gradient(to top, white, #e2f6fa);'
+    background: 'linear-gradient(to top, white, #072f37);'
   },
   
   gradientBot: {
-    background: 'linear-gradient(to bottom, white, #e2f6fa);'
+    background: 'linear-gradient(to bottom, white, #072f37);'
   }
 
 

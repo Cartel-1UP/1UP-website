@@ -29,6 +29,8 @@ export function Popular() {
     });
     
     let bodyOfArticle = newWords.join(" ");
+
+
   
 
     return (
@@ -81,7 +83,7 @@ export function Popular() {
       </Suspense>
       <Container pt={25}>
         <Center>
-          <BlogPagination/>
+          <BlogPagination amount={4} type={'trending'}/>
         </Center>
       </Container>
     </>
