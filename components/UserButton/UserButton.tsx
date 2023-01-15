@@ -16,14 +16,14 @@ const UserButton = forwardRef<HTMLButtonElement, UserButtonProps>(
     <UnstyledButton
       ref={ref}
       sx={(theme) => ({
-        color: theme.colorScheme === 'dark' ? theme.colors.dark[0] : theme.black,
+        color: theme.colorScheme === 'dark' ? theme.colors.dark[0] : theme.white,
         padding: `${theme.spacing.xs}px ${theme.spacing.sm}px`,
         borderRadius: theme.radius.sm,
         transition: 'background-color 100ms ease',
 
         '&:hover': {
-          backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.white,
-        },
+          color: theme.colorScheme !== 'dark' ? theme.colors.gray[4]  : theme.black,
+          backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : '#084e5c',        },
 
         [theme.fn.smallerThan('xs')]: {
           display: 'none',
@@ -51,3 +51,4 @@ const UserButton = forwardRef<HTMLButtonElement, UserButtonProps>(
 );
 
 export { UserButton };
+

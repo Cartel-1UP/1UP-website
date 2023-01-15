@@ -54,8 +54,7 @@ export function RecommendedCardsGrid() {
 
   return (
     <>
-    <Container fluid className={classes.gradient} pb={30} pt={20}/>
-    <Container fluid sx={{backgroundColor: '#e2f6fa'}} pb={20}>
+    <Container fluid className={classes.gradient} pb={40} pt={40}>
       <Container size='xl'>
       <Title order={1}>Recommended</Title>
         <Space h="xl" />

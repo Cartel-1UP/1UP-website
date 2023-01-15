@@ -36,6 +36,7 @@ function Card({ image, title, category }: CardProps) {
 }
 
 export function MainCardsGrid() {
+  const { classes } = useStyles();
   const theme = useMantineTheme();
   const mobile = useMediaQuery(`(max-width: ${theme.breakpoints.sm}px)`);
   const slides = mockdata.map((item, index) => (
@@ -45,7 +46,9 @@ export function MainCardsGrid() {
   ));
 
   return (
-    <Container size="xl">
+    <Container fluid className={classes.gradientBot}>
+    <Container size="xl" pt={80}>
+
       <Carousel
         slideSize="25%"
         breakpoints={[{ maxWidth: 'sm', slideSize: '100%', slideGap: 4 }]}
@@ -56,6 +59,7 @@ export function MainCardsGrid() {
       >
         {slides}
       </Carousel>
+    </Container>
     </Container>
   );
 }

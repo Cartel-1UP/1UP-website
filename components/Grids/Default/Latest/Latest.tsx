@@ -1,15 +1,27 @@
 'use client'
-import { Card, Center, Container, Grid, SimpleGrid, Space, Text, Title } from '@mantine/core'
-import { Suspense } from 'react'
+import { Card, Container, Grid, SimpleGrid, Space, Text, Title } from '@mantine/core'
+import { Suspense, useEffect } from 'react'
 import useStyles from '.'
-import { usePostsStore } from '../../../../zustand/stores/usePostsStore'
-import BlogPagination from '../../../Pagination/Pagination'
+import getPosts from '../../../../utils/actions/posts'
+import { setLatestPosts, usePostsStore } from '../../../../zustand/stores/usePostsStore'
 
 export function Latest() {
   const { classes, theme } = useStyles()
-  const posts = usePostsStore((state: { posts: any; }) => state.posts)
+  const posts = usePostsStore((state: { latestPosts: any; }) => state.latestPosts)
   const nextUser = usePostsStore((state: { nextUser: any; }) => state.nextUser)
-
+  
+  useEffect(() => {
+    console.log('start')
+    getPosts({
+      tag: "hive-102223",
+      sort: 'trending',
+      limit: 6
+    }).then((data) => { 
+        setLatestPosts(data.result) 
+        console.log(data)
+      }
+    )
+  }, [])
 
   const cards = posts.map((article: any) => {
     const date = new Date(article.created);
@@ -19,20 +31,13 @@ export function Latest() {
       year: 'numeric'
     });
 
-    let forbiddenChars = ["!", "<", ">","[","]"];
-    let myString = article.body;
-    let words = myString.split(" ");
-    let newWords = words.filter(function(word: string) {
-        return !word.split('').some(function(char: string) {
-            return forbiddenChars.includes(char);
-        });
-    });
+
+
     
-    let bodyOfArticle = newWords.join(" ");
 
     return (
-      <Card key={article.post_id} p="md" radius="md" component="a" href="#" className={classes.card}>
-        <Grid grow>        
+      <Card key={article.post_id} radius="md" component="a" href="#" className={classes.card}>
+        <Grid grow>     
           <Grid.Col>
             <Container>
               <Text color="dimmed" size="xs" transform="uppercase" weight={700}>
@@ -45,12 +50,7 @@ export function Latest() {
               </Text>
             </Container>
             <Container>
-              <Text color="dimmed" size="xs" transform="uppercase" weight={600} mt={20}>
-                Tags: [ {article?.category} ]
-              </Text>
-            </Container>
-            <Container>
-              <Text color="dimmed"  className={classes.price} >
+              <Text color="dimmed"  className={classes.price} pt={10}>
                 ${article?.payout} | comments: {article?.children}
               </Text>
             </Container>
@@ -72,9 +72,9 @@ export function Latest() {
         </SimpleGrid>
       </Suspense>
       <Container pt={25}>
-        <Center>
-          <BlogPagination/>
-        </Center>
+        {/* <Center>
+          <BlogPagination amount={5} type={'latest'}/>
+        </Center> */}
       </Container>
     </>
 

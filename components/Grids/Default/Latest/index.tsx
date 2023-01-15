@@ -3,11 +3,12 @@ import { createStyles } from '@mantine/styles'
 const useStyles = createStyles((theme) => ({
   card: {
     transition: 'transform 150ms ease, box-shadow 150ms ease',
-
+    boxShadow: theme.shadows.md,
     '&:hover': {
-      transform: 'scale(1.01)',
+      transform: 'scale(1.05)',
       boxShadow: theme.shadows.md,
     },
+    padding: 0, 
   },
 
   title: {
@@ -31,6 +32,15 @@ const useStyles = createStyles((theme) => ({
     fontWeight: 400,
     fontSize: 12
   },
+
+  image: {
+    width: '100%', /* Change to 50% to take up half of the card's width */
+    objectFit: 'cover', /* Scale the image to cover the entire width without distorting it */
+    padding: 0, /* Remove any padding */
+    margin: 0, /* Remove any margin */
+    border: 0, /* Remove any border */
+}
+
 }))
 
 export default useStyles

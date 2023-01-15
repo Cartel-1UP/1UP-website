@@ -2,8 +2,11 @@
 
 import { Button, Dialog, Group, Text, TextInput } from "@mantine/core";
 import { useState } from "react";
+import useStyles from ".";
 import loginKeychain from "../../utils/actions/login";
 import { useAuthorizationStore } from "../../zustand/stores/useAuthorizationStore";
+
+
 
 declare global {
   interface Window {
@@ -17,6 +20,7 @@ const isKeychain = () => {
 
 
 function LoginButton() {
+  const { classes, theme } = useStyles()
   const authorized = useAuthorizationStore((state: { authorized: any; }) => state.authorized)
   const [opened, setOpened] = useState(false);
   const [value, setValue] = useState('');
@@ -39,7 +43,7 @@ function LoginButton() {
   return (
     <>
     <Group position="center">
-      <Button onClick={() => setOpened((o) => !o)}>Log in</Button>
+      <Button className={classes.button} onClick={() => setOpened((o) => !o)}>Log in</Button>
     </Group>
 
     <Dialog

@@ -60,7 +60,7 @@ export function WebHeader() {
 
   return (
     <Box pb={0}>
-      <Header height={75} px="md">
+      <Header height={75} px="md" className={classes.header}>
         <Group position="apart" sx={{ height: '100%' }}>
           <Image
                src={oneuplogo.src}
@@ -132,7 +132,8 @@ export function WebHeader() {
               position="bottom-end"
               transition="pop-top-right"
               onClose={() => setUserMenuOpened(false)}
-              onOpen={() => setUserMenuOpened(true)}>
+              onOpen={() => setUserMenuOpened(true)}
+              >
               <Menu.Target>
                 <UserButton
                   image="https://i.imgur.com/7OnTZBA.png"
