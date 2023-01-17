@@ -22,6 +22,7 @@ const useStyles = createStyles((theme) => ({
     backgroundColor: '#072f37',
     maxHeight: '7em',
   },
+  
 
   gradientTop: {
     background: 'linear-gradient(to top, white, #072f37);'

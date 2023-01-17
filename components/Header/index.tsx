@@ -55,6 +55,12 @@ const useStyles = createStyles((theme) => ({
     },
   },
 
+  hiddenMobileLogin: {
+    [theme.fn.smallerThan('lg')]: {
+      display: 'none',
+    },
+  },
+
   hiddenDesktop: {
     [theme.fn.largerThan('sm')]: {
       display: 'none',

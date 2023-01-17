@@ -9,11 +9,12 @@ const useStyles = createStyles((theme) => ({
     alignItems: 'flex-start',
     backgroundSize: 'cover',
     backgroundPosition: 'center',
+    boxShadow: '0px 9px 8px -5px rgba(66, 68, 90, 1);',
 
     transition: 'transform 900ms ease, box-shadow 900ms ease, filter 900ms ease',
     '&:hover': {
       transform: 'scale(1.02)',
-      boxShadow: theme.shadows.md,
+      boxShadow: '0px 9px 8px -5px rgba(66, 68, 90, 1);',
       filter: 'brightness(70%)'
     },
   },
