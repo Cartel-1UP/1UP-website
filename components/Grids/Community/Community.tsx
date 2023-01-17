@@ -44,14 +44,15 @@ export function CommunityGrid() {
 
   return (
     <>
+      {!mobile && 
       <Container fluid className={classes.containerLogos} pt={10}>
         <Container size="xl">
           <Carousel
-            slideSize="10%"
+            slideSize={mobile ? '20%' : "10%"}
             breakpoints={[{ maxWidth: 'sm', slideSize: '100%', slideGap: 1 }]}
             slideGap="xl"
             align="start"
-            slidesToScroll={mobile ? 1 : 1}
+            slidesToScroll={mobile ? 2 : 1}
             loop
             withControls={false}
             plugins={[autoplay.current]}
@@ -64,7 +65,7 @@ export function CommunityGrid() {
           </Carousel>
         </Container>
       </Container>
-      {/* <Container fluid  pb={30} pt={20}/> */}
+      }
     </>
   );
 }

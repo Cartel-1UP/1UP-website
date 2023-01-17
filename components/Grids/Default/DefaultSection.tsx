@@ -9,7 +9,7 @@ export function ArticlesCardsGrid() {
 
   return (
 
-    <Container size="xl" py="xl" color={theme.colorScheme === 'dark' ? 'dark.5' : 'gray.1'}>
+    <Container size="xl" color={theme.colorScheme === 'dark' ? 'dark.5' : 'gray.1'}>
       <Grid>
         <Grid.Col span={9}>
           <Popular/>

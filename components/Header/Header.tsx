@@ -139,6 +139,7 @@ export function WebHeader() {
                   image="https://i.imgur.com/7OnTZBA.png"
                   name="KWSKicky"
                   email="kwskicky@outlook.com"
+                  className={classes.hiddenMobileLogin}
                 />
               </Menu.Target>
               <Menu.Dropdown>

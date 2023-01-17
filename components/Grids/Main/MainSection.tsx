@@ -17,11 +17,14 @@ function Card({ image, title, category }: CardProps) {
 
   return (
     <Paper
-      shadow="md"
       p="xl"
       radius="md"
-      sx={{ backgroundImage: `url(${image})` }}
+      sx={{ backgroundImage: `url(${image})`}}
       className={classes.card}
+      mt={30}
+      mb={50}
+      ml={10}
+      mr={10}
     >
       <div>
         <Text className={classes.category} size="xs">
@@ -47,14 +50,14 @@ export function MainCardsGrid() {
 
   return (
     <Container fluid className={classes.gradientBot}>
-    <Container size="xl" pt={80}>
+    <Container size="xl" pt={30}>
 
       <Carousel
-        slideSize="25%"
-        breakpoints={[{ maxWidth: 'sm', slideSize: '100%', slideGap: 4 }]}
+        slideSize="33%"
+        breakpoints={[{ maxWidth: 'xs', slideSize: '100%', slideGap: 3 }]}
         slideGap="xl"
         align="start"
-        slidesToScroll={mobile ? 1 : 4}
+        slidesToScroll={mobile ? 1 : 3}
         loop
       >
         {slides}
