@@ -60,14 +60,9 @@ export function WebHeader() {
 
   return (
     <Box pb={0}>
-      <Header height={75} px="md" className={classes.header}>
+      <Header height={75} pl="xl" pr="xl" className={classes.header}>
         <Group position="apart" sx={{ height: '100%' }}>
-          <Image
-               src={oneuplogo.src}
-               alt="Logo"
-               width={380}
-               height={60}
-               />
+
           <Group sx={{ height: '100%' }} spacing={0} className={classes.hiddenMobile}>
             <a href="/news" className={classes.link}>
               News
@@ -124,7 +119,12 @@ export function WebHeader() {
               </HoverCard.Dropdown>
             </HoverCard>
           </Group>
-
+          <Image
+               src={oneuplogo.src}
+               alt="Logo"
+               width={460}
+               height={100}
+               />
           <Group className={classes.hiddenMobile}>
             {authorized ? 
               <Menu 

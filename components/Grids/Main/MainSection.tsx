@@ -23,8 +23,6 @@ function Card({ image, title, category }: CardProps) {
       className={classes.card}
       mt={30}
       mb={50}
-      ml={10}
-      mr={10}
     >
       <div>
         <Text className={classes.category} size="xs">
@@ -50,10 +48,10 @@ export function MainCardsGrid() {
 
   return (
     <Container fluid className={classes.gradientBot}>
-    <Container size="xl" pt={30}>
+    <Container size="xl" pt={15}>
 
       <Carousel
-        slideSize="33%"
+        slideSize="33.33%"
         breakpoints={[{ maxWidth: 'xs', slideSize: '100%', slideGap: 3 }]}
         slideGap="xl"
         align="start"
