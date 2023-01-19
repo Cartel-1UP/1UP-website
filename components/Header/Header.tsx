@@ -9,12 +9,12 @@ import {
   Collapse,
   Divider,
   Drawer,
+  Grid,
   Group,
   Header,
   HoverCard,
   Image,
-  Menu,
-  ScrollArea,
+  Menu, ScrollArea,
   SimpleGrid,
   Text,
   ThemeIcon,
@@ -30,7 +30,7 @@ import { ToggleColor } from '../ToggleColor/ToggleColor'
 import { UserButton } from '../UserButton/UserButton'
 import { mockdata } from './data'
 
-import oneuplogo from '../../images/oneuplogo.png'
+import oneuplogo from '../../images/oneup1.png'
 
 
 export function WebHeader() {
@@ -61,9 +61,11 @@ export function WebHeader() {
   return (
     <Box pb={0}>
       <Header height={75} pl="xl" pr="xl" className={classes.header}>
-        <Group position="apart" sx={{ height: '100%' }}>
-
-          <Group sx={{ height: '100%' }} spacing={0} className={classes.hiddenMobile}>
+        {/* <Group position="apart" sx={{ height: '100%' }}> */}
+        <Grid justify="space-between" align="center"> 
+        <Grid.Col span={3} pl={20} sx={{display:'flex', justifyContent:'left'}}>
+        <Center>
+          <Group spacing={0} className={classes.hiddenMobile}>
             <a href="/news" className={classes.link}>
               News
             </a>
@@ -119,12 +121,20 @@ export function WebHeader() {
               </HoverCard.Dropdown>
             </HoverCard>
           </Group>
+        </Center>
+        </Grid.Col>
+        <Grid.Col span={6}>
+        <Center>
           <Image
                src={oneuplogo.src}
                alt="Logo"
-               width={460}
+               width={540}
                height={100}
                />
+        </Center>
+        </Grid.Col>
+        <Grid.Col span={3} pr={20} sx={{display:'flex', justifyContent:'right'}}>
+        
           <Group className={classes.hiddenMobile}>
             {authorized ? 
               <Menu 
@@ -160,11 +170,13 @@ export function WebHeader() {
             </Menu> :
             <LoginButton/>
             }
-            <ToggleColor />
+            <ToggleColor/>
           </Group>
+        </Grid.Col>
 
           <Burger opened={drawerOpened} onClick={toggleDrawer} className={classes.hiddenDesktop} />
-        </Group>
+          </Grid>
+        {/* </Group> */}
       </Header>
       <Drawer
         opened={drawerOpened}
