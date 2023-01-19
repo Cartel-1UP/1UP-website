@@ -26,7 +26,7 @@ const useStyles = createStyles((theme) => ({
     color: theme.white,
     lineHeight: 1.2,
     fontSize: 32,
-    marginTop: theme.spacing.xs,
+    // marginTop: '5%',
   },
 
   gradientBot: {
@@ -38,6 +38,7 @@ const useStyles = createStyles((theme) => ({
     opacity: 0.7,
     fontWeight: 700,
     textTransform: 'uppercase',
+    paddingTop: '70%',
   },
 }))
 

@@ -45,7 +45,7 @@ export function CommunityGrid() {
   return (
     <>
       {!mobile && 
-      <Container fluid className={classes.containerLogos} pt={10}>
+      <Container fluid className={classes.containerLogos} pt={40}>
         <Container size="xl">
           <Carousel
             slideSize={mobile ? '20%' : "10%"}

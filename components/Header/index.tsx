@@ -21,8 +21,7 @@ const useStyles = createStyles((theme) => ({
     },
 
     ...theme.fn.hover({
-      backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[6] : '#084e5c',
-      color: theme.colorScheme !== 'dark' ? theme.colors.gray[4]  : theme.black,
+      color: theme.colorScheme !== 'dark' ? theme.colors.gray[4] : '#084e5c',
     }),
   },
 
