@@ -22,7 +22,7 @@ function Card({ image, title, category }: CardProps) {
       sx={{ backgroundImage: `url(${image})`}}
       className={classes.card}
       mt={30}
-      mb={50}
+      mb={30}
     >
       <div>
         <Text className={classes.category} size="xs">
@@ -48,7 +48,7 @@ export function MainCardsGrid() {
 
   return (
     <Container fluid className={classes.gradientBot}>
-    <Container size="xl" pt={25}>
+    <Container size="xl" pt={30} >
 
       <Carousel
         slideSize="33.33%"

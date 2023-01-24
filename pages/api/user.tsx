@@ -5,22 +5,19 @@ import apiHive from '../../utils/apiHive';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const {...body} = req.body
-
+  console.log(body)
   if (req.method === 'POST') {
     try {
       
     const { data } = await apiHive.post('', { 
-        "id": 1,
+        "id": 0,
         "jsonrpc": "2.0",
-        "method": "bridge.get_ranked_posts",
-        "params": {
-            "sort": "trending",
-            "tag": body.tag,
-            "observer": "hive.blog",
-            "limit": body.number,
-            "start_author": body.start ? body.start : '',
-            "start_permlink": body.link ? body.link : ''
-        }
+        "method": "condenser_api.get_accounts",
+        "params": [
+            [
+                "kwskicky"
+            ]
+        ]
      } )
      return res.json(data)
     }

@@ -4,20 +4,26 @@ import useStyles from '.'
 import { Latest } from './Latest/Latest'
 import { Popular } from './Popular/Popular'
 
-export function ArticlesCardsGrid() {
+type Props = {
+  tag: string
+}
+
+export function ArticlesCardsGrid({tag} : Props) {
   const { classes, theme } = useStyles()
-
+  console.log('test: ' + tag)
   return (
-
-    <Container size="xl" color={theme.colorScheme === 'dark' ? 'dark.5' : 'gray.1'}>
+    <Container  fluid className={classes.default}>
+    <Container size="xl" color={theme.colorScheme === 'dark' ? 'dark.5' : 'gray.1'} >
       <Grid>
         <Grid.Col span={9}>
           <Popular/>
         </Grid.Col>
         <Grid.Col span={3}>
-          <Latest/>
+          <Latest tag={tag}/>
         </Grid.Col>
       </Grid>
     </Container>
-  )
+
+    </Container>
+      )
 }

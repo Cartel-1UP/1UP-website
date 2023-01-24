@@ -34,7 +34,7 @@ export function RecommendedCardsGrid() {
     <Card key={article.post_id} p="md" radius="md" component="a" href="#" className={classes.card}>
       <Container>
         <AspectRatio ratio={16/9}>
-        <Image src={article.json_metadata.image[0]} />
+        <Image src={article.json_metadata.image ? article.json_metadata.image[0] : null} />
         </AspectRatio> 
       </Container>
       <Container>

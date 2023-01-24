@@ -5,20 +5,24 @@ import useStyles from '.'
 import getPosts from '../../../../utils/actions/posts'
 import { setLatestPosts, usePostsStore } from '../../../../zustand/stores/usePostsStore'
 
-export function Latest() {
+type Props = {
+  tag: string
+}
+
+export function Latest({tag}: Props) {
+  
   const { classes, theme } = useStyles()
   const posts = usePostsStore((state: { latestPosts: any; }) => state.latestPosts)
   const nextUser = usePostsStore((state: { nextUser: any; }) => state.nextUser)
   
   useEffect(() => {
-    console.log('start')
+    console.log('test: ' + tag)
     getPosts({
-      tag: "hive-102223",
+      tag: tag,
       sort: 'trending',
       limit: 6
     }).then((data) => { 
         setLatestPosts(data.result) 
-        console.log(data)
       }
     )
   }, [])

@@ -1,7 +1,6 @@
 'use client'
 
 import {
-  Anchor,
   Box,
   Burger,
   Button,
@@ -21,7 +20,7 @@ import {
   UnstyledButton
 } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
-import { IconChevronDown, IconHeart, IconLogout, IconMessage, IconStar } from '@tabler/icons'
+import { IconArticle, IconChevronDown, IconLogout, IconUserCircle, IconWallet } from '@tabler/icons'
 import { useState } from 'react'
 import useStyles from '.'
 import { logoutUser, useAuthorizationStore } from '../../zustand/stores/useAuthorizationStore'
@@ -37,20 +36,24 @@ export function WebHeader() {
   const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] = useDisclosure(false)
   const [linksOpened, { toggle: toggleLinks }] = useDisclosure(false)
   const { classes, theme } = useStyles()
-  const authorized = useAuthorizationStore((state: { authorized: any; }) => state.authorized)
+  const authorized = useAuthorizationStore((state: { authorized: boolean; }) => state.authorized)
+  const userImage = useAuthorizationStore((state: { profile_image: string; }) => state.profile_image)
+  const username = useAuthorizationStore((state: { username: string; }) => state.username)
+
+  
   const [userMenuOpened, setUserMenuOpened] = useState(false);
   
   const links = mockdata.map((item, index) => (
     <UnstyledButton className={classes.subLink} key={index}>
       <Group noWrap align="flex-start">
         <ThemeIcon size={34} variant="default" radius="md">
-          <item.icon size={22} color={theme.fn.primaryColor()} />
+          <item.icon size={22} color={'#06272e'} />
         </ThemeIcon>
         <div>
-          <Text size="sm" weight={500}>
+          <Text size="sm" weight={500} sx={{color: 'white' }}>
             {item.title}
           </Text>
-          <Text size="xs" color="dimmed">
+          <Text size="xs" color="white">
             {item.description}
           </Text>
         </div>
@@ -77,7 +80,7 @@ export function WebHeader() {
             </a>
             <HoverCard width={600} position="bottom" radius="md" shadow="md" withinPortal>
               <HoverCard.Target>
-                <a href="/more" className={classes.link}>
+                <a className={classes.link}>
                   <Center inline>
                     <Box component="span" mr={5}>
                       More
@@ -87,31 +90,28 @@ export function WebHeader() {
                 </a>
               </HoverCard.Target>
 
-              <HoverCard.Dropdown sx={{ overflow: 'hidden' }}>
-                <Group position="apart" px="md">
-                  <Text weight={500}>More</Text>
-                  <Anchor href="#" size="xs">
-                    View all
-                  </Anchor>
+              <HoverCard.Dropdown sx={{ overflow: 'hidden' }} className={classes.dropdownBody}>
+                <Group position="apart" mx="-md" my="-md" sx={{backgroundColor: '#06272e'}}>
+                  <Text weight={500} sx={{ color: 'white'}} m={"md"}>More</Text>
                 </Group>
 
                 <Divider
-                  my="sm"
+                  my="md"
                   mx="-md"
-                  color={theme.colorScheme === 'dark' ? 'dark.5' : 'gray.1'}
+                  color={theme.colorScheme === 'dark' ? '#031418' : '#031418'}
                 />
 
-                <SimpleGrid cols={2} spacing={0}>
+                <SimpleGrid cols={2} spacing={0} sx={{ color: 'white' }}>
                   {links}
                 </SimpleGrid>
 
                 <div className={classes.dropdownFooter}>
                   <Group position="apart">
                     <div>
-                      <Text weight={500} size="sm">
+                      <Text weight={500} size="sm" sx={{ color: 'white' }}>
                         Get contact
                       </Text>
-                      <Text size="xs" color="dimmed">
+                      <Text size="xs" color="dimmed" sx={{ color: 'white' }}>
                         Come and contact with us if you have new ideas
                       </Text>
                     </div>
@@ -135,7 +135,7 @@ export function WebHeader() {
         </Grid.Col>
         <Grid.Col span={3} pr={20} sx={{display:'flex', justifyContent:'right'}}>
         
-          <Group className={classes.hiddenMobile}>
+          <Group className={classes.hiddenMobile} >
             {authorized ? 
               <Menu 
               width={260}
@@ -143,27 +143,27 @@ export function WebHeader() {
               transition="pop-top-right"
               onClose={() => setUserMenuOpened(false)}
               onOpen={() => setUserMenuOpened(true)}
+              classNames = {classes}
               >
               <Menu.Target>
                 <UserButton
-                  image="https://i.imgur.com/7OnTZBA.png"
-                  name="KWSKicky"
-                  email="kwskicky@outlook.com"
-                  className={classes.hiddenMobileLogin}
-                />
+                      image={userImage}
+                      name={username}
+                      className={classes.hiddenMobileLogin} 
+                      email={''}                />
               </Menu.Target>
-              <Menu.Dropdown>
-              <Menu.Item icon={<IconHeart size={14} color={theme.colors.red[6]} stroke={1.5} />}>
-                Liked posts
+              <Menu.Dropdown sx={{backgroundColor: '#072f37', borderColor: '#031418'}}  >
+              <Menu.Item   sx={{color: 'white'}} className={classes.subLink}  icon={<IconUserCircle size={20} color={'white'} stroke={1.5} />}>
+                Profile
               </Menu.Item>
-              <Menu.Item icon={<IconStar size={14} color={theme.colors.yellow[6]} stroke={1.5} />}>
-                Saved posts
+              <Menu.Item   sx={{color: 'white'}} className={classes.subLink} icon={<IconArticle size={20} color={'white'} stroke={1.5} />}>
+                My blog
               </Menu.Item>
-              <Menu.Item icon={<IconMessage size={14} color={theme.colors.blue[6]} stroke={1.5} />}>
-                Your comments
+              <Menu.Item  sx={{color: 'white'}} className={classes.subLink} icon={<IconWallet size={20} color={'white'} stroke={1.5} />}>
+                Wallet
               </Menu.Item>
-              <Menu.Divider />
-              <Menu.Item onClick={() => logoutUser()} color="red" icon={<IconLogout size={14} stroke={1.5} />}>
+              <Menu.Divider color={theme.colorScheme === 'dark' ? '#031418' : '#031418'}/>
+              <Menu.Item className={classes.subLink} sx={{color: 'white'}} onClick={() => logoutUser()}  icon={<IconLogout color={'white'} size={20} stroke={1.5} />}>
                 Log out
               </Menu.Item>
             </Menu.Dropdown>
