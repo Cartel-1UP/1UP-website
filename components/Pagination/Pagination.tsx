@@ -62,15 +62,7 @@ function BlogPagination({amount, type}: Props) {
         tag: "hive-102223",
         sort: 'trending',
         limit: amount
-      }).then((data) => {
-        // const user2 = {
-        //     author: data?.result[0].author,
-        //     link: data?.result[0].permlink
-        //   }   
-        //   const user = {
-        //     author: data?.result[3].author,
-        //     link: data?.result[3].permlink
-        //   }   
+      }).then((data) => {  
         switch (type) {
           case 'trending':
             setPosts(data.result) 

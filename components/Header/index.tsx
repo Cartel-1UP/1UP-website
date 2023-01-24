@@ -21,7 +21,7 @@ const useStyles = createStyles((theme) => ({
     },
 
     ...theme.fn.hover({
-      color: theme.colorScheme !== 'dark' ? theme.colors.gray[4] : '#084e5c',
+      color: theme.colorScheme !== 'dark' ? theme.colors.gray[4] : '#06272e',
     }),
   },
 
@@ -31,21 +31,40 @@ const useStyles = createStyles((theme) => ({
     borderRadius: theme.radius.md,
     //color zastepczy 095261
     ...theme.fn.hover({
-      backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : '#072f37',
+      backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : '#06272e',
     }),
 
     '&:active': theme.activeStyles,
   },
 
   dropdownFooter: {
-    backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.colors.gray[0],
+    backgroundColor: theme.colorScheme === 'dark' ? '#06272e' : '#06272e',
+    color: theme.colorScheme === 'dark' ? '#031013' : '#031013',
     margin: -theme.spacing.md,
     marginTop: theme.spacing.sm,
     padding: `${theme.spacing.md}px ${theme.spacing.md * 2}px`,
     paddingBottom: theme.spacing.xl,
     borderTop: `1px solid ${
-      theme.colorScheme === 'dark' ? theme.colors.dark[5] : theme.colors.gray[1]
+      theme.colorScheme === 'dark' ? '#031418' : '#031418'
     }`,
+  },
+
+
+  dropdownBody: {
+    backgroundColor: theme.colorScheme === 'dark' ? '#072f37' : '#072f37',
+    borderColor: theme.colorScheme === 'dark' ? '#031013' : '#031013',
+  },
+
+  loginPanel:{
+    backgroundColor: theme.colorScheme === 'dark' ? '#072f37' : '#072f37',
+    borderColor: theme.colorScheme === 'dark' ? '#031013' : '#031013',
+  },
+
+  item: {
+    '&[data-hovered]': {
+      backgroundColor: '#06272e',
+      color: theme.white,
+    },
   },
 
   hiddenMobile: {

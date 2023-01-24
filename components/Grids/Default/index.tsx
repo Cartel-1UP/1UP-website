@@ -10,6 +10,10 @@ const useStyles = createStyles((theme) => ({
     },
   },
 
+  default: {
+    // background: 'linear-gradient(to top, white, #275c67bb);',
+  },
+
   title: {
     fontFamily: `Greycliff CF, ${theme.fontFamily}`,
     fontWeight: 600,
