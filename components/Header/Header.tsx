@@ -14,22 +14,20 @@ import {
   HoverCard,
   Image,
   Menu, ScrollArea,
-  SimpleGrid,
-  Text,
-  ThemeIcon,
+  SimpleGrid, Space, Text, ThemeIcon,
   UnstyledButton
 } from '@mantine/core'
-import { useDisclosure } from '@mantine/hooks'
+import { useDisclosure, useMediaQuery } from '@mantine/hooks'
 import { IconArticle, IconChevronDown, IconLogout, IconUserCircle, IconWallet } from '@tabler/icons'
 import { useState } from 'react'
 import useStyles from '.'
 import { logoutUser, useAuthorizationStore } from '../../zustand/stores/useAuthorizationStore'
 import LoginButton from '../LoginButton/LoginButton'
-import { ToggleColor } from '../ToggleColor/ToggleColor'
 import { UserButton } from '../UserButton/UserButton'
 import { mockdata } from './data'
 
 import oneuplogo from '../../images/oneup1.png'
+import oneuplogo2 from '../../images/oneup2.png'
 
 
 export function WebHeader() {
@@ -39,6 +37,7 @@ export function WebHeader() {
   const authorized = useAuthorizationStore((state: { authorized: boolean; }) => state.authorized)
   const userImage = useAuthorizationStore((state: { profile_image: string; }) => state.profile_image)
   const username = useAuthorizationStore((state: { username: string; }) => state.username)
+  const mobile = useMediaQuery(`(max-width: ${theme.breakpoints.xs}px)`);
 
   
   const [userMenuOpened, setUserMenuOpened] = useState(false);
@@ -63,78 +62,76 @@ export function WebHeader() {
 
   return (
     <Box pb={0}>
-      <Header height={75} pl="xl" pr="xl" className={classes.header}>
-        {/* <Group position="apart" sx={{ height: '100%' }}> */}
+      <Header height={mobile ? '1em' : 75} pl="xl" pr="xl" className={classes.header}>
         <Grid justify="space-between" align="center"> 
-        <Grid.Col span={3} pl={20} sx={{display:'flex', justifyContent:'left'}}>
-        <Center>
-          <Group spacing={0} className={classes.hiddenMobile}>
-            <a href="/news" className={classes.link}>
-              News
-            </a>
-            <a href="/posts" className={classes.link}>
-              Posts
-            </a>
-            <a href="/proposals" className={classes.link}>
-              Proposals
-            </a>
-            <HoverCard width={600} position="bottom" radius="md" shadow="md" withinPortal>
-              <HoverCard.Target>
-                <a className={classes.link}>
-                  <Center inline>
-                    <Box component="span" mr={5}>
-                      More
-                    </Box>
-                    <IconChevronDown size={16} color={theme.fn.primaryColor()} />
-                  </Center>
+          <Grid.Col span={3} pl={20} sx={{display:'flex', justifyContent:'left'}} className={classes.hiddenMobile}>
+            <Center>
+              <Group spacing={0} >
+                <a href="/news" className={classes.link}>
+                  News
                 </a>
-              </HoverCard.Target>
+                <a href="/posts" className={classes.link}>
+                  Posts
+                </a>
+                <a href="/proposals" className={classes.link}>
+                  Proposals
+                </a>
+                <HoverCard width={600} position="bottom" radius="md" shadow="md" withinPortal>
+                  <HoverCard.Target>
+                    <a className={classes.link}>
+                      <Center inline>
+                        <Box component="span" mr={5}>
+                          More
+                        </Box>
+                        <IconChevronDown size={16} color={theme.fn.primaryColor()} />
+                      </Center>
+                    </a>
+                  </HoverCard.Target>
 
-              <HoverCard.Dropdown sx={{ overflow: 'hidden' }} className={classes.dropdownBody}>
-                <Group position="apart" mx="-md" my="-md" sx={{backgroundColor: '#06272e'}}>
-                  <Text weight={500} sx={{ color: 'white'}} m={"md"}>More</Text>
-                </Group>
+                  <HoverCard.Dropdown sx={{ overflow: 'hidden' }} className={classes.dropdownBody}>
+                    <Group position="apart" mx="-md" my="-md" sx={{backgroundColor: '#06272e'}}>
+                      <Text weight={500} sx={{ color: 'white'}} m={"md"}>More</Text>
+                    </Group>
 
-                <Divider
-                  my="md"
-                  mx="-md"
-                  color={theme.colorScheme === 'dark' ? '#031418' : '#031418'}
-                />
+                    <Divider
+                      my="md"
+                      mx="-md"
+                      color={theme.colorScheme === 'dark' ? '#031418' : '#031418'}
+                    />
 
-                <SimpleGrid cols={2} spacing={0} sx={{ color: 'white' }}>
-                  {links}
-                </SimpleGrid>
+                    <SimpleGrid cols={2} spacing={0} sx={{ color: 'white' }}>
+                      {links}
+                    </SimpleGrid>
 
-                <div className={classes.dropdownFooter}>
-                  <Group position="apart">
-                    <div>
-                      <Text weight={500} size="sm" sx={{ color: 'white' }}>
-                        Get contact
-                      </Text>
-                      <Text size="xs" color="dimmed" sx={{ color: 'white' }}>
-                        Come and contact with us if you have new ideas
-                      </Text>
+                    <div className={classes.dropdownFooter}>
+                      <Group position="apart">
+                        <div>
+                          <Text weight={500} size="sm" sx={{ color: 'white' }}>
+                            Get contact
+                          </Text>
+                          <Text size="xs" color="dimmed" sx={{ color: 'white' }}>
+                            Come and contact with us if you have new ideas
+                          </Text>
+                        </div>
+                        <Button variant="default">Get contact</Button>
+                      </Group>
                     </div>
-                    <Button variant="default">Get contact</Button>
-                  </Group>
-                </div>
-              </HoverCard.Dropdown>
-            </HoverCard>
-          </Group>
-        </Center>
-        </Grid.Col>
-        <Grid.Col span={6}>
-        <Center>
-          <Image
-               src={oneuplogo.src}
-               alt="Logo"
-               width={540}
-               height={100}
-               />
-        </Center>
-        </Grid.Col>
+                  </HoverCard.Dropdown>
+                </HoverCard>
+              </Group>
+            </Center>
+          </Grid.Col>
+          <Grid.Col span={mobile ? 9 : 6}>
+          <Center>
+            <Image
+                src={oneuplogo.src}
+                alt="Logo"
+                width={mobile ? 280 : 540}
+                height={'100%'}
+                />
+          </Center>
+          </Grid.Col>
         <Grid.Col span={3} pr={20} sx={{display:'flex', justifyContent:'right'}}>
-        
           <Group className={classes.hiddenMobile} >
             {authorized ? 
               <Menu 
@@ -150,7 +147,8 @@ export function WebHeader() {
                       image={userImage}
                       name={username}
                       className={classes.hiddenMobileLogin} 
-                      email={''}                />
+                      email={''}          
+                       />
               </Menu.Target>
               <Menu.Dropdown sx={{backgroundColor: '#072f37', borderColor: '#031418'}}  >
               <Menu.Item   sx={{color: 'white'}} className={classes.subLink}  icon={<IconUserCircle size={20} color={'white'} stroke={1.5} />}>
@@ -170,36 +168,59 @@ export function WebHeader() {
             </Menu> :
             <LoginButton/>
             }
-            <ToggleColor/>
+            {/* <ToggleColor/> */}
           </Group>
+          <Burger opened={drawerOpened} onClick={toggleDrawer} className={classes.hiddenDesktop} />
         </Grid.Col>
 
-          <Burger opened={drawerOpened} onClick={toggleDrawer} className={classes.hiddenDesktop} />
           </Grid>
         {/* </Group> */}
       </Header>
+      
       <Drawer
         opened={drawerOpened}
         onClose={closeDrawer}
         size="100%"
         padding="md"
-        title="Navigation"
-        className={classes.hiddenDesktop}
+       
+        className={classes.moblieDrawer}
+        
         zIndex={1000000}
       >
+         <Grid justify="space-between" align="center" mt="-50px"> 
+         <Grid.Col span={3}>
+          <Image
+                src={oneuplogo2.src}
+                alt="Logo"
+                width={70}
+                height={70}
+                />
+         </Grid.Col>
+         <Grid.Col span={9}>
+         <Text 
+          size={25}
+          >Cartel menu</Text>
+         </Grid.Col>
+          
+        </Grid>
+
         <ScrollArea sx={{ height: 'calc(100vh - 60px)' }} mx="-md">
-          <Divider my="sm" color={theme.colorScheme === 'dark' ? 'dark.5' : 'gray.1'} />
+          <Divider my="md" color={'#031418'} />
 
           <a href="/news" className={classes.link}>
             News
           </a>
+          
+          <Space h="sm"/>
+          
           <a href="/posts" className={classes.link}>
             Posts
           </a>
+          <Space h="sm"/>
           <a href="/proposals" className={classes.link}>
             Proposals
           </a>
-
+          <Space h="sm"/>
           <UnstyledButton className={classes.link} onClick={toggleLinks}>
             <Center inline>
               <Box component="span" mr={5}>
@@ -208,13 +229,13 @@ export function WebHeader() {
               <IconChevronDown size={16} color={theme.fn.primaryColor()} />
             </Center>
           </UnstyledButton>
+          <Space h="sm"/>
           <Collapse in={linksOpened}>{links}</Collapse>
-
-          <Divider my="sm" color={theme.colorScheme === 'dark' ? 'dark.5' : 'gray.1'} />
-
+          <Divider my="sm" color={'#031418'} />
           <Group position="center" grow pb="xl" px="md">
             <Button variant="default">Log in</Button>
           </Group>
+          <Space h="md"/>
         </ScrollArea>
       </Drawer>
     </Box>

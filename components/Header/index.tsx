@@ -13,12 +13,7 @@ const useStyles = createStyles((theme) => ({
     fontSize: theme.fontSizes.md,
     borderRadius: theme.radius.xs,
 
-    [theme.fn.smallerThan('sm')]: {
-      height: 42,
-      display: 'flex',
-      alignItems: 'center',
-      width: '100%',
-    },
+
 
     ...theme.fn.hover({
       color: theme.colorScheme !== 'dark' ? theme.colors.gray[4] : '#06272e',
@@ -77,9 +72,21 @@ const useStyles = createStyles((theme) => ({
     [theme.fn.smallerThan('lg')]: {
       display: 'none',
     },
+
+    backgroundColord: 'red',
   },
 
   hiddenDesktop: {
+    [theme.fn.largerThan('sm')]: {
+      display: 'none',
+    },
+  },
+
+  moblieDrawer: {
+    backgroundColor: theme.colorScheme === 'dark' ? '#072f37' : '#072f37',
+    borderColor: theme.colorScheme === 'dark' ? '#031418' : '#031418',
+    color: 'white',
+
     [theme.fn.largerThan('sm')]: {
       display: 'none',
     },

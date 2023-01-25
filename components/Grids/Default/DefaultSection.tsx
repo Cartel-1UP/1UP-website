@@ -1,5 +1,6 @@
 'use client'
 import { Container, Grid } from '@mantine/core'
+import { useMediaQuery } from '@mantine/hooks'
 import useStyles from '.'
 import { Latest } from './Latest/Latest'
 import { Popular } from './Popular/Popular'
@@ -10,15 +11,16 @@ type Props = {
 
 export function ArticlesCardsGrid({tag} : Props) {
   const { classes, theme } = useStyles()
-  console.log('test: ' + tag)
+  const mobile = useMediaQuery(`(max-width: ${theme.breakpoints.xs}px)`);
+
   return (
     <Container  fluid className={classes.default}>
     <Container size="xl" color={theme.colorScheme === 'dark' ? 'dark.5' : 'gray.1'} >
       <Grid>
-        <Grid.Col span={9}>
+        <Grid.Col span={mobile ? 12 : 9}>
           <Popular/>
         </Grid.Col>
-        <Grid.Col span={3}>
+        <Grid.Col span={mobile ? 12 : 3}>
           <Latest tag={tag}/>
         </Grid.Col>
       </Grid>

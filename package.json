@@ -24,6 +24,7 @@
     "@mantine/hooks": "^5.8.2",
     "@mantine/prism": "^5.8.2",
     "@mantine/styles": "^5.8.2",
+    "@supabase/supabase-js": "^2.4.1",
     "@tabler/icons": "^1.112.0",
     "@types/node": "18.11.9",
     "@types/react": "18.0.25",

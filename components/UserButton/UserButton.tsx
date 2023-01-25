@@ -23,7 +23,7 @@ const UserButton = forwardRef<HTMLButtonElement, UserButtonProps>(
 
         '&:hover': {
           color: theme.colorScheme !== 'dark' ? theme.colors.gray[4]  : theme.black,
-          backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : '#084e5c',        },
+          backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : '#06272e',        },
 
         [theme.fn.smallerThan('xs')]: {
           display: 'none',
