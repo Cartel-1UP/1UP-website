@@ -3,8 +3,8 @@ import { Carousel } from '@mantine/carousel';
 import { Container, Paper, Text, Title, useMantineTheme } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
 import useStyles from '.';
+import { supabase } from '../../../lib/supabaseClient';
 import { mockdata } from './data';
-
 
 interface CardProps {
   image: string;
@@ -46,22 +46,33 @@ export function MainCardsGrid() {
     </Carousel.Slide>
   ));
 
+  getServerSideProps()
+
   return (
     <Container fluid className={classes.gradientBot}>
-    <Container size="xl" pt={30} >
-
-      <Carousel
-        slideSize="33.33%"
-        breakpoints={[{ maxWidth: 'xs', slideSize: '100%', slideGap: 3 }]}
-        slideGap="xl"
-        align="start"
-        slidesToScroll={mobile ? 1 : 3}
-        loop
-      >
-        {slides}
-      </Carousel>
-    </Container>
+      <Container size="xl" pt={30}>
+        <Carousel
+          slideSize="33.33%"
+          breakpoints={[{ maxWidth: 'xs', slideSize: '100%', slideGap: 3 }]}
+          slideGap="xl"
+          align="start"
+          slidesToScroll={mobile ? 1 : 3}
+          loop
+        >
+          {slides}
+        </Carousel>
+      </Container>
     </Container>
   );
+}
+
+
+
+export async function getServerSideProps() {
+  let { data } = await supabase.from('maincards').select()
+
+  console.log(data)
+
+  return data
 }
 

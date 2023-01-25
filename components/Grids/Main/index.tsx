@@ -17,7 +17,14 @@ const useStyles = createStyles((theme) => ({
       boxShadow: '0px 9px 8px -5px rgba(66, 68, 90, 1);',
       filter: 'brightness(70%)'
     },
+
+    [theme.fn.smallerThan('sm')]: {
+      height: 300,
+    },
+
   },
+
+
 
 
   title: {
@@ -26,7 +33,12 @@ const useStyles = createStyles((theme) => ({
     color: theme.white,
     lineHeight: 1.2,
     fontSize: 32,
-    // marginTop: '5%',
+
+    
+    [theme.fn.smallerThan('sm')]: {
+      fontSize: 24,
+    },
+
   },
 
   gradientBot: {
@@ -39,6 +51,11 @@ const useStyles = createStyles((theme) => ({
     fontWeight: 700,
     textTransform: 'uppercase',
     paddingTop: '70%',
+
+    [theme.fn.smallerThan('sm')]: {
+      paddingTop: '12em',
+    },
+
   },
 }))
 
