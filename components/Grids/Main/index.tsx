@@ -42,7 +42,7 @@ const useStyles = createStyles((theme) => ({
   },
 
   gradientBot: {
-    background: 'linear-gradient(to top, white, #072f37);'
+    background: 'linear-gradient(to top, #275c672d, #072f37);'
   },
 
   category: {

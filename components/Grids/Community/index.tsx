@@ -19,7 +19,7 @@ const useStyles = createStyles((theme) => ({
   },
 
   containerLogos: {
-    background: 'linear-gradient(to bottom, white, #275c67bb);',
+    background: 'linear-gradient(to bottom, #275c672d, #275c67bb);',
     // maxHeight: '10em',
   },
   
