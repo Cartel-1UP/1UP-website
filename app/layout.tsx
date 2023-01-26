@@ -3,6 +3,7 @@
 import { ColorScheme, ColorSchemeProvider, MantineProvider } from '@mantine/core';
 import { useState } from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
+import { Footer } from '../components/Footer/Footer';
 import { WebHeader } from '../components/Header/Header';
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -20,6 +21,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <body>
             <WebHeader />
             {children}
+            <Footer links={[]}/>
           </body>
         </html>
       </MantineProvider>

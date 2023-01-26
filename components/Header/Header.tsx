@@ -38,6 +38,7 @@ export function WebHeader() {
   const userImage = useAuthorizationStore((state: { profile_image: string; }) => state.profile_image)
   const username = useAuthorizationStore((state: { username: string; }) => state.username)
   const mobile = useMediaQuery(`(max-width: ${theme.breakpoints.xs}px)`);
+  const tablet = useMediaQuery(`(max-width: ${theme.breakpoints.md}px)`);
 
   
   const [userMenuOpened, setUserMenuOpened] = useState(false);
@@ -64,6 +65,7 @@ export function WebHeader() {
     <Box pb={0}>
       <Header height={mobile ? '1em' : 75} pl="xl" pr="xl" className={classes.header}>
         <Grid justify="space-between" align="center"> 
+        {/* {tablet ? <Grid.Col span={3}></Grid.Col> : null } */}
           <Grid.Col span={3} pl={20} sx={{display:'flex', justifyContent:'left'}} className={classes.hiddenMobile}>
             <Center>
               <Group spacing={0} >

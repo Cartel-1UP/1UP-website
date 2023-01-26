@@ -23,6 +23,8 @@ function Card({ image, title, category }: CardProps) {
       className={classes.card}
       mt={30}
       mb={30}
+      ml={10}
+      mr={10}
     >
       <div>
         <Text className={classes.category} size="xs">
