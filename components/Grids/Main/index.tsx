@@ -1,33 +1,66 @@
 import { createStyles } from '@mantine/styles'
 
-const useStyles = createStyles((theme) => ({
-  card: {
-    height: 440,
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'space-between',
-    alignItems: 'flex-start',
+const useStyles = createStyles((theme, _params, getRef) => ({
+  container:{
+    position: 'relative',
+    height: 400,
     backgroundSize: 'cover',
     backgroundPosition: 'center',
-    boxShadow: '0px 9px 8px -5px rgba(66, 68, 90, 1);',
+   
+    display:'flex', 
+    flexDirection:'row',
+    flexWrap: 'wrap',
+    alignContent: 'flex-end',
+    alignItems: 'flex-end',
 
-    transition: 'transform 900ms ease, box-shadow 900ms ease, filter 900ms ease',
-    '&:hover': {
-      transform: 'scale(1.02)',
-      boxShadow: '0px 9px 8px -5px rgba(66, 68, 90, 1);',
-      filter: 'brightness(70%)'
+    [`&:hover .${getRef('overlay')}`]: {
+      transition: '0.5s linear',
+      opacity: 1
     },
 
-    [theme.fn.smallerThan('sm')]: {
-      height: 300,
+
+    [`&:hover .${getRef('image')}`]: {
+      transition: '0.5s linear',
+      filter: 'brightness(70%)',
+      boxShadow: '0 0 10px 0 #00000081',
+
     },
 
   },
 
 
+  image: {
+    ref: getRef('image'),
+    display: 'block',
+    width: '100%',
+    height: '100%',
+    objectFit: 'cover',
+    position: 'absolute',
+    borderRadius: '10px',
+    boxShadow: '0 0 4px 0 #00000081',
+    transition: '0.5s linear',
+  },
+
+  overlay: {
+    ref: getRef('overlay'),
+    position: 'absolute', 
+    bottom: 0,
+    background: 'rgba(0, 0, 0, 0.5)', /* Black see-through */
+    color: '#f1f1f1',
+    width: '100%',
+    transition: '0.5s linear',
+    opacity: '0.75',
+    fontSize: '20px',
+    padding: '20px',
+    textAlign: 'center',
+    borderRadius: '0 0 10px 10px',
+
+  },
 
 
   title: {
+    ref: getRef('title'),
+
     fontFamily: `Greycliff CF, ${theme.fontFamily}`,
     fontWeight: 900,
     color: theme.white,
@@ -50,10 +83,10 @@ const useStyles = createStyles((theme) => ({
     opacity: 0.7,
     fontWeight: 700,
     textTransform: 'uppercase',
-    paddingTop: '70%',
+    
 
     [theme.fn.smallerThan('sm')]: {
-      paddingTop: '12em',
+      
     },
 
   },

@@ -12,7 +12,7 @@ function loginKeychain(username: string|null) {
           processLogin({username, ts, sig: r.result}).then( async () => {
             const { data } = await api.post('user', { username} )
 
-            let userImage = data.result[0].posting_json_metadata
+            let userImage = data?.result[0]?.posting_json_metadata
 
             userImage = JSON.parse(userImage)
             userImage = userImage.profile.profile_image

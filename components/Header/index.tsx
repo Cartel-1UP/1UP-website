@@ -63,8 +63,18 @@ const useStyles = createStyles((theme) => ({
   },
 
   hiddenMobile: {
-    [theme.fn.smallerThan('sm')]: {
+    [theme.fn.smallerThan('md')]: {
       display: 'none',
+    },
+  },
+
+  imageLogo: {
+
+    display:'flex', 
+    justifyContent:'center',
+
+    [theme.fn.smallerThan('md')]: {
+      justifyContent:'left'
     },
   },
 
@@ -72,8 +82,6 @@ const useStyles = createStyles((theme) => ({
     [theme.fn.smallerThan('lg')]: {
       display: 'none',
     },
-
-    backgroundColord: 'red',
   },
 
   hiddenDesktop: {

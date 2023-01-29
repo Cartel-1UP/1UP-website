@@ -1,6 +1,6 @@
 'use client'
 import { Carousel } from '@mantine/carousel';
-import { Container, Paper, Text, Title, useMantineTheme } from '@mantine/core';
+import { Box, Container, Text, Title, useMantineTheme } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
 import useStyles from '.';
 import { supabase } from '../../../lib/supabaseClient';
@@ -16,25 +16,25 @@ function Card({ image, title, category }: CardProps) {
   const { classes } = useStyles();
 
   return (
-    <Paper
-      p="xl"
-      radius="md"
-      sx={{ backgroundImage: `url(${image})`}}
-      className={classes.card}
+    <Box  
       mt={30}
       mb={30}
-      ml={10}
       mr={10}
-    >
-      <div>
-        <Text className={classes.category} size="xs">
-          {category}
-        </Text>
-        <Title order={3} className={classes.title}>
-          {title}
-        </Title>
-      </div>
-    </Paper>
+      ml={10}
+      className={classes.container}>
+        <img src={image} alt={'Main'} className={classes.image}/>
+        <div className={classes.overlay}>
+           <Text className={classes.category} size="xs">
+             {category}
+           </Text>
+          <Title order={3} className={classes.title}>
+            {title}
+          </Title>
+        </div>
+    </Box>
+
+
+
   );
 }
 
@@ -52,7 +52,7 @@ export function MainCardsGrid() {
 
   return (
     <Container fluid className={classes.gradientBot}>
-      <Container size="xl" pt={30}>
+      <Container size="xl" pt={0}>
         <Carousel
           slideSize="33.33%"
           breakpoints={[{ maxWidth: 'xs', slideSize: '100%', slideGap: 3 }]}
