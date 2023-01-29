@@ -62,8 +62,8 @@ export function WebHeader() {
   ))
 
   return (
-    <Box pb={0}>
-      <Header height={mobile ? '1em' : 75} pl="xl" pr="xl" className={classes.header}>
+    <Box>
+      <Header p="xs" className={classes.header} height={'100%'}>
         <Grid justify="space-between" align="center"> 
         {/* {tablet ? <Grid.Col span={3}></Grid.Col> : null } */}
           <Grid.Col span={3} pl={20} sx={{display:'flex', justifyContent:'left'}} className={classes.hiddenMobile}>
@@ -123,15 +123,15 @@ export function WebHeader() {
               </Group>
             </Center>
           </Grid.Col>
-          <Grid.Col span={mobile ? 9 : 6}>
-          <Center>
+          <Grid.Col span={tablet ? 9 : 6} className={classes.imageLogo}>
             <Image
                 src={oneuplogo.src}
                 alt="Logo"
-                width={mobile ? 280 : 540}
-                height={'100%'}
+                // width={mobile ? 280 : 540}
+                fit="contain"
+                width={'40vw'}
+                
                 />
-          </Center>
           </Grid.Col>
         <Grid.Col span={3} pr={20} sx={{display:'flex', justifyContent:'right'}}>
           <Group className={classes.hiddenMobile} >
