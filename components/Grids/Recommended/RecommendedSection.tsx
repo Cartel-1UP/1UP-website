@@ -4,8 +4,13 @@ import { useEffect, useState } from 'react'
 import useStyles from '.'
 import api from '../../../utils/api'
 
-export function RecommendedCardsGrid() {
-    const { classes, theme } = useStyles()
+
+type Props = {
+  tag: string
+}
+
+export function RecommendedCardsGrid({tag}: Props) {
+  const { classes, theme } = useStyles()
   const [articles, setArticles] = useState<any>([])
   
   async function getPosts(tag: string) {
@@ -19,7 +24,7 @@ export function RecommendedCardsGrid() {
   }
 
   useEffect(() => {
-    getPosts("hive-102223")
+    getPosts(tag)
   }, [])
 
   const cards = articles.map((article: any) =>{ 

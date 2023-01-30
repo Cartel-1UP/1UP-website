@@ -12,13 +12,12 @@ export const runtime = 'experimental-edge';
 export default function Home() {
   return (
     <div>
-        
+         <Suspense>
         <MainCardsGrid/>
         <CommunityGrid/>
-        <Suspense fallback={<p>Loading feed...</p>}>
         <ArticlesCardsGrid tag={'hive-102223'}/>
+        <RecommendedCardsGrid tag={'hive-102223'}/>
         </Suspense>
-        <RecommendedCardsGrid/>
     </div>
 
   )

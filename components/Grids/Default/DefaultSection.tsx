@@ -18,7 +18,7 @@ export function ArticlesCardsGrid({tag} : Props) {
     <Container size="xl" color={theme.colorScheme === 'dark' ? 'dark.5' : 'gray.1'} >
       <Grid>
         <Grid.Col span={mobile ? 12 : 9}>
-          <Popular/>
+          <Popular tag={tag}/>
         </Grid.Col>
         <Grid.Col span={mobile ? 12 : 3}>
           <Latest tag={tag}/>

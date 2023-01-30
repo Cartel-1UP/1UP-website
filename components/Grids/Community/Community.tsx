@@ -3,6 +3,7 @@ import { Carousel } from '@mantine/carousel';
 import { AspectRatio, Container, Image, useMantineTheme } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
 import Autoplay from 'embla-carousel-autoplay';
+import Link from 'next/link';
 import { useRef } from 'react';
 import useStyles from '.';
 import { mockdata } from './data';
@@ -10,14 +11,17 @@ import { mockdata } from './data';
 
 interface CardProps {
   image: string;
+  tag: string
 }
 
-function Card({ image}: CardProps) {
+function Card({ image, tag}: CardProps) {
   const { classes } = useStyles();
 
   return (
     <AspectRatio ratio={1/1} sx={{maxWidth:'5em'}}>
+       <Link href={'community/' + tag}>
       <Image src={image} className={classes.card}/>
+      </Link>
     </AspectRatio>
 );
 }

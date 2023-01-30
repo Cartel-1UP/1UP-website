@@ -26,6 +26,7 @@ import LoginButton from '../LoginButton/LoginButton'
 import { UserButton } from '../UserButton/UserButton'
 import { mockdata } from './data'
 
+import Link from 'next/link'
 import oneuplogo from '../../images/oneup1.png'
 import oneuplogo2 from '../../images/oneup2.png'
 
@@ -124,14 +125,14 @@ export function WebHeader() {
             </Center>
           </Grid.Col>
           <Grid.Col span={tablet ? 9 : 6} className={classes.imageLogo}>
+          <Link href={''}> 
             <Image
                 src={oneuplogo.src}
                 alt="Logo"
-                // width={mobile ? 280 : 540}
                 fit="contain"
                 width={'40vw'}
-                
                 />
+          </Link>
           </Grid.Col>
         <Grid.Col span={3} pr={20} sx={{display:'flex', justifyContent:'right'}}>
           <Group className={classes.hiddenMobile} >

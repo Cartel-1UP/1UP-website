@@ -17,54 +17,67 @@ import woo from '../../../images/woo.png'
 export const mockdata = [
   {
     image: splinterlands.src,
-    tag: 'hive-13323'
+    tag: 'hive-13323',
+    name: 'splinterlands'
   },
   {
     image: dcrops.src,
-    tag: 'hive-115712'
+    tag: 'hive-115712',
+    name: 'dcrops'
   },
   {
     image: dcity.src,
     tag: 'hive-198197',
+    name: 'dcity'
   },
   {
     image: mu.src,
     tag: 'hive-196251',
+    name: 'mu'
   },
   {
     image: risingstar.src,
     tag: 'hive-195370',
+    name: 'risingstar'
   },
   {
     image: woo.src,
     tag: 'hive-191258',
+    name: 'woo'
   },
   {
     image: astralrevelations.src,
     tag: '',
+    name: 'astralrevelations'
   },
   {
     image: craftInk.src,
     tag: '',
+    name: 'craftink'
   },
   {
     image: cryptocompany.src,
-    tag: 'hive-196769'
+    tag: 'hive-196769',
+    name: 'cryptocompany'
   },
   {
     image: gls.src,
-    tag: ''
+    tag: '',
+    name: 'gls'
   },
   {
     image: hk.src,
-    tag: ''
+    tag: '',
+    name: 'hk'
   },
   {
     image: kod.src,
-    tag: ''
+    tag: '',
+    name: 'kod'
   },
   {
     image: psyber.src,
-    tag: 'hive-168109'
+    tag: 'hive-168109',
+    name: 'psyber'
   },
 ]

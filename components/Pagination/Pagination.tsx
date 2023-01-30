@@ -10,9 +10,10 @@ import { setLatestPosts, setPosts, usePostsStore } from '../../zustand/stores/us
 type Props = {
   amount: number
   type: string
+  tag: string
 }
 
-function BlogPagination({amount, type}: Props) {
+function BlogPagination({amount, type, tag}: Props) {
   const nextUser = usePostsStore((state: { nextUser: any; }) => state.nextUser)
   const recentUser = usePostsStore((state: { recentUser: any; }) => state.recentUser)
   
@@ -59,7 +60,7 @@ function BlogPagination({amount, type}: Props) {
 
     useEffect(() => {
       getPosts({
-        tag: "hive-102223",
+        tag: tag,
         sort: 'trending',
         limit: amount
       }).then((data) => {  
@@ -82,14 +83,14 @@ function BlogPagination({amount, type}: Props) {
     <>
       <Group position="center" spacing="xl">
         <ActionIcon onClick={() => getPosts({
-          tag: "hive-102223", 
+          tag: tag, 
           isRecent: true,
           sort: 'trending'
         })}>
           <IconArrowNarrowLeft size={48} />
         </ActionIcon>
         <ActionIcon onClick={() => getPosts({
-          tag: "hive-102223", 
+          tag: tag, 
           isRecent: false,
           sort: 'trending'
         })}>
