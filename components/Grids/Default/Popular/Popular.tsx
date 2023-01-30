@@ -5,7 +5,12 @@ import useStyles from '.'
 import { usePostsStore } from '../../../../zustand/stores/usePostsStore'
 import BlogPagination from '../../../Pagination/Pagination'
 
-export function Popular() {
+type Props = {
+  tag: string
+}
+
+
+export function Popular({tag} : Props) {
   const { classes, theme } = useStyles()
   const posts = usePostsStore((state: { posts: any; }) => state.posts)
   const nextUser = usePostsStore((state: { nextUser: any; }) => state.nextUser)
@@ -83,7 +88,7 @@ export function Popular() {
       </Suspense>
       <Container pt={25}>
         <Center>
-          <BlogPagination amount={4} type={'trending'}/>
+          <BlogPagination amount={4} type={'trending'} tag={tag}/>
         </Center>
       </Container>
     </>
