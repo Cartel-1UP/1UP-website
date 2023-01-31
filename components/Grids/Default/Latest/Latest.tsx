@@ -1,5 +1,6 @@
 'use client'
 import { Card, Container, Grid, SimpleGrid, Space, Text, Title } from '@mantine/core'
+import Link from 'next/link'
 import { Suspense, useEffect } from 'react'
 import useStyles from '.'
 import getPosts from '../../../../utils/actions/posts'
@@ -68,7 +69,11 @@ export function Latest({tag}: Props) {
 
     <>
       <Space h="xl" />
-      <Title order={1}>Latest</Title>
+      <Title order={1}>
+      <Link href={'community/' + tag + '/popular'} className={classes.link}>
+        Latest
+      </Link>
+      </Title>
       <Space h="xl" />
       <Suspense>
         <SimpleGrid cols={1} breakpoints={[{ maxWidth: 'sm', cols: 1 }]}>

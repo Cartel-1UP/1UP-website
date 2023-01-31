@@ -39,6 +39,15 @@ const useStyles = createStyles((theme) => ({
     padding: 0, /* Remove any padding */
     margin: 0, /* Remove any margin */
     border: 0, /* Remove any border */
+},
+
+link: {
+  textDecoration: 'none',
+  color: '#000000',
+
+  '&:hover': {
+    color: '#000000bd',
+  },
 }
 
 }))

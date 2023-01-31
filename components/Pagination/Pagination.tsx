@@ -59,9 +59,10 @@ function BlogPagination({amount, type, tag}: Props) {
 
 
     useEffect(() => {
+      console.log(type)
       getPosts({
         tag: tag,
-        sort: 'trending',
+        sort: type,
         limit: amount
       }).then((data) => {  
         switch (type) {
@@ -85,14 +86,14 @@ function BlogPagination({amount, type, tag}: Props) {
         <ActionIcon onClick={() => getPosts({
           tag: tag, 
           isRecent: true,
-          sort: 'trending'
+          sort: type
         })}>
           <IconArrowNarrowLeft size={48} />
         </ActionIcon>
         <ActionIcon onClick={() => getPosts({
           tag: tag, 
           isRecent: false,
-          sort: 'trending'
+          sort: type
         })}>
           <IconArrowNarrowRight size={48} />
         </ActionIcon>
