@@ -7,6 +7,7 @@ import { Popular } from './Popular/Popular'
 
 type Props = {
   tag: string
+
 }
 
 export function ArticlesCardsGrid({tag} : Props) {
@@ -29,3 +30,4 @@ export function ArticlesCardsGrid({tag} : Props) {
     </Container>
       )
 }
+

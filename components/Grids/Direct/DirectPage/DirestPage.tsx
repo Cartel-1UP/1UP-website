@@ -1,6 +1,5 @@
 'use client'
 import { AspectRatio, Card, Center, Container, Grid, Image, SimpleGrid, Space, Text, Title } from '@mantine/core'
-import Link from 'next/link'
 import { Suspense } from 'react'
 import useStyles from '.'
 import { usePostsStore } from '../../../../zustand/stores/usePostsStore'
@@ -8,12 +7,24 @@ import BlogPagination from '../../../Pagination/Pagination'
 
 type Props = {
   tag: string
+  type: string
+  name: string
 }
 
 
-export function Popular({tag} : Props) {
+export function DirectPage({tag, type, name} : Props) {
   const { classes, theme } = useStyles()
-  const posts = usePostsStore((state: { posts: any; }) => state.posts)
+  
+  let posts
+  
+  if(type == 'latest'){
+    posts = usePostsStore((state: { latestPosts: any; }) => state.latestPosts)
+
+  } else {
+    posts = usePostsStore((state: { posts: any; }) => state.posts)
+  }
+  
+
   const nextUser = usePostsStore((state: { nextUser: any; }) => state.nextUser)
 
 
@@ -80,12 +91,7 @@ export function Popular({tag} : Props) {
   return (
     <>
       <Space h="xl" />
-      <Title order={1}>
-      <Link href={'community/' + tag + '/popular'} className={classes.link}>
-        Popular
-      </Link>
-      </Title>
-
+      <Title order={1}>{name}</Title>
       <Space h="xl" />
       <Suspense>
         <SimpleGrid cols={1} breakpoints={[{ maxWidth: 'sm', cols: 1 }]}>
@@ -94,7 +100,7 @@ export function Popular({tag} : Props) {
       </Suspense>
       <Container pt={25}>
         <Center>
-          <BlogPagination amount={4} type={'trending'} tag={tag}/>
+          <BlogPagination amount={4} type={type} tag={tag}/>
         </Center>
       </Container>
     </>

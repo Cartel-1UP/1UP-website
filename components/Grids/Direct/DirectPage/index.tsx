@@ -36,15 +36,6 @@ const useStyles = createStyles((theme) => ({
     WebkitLineClamp: 2,
     WebkitBoxOrient: 'vertical',
     maxHeight: '3em'
-  },
-
-  link: {
-    textDecoration: 'none',
-    color: '#000000',
-
-    '&:hover': {
-      color: '#000000bd',
-    },
   }
 
 }))
