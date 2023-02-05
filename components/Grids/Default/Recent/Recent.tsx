@@ -1,11 +1,11 @@
 'use client'
-import { Avatar, Button, Card, Container, Grid, Image, SimpleGrid, Space, Text, Title } from '@mantine/core'
+import { AspectRatio, Avatar, Button, Card, Container, Grid, Image, SimpleGrid, Space, Text, Title } from '@mantine/core'
 import { IconArrowBarRight, IconHeart, IconMessage } from '@tabler/icons'
 import Link from 'next/link'
 import { Suspense, useEffect } from 'react'
 import useStyles from '.'
 import { getPosts } from '../../../../utils/actions/posts'
-import { setPosts, usePostsStore } from '../../../../zustand/stores/usePostsStore'
+import { setLatestPosts, usePostsStore } from '../../../../zustand/stores/usePostsStore'
 
 
 type Props = {
@@ -13,7 +13,7 @@ type Props = {
 }
 
 
-export function Popular({tag} : Props) {
+export function Recent({tag} : Props) {
   const { classes, theme } = useStyles()
   const posts = usePostsStore((state: { posts: any; }) => state.posts)
   const nextUser = usePostsStore((state: { nextUser: any; }) => state.nextUser)
@@ -21,10 +21,11 @@ export function Popular({tag} : Props) {
   useEffect(() => {
     getPosts({
       tag: tag,
-      sort: 'trending',
+      sort: 'latest',
       limit: 5
     }).then((data: any) => {  
-          setPosts(data.result) 
+      console.log(data.result)
+          setLatestPosts(data.result) 
     }
     )
   }, [])
@@ -57,7 +58,7 @@ export function Popular({tag} : Props) {
         <Grid grow>
           <Grid.Col span={12}>
             <Container className={classes.headerContainer}>
-              <Avatar color="blue" radius="xl" />
+              <Avatar color="blue" radius="xl" src={`https://images.hive.blog/u/${article?.author}/avatar`}/>
              <Text pl={10} color="dimmed" size="xs" transform="uppercase" weight={500}>
                 {article?.author} - {formattedDate}
               </Text>       
@@ -73,9 +74,11 @@ export function Popular({tag} : Props) {
               </Text>
             </Container>
           </Grid.Col>
-          <Grid.Col span={5} display="flex">
-            <Container className={classes.imageContainer}>
-              <Image radius={10}  src={json_metadata.image ? json_metadata.image[0] : null} />
+          <Grid.Col span={5}>
+            <Container >
+              <AspectRatio ratio={4/3}>
+                <Image radius={10}  src={json_metadata.image ? json_metadata.image[0] : null} />
+              </AspectRatio>
             </Container>
           </Grid.Col>
           <Grid.Col span={7}>
@@ -83,13 +86,19 @@ export function Popular({tag} : Props) {
                 <Button variant="outline" color="gray" radius="md" size="xs" uppercase>
                 {article?.category}
                 </Button>
+{/* 
+                {json_metadata.tags.map((tag : any, index: string) => {
+                <Button key={index} variant="outline" color="gray" radius="md" size="xs" uppercase>
+                  {tag} 1
+                </Button>
+              })}   */}
             </Container>
           </Grid.Col>
           <Grid.Col span={5} display="flex">
           <Container mr={0} className={classes.metadataContainer}>
               <IconHeart color="grey" size={14}/>
               <Text color="dimmed"  className={classes.price}>
-                20
+                {article?.active_votes.length}
               </Text>
               <Space w="sm" />
               <IconMessage color="grey" size={14}/>
@@ -98,7 +107,7 @@ export function Popular({tag} : Props) {
               </Text>
               <Space w="sm" />
               <Text color="dimmed"  className={classes.price}>
-               100.11 ONEUP
+                {article?.pending_payout_value}
               </Text>
             </Container>
           </Grid.Col>
@@ -114,12 +123,12 @@ export function Popular({tag} : Props) {
         <SimpleGrid cols={1} mt={0} spacing={0} breakpoints={[{ maxWidth: 'sm', cols: 1 }]}>
           <Card  withBorder p="md" radius={0} className={classes.cardHeader}>
             <Title order={2}>
-              Popular
+              Recent
             </Title>
           </Card>
           {cards}
           <Card  withBorder p="md" radius={0} className={classes.cardFooter}>
-            <Link href={'community/' + tag + '/popular'} className={classes.link}>
+            <Link href={'community/' + tag + '/latest'} className={classes.link}>
               Check for more <Space w='sm'/> <IconArrowBarRight />
             </Link>
           </Card>
