@@ -12,16 +12,16 @@ type Props = {
 
 export function ArticlesCardsGrid({tag} : Props) {
   const { classes, theme } = useStyles()
-  const mobile = useMediaQuery(`(max-width: ${theme.breakpoints.xs}px)`);
+  const laptop = useMediaQuery(`(max-width: ${theme.breakpoints.md}px)`);
 
   return (
     <Container  fluid className={classes.default}>
-    <Container size="xl" color={theme.colorScheme === 'dark' ? 'dark.5' : 'gray.1'} >
+    <Container size="xl">
       <Grid>
-        <Grid.Col span={mobile ? 12 : 9}>
+        <Grid.Col span={laptop ? 12 : 9}>
           <Popular tag={tag}/>
         </Grid.Col>
-        <Grid.Col span={mobile ? 12 : 3}>
+        <Grid.Col span={laptop ? 12 : 3}>
           <Latest tag={tag}/>
         </Grid.Col>
       </Grid>

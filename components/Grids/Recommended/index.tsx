@@ -21,7 +21,7 @@ const useStyles = createStyles((theme) => ({
   },
 
   gradient: {
-    background: 'linear-gradient(to bottom, white, #072f37);'
+    background: 'linear-gradient(to bottom, #E9ECEF, #072f37);'
 }
 }))
 

@@ -16,17 +16,21 @@ export function DirectPage({tag, type, name} : Props) {
   const { classes, theme } = useStyles()
   
   let posts
-  
-  if(type == 'latest'){
-    posts = usePostsStore((state: { latestPosts: any; }) => state.latestPosts)
 
-  } else {
-    posts = usePostsStore((state: { posts: any; }) => state.posts)
+  let posts1 = usePostsStore((state: { latestPosts: any; }) => state.latestPosts)
+  let posts2 = usePostsStore((state: { posts: any; }) => state.posts)
+  
+  switch(type){
+    case 'latest':
+      posts = posts1
+      break
+    case 'trending':
+      posts = posts2
+      break
   }
+
+
   
-
-  const nextUser = usePostsStore((state: { nextUser: any; }) => state.nextUser)
-
 
   const cards = posts.map((article: any) => {
     const date = new Date(article.created);

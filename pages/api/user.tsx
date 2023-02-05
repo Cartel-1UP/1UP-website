@@ -5,7 +5,6 @@ import apiHive from '../../utils/apiHive';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const {...body} = req.body
-  console.log(body)
   if (req.method === 'POST') {
     try {
       
@@ -15,7 +14,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         "method": "condenser_api.get_accounts",
         "params": [
             [
-                "kwskicky"
+                body.username
             ]
         ]
      } )

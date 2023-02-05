@@ -1,9 +1,11 @@
 'use client'
-import { Card, Container, Grid, SimpleGrid, Space, Text, Title } from '@mantine/core'
+import { Avatar, Button, Card, Container, Grid, SimpleGrid, Space, Text, Title } from '@mantine/core'
+import { IconHeart, IconMessage } from '@tabler/icons'
 import Link from 'next/link'
 import { Suspense, useEffect } from 'react'
 import useStyles from '.'
-import getPosts from '../../../../utils/actions/posts'
+import { getPosts } from '../../../../utils/actions/posts'
+import getUserData from '../../../../utils/actions/user'
 import { setLatestPosts, usePostsStore } from '../../../../zustand/stores/usePostsStore'
 
 type Props = {
@@ -22,10 +24,13 @@ export function Latest({tag}: Props) {
       tag: tag,
       sort: 'trending',
       limit: 6
-    }).then((data) => { 
+    }).then((data: any) => { 
         setLatestPosts(data.result) 
       }
     )
+    getUserData('kwskicky').then((data:any) => {
+      console.log(data.result.rc_accounts[0])
+    })
   }, [])
 
   const cards = posts.map((article: any) => {
@@ -41,22 +46,37 @@ export function Latest({tag}: Props) {
     
 
     return (
-      <Card key={article.post_id} radius="md" component="a" href="#" className={classes.card}>
-        <Grid grow>     
-          <Grid.Col>
-            <Container>
-              <Text color="dimmed" size="xs" transform="uppercase" weight={700}>
-                {article?.author} - {formattedDate}
-              </Text>
+      <Card key={article.post_id} withBorder p="md" radius={0} component="a" href="#" className={classes.card}>
+        <Grid grow>  
+          <Grid.Col span={12}>
+            <Container className={classes.headerContainer}>
+              <Avatar color="blue" radius="xl" />
+             <Text pl={10} color="dimmed" size="xs" transform="uppercase" weight={500}>
+                {article?.author}
+              </Text>       
             </Container>
+          </Grid.Col>   
+          <Grid.Col span={12}>
             <Container>
-              <Text className={classes.title} mt={5}>
+              <Text className={classes.title}>
                 {article?.title}
               </Text>
             </Container>
-            <Container>
-              <Text color="dimmed"  className={classes.price} pt={10}>
-                ${article?.payout} | comments: {article?.children}
+          </Grid.Col>
+          <Grid.Col span={12} display="flex">
+          <Container ml={0} className={classes.metadataContainer}>
+              <IconHeart color="grey" size={14}/>
+              <Text color="dimmed"  className={classes.price}>
+                20
+              </Text>
+              <Space w="xs" />
+              <IconMessage color="grey" size={14}/>
+              <Text color="dimmed"  className={classes.price}>
+               {article?.children}
+              </Text>
+              <Space w="xs" />
+              <Text color="dimmed"  className={classes.price}>
+               100.11 ONEUP
               </Text>
             </Container>
           </Grid.Col>
@@ -68,23 +88,24 @@ export function Latest({tag}: Props) {
   return (
 
     <>
-      <Space h="xl" />
-      <Title order={1}>
-      <Link href={'community/' + tag + '/popular'} className={classes.link}>
-        Latest
-      </Link>
-      </Title>
-      <Space h="xl" />
       <Suspense>
-        <SimpleGrid cols={1} breakpoints={[{ maxWidth: 'sm', cols: 1 }]}>
-          {cards}
+      <Space h="xl" />
+        <SimpleGrid cols={1} spacing={0} mt={0} breakpoints={[{ maxWidth: 'sm', cols: 1 }]}>
+          <Card  withBorder p="md" radius={0} className={classes.cardHeader}>
+            <Title order={2}>
+              Latest
+            </Title>
+          </Card>
+            {cards}
+          <Card  withBorder p="md" radius={0} className={classes.cardFooter}>
+            <Link href={'community/' + tag + '/latest'} className={classes.link}>
+              <Button variant="outline" radius="md" size="xs" uppercase>
+                Show more
+              </Button>
+            </Link>
+          </Card>
         </SimpleGrid>
       </Suspense>
-      <Container pt={25}>
-        {/* <Center>
-          <BlogPagination amount={5} type={'latest'}/>
-        </Center> */}
-      </Container>
     </>
 
   )
