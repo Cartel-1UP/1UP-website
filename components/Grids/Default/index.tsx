@@ -11,6 +11,7 @@ const useStyles = createStyles((theme) => ({
   },
 
   default: {
+    backgroundColor: theme.colors.gray[2] 
     // background: 'linear-gradient(to top, white, #275c67bb);',
   },
 

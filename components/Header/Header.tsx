@@ -73,13 +73,10 @@ export function WebHeader() {
                 <a href="/news" className={classes.link}>
                   News
                 </a>
-                <a href="/posts" className={classes.link}>
-                  Posts
-                </a>
                 <a href="/proposals" className={classes.link}>
                   Proposals
                 </a>
-                <HoverCard width={600} position="bottom" radius="md" shadow="md" withinPortal>
+                <HoverCard width={600} position="bottom" radius="md" shadow="md" withinPortal m={10}>
                   <HoverCard.Target>
                     <a className={classes.link}>
                       <Center inline>
@@ -91,7 +88,7 @@ export function WebHeader() {
                     </a>
                   </HoverCard.Target>
 
-                  <HoverCard.Dropdown sx={{ overflow: 'hidden' }} className={classes.dropdownBody}>
+                  <HoverCard.Dropdown sx={{ overflow: 'hidden', margin:10}} className={classes.dropdownBody}>
                     <Group position="apart" mx="-md" my="-md" sx={{backgroundColor: '#06272e'}}>
                       <Text weight={500} sx={{ color: 'white'}} m={"md"}>More</Text>
                     </Group>
@@ -214,11 +211,6 @@ export function WebHeader() {
             News
           </a>
           
-          <Space h="sm"/>
-          
-          <a href="/posts" className={classes.link}>
-            Posts
-          </a>
           <Space h="sm"/>
           <a href="/proposals" className={classes.link}>
             Proposals

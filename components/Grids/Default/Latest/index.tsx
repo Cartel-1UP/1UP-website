@@ -2,13 +2,9 @@ import { createStyles } from '@mantine/styles'
 
 const useStyles = createStyles((theme) => ({
   card: {
-    transition: 'transform 150ms ease, box-shadow 150ms ease',
-    boxShadow: theme.shadows.md,
-    '&:hover': {
-      transform: 'scale(1.05)',
-      boxShadow: theme.shadows.md,
-    },
-    padding: 0, 
+    borderColor: '#e2e8f0d2',
+    borderWidth: 1,
+
   },
 
   title: {
@@ -24,7 +20,32 @@ const useStyles = createStyles((theme) => ({
     display: '-webkit-box',
     WebkitLineClamp: 3,
     WebkitBoxOrient: 'vertical',
-    maxHeight: '3em'
+    maxHeight: '4.5em'
+  },
+
+  cardHeader: {
+    borderColor: '#e2e8f0d2',
+    borderWidth: 1,
+    borderRadius: '10px 10px 0 0'
+  },
+
+  cardFooter: {
+    borderColor: '#e2e8f0d2',
+    borderWidth: 1,
+    borderRadius: '0 0 10px 10px',
+
+  },
+
+  metadataContainer:{
+    display: 'flex',
+    alignItems: 'center',
+    alignContent: 'left'
+  },
+
+  headerContainer:{
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center'
   },
 
   price: {
@@ -44,6 +65,8 @@ const useStyles = createStyles((theme) => ({
 link: {
   textDecoration: 'none',
   color: '#000000',
+  display: 'flex',
+  alignItems: 'center',
 
   '&:hover': {
     color: '#000000bd',

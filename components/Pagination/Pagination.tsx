@@ -3,7 +3,7 @@
 import { ActionIcon, Group } from '@mantine/core';
 import { IconArrowNarrowLeft, IconArrowNarrowRight } from '@tabler/icons';
 import { useEffect } from 'react';
-import getPosts from '../../utils/actions/posts';
+import { getPosts } from '../../utils/actions/posts';
 import { setLatestPosts, setPosts, usePostsStore } from '../../zustand/stores/usePostsStore';
 
 
@@ -64,7 +64,7 @@ function BlogPagination({amount, type, tag}: Props) {
         tag: tag,
         sort: type,
         limit: amount
-      }).then((data) => {  
+      }).then((data: any) => {  
         switch (type) {
           case 'trending':
             setPosts(data.result) 

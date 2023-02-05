@@ -12,15 +12,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const { data } = await apiHive.post('', { 
         "id": 1,
         "jsonrpc": "2.0",
-        "method": "bridge.get_ranked_posts",
-        "params": {
-            "sort": "trending",
-            "tag": body.tag,
-            "observer": "hive.blog",
+        "method": "condenser_api.get_discussions_by_trending",
+        "params": [{
+            "tag" : body.tag,
             "limit": body.number,
             "start_author": body.start ? body.start : '',
-            "start_permlink": body.link ? body.link : ''
-        }
+            "start_permlink": body.link ? body.link : '',
+        }]
      } )
      return res.json(data)
     }
