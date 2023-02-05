@@ -5,30 +5,27 @@ import {
   Burger,
   Button,
   Center,
-  Collapse,
-  Divider,
+  Collapse, Container, Divider,
   Drawer,
   Grid,
   Group,
   Header,
-  HoverCard,
-  Image,
+  HoverCard, Image,
   Menu, ScrollArea,
   SimpleGrid, Space, Text, ThemeIcon,
   UnstyledButton
 } from '@mantine/core'
 import { useDisclosure, useMediaQuery } from '@mantine/hooks'
 import { IconArticle, IconChevronDown, IconLogout, IconUserCircle, IconWallet } from '@tabler/icons'
+import Link from 'next/link'
 import { useState } from 'react'
 import useStyles from '.'
+import oneuplogo from '../../images/oneup1.png'
+import oneuplogo2 from '../../images/oneup2.png'
 import { logoutUser, useAuthorizationStore } from '../../zustand/stores/useAuthorizationStore'
 import LoginButton from '../LoginButton/LoginButton'
 import { UserButton } from '../UserButton/UserButton'
 import { mockdata } from './data'
-
-import Link from 'next/link'
-import oneuplogo from '../../images/oneup1.png'
-import oneuplogo2 from '../../images/oneup2.png'
 
 
 export function WebHeader() {
@@ -63,8 +60,9 @@ export function WebHeader() {
   ))
 
   return (
-    <Box>
-      <Header p="xs" className={classes.header} height={'100%'}>
+    <Container fluid className={classes.header}>
+    <Container size={'xl'}>
+      <Header p="xs"  height={'100%'} className={classes.header}>
         <Grid justify="space-between" align="center"> 
         {/* {tablet ? <Grid.Col span={3}></Grid.Col> : null } */}
           <Grid.Col span={3} pl={20} sx={{display:'flex', justifyContent:'left'}} className={classes.hiddenMobile}>
@@ -76,7 +74,7 @@ export function WebHeader() {
                 <a href="/proposals" className={classes.link}>
                   Proposals
                 </a>
-                <HoverCard width={600} position="bottom" radius="md" shadow="md" withinPortal m={10}>
+                <HoverCard width={600} position="bottom" radius="md" shadow="md" withinPortal>
                   <HoverCard.Target>
                     <a className={classes.link}>
                       <Center inline>
@@ -127,7 +125,6 @@ export function WebHeader() {
                 src={oneuplogo.src}
                 alt="Logo"
                 fit="contain"
-                width={'40vw'}
                 />
           </Link>
           </Grid.Col>
@@ -233,6 +230,7 @@ export function WebHeader() {
           <Space h="md"/>
         </ScrollArea>
       </Drawer>
-    </Box>
+    </Container>
+    </Container>
   )
 }

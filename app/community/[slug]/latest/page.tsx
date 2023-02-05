@@ -1,8 +1,8 @@
 'use client'
 
 import { Suspense } from "react";
-import { MainPage } from "../../../../components/CommunityFront/CommunityFront";
 import { CommunityGrid } from "../../../../components/Grids/Community/Community";
+import { MainPage } from "../../../../components/Grids/CommunityPage/CommunityPage";
 import { DirectSection } from "../../../../components/Grids/Direct/DirectSection";
 
 

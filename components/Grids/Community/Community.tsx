@@ -19,8 +19,8 @@ function Card({ image, tag}: CardProps) {
 
   return (
     <AspectRatio ratio={1/1} sx={{maxWidth:'5em'}}>
-       <Link href={'community/' + tag}>
-      <Image src={image} className={classes.card}/>
+      <Link href={'community/' + tag}>
+        <Image src={image} className={classes.card}/>
       </Link>
     </AspectRatio>
 );

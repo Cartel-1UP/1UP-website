@@ -2,6 +2,10 @@ import { createStyles } from '@mantine/styles'
 
 const useStyles = createStyles((theme, _params, getRef) => ({
 
+  card: {
+    borderColor: '#e2e8f0d2',
+    borderWidth: 1,
+  },
 
   image: {
     ref: getRef('image'),
@@ -18,6 +22,10 @@ const useStyles = createStyles((theme, _params, getRef) => ({
     background: 'linear-gradient(to top, #275c672d, #072f37);'
   },
 
+  default: {
+    backgroundColor: theme.colors.gray[2] 
+    // background: 'linear-gradient(to top, white, #275c67bb);',
+  },
 
 }))
 

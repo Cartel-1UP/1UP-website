@@ -2,8 +2,8 @@
 import { Container, Grid } from '@mantine/core'
 import { useMediaQuery } from '@mantine/hooks'
 import useStyles from '.'
-import { Latest } from './Latest/Latest'
-import { Popular } from './Popular/Popular'
+import { Recent } from './Recent/Recent'
+import { Trending } from './Trending/Trending'
 
 type Props = {
   tag: string
@@ -19,10 +19,10 @@ export function ArticlesCardsGrid({tag} : Props) {
     <Container size="xl">
       <Grid>
         <Grid.Col span={laptop ? 12 : 9}>
-          <Popular tag={tag}/>
+          <Recent tag={tag}/>
         </Grid.Col>
         <Grid.Col span={laptop ? 12 : 3}>
-          <Latest tag={tag}/>
+          <Trending tag={tag}/>
         </Grid.Col>
       </Grid>
     </Container>

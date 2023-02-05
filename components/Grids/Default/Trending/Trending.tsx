@@ -6,26 +6,26 @@ import { Suspense, useEffect } from 'react'
 import useStyles from '.'
 import { getPosts } from '../../../../utils/actions/posts'
 import getUserData from '../../../../utils/actions/user'
-import { setLatestPosts, usePostsStore } from '../../../../zustand/stores/usePostsStore'
+import { setPosts, usePostsStore } from '../../../../zustand/stores/usePostsStore'
 
 type Props = {
   tag: string
 }
 
-export function Latest({tag}: Props) {
+export function Trending({tag}: Props) {
   
   const { classes, theme } = useStyles()
   const posts = usePostsStore((state: { latestPosts: any; }) => state.latestPosts)
   const nextUser = usePostsStore((state: { nextUser: any; }) => state.nextUser)
   
+  
   useEffect(() => {
-    console.log('test: ' + tag)
     getPosts({
       tag: tag,
       sort: 'trending',
       limit: 6
     }).then((data: any) => { 
-        setLatestPosts(data.result) 
+        setPosts(data.result) 
       }
     )
     getUserData('kwskicky').then((data:any) => {
@@ -40,9 +40,6 @@ export function Latest({tag}: Props) {
       day: 'numeric',
       year: 'numeric'
     });
-
-
-
     
 
     return (
@@ -50,7 +47,7 @@ export function Latest({tag}: Props) {
         <Grid grow>  
           <Grid.Col span={12}>
             <Container className={classes.headerContainer}>
-              <Avatar color="blue" radius="xl" />
+            <Avatar color="blue" radius="xl" src={`https://images.hive.blog/u/${article?.author}/avatar`}/>
              <Text pl={10} color="dimmed" size="xs" transform="uppercase" weight={500}>
                 {article?.author}
               </Text>       
@@ -67,7 +64,7 @@ export function Latest({tag}: Props) {
           <Container ml={0} className={classes.metadataContainer}>
               <IconHeart color="grey" size={14}/>
               <Text color="dimmed"  className={classes.price}>
-                20
+              {article?.active_votes.length}
               </Text>
               <Space w="xs" />
               <IconMessage color="grey" size={14}/>
@@ -76,7 +73,7 @@ export function Latest({tag}: Props) {
               </Text>
               <Space w="xs" />
               <Text color="dimmed"  className={classes.price}>
-               100.11 ONEUP
+              {article?.pending_payout_value}
               </Text>
             </Container>
           </Grid.Col>
@@ -93,12 +90,12 @@ export function Latest({tag}: Props) {
         <SimpleGrid cols={1} spacing={0} mt={0} breakpoints={[{ maxWidth: 'sm', cols: 1 }]}>
           <Card  withBorder p="md" radius={0} className={classes.cardHeader}>
             <Title order={2}>
-              Latest
+              Trending
             </Title>
           </Card>
             {cards}
           <Card  withBorder p="md" radius={0} className={classes.cardFooter}>
-            <Link href={'community/' + tag + '/latest'} className={classes.link}>
+            <Link href={'community/' + tag + '/popular'} className={classes.link}>
               <Button variant="outline" radius="md" size="xs" uppercase>
                 Show more
               </Button>
