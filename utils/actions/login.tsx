@@ -1,5 +1,6 @@
 import { setAuthorized, setProfileImage, setUsername } from '../../zustand/stores/useAuthorizationStore'
 import api from '../api'
+import getUserData from './user'
 
 function loginKeychain(username: string|null) {
     if (!username) { return }
@@ -14,8 +15,11 @@ function loginKeychain(username: string|null) {
 
             let userImage = data?.result[0]?.posting_json_metadata
 
-            userImage = JSON.parse(userImage)
-            userImage = userImage.profile.profile_image
+            if(userImage){
+              userImage = JSON.parse(userImage)
+              userImage = userImage.profile.profile_image
+            }
+
             setProfileImage(userImage)
             setUsername(data.result[0].name)
           }
@@ -35,6 +39,9 @@ async function processLogin ({ username, ts, sig, smartlock = false}: any) {
       localStorage.setItem('username', data.username)
       localStorage.setItem('smartlock', data.smartlock)
       setAuthorized(data.authorized)
+      getUserData(data.username).then((data:any) => {
+        console.log(data.result.rc_accounts[0])
+      })
       
     } catch {
     }
