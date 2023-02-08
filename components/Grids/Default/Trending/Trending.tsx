@@ -5,7 +5,6 @@ import Link from 'next/link'
 import { Suspense, useEffect } from 'react'
 import useStyles from '.'
 import { getPosts } from '../../../../utils/actions/posts'
-import getUserData from '../../../../utils/actions/user'
 import { setPosts, usePostsStore } from '../../../../zustand/stores/usePostsStore'
 
 type Props = {
@@ -17,6 +16,7 @@ export function Trending({tag}: Props) {
   const { classes, theme } = useStyles()
   const posts = usePostsStore((state: { latestPosts: any; }) => state.latestPosts)
   const nextUser = usePostsStore((state: { nextUser: any; }) => state.nextUser)
+
   
   
   useEffect(() => {
@@ -28,9 +28,6 @@ export function Trending({tag}: Props) {
         setPosts(data.result) 
       }
     )
-    getUserData('kwskicky').then((data:any) => {
-      console.log(data.result.rc_accounts[0])
-    })
   }, [])
 
   const cards = posts.map((article: any) => {
