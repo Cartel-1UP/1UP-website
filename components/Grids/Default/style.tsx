@@ -12,7 +12,6 @@ const useStyles = createStyles((theme) => ({
 
   default: {
     backgroundColor: theme.colors.gray[2] 
-    // background: 'linear-gradient(to top, white, #275c67bb);',
   },
 
   title: {
@@ -25,6 +24,22 @@ const useStyles = createStyles((theme) => ({
     fontWeight: 400,
     fontSize: 12
   },
+
+  recentCol: {
+    span: 9,
+    '@media (max-width: 1000px)' : {
+      span: 12
+    }
+  },
+
+  trendingCol: {
+    span: 3,
+    '@media (max-width: 1000px)' : {
+      span: 12
+    }
+  }
+
+
 }))
 
 export default useStyles

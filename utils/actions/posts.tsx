@@ -32,18 +32,3 @@ export  async function getPosts(props: Posts) {
         console.log(e)
     }
 }
-
-
-// export  async function getPosts2() {
-//     try {
-//         const { data } = await apiCartel.get('get_discussions_by_trending', {
-//             params: {
-//                 limit: 10,
-//                 token: 'ONEUP'
-//             }
-//         })
-//         return data
-//     } catch (e:any) {
-//         console.log(e)
-//     }
-// }

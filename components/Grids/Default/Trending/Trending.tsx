@@ -1,84 +1,26 @@
 'use client'
-import { Avatar, Button, Card, Container, Grid, SimpleGrid, Space, Text, Title } from '@mantine/core'
-import { IconHeart, IconMessage } from '@tabler/icons'
+import { Button, Card, Container, Grid, SimpleGrid, Skeleton, Space, Title } from '@mantine/core'
 import Link from 'next/link'
-import { Suspense, useEffect } from 'react'
-import useStyles from '.'
+import { Suspense } from 'react'
+import { useQuery } from 'react-query'
 import { getPosts } from '../../../../utils/actions/posts'
-import { setPosts, usePostsStore } from '../../../../zustand/stores/usePostsStore'
+import useStyles from './style'
+import { TrendingCard } from './TrendingCard/TrendingCard'
 
 type Props = {
   tag: string
 }
 
 export function Trending({tag}: Props) {
-  
   const { classes, theme } = useStyles()
-  const posts = usePostsStore((state: { latestPosts: any; }) => state.latestPosts)
-  const nextUser = usePostsStore((state: { nextUser: any; }) => state.nextUser)
+  const { isLoading, error, data } = useQuery('trendingData', () => getPosts({
+    tag: tag,
+    sort: 'trending',
+    limit: 5
+  }));
 
+  if (error) return <div>'An error has occurred: ' + error</div>
   
-  
-  useEffect(() => {
-    getPosts({
-      tag: tag,
-      sort: 'trending',
-      limit: 6
-    }).then((data: any) => { 
-        setPosts(data.result) 
-      }
-    )
-  }, [])
-
-  const cards = posts.map((article: any) => {
-    const date = new Date(article.created);
-    const formattedDate = date.toLocaleDateString('en-US', {
-      month: 'short',
-      day: 'numeric',
-      year: 'numeric'
-    });
-    
-
-    return (
-      <Card key={article.post_id} withBorder p="md" radius={0} component="a" href="#" className={classes.card}>
-        <Grid grow>  
-          <Grid.Col span={12}>
-            <Container className={classes.headerContainer}>
-            <Avatar color="blue" radius="xl" src={`https://images.hive.blog/u/${article?.author}/avatar`}/>
-             <Text pl={10} color="dimmed" size="xs" transform="uppercase" weight={500}>
-                {article?.author}
-              </Text>       
-            </Container>
-          </Grid.Col>   
-          <Grid.Col span={12}>
-            <Container>
-              <Text className={classes.title}>
-                {article?.title}
-              </Text>
-            </Container>
-          </Grid.Col>
-          <Grid.Col span={12} display="flex">
-          <Container ml={0} className={classes.metadataContainer}>
-              <IconHeart color="grey" size={14}/>
-              <Text color="dimmed"  className={classes.price}>
-              {article?.active_votes.length}
-              </Text>
-              <Space w="xs" />
-              <IconMessage color="grey" size={14}/>
-              <Text color="dimmed"  className={classes.price}>
-               {article?.children}
-              </Text>
-              <Space w="xs" />
-              <Text color="dimmed"  className={classes.price}>
-              {article?.pending_payout_value}
-              </Text>
-            </Container>
-          </Grid.Col>
-        </Grid>
-      </Card>
-    )}
-    )
-
   return (
 
     <>
@@ -90,7 +32,38 @@ export function Trending({tag}: Props) {
               Trending
             </Title>
           </Card>
-            {cards}
+            {
+              isLoading ?  
+
+              Array.from({ length: 5 }).map((_, index) => (
+                <Card withBorder p="md" radius={0} className={classes.card} key={index}>
+                  <Grid grow>
+                    <Grid.Col>
+                      <Container> 
+                        <Skeleton height={50} circle mb="xl" />
+                      </Container>
+                    </Grid.Col>
+                    <Grid.Col span={12}>
+                      <Container>
+                        <Skeleton height={8} radius="xl" />
+                        <Skeleton height={8} mt={6} radius="xl" />
+                        <Skeleton height={8} mt={6} radius="xl" />
+                      </Container>
+                    </Grid.Col>
+                    <Grid.Col span={12}>
+                      <Container ml={0} className={classes.metadataContainer}>
+                        <Skeleton height={8} mt={6} radius="xl" />
+                      </Container>
+                    </Grid.Col>
+                  </Grid>
+                </Card>
+              ))
+              
+              : 
+                data.result.map?.((item: any, index: any) => (
+                    <TrendingCard article={item} key={index}/>
+                )) 
+            }
           <Card  withBorder p="md" radius={0} className={classes.cardFooter}>
             <Link href={'community/' + tag + '/popular'} className={classes.link}>
               <Button variant="outline" radius="md" size="xs" uppercase>
