@@ -1,33 +1,20 @@
 'use client'
-import { Container, Grid } from '@mantine/core'
-import { useMediaQuery } from '@mantine/hooks'
-import useStyles from '.'
-import { Recent } from './Recent/Recent'
-import { Trending } from './Trending/Trending'
+import { Container } from '@mantine/core'
+import { ReactNode } from 'react'
+import useStyles from './style'
 
 type Props = {
-  tag: string
+  children: ReactNode
 
 }
-
-export function ArticlesCardsGrid({tag} : Props) {
-  const { classes, theme } = useStyles()
-  const laptop = useMediaQuery(`(max-width: ${theme.breakpoints.md}px)`);
+export function ArticlesCardsGrid({children}:Props) {
+  const { classes } = useStyles()
 
   return (
-    <Container  fluid className={classes.default}>
-    <Container size="xl">
-      <Grid>
-        <Grid.Col span={laptop ? 12 : 9}>
-          <Recent tag={tag}/>
-        </Grid.Col>
-        <Grid.Col span={laptop ? 12 : 3}>
-          <Trending tag={tag}/>
-        </Grid.Col>
-      </Grid>
-    </Container>
-
+    <Container fluid className={classes.default}>
+      <Container size="xl">
+          {children}
+      </Container>
     </Container>
       )
 }
-

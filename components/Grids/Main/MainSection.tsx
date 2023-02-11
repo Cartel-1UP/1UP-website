@@ -1,6 +1,6 @@
 'use client'
 import { Carousel } from '@mantine/carousel';
-import { Box, Center, Container, Loader, useMantineTheme } from '@mantine/core';
+import { Box, Center, Container, Skeleton, useMantineTheme } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
 import { useQuery } from 'react-query';
 import { fetchMaincards } from '../../../utils/actions/cartel';
@@ -12,24 +12,26 @@ export function MainCardsGrid() {
   const theme = useMantineTheme();
   const mobile = useMediaQuery(`(max-width: ${theme.breakpoints.sm}px)`);
 
-
   const { isLoading, error, data } = useQuery('carouselData', () => fetchMaincards());
 
   if (isLoading) return (
     <Container fluid className={classes.gradientBot}>
       <Container size="xl" pt={0}>
         <Center>
-          <Box sx={{height: 400}}>
-            <Center>
-                <Loader size="xl" color="dark"/> 
-            </Center>
-          </Box>
+        <Box  
+          mt={30}
+          mb={30}
+          mr={10}
+          ml={10}
+          className={classes.container}>
+          <Skeleton height={100} radius="xl" />
+        </Box>
         </Center>
       </Container>
     </Container>
   )
  
-  if (error) return 'An error has occurred: ' + error
+  if (error) return <div>'An error has occurred: ' + error</div>
   
   if (data && typeof data === 'object') {
   return (
@@ -56,5 +58,6 @@ export function MainCardsGrid() {
   );
 }
 
-return null
+  return <div>Loading...</div>
+
 }

@@ -1,50 +1,26 @@
 'use client'
 import { Carousel } from '@mantine/carousel';
-import { AspectRatio, Container, Image, useMantineTheme } from '@mantine/core';
+import { Container, useMantineTheme } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
 import Autoplay from 'embla-carousel-autoplay';
-import Link from 'next/link';
 import { useRef } from 'react';
-import useStyles from '.';
+import CommunityCard from './CommunityCard/CommunityCard';
 import { mockdata } from './data';
-
-
-interface CardProps {
-  image: string;
-  tag: string
-}
-
-function Card({ image, tag}: CardProps) {
-  const { classes } = useStyles();
-
-  return (
-    <AspectRatio ratio={1/1} sx={{maxWidth:'5em'}}>
-      <Link href={'community/' + tag}>
-        <Image src={image} className={classes.card}/>
-      </Link>
-    </AspectRatio>
-);
-}
+import useStyles from './style';
 
 export function CommunityGrid() {
+  const { classes } = useStyles();
+  const theme = useMantineTheme();
+  const mobile = useMediaQuery(`(max-width: ${theme.breakpoints.sm}px)`);
+  
   const autoplayOptions = {
     delay: 100,
     playOnInit: true,
     stopOnInteraction: false,
     rootNode: (emblaRoot: any) => emblaRoot.parentElement,
   }
-  const { classes } = useStyles();
-  const theme = useMantineTheme();
-  const mobile = useMediaQuery(`(max-width: ${theme.breakpoints.sm}px)`);
   const autoplay = useRef(Autoplay(autoplayOptions));
-  
 
-  
-  const slides = mockdata.map((item, index) => (
-    <Carousel.Slide key={index}>
-      <Card {...item} />
-    </Carousel.Slide>
-  ));
 
   return (
     <>
@@ -65,7 +41,11 @@ export function CommunityGrid() {
             dragFree={true}
             speed={0.01}
           >
-            {slides}
+            {mockdata.map((item, index) => (
+              <Carousel.Slide key={index}>
+                <CommunityCard {...item} />
+              </Carousel.Slide>
+            ))}
           </Carousel>
         </Container>
       </Container>

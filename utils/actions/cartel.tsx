@@ -11,3 +11,6 @@ export const fetchMaincards = async () => {
       alert(error.message);
     }
   };
+
+
+
