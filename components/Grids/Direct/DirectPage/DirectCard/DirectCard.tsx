@@ -7,37 +7,37 @@ interface CardProps {
   article: any;
 }
 
-export function RecentCard({ article }: CardProps) {
+export function DirectCard({ article }: CardProps) {
 
-  const { classes } = useStyles();
-  const date = new Date(article.created);
-  const formattedDate = date.toLocaleDateString('en-US', {
-      month: 'short',
-      day: 'numeric',
-      year: 'numeric'
-  });
-
-  let forbiddenChars = ["!", "<", ">","[","]"];
-  let myString = article.body;
-  let words = myString.split(" ");
-  let newWords = words.filter(function(word: string) {
-      return !word.split('').some(function(char: string) {
-          return forbiddenChars.includes(char);
-      });
-  });
-
-  let bodyOfArticle = newWords.join(" ");
-  let json_metadata = article?.json_metadata
-  let imageExists
+    const { classes } = useStyles();
+    const date = new Date(article.created);
+    const formattedDate = date.toLocaleDateString('en-US', {
+        month: 'short',
+        day: 'numeric',
+        year: 'numeric'
+    });
   
-  if (Array.isArray(json_metadata.image) && json_metadata.image.length === 0) {
-    imageExists = false
-  } else if (!Array.isArray(json_metadata.image)) {
-    imageExists = false
-  } else {
-    imageExists = true
-  }  
+    let forbiddenChars = ["!", "<", ">","[","]"];
+    let myString = article.body;
+    let words = myString.split(" ");
+    let newWords = words.filter(function(word: string) {
+        return !word.split('').some(function(char: string) {
+            return forbiddenChars.includes(char);
+        });
+    });
+  
+    let bodyOfArticle = newWords.join(" ");
+    let json_metadata = article?.json_metadata
 
+    let imageExists
+
+    if (Array.isArray(json_metadata.image) && json_metadata.image.length === 0) {
+        imageExists = false
+      } else if (!Array.isArray(json_metadata.image)) {
+        imageExists = false
+      } else {
+        imageExists = true
+      }  
 
   return (
     <Card key={article.post_id} withBorder p="md" radius={0} component="a" href="#" className={classes.card}>
@@ -61,7 +61,7 @@ export function RecentCard({ article }: CardProps) {
           <Grid.Col span={5}>
             <Container >
               <AspectRatio ratio={4/3}>
-                {  imageExists ? 
+              {  imageExists ? 
                   <Image radius={10}  src={json_metadata.image[0]} /> :
                   <Image
                     src={null}

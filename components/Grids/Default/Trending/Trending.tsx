@@ -1,7 +1,6 @@
 'use client'
 import { Button, Card, Container, Grid, SimpleGrid, Skeleton, Space, Title } from '@mantine/core'
 import Link from 'next/link'
-import { Suspense } from 'react'
 import { useQuery } from 'react-query'
 import { getPosts } from '../../../../utils/actions/posts'
 import useStyles from './style'
@@ -11,20 +10,19 @@ type Props = {
   tag: string
 }
 
-export function Trending({tag}: Props) {
+export function Trending({...props}: Props) {
   const { classes, theme } = useStyles()
   const { isLoading, error, data } = useQuery('trendingData', () => getPosts({
-    tag: tag,
+    tag: props.tag,
     sort: 'trending',
     limit: 5
   }));
 
-  if (error) return <div>'An error has occurred: ' + error</div>
+  if (error) return <div>An error has occurred</div>
   
   return (
 
     <>
-      <Suspense>
       <Space h="xl" />
         <SimpleGrid cols={1} spacing={0} mt={0} breakpoints={[{ maxWidth: 'sm', cols: 1 }]}>
           <Card  withBorder p="md" radius={0} className={classes.cardHeader}>
@@ -65,14 +63,13 @@ export function Trending({tag}: Props) {
                 )) 
             }
           <Card  withBorder p="md" radius={0} className={classes.cardFooter}>
-            <Link href={'community/' + tag + '/popular'} className={classes.link}>
+            <Link href={'community/' + props.tag + '/popular'} className={classes.link}>
               <Button variant="outline" radius="md" size="xs" uppercase>
                 Show more
               </Button>
             </Link>
           </Card>
         </SimpleGrid>
-      </Suspense>
     </>
 
   )

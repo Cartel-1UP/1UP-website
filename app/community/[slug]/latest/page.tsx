@@ -1,7 +1,4 @@
-'use client'
-
-import { Suspense } from "react";
-import { CommunityGrid } from "../../../../components/Grids/Community/Community";
+import { DirectPage } from "../../../../components/Grids/Direct/DirectPage/DirectPage";
 import { DirectSection } from "../../../../components/Grids/Direct/DirectSection";
 
 
@@ -11,10 +8,9 @@ export default function Page({params}: {params: { slug: string}}) {
   
   return (
     <div>
-        <Suspense>
-        <CommunityGrid/>
-        <DirectSection tag={params.slug} type={'latest'} name={'Latest'}/>
-        </Suspense>
+        <DirectSection>
+          <DirectPage tag={params.slug} type={'latest'} name={'Latest'}/>
+        </DirectSection>
     </div>
 
   )
