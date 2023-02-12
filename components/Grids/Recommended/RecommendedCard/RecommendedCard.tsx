@@ -19,6 +19,16 @@ export function RecommendedCard({ article }: CardProps) {
 
   const json_metadata = JSON.parse(article.json_metadata)
 
+  let imageExists
+  
+  if (Array.isArray(json_metadata.image) && json_metadata.image.length === 0) {
+    imageExists = false
+  } else if (!Array.isArray(json_metadata.image)) {
+    imageExists = false
+  } else {
+    imageExists = true
+  }  
+
   return (
     <Card key={article.post_id} p="md" withBorder radius={0} component="a" href="#" className={classes.card}>
       <Grid grow>
@@ -33,7 +43,16 @@ export function RecommendedCard({ article }: CardProps) {
         <Grid.Col span={12}>
           <Container >
             <AspectRatio ratio={16/9}>
-              <Image radius={10}  src={json_metadata.image ? json_metadata.image[0] : null} />
+            {  imageExists ? 
+                  <Image radius={10}  src={json_metadata.image[0]} /> :
+                  <Image
+                    src={null}
+                    alt="Image placeholder"
+                    withPlaceholder
+                    radius={10}
+                    height={100}
+                  />
+              }
             </AspectRatio>
           </Container>
         </Grid.Col>

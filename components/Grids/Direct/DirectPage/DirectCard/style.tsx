@@ -5,6 +5,13 @@ const useStyles = createStyles((theme) => ({
 
     borderColor: '#e2e8f0d2',
     borderWidth: 1,
+
+    // transition: 'transform 150ms ease, box-shadow 150ms ease',
+
+    // '&:hover': {
+    //   transform: 'scale(1.01)',
+    //   boxShadow: theme.shadows.md,
+    // },
   },
 
   headerContainer:{

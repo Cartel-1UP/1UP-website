@@ -1,43 +1,41 @@
 'use client'
 import { Card, Container, Grid, SimpleGrid, Skeleton, Space, Title } from '@mantine/core'
-import { IconArrowBarRight } from '@tabler/icons'
-import Link from 'next/link'
 import { useQuery } from 'react-query'
-import { getPosts } from '../../../utils/actions/posts'
-import { RecommendedCard } from './RecommendedCard/RecommendedCard'
+import { getPosts } from '../../../../utils/actions/posts'
+import { DirectCard } from './DirectCard/DirectCard'
 import useStyles from './style'
-
 
 type Props = {
   tag: string
+  type: string
+  name: string
 }
 
-export function RecommendedCardsGrid({tag}: Props) {
+
+export function DirectPage({tag, type, name} : Props) {
   const { classes, theme } = useStyles()
-  const { isLoading, error, data } = useQuery('recommededData', () => getPosts({
+
+  const { isLoading, error, data } = useQuery('directData', () => getPosts({
     tag: tag,
-    sort: 'hot',
-    limit: 4
+    sort: type,
+    limit: 10
   }));
 
   if (error) return <div>An error has occurred</div>
 
   return (
     <>
-      <Container fluid className={classes.gradient}>
-      <Container size="xl" p={8}>
       <Space h="xl" />
-      <Space h="xl" />
+        <SimpleGrid cols={1} mt={0} spacing={0} breakpoints={[{ maxWidth: 'sm', cols: 1 }]}>
           <Card  withBorder p="md" radius={0} className={classes.cardHeader}>
             <Title order={2}>
-              Recomended
+              {name}
             </Title>
           </Card>
-          <SimpleGrid sx={{backgroundColor: '#ffff'}} cols={4} spacing={0} mt={0} breakpoints={[{ maxWidth: 'md', cols: 1 }]}>
           {
               isLoading ?  
 
-              Array.from({ length: 4 }).map((_, index) => (
+              Array.from({ length: 5 }).map((_, index) => (
                 <Card withBorder p="md" radius={0} className={classes.card} key={index}>
                   <Grid grow>
                     <Grid.Col>
@@ -69,19 +67,13 @@ export function RecommendedCardsGrid({tag}: Props) {
 
               
               : 
-                
                 data.result.map?.((item: any, index: any) => (
-                    <RecommendedCard article={item} key={index}/>
+                    <DirectCard article={item} key={index}/>
                 )) 
             }
-          </SimpleGrid>
-          <Card  withBorder p="md" radius={0} className={classes.cardFooter}>
-            <Link href={'community/' + tag + '/recommended'} className={classes.link}>
-              Check for more <Space w='sm'/> <IconArrowBarRight />
-            </Link>
-          </Card>
-        </Container>
-        </Container>
+        </SimpleGrid>
+        <Space h="xl" />
     </>
+
   )
 }

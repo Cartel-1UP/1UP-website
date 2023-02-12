@@ -1,25 +1,24 @@
 'use client'
 import { Container, Grid } from '@mantine/core'
-import useStyles from '.'
-import { DirectPage } from './DirectPage/DirestPage'
+import useStyles from './style'
 
 type Props = {
-    tag: string
-    type: string
-    name: string
+    children: React.ReactNode
 }
 
-export function DirectSection({tag, type, name} : Props) {
+export function DirectSection({children} : Props) {
   const { classes, theme } = useStyles()
 
   return (
     <Container  fluid className={classes.default}>
         <Container size="xl" color={theme.colorScheme === 'dark' ? 'dark.5' : 'gray.1'} >
-        <Grid>
-            <Grid.Col span={12}>
-                <DirectPage tag={tag} type={type} name={name}/>
-            </Grid.Col>
-        </Grid>
+            <Container>
+                <Grid>
+                    <Grid.Col span={12}>
+                        {children}
+                    </Grid.Col>
+                </Grid>
+            </Container>
         </Container>
     </Container>
     )

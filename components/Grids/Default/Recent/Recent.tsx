@@ -11,15 +11,15 @@ type Props = {
   tag: string
 }
 
-export function Recent({tag} : Props) {
+export function Recent({...props} : Props) {
   const { classes, theme } = useStyles()
   const { isLoading, error, data } = useQuery('recentData', () => getPosts({
-    tag: tag,
+    tag: props.tag,
     sort: 'latest',
     limit: 5
   }));
 
-  if (error) return <div>'An error has occurred: ' + error</div>
+  if (error) return <div>An error has occurred</div>
 
   return (
     <>
@@ -36,13 +36,15 @@ export function Recent({tag} : Props) {
               Array.from({ length: 5 }).map((_, index) => (
                 <Card withBorder p="md" radius={0} className={classes.card} key={index}>
                   <Grid grow>
-                    <Grid.Col>
-                      <Skeleton height={50} circle mb="xl" />
-                    </Grid.Col>
                     <Grid.Col span={7}>
-                      <Skeleton height={8} radius="xl" />
-                      <Skeleton height={8} mt={6} radius="xl" />
-                      <Skeleton height={8} mt={6} radius="xl" />
+                      <Container >
+                        <Skeleton height={50} circle mb="xl" />
+                      </Container>
+                      <Container>
+                        <Skeleton height={8} radius="xl" />
+                        <Skeleton height={8} mt={6} radius="xl" />
+                        <Skeleton height={8} mt={6} radius="xl" />
+                      </Container>
                     </Grid.Col>
                     <Grid.Col span={5}>
                       <Container>
@@ -63,7 +65,6 @@ export function Recent({tag} : Props) {
                 </Card>
               ))
 
-              
               : 
                 data.result.map?.((item: any, index: any) => (
                     <RecentCard article={item} key={index}/>
@@ -71,7 +72,7 @@ export function Recent({tag} : Props) {
             }
 
           <Card  withBorder p="md" radius={0} className={classes.cardFooter}>
-            <Link href={'community/' + tag + '/latest'} className={classes.link}>
+            <Link href={'community/' + props.tag + '/latest'} className={classes.link}>
               Check for more <Space w='sm'/> <IconArrowBarRight />
             </Link>
           </Card>

@@ -31,7 +31,7 @@ export function MainCardsGrid() {
     </Container>
   )
  
-  if (error) return <div>'An error has occurred: ' + error</div>
+  if (error) return <div>An error has occurred</div>
   
   if (data && typeof data === 'object') {
   return (
