@@ -7,14 +7,16 @@ type AuthorizationStoreState = {
   balance: string;
   hbd_balance: string;
   profile_image: string;
-  reputation: string;
+  reputation: number;
+  mana: number;
   logoutUser: () => void;
   setUsername: (name: string) => void;
   setAuthorized: (flag: boolean) => void;
   setBalance: (bal: string) => void;
   setHBDBalance: (bal: string) => void;
   setProfileImage: (src: string) => void;
-  setReputation: (rep: string) => void;
+  setReputation: (rep: number) => void;
+  setMana: (mana: number) => void;
 };
 
 export const useAuthorizationStore = create<AuthorizationStoreState>()(immer((set) => ({
@@ -23,7 +25,8 @@ export const useAuthorizationStore = create<AuthorizationStoreState>()(immer((se
   balance: '',
   hbd_balance: '',
   profile_image: '',
-  reputation: '',
+  reputation: 0,
+  mana: 0,
   logoutUser: () => {
     set((state) => {
       state.authorized = false;
@@ -60,6 +63,11 @@ export const useAuthorizationStore = create<AuthorizationStoreState>()(immer((se
       state.reputation = rep;
     });
   },
+  setMana: (mana) => {
+    set((state) => {
+      state.mana = mana;
+    });
+  },
 })))
 
-export const { logoutUser, setUsername, setAuthorized, setBalance, setHBDBalance,  setProfileImage, setReputation} = useAuthorizationStore.getState();
+export const { logoutUser, setUsername, setAuthorized, setBalance, setHBDBalance,  setProfileImage, setReputation, setMana} = useAuthorizationStore.getState();

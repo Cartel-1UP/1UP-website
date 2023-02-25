@@ -9,7 +9,7 @@ export default function Page({params}: {params: { slug: string}}) {
   return (
     <div>
         <DirectSection>
-          <DirectPage tag={params.slug} type={'latest'} name={'Latest'}/>
+          <DirectPage tag={params.slug} type={'created'} name={'Latest'}/>
         </DirectSection>
     </div>
 

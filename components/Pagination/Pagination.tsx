@@ -59,7 +59,6 @@ function BlogPagination({amount, type, tag}: Props) {
 
 
     useEffect(() => {
-      console.log(type)
       getPosts({
         tag: tag,
         sort: type,
@@ -69,7 +68,7 @@ function BlogPagination({amount, type, tag}: Props) {
           case 'trending':
             setPosts(data.result) 
             break;
-          case 'latest':
+          case 'created':
             setLatestPosts(data.result) 
             break
            default:

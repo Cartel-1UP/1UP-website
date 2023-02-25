@@ -1,6 +1,6 @@
 'use client'
 
-import { Avatar, Group, Text, UnstyledButton } from '@mantine/core';
+import { Avatar, Badge, Group, Progress, Text, UnstyledButton } from '@mantine/core';
 import { IconChevronRight } from '@tabler/icons';
 import { forwardRef } from 'react';
 
@@ -9,10 +9,12 @@ interface UserButtonProps extends React.ComponentPropsWithoutRef<'button'> {
   name: string;
   email: string;
   icon?: React.ReactNode;
+  mana: number;
+  reputation: number
 }
 
 const UserButton = forwardRef<HTMLButtonElement, UserButtonProps>(
-  ({ image, name, email, icon, ...others }: UserButtonProps, ref) => (
+  ({ image, name, email, icon, mana, reputation, ...others }: UserButtonProps, ref) => (
     <UnstyledButton
       ref={ref}
       sx={(theme) => ({
@@ -33,17 +35,16 @@ const UserButton = forwardRef<HTMLButtonElement, UserButtonProps>(
     >
       <Group>
         <Avatar src={image} radius="xl" />
-
         <div style={{ flex: 1 }}>
           <Text size="sm" weight={500}>
-            {name}
+          {name} <Badge sx={(theme) => ({padding: 5})} ml={5} radius="sm" color="gray" variant="outline">{reputation}</Badge> 
           </Text>
-
-          <Text color="dimmed" size="xs">
-            {email}
-          </Text>
+          
+          <Progress mt={5} radius="md" size="md"
+                sections={[
+                  { value: mana , color: 'pink', label: '', tooltip: 'RC: ' + mana + '%'},
+                ]}/>
         </div>
-
         {icon || <IconChevronRight size={16} />}
       </Group>
     </UnstyledButton>

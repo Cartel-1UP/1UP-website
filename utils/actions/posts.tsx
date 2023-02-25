@@ -1,6 +1,6 @@
-import api from '../api'
+import apiHive from '../apiHive'
 
-type Posts = {
+interface Props {
     sort: string,
     tag: string,
     recentUser?: {
@@ -15,20 +15,19 @@ type Posts = {
     limit?: number,
 }
 
-export  async function getPosts(props: Posts) {
+export async function getPosts ({...props}: Props) {
     try {
-        const { data } = await api.post(props.sort, { 
-            tag: props.tag, 
-            sort: props.sort,
-            // start: props.isRecent ? props.recentUser?.start : props.nextUser?.start,
-            // link: props.isRecent ? props.recentUser?.link : props.nextUser?.link,
-            number: props.limit
-            } 
-        )
-
-        return data
-             
-    } catch (e:any) {
-        console.log(e)
+        const { data } = await apiHive.post('', { 
+            "jsonrpc": "2.0",
+            "method": "bridge.get_ranked_posts",
+            "params": {
+                "sort": props.sort,
+                "tag": props.tag,
+            },
+            "id": 1
+     })
+     return data
+      
+    } catch {
     }
 }

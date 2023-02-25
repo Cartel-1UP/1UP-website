@@ -34,6 +34,7 @@ export function MainCardsGrid() {
   if (error) return <div>An error has occurred</div>
   
   if (data && typeof data === 'object') {
+
   return (
     <Container fluid className={classes.gradientBot}>
       <Container size="xl" pt={0}>

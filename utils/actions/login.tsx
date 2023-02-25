@@ -1,6 +1,6 @@
-import { setAuthorized, setProfileImage, setUsername } from '../../zustand/stores/useAuthorizationStore'
+import { setAuthorized, setMana, setProfileImage, setReputation, setUsername } from '../../zustand/stores/useAuthorizationStore'
 import api from '../api'
-import getUserData from './user'
+import getUserData, { getUserDataProfile } from './user'
 
 function loginKeychain(username: string|null) {
     if (!username) { return }
@@ -39,8 +39,14 @@ async function processLogin ({ username, ts, sig, smartlock = false}: any) {
       localStorage.setItem('username', data.username)
       localStorage.setItem('smartlock', data.smartlock)
       setAuthorized(data.authorized)
+      getUserDataProfile(data.username).then((data:any) => {
+        setReputation(data.result.reputation)
+      })
       getUserData(data.username).then((data:any) => {
-        console.log(data.result.rc_accounts[0])
+        const max_mana = parseFloat(data.result.rc_accounts[0].max_rc) - parseFloat(data.result.rc_accounts[0].received_delegated_rc)
+        let mana = max_mana / parseFloat(data.result.rc_accounts[0].rc_manabar.current_mana)
+        mana = parseFloat(mana.toFixed(2))
+        setMana(mana)
       })
       
     } catch {

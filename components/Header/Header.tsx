@@ -34,6 +34,8 @@ export function WebHeader() {
   const { classes, theme } = useStyles()
   const authorized = useAuthorizationStore((state: { authorized: boolean; }) => state.authorized)
   const userImage = useAuthorizationStore((state: { profile_image: string; }) => state.profile_image)
+  const userMana = useAuthorizationStore((state: { mana: number; }) => state.mana)
+  const userReputation = useAuthorizationStore((state: { reputation: number; }) => state.reputation)
   const username = useAuthorizationStore((state: { username: string; }) => state.username)
   const mobile = useMediaQuery(`(max-width: ${theme.breakpoints.xs}px)`);
   const tablet = useMediaQuery(`(max-width: ${theme.breakpoints.md}px)`);
@@ -144,8 +146,11 @@ export function WebHeader() {
                       image={userImage}
                       name={username}
                       className={classes.hiddenMobileLogin} 
-                      email={''}          
+                      email={''}   
+                      mana={userMana}   
+                      reputation = {userReputation}    
                        />
+                
               </Menu.Target>
               <Menu.Dropdown sx={{backgroundColor: '#072f37', borderColor: '#031418'}}  >
               <Menu.Item   sx={{color: 'white'}} className={classes.subLink}  icon={<IconUserCircle size={20} color={'white'} stroke={1.5} />}>
