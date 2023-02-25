@@ -1,5 +1,5 @@
 'use client'
-import { AspectRatio, Avatar, Button, Card, Container, Grid, Image, Space, Text } from '@mantine/core';
+import { AspectRatio, Avatar, Badge, Button, Card, Container, Grid, Image, Space, Text } from '@mantine/core';
 import { IconHeart, IconMessage } from '@tabler/icons';
 import useStyles from './style';
 
@@ -27,13 +27,12 @@ export function DirectCard({ article }: CardProps) {
     });
   
     let bodyOfArticle = newWords.join(" ");
-    let json_metadata = article?.json_metadata
 
     let imageExists
 
-    if (Array.isArray(json_metadata.image) && json_metadata.image.length === 0) {
+    if (Array.isArray(article.json_metadata.image) && article.json_metadata.image.length === 0) {
         imageExists = false
-      } else if (!Array.isArray(json_metadata.image)) {
+      } else if (!Array.isArray(article.json_metadata.image)) {
         imageExists = false
       } else {
         imageExists = true
@@ -45,7 +44,8 @@ export function DirectCard({ article }: CardProps) {
           <Grid.Col span={7}>
             <Container className={classes.headerContainer}>
               <Avatar color="blue" radius="xl" src={`https://images.hive.blog/u/${article?.author}/avatar`}/>
-             <Text pl={10} color="dimmed" size="xs" transform="uppercase" weight={500}>
+              <Badge ml={10} color="dark" variant="outline">{article.author_reputation.toFixed()} lvl</Badge>
+              <Text pl={10} color="dimmed" size="xs" transform="uppercase" weight={500}>
                 {article?.author} - {formattedDate}
               </Text>       
             </Container>
@@ -62,7 +62,7 @@ export function DirectCard({ article }: CardProps) {
             <Container >
               <AspectRatio ratio={4/3}>
               {  imageExists ? 
-                  <Image radius={10}  src={json_metadata.image[0]} /> :
+                  <Image radius={10}  src={article.json_metadata.image[0]} /> :
                   <Image
                     src={null}
                     alt="Image placeholder"
@@ -77,7 +77,7 @@ export function DirectCard({ article }: CardProps) {
           <Grid.Col span={7}>
           <Container>
                 <Button variant="outline" color="gray" radius="md" size="xs" uppercase>
-                {article?.category}
+                {article?.json_metadata.tags[0]}
                 </Button>
             </Container>
           </Grid.Col>

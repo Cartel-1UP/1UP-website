@@ -15,7 +15,7 @@ export function Recent({...props} : Props) {
   const { classes, theme } = useStyles()
   const { isLoading, error, data } = useQuery('recentData', () => getPosts({
     tag: props.tag,
-    sort: 'latest',
+    sort: 'created',
     limit: 5
   }));
 

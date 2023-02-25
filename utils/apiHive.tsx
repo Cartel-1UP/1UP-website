@@ -34,7 +34,3 @@ apiHive.interceptors.response.use(
 );
 
 export default apiHive;
-
-export const is5xxError = (error: any) => {
-  return error?.response?.status >= 500 && error?.response?.status < 600;
-};

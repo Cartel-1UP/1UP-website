@@ -17,10 +17,11 @@ const useStyles = createStyles((theme) => ({
     whiteSpace: 'normal',
     overflow: 'hidden',
     display: '-webkit-box',
-    WebkitLineClamp: 3,
+    WebkitLineClamp: 2,
     WebkitBoxOrient: 'vertical',
-    maxHeight: '4.5em'
+    maxHeight: '3.5em'
   },
+
 
   price: {
     fontFamily: `Greycliff CF, ${theme.fontFamily}`,
@@ -65,7 +66,8 @@ link: {
   '&:hover': {
     color: '#000000bd',
   },
-}
+},
+
 
 }))
 
