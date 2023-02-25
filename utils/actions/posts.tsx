@@ -1,6 +1,6 @@
 import apiHive from '../apiHive'
 
-interface Props {
+interface Posts {
     sort: string,
     tag: string,
     recentUser?: {
@@ -15,7 +15,12 @@ interface Props {
     limit?: number,
 }
 
-export async function getPosts ({...props}: Props) {
+interface Post {
+    author: string
+    permlink: string
+}
+
+export async function getPosts ({...props}: Posts) {
     try {
         const { data } = await apiHive.post('', { 
             "jsonrpc": "2.0",
@@ -26,6 +31,24 @@ export async function getPosts ({...props}: Props) {
             },
             "id": 1
      })
+     return data
+      
+    } catch {
+    }
+}
+
+
+export async function getPost ({...props}: Post) {
+    try {
+        const { data } = await apiHive.post('', {
+            "id": 21,
+            "jsonrpc": "2.0",
+            "method": "bridge.get_post",
+            "params": {
+                "author": props.author,
+                "permlink": props.permlink,
+            }
+        })
      return data
       
     } catch {
