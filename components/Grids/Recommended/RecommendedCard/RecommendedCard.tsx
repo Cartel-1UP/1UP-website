@@ -58,11 +58,13 @@ export function RecommendedCard({ article }: CardProps) {
           </Container>
         </Grid.Col>
         <Grid.Col span={12}>
+
           <Container>
             <Text className={classes.title} mt={5}>
               {article?.title}
             </Text>
           </Container>
+
         </Grid.Col>
         <Grid.Col span={12} display="flex">
           <Container mr={0} className={classes.metadataContainer}>

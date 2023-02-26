@@ -24,11 +24,13 @@ export function TrendingCard({ article }: CardProps) {
         </Container>
       </Grid.Col>   
       <Grid.Col span={12}>
+
         <Container>
           <Text className={classes.title}>
             {article?.title}
           </Text>
         </Container>
+   
       </Grid.Col>
       <Grid.Col span={12} display="flex">
       <Container ml={0} className={classes.metadataContainer}>

@@ -1,6 +1,7 @@
 'use client'
 import { AspectRatio, Avatar, Badge, Button, Card, Container, Grid, Image, Space, Text } from '@mantine/core';
 import { IconHeart, IconMessage } from '@tabler/icons';
+import Link from 'next/link';
 import useStyles from './style';
 
 interface CardProps {
@@ -49,6 +50,7 @@ export function DirectCard({ article }: CardProps) {
                 {article?.author} - {formattedDate}
               </Text>       
             </Container>
+            <Link href={'post/' + article.permlink} className={classes.link}>
             <Container>
               <Text className={classes.title} mt={5}>
                 {article?.title}
@@ -57,6 +59,7 @@ export function DirectCard({ article }: CardProps) {
                 {bodyOfArticle}
               </Text>
             </Container>
+            </Link>
           </Grid.Col>  
           <Grid.Col span={5}>
             <Container >

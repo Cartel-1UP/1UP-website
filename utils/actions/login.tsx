@@ -1,6 +1,6 @@
 import { setAuthorized, setMana, setProfileImage, setReputation, setUsername } from '../../zustand/stores/useAuthorizationStore'
 import api from '../api'
-import getUserData, { getUserDataProfile } from './user'
+import { getUserData, getUserDataProfile } from './user'
 
 function loginKeychain(username: string|null) {
     if (!username) { return }

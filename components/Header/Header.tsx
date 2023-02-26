@@ -62,11 +62,10 @@ export function WebHeader() {
   ))
 
   return (
-    <Container fluid className={classes.header}>
+    <Container fluid className={classes.header} p={5} pb={15}>
     <Container size={'xl'}>
-      <Header p="xs"  height={'100%'} className={classes.header}>
+      <Header  height={'100%'} className={classes.header}>
         <Grid justify="space-between" align="center"> 
-        {/* {tablet ? <Grid.Col span={3}></Grid.Col> : null } */}
           <Grid.Col span={3} pl={20} sx={{display:'flex', justifyContent:'left'}} className={classes.hiddenMobile}>
             <Center>
               <Group spacing={0} >

@@ -67,7 +67,7 @@ export function Recent({...props} : Props) {
 
               : 
                 data.result.map?.((item: any, index: any) => (
-                    <RecentCard article={item} key={index}/>
+                    <RecentCard article={item} key={index} tag={props.tag}/>
                 )) 
             }
 
