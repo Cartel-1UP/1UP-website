@@ -1,33 +1,13 @@
 import { createStyles } from '@mantine/styles'
 
 const useStyles = createStyles((theme) => ({
-
-    footer: {
-        background: ' #072f37'
+      default: {
+        backgroundColor: theme.colors.gray[2] 
       },
-    
-      inner: {
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        padding: `${theme.spacing.md}px ${theme.spacing.md}px`,
-    
-        [theme.fn.smallerThan('sm')]: {
-          flexDirection: 'column',
-        },
+      card: {
+        borderColor: '#e2e8f0d2',
+        borderWidth: 1,
       },
-    
-      links: {
-        [theme.fn.smallerThan('sm')]: {
-          marginTop: theme.spacing.lg,
-          marginBottom: theme.spacing.sm,
-        },
-      },
-
-      gradientBot: {
-        background: 'linear-gradient(to bottom, white, #072f37);'
-      }
-
 }))
 
 export default useStyles
