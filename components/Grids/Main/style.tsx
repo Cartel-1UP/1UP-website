@@ -75,7 +75,11 @@ const useStyles = createStyles((theme, _params, getRef) => ({
   },
 
   gradientBot: {
-    background: 'linear-gradient(to top, #275c672d, #072f37);'
+    background: 'linear-gradient(to top, #275c672d, #072f37);',
+    [theme.fn.smallerThan('xl')]: {
+      height: '70vh'
+    },
+  
   },
 
   category: {

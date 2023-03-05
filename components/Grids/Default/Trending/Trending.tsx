@@ -15,7 +15,7 @@ export function Trending({...props}: Props) {
   const { isLoading, error, data } = useQuery('trendingData', () => getPosts({
     tag: props.tag,
     sort: 'trending',
-    limit: 5
+    limit: 10
   }));
 
   if (error) return <div>An error has occurred</div>
@@ -59,7 +59,8 @@ export function Trending({...props}: Props) {
               
               : 
                 data.result.map?.((item: any, index: any) => (
-                    <TrendingCard article={item} key={index}/>
+
+                    item?.stats?.is_pinned ? null : <TrendingCard article={item} key={index}/>
                 )) 
             }
           <Card  withBorder p="md" radius={0} className={classes.cardFooter}>

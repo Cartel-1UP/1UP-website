@@ -16,7 +16,7 @@ export function Recent({...props} : Props) {
   const { isLoading, error, data } = useQuery('recentData', () => getPosts({
     tag: props.tag,
     sort: 'created',
-    limit: 5
+    limit: 10
   }));
 
   if (error) return <div>An error has occurred</div>

@@ -1,6 +1,6 @@
 import { ActionIcon, Anchor, Group, Text } from '@mantine/core';
 import { IconBrandInstagram, IconBrandTwitter, IconBrandYoutube } from '@tabler/icons';
-import useStyles from '.';
+import useStyles from './style';
 
 interface FooterCenteredProps {
   links: { link: string; label: string }[];

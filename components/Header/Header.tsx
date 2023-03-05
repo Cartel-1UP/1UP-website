@@ -19,13 +19,13 @@ import { useDisclosure, useMediaQuery } from '@mantine/hooks'
 import { IconArticle, IconChevronDown, IconLogout, IconUserCircle, IconWallet } from '@tabler/icons'
 import Link from 'next/link'
 import { useState } from 'react'
-import useStyles from '.'
 import oneuplogo from '../../images/oneup1.png'
 import oneuplogo2 from '../../images/oneup2.png'
 import { logoutUser, useAuthorizationStore } from '../../zustand/stores/useAuthorizationStore'
 import LoginButton from '../LoginButton/LoginButton'
 import { UserButton } from '../UserButton/UserButton'
 import { mockdata } from './data'
+import useStyles from './style'
 
 
 export function WebHeader() {
@@ -37,7 +37,6 @@ export function WebHeader() {
   const userMana = useAuthorizationStore((state: { mana: number; }) => state.mana)
   const userReputation = useAuthorizationStore((state: { reputation: number; }) => state.reputation)
   const username = useAuthorizationStore((state: { username: string; }) => state.username)
-  const mobile = useMediaQuery(`(max-width: ${theme.breakpoints.xs}px)`);
   const tablet = useMediaQuery(`(max-width: ${theme.breakpoints.md}px)`);
 
   
@@ -62,7 +61,7 @@ export function WebHeader() {
   ))
 
   return (
-    <Container fluid className={classes.header} p={5} pb={15}>
+    <Container fluid className={classes.headerContainer} p={5} pb={15}>
     <Container size={'xl'}>
       <Header  height={'100%'} className={classes.header}>
         <Grid justify="space-between" align="center"> 

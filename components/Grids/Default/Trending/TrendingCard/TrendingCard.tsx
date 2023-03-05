@@ -18,6 +18,9 @@ export function TrendingCard({ article }: CardProps) {
         <Container className={classes.headerContainer}>
           <Avatar color="blue" radius="xl" src={`https://images.hive.blog/u/${article?.author}/avatar`}/>
           <Badge ml={10} color="dark" variant="outline">{article.author_reputation.toFixed()} lvl</Badge>
+              {
+                article.stats.is_pinned && <Badge ml={10} color="red" variant="outline">Pinned</Badge>
+              }
           <Text pl={10} color="dimmed" size="xs" transform="uppercase" weight={500}>
               {article?.author}
           </Text>       

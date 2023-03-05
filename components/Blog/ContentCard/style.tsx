@@ -18,6 +18,10 @@ const useStyles = createStyles((theme) => ({
     borderRadius: '0 0 10px 10px',
 
   },
+  image: {
+    display: 'flex',
+    justifyContent: 'space-around',
+  },
   headerContainer:{
     display: 'flex',
     flexDirection: 'row',

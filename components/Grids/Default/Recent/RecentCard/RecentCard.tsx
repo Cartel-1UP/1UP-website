@@ -40,8 +40,6 @@ export function RecentCard({ ...props }: CardProps) {
     imageExists = true
   }  
 
-
-
   return (
     <Card key={props.article.post_id} withBorder p="md" radius={0} className={classes.card}>
         <Grid grow>
@@ -49,6 +47,9 @@ export function RecentCard({ ...props }: CardProps) {
             <Container className={classes.headerContainer}>
               <Avatar color="blue" radius="xl" src={`https://images.hive.blog/u/${props.article?.author}/avatar`}/>
               <Badge ml={10} color="dark" variant="outline">{props.article.author_reputation.toFixed()} lvl</Badge>
+              {
+                props.article.stats.is_pinned && <Badge ml={10} color="red" variant="outline">Pinned</Badge>
+              }
               <Text pl={10} color="dimmed" size="xs" transform="uppercase" weight={500}>
                 {props.article?.author} - {formattedDate}
               </Text>       

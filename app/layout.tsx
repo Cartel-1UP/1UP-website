@@ -20,7 +20,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <html lang="en">
           <head />
           <body>
-            <WebHeader />
+            <WebHeader/>
             {children}
             <Footer links={[]}/>
           </body>

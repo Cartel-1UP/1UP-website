@@ -30,6 +30,7 @@ export async function getPosts ({...props}: Posts) {
             "params": {
                 "sort": props.sort,
                 "tag": props.tag,
+                "limit": props.limit
             },
             "id": 1
      })
