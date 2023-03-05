@@ -1,8 +1,10 @@
 'use client'
 import { Avatar, Badge, Box, Button, Card, Container, Grid, Group, Image, SimpleGrid, Space, Text, Title } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
+import { useMemo } from 'react';
 import ReactMarkdown from 'react-markdown';
 import rehypeRaw from "rehype-raw";
+import gfm from 'remark-gfm';
 import useStyles from './style';
 
 interface CardProps {
@@ -16,7 +18,39 @@ export function ContentCard({ article, user }: CardProps) {
 
   const profile = user.result.metadata.profile
   const stats = user.result.stats
+  const markdownBody = useMemo(() => {
+    // Convert links without markdown tags to markdown
+    const linkRegex = /(^|\s)(https?:\/\/\S+)/g;
+    const markdownLink = (match: string, p1: string, p2: string) => {
+      return `${p1}[${p2}](${p2})`;
+    };
+    const bodyWithMarkdownLinks = article.data.result.body.replace(linkRegex, markdownLink);
 
+    return (
+      <ReactMarkdown 
+        rehypePlugins={[rehypeRaw]}
+        remarkPlugins={[gfm]}
+        components={{
+          img: ({ node }) => {
+              const image: any = node.properties;
+
+              return (
+                  <div className={classes.image}>
+                      <Image
+                          src={image.src}
+                          alt={image.alt}
+                          sx={{maxWidth: '500px'}}
+                          // width="600"
+                          // height="300"
+                      />
+                  </div>
+                  );
+              },
+          }}>
+        {bodyWithMarkdownLinks}
+      </ReactMarkdown>
+    );
+  }, [article.data.result.body]);
 
   return (
     <>
@@ -53,29 +87,9 @@ export function ContentCard({ article, user }: CardProps) {
         <Card  withBorder p="md" radius={0} className={classes.card}>
         
             <Container>
-            <ReactMarkdown 
 
-            rehypePlugins={[rehypeRaw]}
-            
-            components={{
-              img: ({ node }) => {
-                  const image: any = node.properties;
-
-                  return (
-                      <div className="image">
-                          <Image
-                              src={image.src}
-                              alt={image.alt}
-                              // width="600"
-                              // height="300"
-                          />
-                      </div>
-                      );
-                  },
-              }}
-                >
-              {article.data.result.body}
-              </ReactMarkdown>
+              {markdownBody}
+             
             </Container>
 
         </Card>

@@ -103,6 +103,16 @@ const useStyles = createStyles((theme) => ({
   header:{
     backgroundColor: '#072f37',
     border: 0,
+
+    [theme.fn.smallerThan('xl')]: {
+      height: '15vh'
+    },
+    
+  },
+
+  headerContainer:{
+    backgroundColor: '#072f37',
+    border: 0,
   },
 }))
 

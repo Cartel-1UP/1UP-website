@@ -37,7 +37,7 @@ const UserButton = forwardRef<HTMLButtonElement, UserButtonProps>(
         <Avatar src={image} radius="xl" />
         <div style={{ flex: 1 }}>
           <Text size="sm" weight={500}>
-          {name} <Badge sx={(theme) => ({padding: 5})} ml={5} radius="sm" color="gray" variant="outline">{reputation}</Badge> 
+          {name} <Badge sx={(theme) => ({padding: 5})} ml={5} radius="sm" color="gray" variant="outline">{reputation.toFixed()}</Badge> 
           </Text>
           
           <Progress mt={5} radius="md" size="md"
