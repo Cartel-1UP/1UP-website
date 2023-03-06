@@ -17,6 +17,7 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@agentofuser/remark-oembed": "^1.0.4",
     "@emotion/react": "^11.10.5",
     "@hiveio/dhive": "^1.2.4",
     "@mantine/carousel": "^5.9.5",
@@ -47,6 +48,7 @@
     "react-linkify": "^1.0.0-alpha",
     "react-markdown": "^8.0.5",
     "react-query": "^3.39.2",
+    "react-twitter-widgets": "^1.11.0",
     "rehype-raw": "^6.1.1",
     "remark": "^14.0.2",
     "remark-gfm": "^3.0.1",

@@ -57,11 +57,32 @@ export async function getPost ({...props}: Post) {
         .use(html)
         .process(data.result.body);
         
-        const contentHtml = processedContent.toString();
+        const contentHtml = data.result.body;
 
         const time = readTime(contentHtml)
 
      return { data, contentHtml, time}
+
+      
+    } catch {
+    }
+}
+
+
+
+export async function getComments ({...props}: Post) {
+    try {
+        const { data } = await apiHive.post('', {
+            "id": 21,
+            "jsonrpc": "2.0",
+            "method": "bridge.get_discussion",
+            "params": {
+                "author": props.author,
+                "permlink": props.permlink,
+            }
+        })
+
+     return {data}
 
       
     } catch {
