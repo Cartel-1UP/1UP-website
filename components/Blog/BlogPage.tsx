@@ -2,7 +2,7 @@
 import { Card, Container, Grid, SimpleGrid, Skeleton } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
 import { useQuery } from 'react-query';
-import { getPost } from '../../utils/actions/posts';
+import { getComments, getPost } from '../../utils/actions/posts';
 import { getUserPostData } from '../../utils/actions/user';
 import { ContentCard } from './ContentCard/ContentCard';
 import useStyles from './style';
@@ -18,24 +18,27 @@ export function BlogPage({...props}: Props) {
     permlink: props.id,
     author: props.username,
   }));
-    const laptop = useMediaQuery(`(max-width: ${theme.breakpoints.md}px)`);
 
+    const laptop = useMediaQuery(`(max-width: ${theme.breakpoints.md}px)`);
+  
+    const { data: comments } = useQuery('commentsData', () => getComments({
+    permlink: props.id,
+    author: props.username,
+  }));
 
   const { data: user } = useQuery('userData', () => getUserPostData({
     username: props.username,
   }));
   
-  if(data && user){
+  if(data && user && comments){
     return (
       <Container fluid className={classes.default}>
         <Container size="lg">
           <Grid>
-            <ContentCard article={data} user={user}/>
+            <ContentCard article={data} user={user} comments={comments}/>
           </Grid>
           </Container>
-      
       </Container>
-  
     );
   }
 

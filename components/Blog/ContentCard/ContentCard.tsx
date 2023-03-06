@@ -1,56 +1,29 @@
 'use client'
-import { Avatar, Badge, Box, Button, Card, Container, Grid, Group, Image, SimpleGrid, Space, Text, Title } from '@mantine/core';
+import { Avatar, Badge, Box, Button, Card, Container, Grid, Group, SimpleGrid, Space, Text, Title } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
-import { useMemo } from 'react';
-import ReactMarkdown from 'react-markdown';
-import rehypeRaw from "rehype-raw";
-import gfm from 'remark-gfm';
+import { CommentCard } from '../CommentCard/CommentCard';
+import { Markdown } from '../MarkdownReplacer/Markdown';
 import useStyles from './style';
 
 interface CardProps {
   article: any;
   user: any;
+  comments: any;
 }
 
-export function ContentCard({ article, user }: CardProps) {
+export function ContentCard({ article, user, comments }: CardProps) {
   const { classes, theme } = useStyles();
   const laptop = useMediaQuery(`(max-width: ${theme.breakpoints.md}px)`);
-
   const profile = user.result.metadata.profile
   const stats = user.result.stats
-  const markdownBody = useMemo(() => {
-    // Convert links without markdown tags to markdown
-    const linkRegex = /(^|\s)(https?:\/\/\S+)/g;
-    const markdownLink = (match: string, p1: string, p2: string) => {
-      return `${p1}[${p2}](${p2})`;
-    };
-    const bodyWithMarkdownLinks = article.data.result.body.replace(linkRegex, markdownLink);
 
-    return (
-      <ReactMarkdown 
-        rehypePlugins={[rehypeRaw]}
-        remarkPlugins={[gfm]}
-        components={{
-          img: ({ node }) => {
-              const image: any = node.properties;
-
-              return (
-                  <div className={classes.image}>
-                      <Image
-                          src={image.src}
-                          alt={image.alt}
-                          sx={{maxWidth: '500px'}}
-                          // width="600"
-                          // height="300"
-                      />
-                  </div>
-                  );
-              },
-          }}>
-        {bodyWithMarkdownLinks}
-      </ReactMarkdown>
-    );
-  }, [article.data.result.body]);
+  var mappedPosts = Object.entries(comments.data.result).map(([key, post]: any) => ({
+    id: key,
+    postId: post.post_id,
+    author: post.author,
+    title: post.title,
+    body: post.body
+  }));
 
   return (
     <>
@@ -85,15 +58,15 @@ export function ContentCard({ article, user }: CardProps) {
           </Grid>
         </Card>
         <Card  withBorder p="md" radius={0} className={classes.card}>
-        
             <Container>
-
-              {markdownBody}
-             
+              <Markdown text={article.data.result.body}/>
             </Container>
-
         </Card>
         <Card  withBorder p="md" mb={25} radius={0} className={classes.cardFooter}>
+            {mappedPosts.slice(1).map((item: any) => (
+              <CommentCard comment={item}/>
+              
+            ))}
         </Card>
         </SimpleGrid>
         </Grid.Col>
