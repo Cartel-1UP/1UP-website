@@ -1,5 +1,3 @@
-import { remark } from 'remark';
-import html from 'remark-html';
 import apiHive from '../apiHive';
 
 interface Posts {
@@ -41,52 +39,34 @@ export async function getPosts ({...props}: Posts) {
 }
 
 
-export async function getPost ({...props}: Post) {
-    try {
-        const { data } = await apiHive.post('', {
-            "id": 21,
-            "jsonrpc": "2.0",
-            "method": "bridge.get_post",
-            "params": {
-                "author": props.author,
-                "permlink": props.permlink,
-            }
-        })
+export async function getPost ({...props}: Post): Promise<{ data: [], time: number }> {
+    const { data } = await apiHive.post('', {
+        "id": 21,
+        "jsonrpc": "2.0",
+        "method": "bridge.get_post",
+        "params": {
+            "author": props.author,
+            "permlink": props.permlink,
+        }
+    })
 
-        const processedContent = await remark()
-        .use(html)
-        .process(data.result.body);
-        
-        const contentHtml = data.result.body;
-
-        const time = readTime(contentHtml)
-
-     return { data, contentHtml, time}
-
-      
-    } catch {
-    }
+    const time = readTime(data.result.body)
+    return { data, time}
 }
 
 
 
-export async function getComments ({...props}: Post) {
-    try {
-        const { data } = await apiHive.post('', {
-            "id": 21,
-            "jsonrpc": "2.0",
-            "method": "bridge.get_discussion",
-            "params": {
-                "author": props.author,
-                "permlink": props.permlink,
-            }
-        })
-
-     return {data}
-
-      
-    } catch {
-    }
+export async function getComments ({...props}: Post): Promise<{ data: []}> {
+    const { data } = await apiHive.post('', {
+        "id": 21,
+        "jsonrpc": "2.0",
+        "method": "bridge.get_discussion",
+        "params": {
+            "author": props.author,
+            "permlink": props.permlink,
+        }
+    })
+    return {data}
 }
 
 

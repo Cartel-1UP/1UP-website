@@ -13,13 +13,12 @@ type Props = {
 
 export function Recent({...props} : Props) {
   const { classes, theme } = useStyles()
+
   const { isLoading, error, data } = useQuery('recentData', () => getPosts({
     tag: props.tag,
     sort: 'created',
     limit: 10
   }));
-
-  if (error) return <div>An error has occurred</div>
 
   return (
     <>
@@ -32,7 +31,6 @@ export function Recent({...props} : Props) {
           </Card>
             {
               isLoading ?  
-
               Array.from({ length: 5 }).map((_, index) => (
                 <Card withBorder p="md" radius={0} className={classes.card} key={index}>
                   <Grid grow>

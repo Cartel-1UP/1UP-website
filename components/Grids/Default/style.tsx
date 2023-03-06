@@ -1,45 +1,9 @@
 import { createStyles } from '@mantine/styles'
 
 const useStyles = createStyles((theme) => ({
-  card: {
-    transition: 'transform 150ms ease, box-shadow 150ms ease',
-
-    '&:hover': {
-      transform: 'scale(1.01)',
-      boxShadow: theme.shadows.md,
-    },
-  },
-
   default: {
     backgroundColor: theme.colors.gray[2] 
   },
-
-  title: {
-    fontFamily: `Greycliff CF, ${theme.fontFamily}`,
-    fontWeight: 600,
-  },
-
-  price: {
-    fontFamily: `Greycliff CF, ${theme.fontFamily}`,
-    fontWeight: 400,
-    fontSize: 12
-  },
-
-  recentCol: {
-    span: 9,
-    '@media (max-width: 1000px)' : {
-      span: 12
-    }
-  },
-
-  trendingCol: {
-    span: 3,
-    '@media (max-width: 1000px)' : {
-      span: 12
-    }
-  }
-
-
 }))
 
 export default useStyles

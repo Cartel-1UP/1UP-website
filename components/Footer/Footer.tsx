@@ -2,12 +2,13 @@ import { ActionIcon, Anchor, Group, Text } from '@mantine/core';
 import { IconBrandInstagram, IconBrandTwitter, IconBrandYoutube } from '@tabler/icons';
 import useStyles from './style';
 
-interface FooterCenteredProps {
+interface Props {
   links: { link: string; label: string }[];
 }
 
-export function Footer({ links }: FooterCenteredProps) {
+export function Footer({ links }: Props) {
   const { classes } = useStyles();
+
   const items = links.map((link) => (
     <Anchor<'a'>
       color="dimmed"
@@ -24,11 +25,8 @@ export function Footer({ links }: FooterCenteredProps) {
   return (
     <div className={classes.footer}>
       <div className={classes.inner}>
-
         <Group className={classes.links}>{items}</Group>
-
         <Text color="dimmed">Copyright © 2023 ONEUP-CARTEL</Text>
-
         <Group spacing="xs" position="right" noWrap>
           <ActionIcon size="lg" variant="default" radius="xl">
             <IconBrandTwitter size={18} stroke={1.5} />

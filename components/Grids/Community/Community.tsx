@@ -20,8 +20,7 @@ export function CommunityGrid() {
     rootNode: (emblaRoot: any) => emblaRoot.parentElement,
   }
   const autoplay = useRef(Autoplay(autoplayOptions));
-
-
+  
   return (
     <>
       {!mobile && 

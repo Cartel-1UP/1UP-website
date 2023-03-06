@@ -1,4 +1,3 @@
-'use client'
 import { Container } from '@mantine/core'
 import { ReactNode } from 'react'
 import useStyles from './style'
@@ -16,5 +15,5 @@ export function ArticlesCardsGrid({children}:Props) {
           {children}
       </Container>
     </Container>
-      )
+  )
 }
