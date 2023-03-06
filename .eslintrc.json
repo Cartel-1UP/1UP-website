@@ -5,6 +5,7 @@
   },
   "rules": {
     "no-unused-vars": [1, { "args": "after-used", "argsIgnorePattern": "^_" }],
-    "react/display-name": "off"
+    "react/display-name": "off",
+    "no-useless-escape": "off"
   }
 }

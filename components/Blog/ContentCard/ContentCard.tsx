@@ -64,7 +64,7 @@ export function ContentCard({ article, user, comments }: CardProps) {
         </Card>
         <Card  withBorder p="md" mb={25} radius={0} className={classes.cardFooter}>
             {mappedPosts.slice(1).map((item: any) => (
-              <CommentCard comment={item}/>
+              <CommentCard comment={item} key={item.postId}/>
               
             ))}
         </Card>
