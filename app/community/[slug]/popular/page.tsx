@@ -1,9 +1,5 @@
-'use client'
-
 import { DirectPage } from "../../../../components/Grids/Direct/DirectPage/DirectPage";
 import { DirectSection } from "../../../../components/Grids/Direct/DirectSection";
-
-
 
 export const runtime = 'experimental-edge';
 

@@ -7,14 +7,13 @@ import rehypeRaw from "rehype-raw";
 import gfm from 'remark-gfm';
 import useStyles from './style';
 
-interface CardProps {
+interface Props {
   text: string;
 }
 
-export function Markdown({ text }: CardProps) {
+export function Markdown({ text }: Props) {
     const { classes, theme } = useStyles();
     const imageRegex = /\b(https?:\/\/\S+\.(?:jpg|jpeg|png|gif))\b/gi;
-
     const markdownBody = useMemo(() => {
     const lines = text.split(/\r?\n/);
     const replacedLines = lines.map((line: any) => {
@@ -39,8 +38,6 @@ export function Markdown({ text }: CardProps) {
                         src={image.src}
                         alt={image.alt}
                         sx={{maxWidth: '500px'}}
-                        // width="600"
-                        // height="300"
                     />
                     </div>
                 );
@@ -57,9 +54,7 @@ export function Markdown({ text }: CardProps) {
         </ReactMarkdown>
     );
     }, [text]);
-
-  
-
+    
   return (
     <>
         {markdownBody}    

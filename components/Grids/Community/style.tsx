@@ -8,8 +8,7 @@ const useStyles = createStyles((theme) => ({
       height: '15vh'
     },
   },
-
-
+  
 }))
 
 export default useStyles

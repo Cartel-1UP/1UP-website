@@ -1,6 +1,8 @@
 import apiHive from '../apiHive'
 
-
+interface Props {
+    author: string
+}
 
 export async function getUserData (username: any) {
 
@@ -40,22 +42,14 @@ export async function getUserDataProfile (username: any) {
 }
 
 
-
-
-
-export async function getUserPostData (user: any) {
-
-    try {
-        const { data } = await apiHive.post('', { 
-            "jsonrpc": "2.0",
-            "method": "bridge.get_profile",
-            "params": {
-                "account": user.username 
-            },
-            "id": 1
-     })
-     return data
-    
-    } catch {
-    }
+export async function getUserPostData ({...props}: Props): Promise<{ data: []}> {
+    const { data } = await apiHive.post('', { 
+        "jsonrpc": "2.0",
+        "method": "bridge.get_profile",
+        "params": {
+            "account": props.author 
+        },
+        "id": 1
+    })
+    return data 
 }
