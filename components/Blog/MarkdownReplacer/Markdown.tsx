@@ -18,7 +18,7 @@ export function Markdown({ text }: CardProps) {
     const markdownBody = useMemo(() => {
     const lines = text.split(/\r?\n/);
     const replacedLines = lines.map((line: any) => {
-        if (!/\!\[(.*?)\]\((.*?)\)/gi.test(line)) {
+        if (!/\!\[.*?\]\(.*?\)/gi.test(line)) {
         return line.replace(imageRegex, (url: string) => `![image.png](${url})`);
         }
         return line;
