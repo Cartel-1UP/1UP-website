@@ -1,33 +1,13 @@
 'use client'
 import { Avatar, Badge, Box, Button, Card, Container, Grid, Group, SimpleGrid, Space, Text, Title } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
-import { CommentCard } from '../CommentCard/CommentCard';
 import { Markdown } from '../MarkdownReplacer/Markdown';
 import useStyles from './style';
 
 
-interface Article {
-
-}
-
-
-
 interface Props {
-  article :{
-    data : {
-      result: {
-        title: string,
-        children: string,
-        body: string,
-        stats: {
-          total_votes: number
-        }
-      }
-    }
-    time : string
-  } ;
+  article : any;
   user: any;
-  comments: any;
 }
 
 export function ContentCard({...props}: Props) {
@@ -37,13 +17,7 @@ export function ContentCard({...props}: Props) {
   const profile = props.user.result.metadata.profile
   const stats = props.user.result.stats
 
-  var mappedPosts = Object.entries(props.comments.data.result).map(([key, post]: any) => ({
-    id: key,
-    postId: post.post_id,
-    author: post.author,
-    title: post.title,
-    body: post.body
-  }));
+
 
   return (
     <>
@@ -80,12 +54,6 @@ export function ContentCard({...props}: Props) {
                 <Container>
                   <Markdown text={props.article.data.result.body}/>
                 </Container>
-            </Card>
-            <Card withBorder p="md" mb={25} radius={0} className={classes.cardFooter}>
-                {mappedPosts.slice(1).map((item: any) => (
-                  <CommentCard comment={item} key={item.postId}/>
-                  
-                ))}
             </Card>
         </SimpleGrid>
         </Grid.Col>

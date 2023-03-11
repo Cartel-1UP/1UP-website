@@ -39,7 +39,7 @@ export async function getPosts ({...props}: Posts) {
 }
 
 
-export async function getPost ({...props}: Post): Promise<{ data: [], time: number }> {
+export async function getPost ({...props}: Post): Promise<{ data: any, time: number }> {
     const { data } = await apiHive.post('', {
         "id": 21,
         "jsonrpc": "2.0",

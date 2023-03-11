@@ -4,13 +4,12 @@ import { IconHeart, IconMessage } from '@tabler/icons';
 import Link from 'next/link';
 import useStyles from './style';
 
-interface CardProps {
+interface Props {
   article: any;
   tag: string;
 }
 
-export function RecentCard({ ...props }: CardProps) {
-
+export function RecentCard({ ...props }: Props) {
   const { classes } = useStyles();
   const date = new Date(props.article.created);
   const formattedDate = date.toLocaleDateString('en-US', {
