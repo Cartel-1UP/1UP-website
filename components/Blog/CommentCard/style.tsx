@@ -16,6 +16,13 @@ const useStyles = createStyles((theme) => ({
         marginBottom: 0,
       },
     },
+
+    cardFooter: {
+      borderColor: '#e2e8f0d2',
+      borderWidth: 1,
+      borderRadius: '0 0 10px 10px',
+  
+    },
   }));
 
 export default useStyles

@@ -3,6 +3,7 @@ import { Card, Container, Grid, SimpleGrid, Skeleton } from '@mantine/core';
 import { useQuery } from 'react-query';
 import { getComments, getPost } from '../../utils/actions/posts';
 import { getUserPostData } from '../../utils/actions/user';
+import { CommentCard } from './CommentCard/CommentCard';
 import { ContentCard } from './ContentCard/ContentCard';
 import useStyles from './style';
 
@@ -33,7 +34,8 @@ export function BlogPage({...props}: Props) {
       <Container fluid className={classes.default}>
         <Container size="lg">
           <Grid>
-            <ContentCard article={data} user={user} comments={comments}/>
+            <ContentCard article={data} user={user} />
+            <CommentCard comments={comments}/>
           </Grid>
           </Container>
       </Container>
