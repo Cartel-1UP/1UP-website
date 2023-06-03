@@ -7,18 +7,18 @@ const useStyles = createStyles((theme) => ({
     borderWidth: 1,
   },
 
-  headerContainer:{
+  headerContainer: {
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center'
   },
 
-  imageContainer:{
+  imageContainer: {
     display: 'flex',
     alignItems: 'center'
   },
 
-  metadataContainer:{
+  metadataContainer: {
     display: 'flex',
     alignItems: 'center',
     alignContent: 'right'

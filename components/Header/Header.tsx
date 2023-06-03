@@ -61,15 +61,15 @@ export function WebHeader() {
   ))
 
   return (
-    <Container fluid className={classes.headerContainer} p={5} pb={15}>
+    <Container fluid className={classes.headerContainer} p={5} pb={25}>
     <Container size={'xl'}>
       <Header  height={'100%'} className={classes.header}>
         <Grid justify="space-between" align="center"> 
           <Grid.Col span={3} pl={20} sx={{display:'flex', justifyContent:'left'}} className={classes.hiddenMobile}>
             <Center>
               <Group spacing={0} >
-                <a href="/news" className={classes.link}>
-                  News
+                <a href="/assets" className={classes.link}>
+                  Assets
                 </a>
                 <a href="/proposals" className={classes.link}>
                   Proposals

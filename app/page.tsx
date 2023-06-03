@@ -25,7 +25,9 @@ export default function Home() {
               <Recent tag={'hive-102223'}/>
             </Grid.Col>
             <Grid.Col span={laptop ? 12 : 3}>
+            <div style={{ position: 'sticky', top: '0' }}>
               <Trending tag={'hive-102223'}/>
+            </div>
             </Grid.Col>
           </Grid>
         </ArticlesCardsGrid>
