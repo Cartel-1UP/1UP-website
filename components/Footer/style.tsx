@@ -3,11 +3,8 @@ import { createStyles } from '@mantine/styles'
 const useStyles = createStyles((theme) => ({
 
   footer: {
-      background: ' #072f37',
-      [theme.fn.smallerThan('xl')]: {
-        height: '15vh'
-      },
-    },
+      background: ' #072f37'
+  },
   inner: {
     display: 'flex',
     justifyContent: 'space-between',

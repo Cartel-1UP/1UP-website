@@ -1,3 +1,4 @@
+import { Article } from '../../types/blog.interface';
 import apiHive from '../apiHive';
 
 interface Posts {
@@ -20,9 +21,9 @@ interface Post {
     permlink: string
 }
 
-export async function getPosts ({...props}: Posts) {
+export async function getPosts({ ...props }: Posts) {
     try {
-        const { data } = await apiHive.post('', { 
+        const { data } = await apiHive.post('', {
             "jsonrpc": "2.0",
             "method": "bridge.get_ranked_posts",
             "params": {
@@ -31,15 +32,15 @@ export async function getPosts ({...props}: Posts) {
                 "limit": props.limit
             },
             "id": 1
-     })
-     return data
-      
+        })
+        return data
+
     } catch {
     }
 }
 
 
-export async function getPost ({...props}: Post): Promise<{ data: any, time: number }> {
+export async function getPost({ ...props }: Post): Promise<{ data: Article, time: number }> {
     const { data } = await apiHive.post('', {
         "id": 21,
         "jsonrpc": "2.0",
@@ -49,14 +50,12 @@ export async function getPost ({...props}: Post): Promise<{ data: any, time: num
             "permlink": props.permlink,
         }
     })
-
     const time = readTime(data.result.body)
-    return { data, time}
+    return { data, time }
 }
 
 
-
-export async function getComments ({...props}: Post): Promise<{ data: []}> {
+export async function getComments({ ...props }: Post): Promise<{ data: [] }> {
     const { data } = await apiHive.post('', {
         "id": 21,
         "jsonrpc": "2.0",
@@ -66,36 +65,36 @@ export async function getComments ({...props}: Post): Promise<{ data: []}> {
             "permlink": props.permlink,
         }
     })
-    return {data}
+    return { data }
 }
 
 
-function readTime(content: string) {
+export function readTime(content: string) {
     const WPS = 275 / 60
-  
+
     var images = 0
     const regex = /\w/
-  
+
     let words = content.split(' ').filter((word) => {
-      if (word.includes('<img')) {
-        images += 1
-      }
-      return regex.test(word)
+        if (word.includes('<img')) {
+            images += 1
+        }
+        return regex.test(word)
     }).length
-  
+
     var imageAdjust = images * 4
     var imageSecs = 0
     var imageFactor = 12
-  
+
     while (images) {
-      imageSecs += imageFactor
-      if (imageFactor > 3) {
-        imageFactor -= 1
-      }
-      images -= 1
+        imageSecs += imageFactor
+        if (imageFactor > 3) {
+            imageFactor -= 1
+        }
+        images -= 1
     }
-  
+
     const minutes = Math.ceil(((words - imageAdjust) / WPS + imageSecs) / 60)
-  
+
     return minutes
-  }
+}

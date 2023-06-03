@@ -75,24 +75,14 @@ const useStyles = createStyles((theme, _params, getRef) => ({
   },
 
   gradientBot: {
-    background: 'linear-gradient(to top, #275c672d, #072f37);',
-    [theme.fn.smallerThan('xl')]: {
-      height: '70vh'
-    },
-  
+    background: 'linear-gradient(to top, #275c672d, #072f37)'
   },
 
   category: {
     color: theme.white,
     opacity: 0.7,
     fontWeight: 700,
-    textTransform: 'uppercase',
-    
-
-    [theme.fn.smallerThan('sm')]: {
-      
-    },
-
+    textTransform: 'uppercase'
   },
 }))
 

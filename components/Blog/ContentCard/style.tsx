@@ -5,16 +5,17 @@ const useStyles = createStyles((theme) => ({
     borderColor: '#e2e8f0d2',
     borderWidth: 1,
   },
+
   cardHeader: {
     borderColor: '#e2e8f0d2',
     borderWidth: 1,
     borderRadius: '10px 10px 0 0'
   },
 
-  cardFooter: {
+  cardSticky: {
     borderColor: '#e2e8f0d2',
     borderWidth: 1,
-    borderRadius: '0 0 10px 10px',
+    borderRadius: '0 0 0 0',
 
   },
   avatar: {
@@ -24,6 +25,19 @@ const useStyles = createStyles((theme) => ({
     fontFamily: `Greycliff CF, ${theme.fontFamily}`,
     fontWeight: 600,
   },
+
+  metadataContainer: {
+    display: 'flex',
+    alignItems: 'center',
+
+  },
+
+  price: {
+    fontFamily: `Greycliff CF, ${theme.fontFamily}`,
+    fontWeight: 400,
+    fontSize: 20
+  },
+
 }))
 
 export default useStyles

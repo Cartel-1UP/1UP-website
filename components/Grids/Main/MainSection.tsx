@@ -36,7 +36,7 @@ export function MainCardsGrid() {
   if (data && typeof data === 'object') {
 
   return (
-    <Container fluid className={classes.gradientBot}>
+    <Container fluid className={classes.gradientBot} pb={25}>
       <Container size="xl" pt={0}>
         <Carousel
           slideSize="33.33%"
