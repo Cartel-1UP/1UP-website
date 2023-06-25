@@ -12,7 +12,6 @@ export interface UserMetaData {
 }
 
 export interface UserStats {
-
     followers: number
     following: number
     rank: number

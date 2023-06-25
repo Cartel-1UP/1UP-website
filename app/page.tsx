@@ -12,26 +12,26 @@ import { RecommendedCardsGrid } from '../components/Grids/Recommended/Recommende
 export const runtime = 'experimental-edge';
 
 export default function Home() {
-  
+
   const laptop = useMediaQuery(`(max-width: 1000px)`);
 
   return (
-    <div>
-        <MainCardsGrid/>
-        <CommunityGrid/>
-        <ArticlesCardsGrid>
-          <Grid>
-            <Grid.Col span={laptop ? 12 : 9}>
-              <Recent tag={'hive-102223'}/>
-            </Grid.Col>
-            <Grid.Col span={laptop ? 12 : 3}>
+    <>
+      <MainCardsGrid />
+      <CommunityGrid />
+      <ArticlesCardsGrid>
+        <Grid>
+          <Grid.Col span={laptop ? 12 : 9}>
+            <Recent tag={'hive-102223'} />
+          </Grid.Col>
+          <Grid.Col span={laptop ? 12 : 3}>
             <div style={{ position: 'sticky', top: '0' }}>
-              <Trending tag={'hive-102223'}/>
+              <Trending tag={'hive-102223'} />
             </div>
-            </Grid.Col>
-          </Grid>
-        </ArticlesCardsGrid>
-        <RecommendedCardsGrid tag={'hive-102223'}/>
-    </div>
+          </Grid.Col>
+        </Grid>
+      </ArticlesCardsGrid>
+      <RecommendedCardsGrid />
+    </>
   )
 }
