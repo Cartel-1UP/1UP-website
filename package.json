@@ -23,6 +23,7 @@
     "@mantine/carousel": "^5.9.5",
     "@mantine/core": "^5.8.2",
     "@mantine/ds": "^5.8.2",
+    "@mantine/form": "^6.0.14",
     "@mantine/hooks": "^5.8.2",
     "@mantine/prism": "^5.8.2",
     "@mantine/styles": "^5.8.2",
