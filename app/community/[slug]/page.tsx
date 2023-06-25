@@ -3,12 +3,12 @@ import { RecommendedCardsGrid } from "../../../components/Grids/Recommended/Reco
 
 export const runtime = 'experimental-edge';
 
-export default function Page({params}: {params: { slug: string}}) {
-  
+export default function Page({ params }: { params: { slug: string } }) {
+
   return (
     <>
-        <CommunityPage tag={params.slug}  image={params.slug}/>
-        <RecommendedCardsGrid tag={params.slug}/>
+      <CommunityPage tag={params.slug} image={params.slug} />
+      <RecommendedCardsGrid />
     </>
 
   )

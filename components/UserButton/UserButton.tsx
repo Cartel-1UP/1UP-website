@@ -1,6 +1,6 @@
 'use client'
 
-import { Avatar, Badge, Group, Progress, Text, UnstyledButton } from '@mantine/core';
+import { Avatar, Badge, Group, Text, UnstyledButton } from '@mantine/core';
 import { IconChevronRight } from '@tabler/icons';
 import { forwardRef } from 'react';
 
@@ -24,8 +24,9 @@ const UserButton = forwardRef<HTMLButtonElement, UserButtonProps>(
         transition: 'background-color 100ms ease',
 
         '&:hover': {
-          color: theme.colorScheme !== 'dark' ? theme.colors.gray[4]  : theme.black,
-          backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : '#06272e',        },
+          color: theme.colorScheme !== 'dark' ? theme.colors.gray[4] : theme.black,
+          backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : '#06272e',
+        },
 
         [theme.fn.smallerThan('xs')]: {
           display: 'none',
@@ -37,13 +38,13 @@ const UserButton = forwardRef<HTMLButtonElement, UserButtonProps>(
         <Avatar src={image} radius="xl" />
         <div style={{ flex: 1 }}>
           <Text size="sm" weight={500}>
-          {name} <Badge sx={(theme) => ({padding: 5})} ml={5} radius="sm" color="gray" variant="outline">{reputation.toFixed()}</Badge> 
+            {name} <Badge sx={(theme) => ({ padding: 5 })} ml={5} radius="sm" color="gray" variant="outline">{reputation.toFixed()}</Badge>
           </Text>
-          
-          <Progress mt={5} radius="md" size="md"
+
+          {/* <Progress mt={5} radius="md" size="md"
                 sections={[
                   { value: mana , color: 'pink', label: '', tooltip: 'RC: ' + mana + '%'},
-                ]}/>
+                ]}/> */}
         </div>
         {icon || <IconChevronRight size={16} />}
       </Group>

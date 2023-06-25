@@ -1,5 +1,5 @@
 'use client'
-import { AspectRatio, Avatar, Badge, Card, Container, Grid, Group, Image, Space, Text } from '@mantine/core';
+import { AspectRatio, Avatar, Badge, Card, Container, Grid, Image, Space, Text } from '@mantine/core';
 import { IconHeart, IconMessage } from '@tabler/icons';
 import Link from 'next/link';
 import useStyles from './style';
@@ -89,13 +89,10 @@ export function RecentCard({ ...props }: Props) {
         </Grid.Col>
         <Grid.Col span={5} display="flex">
           <Container mr={0} className={classes.metadataContainer}>
-            <Group>
-              <IconHeart color="grey" size={14} />
-              <Text color="dimmed" className={classes.price}>
-                {props.article?.active_votes.length}
-              </Text>
-            </Group>
-
+            <IconHeart color="grey" size={14} />
+            <Text color="dimmed" className={classes.price}>
+              {props.article?.active_votes.length}
+            </Text>
             <Space w="sm" />
             <IconMessage color="grey" size={14} />
             <Text color="dimmed" className={classes.price}>

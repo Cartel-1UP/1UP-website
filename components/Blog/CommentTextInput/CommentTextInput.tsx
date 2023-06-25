@@ -117,7 +117,14 @@ const Editor = () => {
                                     <Button onClick={handlePreviewModalOpen}>Show Preview</Button>
                                 </Grid.Col> */}
                                 <Grid.Col>
-                                    <Button onClick={handleReply}>Reply</Button>
+                                    <Button
+                                        radius="md"
+                                        size="md"
+                                        color={theme.colorScheme === 'dark' ? undefined : 'dark'}
+                                        onClick={handleReply}
+                                    >
+                                        Reply
+                                    </Button>
                                 </Grid.Col>
                             </Grid>
                         </Card>

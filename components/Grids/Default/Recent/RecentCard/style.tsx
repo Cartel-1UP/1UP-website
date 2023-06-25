@@ -2,9 +2,12 @@ import { createStyles } from '@mantine/styles'
 
 const useStyles = createStyles((theme) => ({
   card: {
-
     borderColor: '#e2e8f0d2',
     borderWidth: 1,
+    transition: 'backgroundColor 0.3s',
+    '&:hover': {
+      backgroundColor: '#f8f9fc',
+    },
   },
 
   headerContainer: {

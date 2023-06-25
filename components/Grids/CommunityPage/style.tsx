@@ -8,8 +8,9 @@ const useStyles = createStyles((theme, _params, getRef) => ({
   },
 
   default: {
-    backgroundColor: theme.colors.gray[2] 
+    background: `linear-gradient(to bottom, #072f37 0%, #E9ECEF 10%, #E9ECEF 10%, #E9ECEF 100%)`,
   },
+
 
 }))
 

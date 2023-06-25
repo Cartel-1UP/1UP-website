@@ -1,13 +1,12 @@
 'use client'
-import { Avatar, Badge, Box, Button, Card, Container, Grid, Group, SimpleGrid, Space, Text, Title } from '@mantine/core';
-import { useMediaQuery } from '@mantine/hooks';
-import { IconHeart, IconMessage } from '@tabler/icons';
+import { ActionIcon, Avatar, Badge, Box, Button, Card, Container, Grid, Group, SimpleGrid, Space, Text, Title } from '@mantine/core';
+import { useMediaQuery, useScrollIntoView } from '@mantine/hooks';
+import { IconArrowDown, IconHeart, IconMessage } from '@tabler/icons';
 import { Article } from '../../../types/blog.interface';
 import { User } from '../../../types/user.interface';
 import { dateRefactor } from '../../../utils/methods/dateRefactor';
 import { Markdown } from '../MarkdownReplacer/Markdown';
 import useStyles from './style';
-
 
 interface Props {
   article: {
@@ -22,16 +21,20 @@ interface Props {
 export function ContentCard({ ...props }: Props) {
   const { classes, theme } = useStyles();
   const laptop = useMediaQuery(`(max-width: ${theme.breakpoints.md}px)`);
-  const profile = props?.user.data.result.metadata.profile
-  const article = props?.article.data.result
-  const user = props?.user.data.result
+  const profile = props?.user.data.result.metadata.profile;
+  const article = props?.article.data.result;
+  const user = props?.user.data.result;
+
+  const { scrollIntoView, targetRef } = useScrollIntoView<HTMLDivElement>({
+    offset: 60,
+  });
 
   return (
     <>
       <Space h="xl" />
       <Grid grow>
-        <Grid.Col span={laptop ? 12 : 9}>
-          <SimpleGrid cols={1} mt={0} spacing={0} breakpoints={[{ maxWidth: 'sm', cols: 1 }]}>
+        <Grid.Col span={laptop ? 12 : 9} ref={targetRef}>
+          <SimpleGrid cols={1} mt={0} spacing={0} breakpoints={[{ maxWidth: 'sm', cols: 1 }]} >
             <Card withBorder p="md" radius={0} className={classes.cardHeader}>
               <Grid grow>
                 <Grid.Col span={10}>
@@ -64,34 +67,34 @@ export function ContentCard({ ...props }: Props) {
             </Card>
           </SimpleGrid>
           <Card withBorder p="xl" radius="md" className={classes.cardSticky} sx={{ position: 'sticky', bottom: 0 }}>
-            <Container size={'xl'} className={classes.metadataContainer}>
-              <Group spacing={3}>
-                <IconHeart color="grey" size={24} />
-                <Text color="dimmed" size={"lg"}>
-                  {article.active_votes.length}
+            <Container size={'xl'} className={classes.metadataContainer} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <Group style={{ display: 'flex', alignItems: 'center' }}>
+                <Group spacing={3}>
+                  <IconHeart color="grey" size={16} />
+                  <Text color="dimmed" size={"md"}>
+                    {article.active_votes.length}
+                  </Text>
+                </Group>
+                <Group spacing={3}>
+                  <IconMessage color="grey" size={16} />
+                  <Text color="dimmed" size={"md"}>
+                    {article.children}
+                  </Text>
+                </Group>
+                <Text color="dimmed" size={"md"} align={"end"}>
+                  {article.pending_payout_value}
                 </Text>
               </Group>
-
-              <Space w="sm" />
-              <Group spacing={3}>
-                <IconMessage color="grey" size={24} />
-                <Text color="dimmed" size={"lg"}>
-                  {article.children}
-                </Text>
-              </Group>
-
-              <Space w="sm" />
-              <Text color="dimmed" size={"lg"} align={"end"}>
-                {article.pending_payout_value}
-              </Text>
+              <ActionIcon color="dark" onClick={() => scrollIntoView({ alignment: 'end' })}>
+                <IconArrowDown size="1.125rem" />
+              </ActionIcon>
             </Container>
           </Card>
         </Grid.Col>
-
         <Grid.Col span={laptop ? 12 : 3}>
           {!laptop &&
             <div style={{ position: 'sticky', top: '10px' }}>
-              <Card withBorder p="xl" radius="md" className={classes.card}>
+              <Card withBorder p="xl" radius="md" className={classes.card} >
                 {
                   profile.cover_image ?
                     <Card.Section sx={{ backgroundImage: `url(${profile.cover_image})`, height: 140 }} />
@@ -151,7 +154,6 @@ export function ContentCard({ ...props }: Props) {
           }
         </Grid.Col>
       </Grid>
-
     </>
   );
 }

@@ -30,42 +30,42 @@ const useStyles = createStyles((theme) => ({
 
   gradient: {
     background: 'linear-gradient(to bottom, #E9ECEF, #072f37);'
-},
-cardHeader: {
-  borderColor: '#e2e8f0d2',
-  borderWidth: 1,
-  borderRadius: '10px 10px 0 0'
-},
-
-cardFooter: {
-  borderColor: '#e2e8f0d2',
-  borderWidth: 1,
-  borderRadius: '0 0 10px 10px',
-
-},
-
-headerContainer:{
-  display: 'flex',
-  flexDirection: 'row',
-  alignItems: 'center'
-},
-
-metadataContainer:{
-  display: 'flex',
-  alignItems: 'center',
-  alignContent: 'left'
-},
-
-link: {
-  textDecoration: 'none',
-  color: '#000000',
-  display: 'flex',
-  alignItems: 'center',
-
-  '&:hover': {
-    color: '#000000bd',
   },
-},
+  cardHeader: {
+    borderColor: '#e2e8f0d2',
+    borderWidth: 1,
+    borderRadius: '10px 10px 0 0'
+  },
+
+  headerContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+
+  cardFooter: {
+    borderColor: '#e2e8f0d2',
+    borderWidth: 1,
+    borderRadius: '0 0 10px 10px',
+
+  },
+
+  metadataContainer: {
+    display: 'flex',
+    alignItems: 'center',
+    alignContent: 'left'
+  },
+
+  link: {
+    textDecoration: 'none',
+    color: '#000000',
+    display: 'flex',
+    alignItems: 'center',
+
+    '&:hover': {
+      color: '#000000bd',
+    },
+  },
 
 
 

@@ -18,47 +18,62 @@ export function MainCardsGrid() {
     <Container fluid className={classes.gradientBot}>
       <Container size="xl" pt={0}>
         <Center>
-        <Box  
-          mt={30}
-          mb={30}
-          mr={10}
-          ml={10}
-          className={classes.container}>
-          <Skeleton height={100} radius="xl" />
-        </Box>
+          <Box
+            mt={30}
+            mb={30}
+            mr={10}
+            ml={10}
+            className={classes.container}>
+            <Skeleton height={100} radius="xl" />
+          </Box>
         </Center>
       </Container>
     </Container>
   )
- 
+
   if (error) return <div>An error has occurred</div>
-  
+
   if (data && typeof data === 'object') {
 
+    return (
+      <Container fluid className={classes.gradientBot} pb={25}>
+        <Container size="xl" pt={0}>
+          <Carousel
+            slideSize="33.33%"
+            breakpoints={[{ maxWidth: 'xs', slideSize: '100%', slideGap: 3 }]}
+            slideGap="xl"
+            align="start"
+            slidesToScroll={mobile ? 1 : 3}
+            loop
+          >
+            {
+              data.map?.((item: any, index: any) => (
+                <Carousel.Slide key={index}>
+                  <Card {...item} />
+                </Carousel.Slide>
+              ))
+            }
+          </Carousel>
+        </Container>
+      </Container>
+    );
+  }
+
   return (
-    <Container fluid className={classes.gradientBot} pb={25}>
+    <Container fluid className={classes.gradientBot}>
       <Container size="xl" pt={0}>
-        <Carousel
-          slideSize="33.33%"
-          breakpoints={[{ maxWidth: 'xs', slideSize: '100%', slideGap: 3 }]}
-          slideGap="xl"
-          align="start"
-          slidesToScroll={mobile ? 1 : 3}
-          loop
-        >
-          {
-            data.map?.((item: any, index: any) => (
-              <Carousel.Slide key={index}>
-                <Card {...item} />
-              </Carousel.Slide>
-            )) 
-          }
-        </Carousel>
+        <Center>
+          <Box
+            mt={30}
+            mb={30}
+            mr={10}
+            ml={10}
+            className={classes.container}>
+            <Skeleton height={100} radius="xl" />
+          </Box>
+        </Center>
       </Container>
     </Container>
-  );
-}
-
-  return <div>Loading...</div>
+  )
 
 }
