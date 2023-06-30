@@ -2,7 +2,7 @@
 import { Card, Container, Grid, SimpleGrid, Skeleton } from '@mantine/core';
 import { useQuery } from 'react-query';
 import { getComments, getPost } from '../../utils/actions/posts';
-import { getUserProfile } from '../../utils/actions/user';
+import { fetchFollowingAccounts, getUserProfile } from '../../utils/actions/user';
 import { CommentCard } from './CommentCard/CommentCard';
 import Editor from './CommentTextInput/CommentTextInput';
 import { ContentCard } from './ContentCard/ContentCard';
@@ -29,6 +29,18 @@ export function BlogPage({ ...props }: Props) {
   const { data: user } = useQuery('userData', () => getUserProfile({
     author: props.username,
   }));
+
+  const account = 'kwskicky';
+
+
+  fetchFollowingAccounts(account)
+    .then((following) => {
+      console.log('Following:', following);
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
+
 
   if (data && user && comments) {
     return (

@@ -15,6 +15,7 @@ export default function Home() {
 
   const laptop = useMediaQuery(`(max-width: 1000px)`);
 
+
   return (
     <>
       <MainCardsGrid />
@@ -32,6 +33,7 @@ export default function Home() {
         </Grid>
       </ArticlesCardsGrid>
       <RecommendedCardsGrid />
+
     </>
   )
 }
