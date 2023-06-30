@@ -14,11 +14,14 @@ type Props = {
 export function Recent({ ...props }: Props) {
   const { classes, theme } = useStyles()
 
-  const { isLoading, error, data } = useQuery('recentData', () => getPosts({
-    tag: props.tag,
-    sort: 'created',
-    limit: 10
-  }));
+  const { isLoading, error, data } = useQuery(
+    'recentData',
+    () => getPosts({
+      tag: props.tag,
+      sort: 'created',
+      limit: 10
+    })
+  );
 
   return (
     <>

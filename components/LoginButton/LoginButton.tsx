@@ -1,7 +1,7 @@
 'use client'
 
 import { Button, Dialog, Group, Text, TextInput } from "@mantine/core";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useStyles from ".";
 import loginKeychain from "../../utils/actions/login";
 import { useAuthorizationStore } from "../../zustand/stores/useAuthorizationStore";
@@ -25,44 +25,47 @@ function LoginButton() {
   const [opened, setOpened] = useState(false);
   const [value, setValue] = useState('');
 
-  if(isKeychain() && localStorage.getItem('username') && !authorized){
-    const username = localStorage.getItem('username')
-    loginKeychain(username)
-  }
-  
-  const loginUser = async () =>
-  {
-    if(isKeychain()){
+  useEffect(() => {
+    if (isKeychain() && localStorage.getItem('username') && !authorized) {
+      const username = localStorage.getItem('username')
+      loginKeychain(username)
+    }
+  }, [])
+
+
+
+  const loginUser = async () => {
+    if (isKeychain()) {
       loginKeychain(value)
 
-    }else{
+    } else {
       console.log("You have to install keychain")
     }
   };
 
   return (
     <>
-    <Group position="center">
-      <Button className={classes.button} onClick={() => setOpened((o) => !o)}>Log in</Button>
-    </Group>
-
-    <Dialog
-      opened={opened}
-      withCloseButton
-      onClose={() => setOpened(false)}
-      size="lg"
-      radius="md"
-      position={{ top: 10, right: 10 }}
-    >
-      <Text size="sm" style={{ marginBottom: 10 }} weight={500}>
-        Put your Hive username
-      </Text>
-
-      <Group align="flex-end">
-        <TextInput placeholder="username" value={value} style={{ flex: 1 }} onChange={(event) => setValue(event.currentTarget.value)}/>
-        <Button onClick={() => {setOpened(false); loginUser()}}>Log in</Button>
+      <Group position="center">
+        <Button className={classes.button} onClick={() => setOpened((o) => !o)}>Log in</Button>
       </Group>
-    </Dialog>
+
+      <Dialog
+        opened={opened}
+        withCloseButton
+        onClose={() => setOpened(false)}
+        size="lg"
+        radius="md"
+        position={{ top: 10, right: 10 }}
+      >
+        <Text size="sm" style={{ marginBottom: 10 }} weight={500}>
+          Put your Hive username
+        </Text>
+
+        <Group align="flex-end">
+          <TextInput placeholder="username" value={value} style={{ flex: 1 }} onChange={(event) => setValue(event.currentTarget.value)} />
+          <Button onClick={() => { setOpened(false); loginUser() }}>Log in</Button>
+        </Group>
+      </Dialog>
     </>
   )
 }

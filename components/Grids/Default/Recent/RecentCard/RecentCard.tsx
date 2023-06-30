@@ -1,7 +1,10 @@
 'use client'
-import { AspectRatio, Avatar, Badge, Card, Container, Grid, Image, Space, Text } from '@mantine/core';
+import { ActionIcon, AspectRatio, Avatar, Badge, Card, Container, Grid, Image, Space, Text } from '@mantine/core';
+import { useMediaQuery } from '@mantine/hooks';
 import { IconHeart, IconMessage } from '@tabler/icons';
 import Link from 'next/link';
+import { useState } from 'react';
+import { VoteSlider } from '../../../../VoteSlider/VoteSlider';
 import useStyles from './style';
 
 interface Props {
@@ -10,7 +13,11 @@ interface Props {
 }
 
 export function RecentCard({ ...props }: Props) {
-  const { classes } = useStyles();
+
+  const { classes, theme } = useStyles();
+  const mobile = useMediaQuery(`(max-width: ${theme.breakpoints.sm}px)`);
+
+  const [isVote, setIsVote] = useState(false)
   const date = new Date(props.article.created);
   const formattedDate = date.toLocaleDateString('en-US', {
     month: 'short',
@@ -64,37 +71,47 @@ export function RecentCard({ ...props }: Props) {
             </Container>
           </Link>
         </Grid.Col>
-        <Grid.Col span={5}>
-          <Container >
-            <AspectRatio ratio={4 / 3}>
-              {imageExists ?
-                <Image radius={10} src={json_metadata.image[0]} /> :
-                <Image
-                  src={null}
-                  alt="Image placeholder"
-                  withPlaceholder
-                  radius={10}
-                  height={100}
-                />
-              }
-            </AspectRatio>
-          </Container>
-        </Grid.Col>
-        <Grid.Col span={7}>
+
+        {!mobile &&
+          <Grid.Col span={5}>
+            <Container >
+              <AspectRatio ratio={4 / 3}>
+                {imageExists ?
+                  <Image radius={10} src={json_metadata.image[0]} /> :
+                  <Image
+                    src={null}
+                    alt="Image placeholder"
+                    withPlaceholder
+                    radius={10}
+                    height={100}
+                  />
+                }
+              </AspectRatio>
+            </Container>
+          </Grid.Col>
+        }
+
+
+        <Grid.Col span={mobile ? 12 : 7}>
           <Container>
             {json_metadata.tags ? json_metadata.tags.slice(0, 3).map?.((item: string) => (
               <Badge mr={5} color="gray" key={item}>{item}</Badge>
             )) : null}
           </Container>
         </Grid.Col>
-        <Grid.Col span={5} display="flex">
+        <Grid.Col span={mobile ? 12 : 5} display="flex">
           <Container mr={0} className={classes.metadataContainer}>
-            <IconHeart color="grey" size={14} />
+            <ActionIcon
+              variant="subtle"
+              onClick={() => setIsVote(!isVote)}
+            >
+              <IconHeart color="grey" size="1rem" />
+            </ActionIcon>
             <Text color="dimmed" className={classes.price}>
               {props.article?.active_votes.length}
             </Text>
             <Space w="sm" />
-            <IconMessage color="grey" size={14} />
+            <IconMessage color="grey" size='1rem' />
             <Text color="dimmed" className={classes.price}>
               {props.article?.children}
             </Text>
@@ -105,6 +122,12 @@ export function RecentCard({ ...props }: Props) {
           </Container>
         </Grid.Col>
       </Grid>
+      {
+        isVote &&
+        <Grid.Col span={12}>
+          <VoteSlider permlink={props.article.permlink} author={props.article.author} setIsVote={setIsVote} />
+        </Grid.Col>
+      }
     </Card>
   );
 }

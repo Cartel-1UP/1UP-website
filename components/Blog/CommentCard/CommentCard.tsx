@@ -51,7 +51,7 @@ export function CommentCard({ ...props }: Props) {
 
   const renderComment = (comment: Comment, depth: number = 0) => {
     const subcomments = comments.filter(subcomment => subcomment.parent_permlink === comment.permlink);
-    
+
     if (depth > 1) {
       return null; // stop rendering subcomments if the depth level is too deep
     }
@@ -60,8 +60,8 @@ export function CommentCard({ ...props }: Props) {
       return null; // exclude the last comment
     }
 
-    
-  
+
+
     return (
       <Paper withBorder m={10} p={15} radius="md" className={classes.comment}>
         <Container size="lg">
@@ -83,10 +83,10 @@ export function CommentCard({ ...props }: Props) {
       </Paper>
     );
   };
-  
+
 
   return (
-    <Grid grow sx={{width: '-webkit-fill-available'}} >
+    <Grid grow sx={{ width: '-webkit-fill-available' }} >
       <Grid.Col span={laptop ? 12 : 9}>
         <SimpleGrid cols={1} mt={0} spacing={0} breakpoints={[{ maxWidth: 'sm', cols: 1 }]}>
           <Card withBorder p="md" mb={25} radius={0} className={classes.cardFooter}>
@@ -98,6 +98,6 @@ export function CommentCard({ ...props }: Props) {
       </Grid.Col>
     </Grid>
 
-    
+
   );
 }
