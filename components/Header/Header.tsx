@@ -13,7 +13,7 @@ import {
   UnstyledButton
 } from '@mantine/core'
 import { useDisclosure, useMediaQuery } from '@mantine/hooks'
-import { IconArticle, IconLogout, IconUserCircle, IconWallet } from '@tabler/icons'
+import { IconLogout } from '@tabler/icons'
 import Link from 'next/link'
 import { useState } from 'react'
 import oneuplogo from '../../images/oneup1.png'
@@ -65,12 +65,12 @@ export function WebHeader() {
             <Grid.Col span={3} pl={20} sx={{ display: 'flex', justifyContent: 'left' }} className={classes.hiddenMobile}>
               <Center>
                 <Group spacing={0} >
-                  <a href="/assets" className={classes.link}>
+                  {/* <a href="/assets" className={classes.link}>
                     Assets
                   </a>
                   <a href="/proposals" className={classes.link}>
                     Proposals
-                  </a>
+                  </a> */}
                   {/* <HoverCard width={600} position="bottom" radius="md" shadow="md" withinPortal>
                   <HoverCard.Target>
                     <a className={classes.link}>
@@ -148,7 +148,7 @@ export function WebHeader() {
 
                     </Menu.Target>
                     <Menu.Dropdown sx={{ backgroundColor: '#072f37', borderColor: '#031418' }}  >
-                      <Menu.Item sx={{ color: 'white' }} className={classes.subLink} icon={<IconUserCircle size={20} color={'white'} stroke={1.5} />}>
+                      {/* <Menu.Item sx={{ color: 'white' }} className={classes.subLink} icon={<IconUserCircle size={20} color={'white'} stroke={1.5} />}>
                         Profile
                       </Menu.Item>
                       <Menu.Item sx={{ color: 'white' }} className={classes.subLink} icon={<IconArticle size={20} color={'white'} stroke={1.5} />}>
@@ -157,7 +157,7 @@ export function WebHeader() {
                       <Menu.Item sx={{ color: 'white' }} className={classes.subLink} icon={<IconWallet size={20} color={'white'} stroke={1.5} />}>
                         Wallet
                       </Menu.Item>
-                      <Menu.Divider color={theme.colorScheme === 'dark' ? '#031418' : '#031418'} />
+                      <Menu.Divider color={theme.colorScheme === 'dark' ? '#031418' : '#031418'} /> */}
                       <Menu.Item className={classes.subLink} sx={{ color: 'white' }} onClick={() => logoutUser()} icon={<IconLogout color={'white'} size={20} stroke={1.5} />}>
                         Log out
                       </Menu.Item>

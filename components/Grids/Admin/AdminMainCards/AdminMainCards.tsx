@@ -1,7 +1,7 @@
 'use client'
 import { ActionIcon, Button, SimpleGrid, Skeleton, Space, Table } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import { IconMinus, IconPencil } from '@tabler/icons';
+import { IconPencil } from '@tabler/icons';
 import { useState } from 'react';
 import { useQuery } from 'react-query';
 import { fetchMaincards } from '../../../../utils/actions/cartel';
@@ -104,9 +104,6 @@ export function AdminMainCards() {
                         }}
                       >
                         <IconPencil size="1.125rem" />
-                      </ActionIcon>
-                      <ActionIcon color="dark" variant="outline" size="sm" radius="sm">
-                        <IconMinus size="1.125rem" />
                       </ActionIcon>
                     </span>
                   </td>

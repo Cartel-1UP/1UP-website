@@ -5,6 +5,7 @@ import {
   Space
 } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
+import { KeychainSDK, Vote } from 'keychain-sdk';
 import { Dispatch, SetStateAction, useState } from 'react';
 import { useMutation } from 'react-query';
 import { useNotifiactionStore } from '../../zustand/stores/useNotificationStore';
@@ -12,18 +13,14 @@ import { DefaultSnackbar } from '../Grids/DefaultSnackbar/DefaultSnackbar';
 import useStyles from './style';
 
 interface Props {
-  setIsVote: Dispatch<SetStateAction<boolean>>;
+  setIsVote?: Dispatch<SetStateAction<boolean>> | any;
   permlink: string;
   author: string;
+  setSuccessfullUpvoted?: Dispatch<SetStateAction<boolean>>
+  queryKey?: string;
 }
 
-declare global {
-  interface Window {
-    hive_keychain: any;
-  }
-}
-
-export function VoteSlider({ setIsVote, permlink, author }: Props) {
+export function VoteSlider({ setIsVote, permlink, author, setSuccessfullUpvoted, queryKey }: Props) {
   const username = localStorage.getItem('username');
   const marks = [
     { value: 0, label: '0%' },
@@ -44,10 +41,20 @@ export function VoteSlider({ setIsVote, permlink, author }: Props) {
 
   const handleRequestVote = useMutation<void, any, void, unknown>(
     async () => {
+      const keychain = new KeychainSDK(window);
+      const formParamsAsObject = {
+        "data": {
+          "username": username,
+          "permlink": permlink,
+          "author": author,
+          "weight": endValue * 100
+        }
+      }
       return new Promise((resolve, reject) => {
-        window.hive_keychain.requestVote(username, permlink, author, endValue * 100, (response: any) => {
+        keychain.vote(formParamsAsObject.data as Vote).then((response: any) => {
           resolve(response);
         });
+
       });
     },
     {
@@ -56,11 +63,13 @@ export function VoteSlider({ setIsVote, permlink, author }: Props) {
           id: '1',
           title: 'Success',
           message: 'Your upvote was sent correctly',
-          queryKey: 'recentData'
+          queryKey: queryKey
         });
+
         const timeout = setTimeout(() => {
           setIsVote(false);
-        }, 3000);
+          setSuccessfullUpvoted && setSuccessfullUpvoted(true)
+        }, 10500);
         () => clearTimeout(timeout);
       },
       onError: (e: any) => {

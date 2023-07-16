@@ -1,20 +1,19 @@
 'use client'
-import { ActionIcon, AspectRatio, Avatar, Badge, Card, Container, Grid, Image, Space, Text } from '@mantine/core';
+import { ActionIcon, AspectRatio, Avatar, Badge, Card, Container, Grid, Group, Image, Space, Text, ThemeIcon } from '@mantine/core';
+
 import { useMediaQuery } from '@mantine/hooks';
-import { IconHeart, IconMessage } from '@tabler/icons';
+import { IconArrowBack, IconHeart, IconMessage } from '@tabler/icons';
 import Link from 'next/link';
 import { useState } from 'react';
-import { useAuthorizationStore } from '../../../../../zustand/stores/useAuthorizationStore';
 import CommentEditor from '../../../../CommentEditor/CommentEditor';
 import { VoteSlider } from '../../../../VoteSlider/VoteSlider';
 import useStyles from './style';
 
 interface Props {
   article: any;
-  tag: string;
 }
 
-export function RecentCard({ ...props }: Props) {
+export function FeedCard({ ...props }: Props) {
 
   const { classes, theme } = useStyles();
   const mobile = useMediaQuery(`(max-width: ${theme.breakpoints.sm}px)`);
@@ -48,13 +47,25 @@ export function RecentCard({ ...props }: Props) {
     imageExists = true
   }
 
-  const authorized = useAuthorizationStore((state: { authorized: boolean; }) => state.authorized)
-
-
   return (
     <Card key={props.article.post_id} withBorder p="md" radius={0} className={classes.card}>
       <Grid grow>
         <Grid.Col span={7}>
+          {props.article.reblogged_by &&
+            <>
+              <Container>
+                <Group spacing={'xs'}>
+                  <ThemeIcon variant="light" color="gray" size={'sm'} radius='xl'>
+                    <IconArrowBack />
+                  </ThemeIcon>
+                  <Text size={'sm'} weight={400}>Rebbloged by <Text span c="blue" inherit>@{props.article.reblogged_by[0]}</Text></Text>
+                </Group>
+                <Space h={'md'} />
+              </Container>
+
+            </>
+          }
+
           <Container className={classes.headerContainer}>
             <Avatar color="blue" radius="xl" src={`https://images.hive.blog/u/${props.article?.author}/avatar`} />
             <Badge ml={10} color="dark" variant="outline">{props.article.author_reputation.toFixed()} lvl</Badge>
@@ -65,7 +76,7 @@ export function RecentCard({ ...props }: Props) {
               {props.article?.author} - {formattedDate}
             </Text>
           </Container>
-          <Link href={'community/' + props.tag + '/post/' + props.article.author + '/' + props.article.permlink} className={classes.link}>
+          <Link href={`community/${props.article.community}/post/` + props.article.author + '/' + props.article.permlink} className={classes.link}>
             <Container >
               <Text className={classes.title} mt={5}>
                 {props.article?.title}
@@ -105,7 +116,7 @@ export function RecentCard({ ...props }: Props) {
           <Container mr={0} className={classes.metadataContainer}>
             <ActionIcon
               variant="subtle"
-              onClick={() => authorized ? setIsVote(!isVote) : null}
+              onClick={() => setIsVote(!isVote)}
             >
               <IconHeart color={"grey"} size="1rem" />
             </ActionIcon>
@@ -115,7 +126,7 @@ export function RecentCard({ ...props }: Props) {
             <Space w="sm" />
             <ActionIcon
               variant="subtle"
-              onClick={() => authorized ? setIsComment(!isComment) : null}
+              onClick={() => setIsComment(!isComment)}
             >
               <IconMessage color="grey" size='1rem' />
             </ActionIcon>

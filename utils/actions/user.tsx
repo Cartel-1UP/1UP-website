@@ -1,3 +1,5 @@
+import { Custom, KeychainKeyTypes, KeychainSDK } from 'keychain-sdk'
+import { Community } from '../../types/blog.interface'
 import { User } from '../../types/user.interface'
 import apiHive from '../apiHive'
 
@@ -56,6 +58,18 @@ export async function getUserProfile({ ...props }: Props): Promise<{ data: User 
 }
 
 
+export async function getCommunityData(community: string): Promise<{ data: Community }> {
+    const { data } = await apiHive.post('', {
+        "jsonrpc": "2.0",
+        "method": "bridge.get_community",
+        "params": {
+            "name": community
+        },
+        "id": 1
+    })
+    return { data }
+}
+
 export async function fetchFollowingAccounts(account: string): Promise<string[]> {
     const batchSize = 100; // Number of accounts to fetch per batch
     let following: string[] = []; // Array to store following accounts
@@ -98,5 +112,29 @@ export async function fetchFollowingAccounts(account: string): Promise<string[]>
     }
 
     return following;
+}
+
+
+export async function postFollowAccount(follower: string, following: string) {
+    try {
+        const keychain = new KeychainSDK(window);
+        const formParamsAsObject = {
+            "data": {
+                "username": "kwskicky",
+                "id": "follow",
+                "method": KeychainKeyTypes.posting,
+                "json": `[    \"follow\",    {       \"follower\": \"${follower}\",       \"following\": \"${following}\",       \"what\": [          \"blog\"       ]    } ]`,
+                "display_msg": "Follow"
+            }
+        }
+
+        const custom = await keychain
+            .custom(
+                formParamsAsObject.data as Custom);
+        return custom;
+    } catch (error) {
+        console.log({ error });
+        return error
+    }
 }
 

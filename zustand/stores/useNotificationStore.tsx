@@ -6,7 +6,7 @@ type Snackbar = {
   id: string;
   title: string;
   message: string;
-  queryKey: string;
+  queryKey?: string;
 };
 
 type NotificationStoreState = {

@@ -4,7 +4,10 @@ const useStyles = createStyles((theme) => ({
   card: {
     borderColor: '#e2e8f0d2',
     borderWidth: 1,
-
+    transition: 'backgroundColor 0.3s',
+    '&:hover': {
+      backgroundColor: '#f8f9fc',
+    },
   },
 
   title: {
@@ -36,13 +39,13 @@ const useStyles = createStyles((theme) => ({
 
   },
 
-  metadataContainer:{
+  metadataContainer: {
     display: 'flex',
     alignItems: 'center',
     alignContent: 'left'
   },
 
-  headerContainer:{
+  headerContainer: {
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center'
@@ -60,18 +63,18 @@ const useStyles = createStyles((theme) => ({
     padding: 0, /* Remove any padding */
     margin: 0, /* Remove any margin */
     border: 0, /* Remove any border */
-},
-
-link: {
-  textDecoration: 'none',
-  color: '#000000',
-  display: 'flex',
-  alignItems: 'center',
-
-  '&:hover': {
-    color: '#000000bd',
   },
-}
+
+  link: {
+    textDecoration: 'none',
+    color: '#000000',
+    display: 'flex',
+    alignItems: 'center',
+
+    '&:hover': {
+      color: '#16093fbc',
+    },
+  }
 
 }))
 

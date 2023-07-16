@@ -47,6 +47,7 @@ export interface Article {
         pending_payout_value: string
         percent_hbd: number
         permlink: string
+        parent_permlink: string
         post_id: number
         promoted: string
         replies: []
@@ -54,5 +55,49 @@ export interface Article {
         title: string
         updated: string
         url: string
-    }  
+    }
+}
+
+export interface PostComment {
+    permlink: string
+    parentAuthor?: string
+    parentPermlink?: string
+    body: any
+}
+
+export interface Comment {
+    subcomments: Comment[]
+    id: string,
+    postId: string,
+    author: string,
+    title: string,
+    body: string,
+    depth: number,
+    parent_permlink: string,
+    permlink: string,
+    replies: any,
+    children: any
+    author_reputation: any,
+    created: string,
+    active_votes: any
+}
+
+export interface Community {
+    result: {
+        about: string,
+        avatar_url: string,
+        created_at: string,
+        description: string,
+        flag_text: string,
+        id: number,
+        is_nsfw: boolean,
+        lang: string,
+        name: string,
+        num_authors: number,
+        num_pending: number,
+        subscribers: number,
+        sum_pending: number,
+        team: [],
+        title: string,
+    }
 }

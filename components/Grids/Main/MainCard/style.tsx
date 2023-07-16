@@ -1,14 +1,14 @@
 import { createStyles } from '@mantine/styles'
 
 const useStyles = createStyles((theme, _params, getRef) => ({
-  container:{
+  container: {
     position: 'relative',
     height: 400,
     backgroundSize: 'cover',
     backgroundPosition: 'center',
-   
-    display:'flex', 
-    flexDirection:'row',
+
+    display: 'flex',
+    flexDirection: 'row',
     flexWrap: 'wrap',
     alignContent: 'flex-end',
     alignItems: 'flex-end',
@@ -43,7 +43,7 @@ const useStyles = createStyles((theme, _params, getRef) => ({
 
   overlay: {
     ref: getRef('overlay'),
-    position: 'absolute', 
+    position: 'absolute',
     bottom: 0,
     background: 'rgba(0, 0, 0, 0.5)', /* Black see-through */
     color: '#f1f1f1',
@@ -66,23 +66,23 @@ const useStyles = createStyles((theme, _params, getRef) => ({
     color: theme.white,
     lineHeight: 1.2,
     fontSize: 32,
+    textDecoration: 'none',
 
-    
-    [theme.fn.smallerThan('sm')]: {
-      fontSize: 24,
-    },
+
 
   },
+
+
 
   category: {
     color: theme.white,
     opacity: 0.7,
     fontWeight: 700,
     textTransform: 'uppercase',
-    
+
 
     [theme.fn.smallerThan('sm')]: {
-      
+
     },
 
   },

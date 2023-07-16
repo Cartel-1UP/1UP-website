@@ -2,9 +2,19 @@
 import { ActionIcon, Avatar, Badge, Box, Button, Card, Container, Grid, Group, SimpleGrid, Space, Text, Title } from '@mantine/core';
 import { useMediaQuery, useScrollIntoView } from '@mantine/hooks';
 import { IconArrowDown, IconHeart, IconMessage } from '@tabler/icons';
+import { Custom, KeychainKeyTypes, KeychainSDK } from 'keychain-sdk';
+import { useState } from 'react';
+import { useMutation, useQuery } from 'react-query';
 import { Article } from '../../../types/blog.interface';
 import { User } from '../../../types/user.interface';
+import { fetchFollowingAccounts } from '../../../utils/actions/user';
 import { dateRefactor } from '../../../utils/methods/dateRefactor';
+import { useAuthorizationStore } from '../../../zustand/stores/useAuthorizationStore';
+import { useNotifiactionStore } from '../../../zustand/stores/useNotificationStore';
+import CommentEditor from '../../CommentEditor/CommentEditor';
+import { VoteSlider } from '../../VoteSlider/VoteSlider';
+import CommentCard from '../CommentCard/CommentCard';
+
 import { Markdown } from '../MarkdownReplacer/Markdown';
 import useStyles from './style';
 
@@ -16,6 +26,9 @@ interface Props {
   user: {
     data: User
   }
+  comments: any,
+  permlink: string,
+  username: string,
 }
 
 export function ContentCard({ ...props }: Props) {
@@ -24,18 +37,60 @@ export function ContentCard({ ...props }: Props) {
   const profile = props?.user.data.result.metadata.profile;
   const article = props?.article.data.result;
   const user = props?.user.data.result;
-
+  const [isVote, setIsVote] = useState(false)
+  const [isComment, setIsComment] = useState(false)
+  const [successfullUpvoted, setSuccessfullUpvoted] = useState(false)
   const { scrollIntoView, targetRef } = useScrollIntoView<HTMLDivElement>({
     offset: 60,
   });
+
+  const [color, setColor] = useState("grey")
+
+  const addSnackbar = useNotifiactionStore((state) => state.addSnackbar);
+  const authorized = useAuthorizationStore((state: { authorized: boolean; }) => state.authorized)
+  const { data: following } = useQuery('following-data', () => fetchFollowingAccounts(props.username));
+
+  const handlePostFollow = useMutation<void, any, void, unknown>(
+    async () => {
+
+      const keychain = new KeychainSDK(window);
+      const formParamsAsObject = {
+        "data": {
+          "username": "kwskicky",
+          "id": "follow",
+          "method": KeychainKeyTypes.posting,
+          "json": `[    \"follow\",    {       \"follower\": \"${props.username}\",       \"following\": \"${user.name}\",       \"what\": [          \"blog\"       ]    } ]`,
+          "display_msg": "Follow"
+        }
+      }
+      await keychain.custom(formParamsAsObject.data as Custom).then(
+        (response) => {
+          console.log(response)
+        }
+      );
+    },
+    {
+      onSuccess: () => {
+        addSnackbar({
+          id: '3',
+          title: 'Success',
+          message: 'Your followed corectly',
+          queryKey: 'post-data'
+        });
+      },
+      onError: (e: any) => {
+        console.log(e);
+      }
+    }
+  );
 
   return (
     <>
       <Space h="xl" />
       <Grid grow>
-        <Grid.Col span={laptop ? 12 : 9} ref={targetRef}>
-          <SimpleGrid cols={1} mt={0} spacing={0} breakpoints={[{ maxWidth: 'sm', cols: 1 }]} >
-            <Card withBorder p="md" radius={0} className={classes.cardHeader}>
+        <Grid.Col span={laptop ? 12 : 9}>
+          <SimpleGrid cols={1} spacing={2} >
+            <Card p="md" radius={0} className={classes.cardHeader}>
               <Grid grow>
                 <Grid.Col span={10}>
                   <Title order={2}>
@@ -66,30 +121,62 @@ export function ContentCard({ ...props }: Props) {
               </Container>
             </Card>
           </SimpleGrid>
-          <Card withBorder p="xl" radius="md" className={classes.cardSticky} sx={{ position: 'sticky', bottom: 0 }}>
-            <Container size={'xl'} className={classes.metadataContainer} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <Group style={{ display: 'flex', alignItems: 'center' }}>
-                <Group spacing={3}>
-                  <IconHeart color="grey" size={16} />
-                  <Text color="dimmed" size={"md"}>
-                    {article.active_votes.length}
+          <SimpleGrid cols={1} spacing={1} ref={targetRef}>
+            <Card p="md" radius={0} className={classes.cardSticky} sx={{ position: 'sticky', bottom: 0 }}>
+              <Container className={classes.metadataContainer} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <Group style={{ display: 'flex', alignItems: 'center' }}>
+                  <Group spacing={3}>
+                    <ActionIcon
+                      variant="transparent"
+                      onClick={() => setIsVote(!isVote)}
+                      onMouseEnter={() => (setColor('red'))}
+                      onMouseLeave={() => (setColor('grey'))}
+                      disabled={successfullUpvoted || !authorized}
+                    >
+                      <IconHeart color={successfullUpvoted ? 'red' : color} size="1rem" />
+                    </ActionIcon>
+                    <Text color="dimmed" size={"md"}>
+                      {article.active_votes.length}
+                    </Text>
+                  </Group>
+                  <Group spacing={3}>
+                    <ActionIcon
+                      variant="transparent"
+                      onClick={() => setIsComment(!isComment)}
+                      disabled={!authorized}
+                    >
+                      <IconMessage color="grey" size={16} />
+                    </ActionIcon>
+                    <Text color="dimmed" size={"md"}>
+                      {article.children}
+                    </Text>
+                  </Group>
+                  <Text color="dimmed" size={"md"} align={"end"}>
+                    {article.pending_payout_value}
                   </Text>
                 </Group>
-                <Group spacing={3}>
-                  <IconMessage color="grey" size={16} />
-                  <Text color="dimmed" size={"md"}>
-                    {article.children}
-                  </Text>
-                </Group>
-                <Text color="dimmed" size={"md"} align={"end"}>
-                  {article.pending_payout_value}
-                </Text>
-              </Group>
-              <ActionIcon color="dark" onClick={() => scrollIntoView({ alignment: 'end' })}>
-                <IconArrowDown size="1.125rem" />
-              </ActionIcon>
-            </Container>
-          </Card>
+                <ActionIcon color="dark" onClick={() => scrollIntoView({ alignment: 'end' })}>
+                  <IconArrowDown size="1.125rem" />
+                </ActionIcon>
+              </Container>
+              {
+                isVote &&
+                <Grid.Col span={12}>
+                  <VoteSlider permlink={article.permlink} author={article.author} setIsVote={setIsVote} setSuccessfullUpvoted={setSuccessfullUpvoted} queryKey={'post-data'} />
+                </Grid.Col>
+              }
+              {
+                isComment &&
+                <Grid.Col span={12}>
+                  <CommentEditor setIsComment={setIsComment} permlink={article.permlink} parentAuthor={article.author} parentPermlink={''} />
+                </Grid.Col>
+              }
+
+            </Card>
+            {/* <Editor /> */}
+            <CommentCard comments={props.comments} permlink={props.permlink} article={article} queryKey={'comments-data'} />
+          </SimpleGrid>
+
         </Grid.Col>
         <Grid.Col span={laptop ? 12 : 3}>
           {!laptop &&
@@ -99,7 +186,7 @@ export function ContentCard({ ...props }: Props) {
                   profile.cover_image ?
                     <Card.Section sx={{ backgroundImage: `url(${profile.cover_image})`, height: 140 }} />
                     :
-                    <Card.Section sx={{ backgroundColor: '#072f37', height: 140 }} />
+                    <Card.Section sx={{ backgroundColor: '#25262B', height: 140 }} />
                 }
                 <Avatar src={profile.profile_image} size={80} radius={80} mx="auto" mt={-30} className={classes.avatar} />
                 <Text align="center" size="lg" weight={500} mt="sm">
@@ -141,13 +228,15 @@ export function ContentCard({ ...props }: Props) {
                   </Grid.Col>
                 </Grid>
                 <Button
+                  disabled={!authorized}
                   fullWidth
                   radius="md"
                   mt="xl"
                   size="md"
                   color={theme.colorScheme === 'dark' ? undefined : 'dark'}
+                  onClick={() => handlePostFollow.mutate()}
                 >
-                  Follow
+                  {following?.includes(user.name) ? 'Unfollow' : 'Follow'}
                 </Button>
               </Card>
             </div>
