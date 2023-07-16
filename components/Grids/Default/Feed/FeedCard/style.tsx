@@ -2,30 +2,26 @@ import { createStyles } from '@mantine/styles'
 
 const useStyles = createStyles((theme) => ({
   card: {
-
     borderColor: '#e2e8f0d2',
     borderWidth: 1,
-
-    // transition: 'transform 150ms ease, box-shadow 150ms ease',
-
-    // '&:hover': {
-    //   transform: 'scale(1.01)',
-    //   boxShadow: theme.shadows.md,
-    // },
+    transition: 'backgroundColor 0.3s',
+    '&:hover': {
+      backgroundColor: '#f8f9fc',
+    },
   },
 
-  headerContainer:{
+  headerContainer: {
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center'
   },
 
-  imageContainer:{
+  imageContainer: {
     display: 'flex',
     alignItems: 'center'
   },
 
-  metadataContainer:{
+  metadataContainer: {
     display: 'flex',
     alignItems: 'center',
     alignContent: 'right'

@@ -2,9 +2,8 @@
 import { Card, Container, Grid, SimpleGrid, Skeleton } from '@mantine/core';
 import { useQuery } from 'react-query';
 import { getComments, getPost } from '../../utils/actions/posts';
-import { fetchFollowingAccounts, getUserProfile } from '../../utils/actions/user';
-import { CommentCard } from './CommentCard/CommentCard';
-import Editor from './CommentTextInput/CommentTextInput';
+import { getUserProfile } from '../../utils/actions/user';
+import { useAuthorizationStore } from '../../zustand/stores/useAuthorizationStore';
 import { ContentCard } from './ContentCard/ContentCard';
 import useStyles from './style';
 
@@ -16,30 +15,23 @@ interface Props {
 export function BlogPage({ ...props }: Props) {
   const { classes, theme } = useStyles();
 
-  const { data: data } = useQuery('postData', () => getPost({
+  const { data: data } = useQuery('post-data', () => getPost({
     permlink: props.id,
     author: props.username,
   }));
 
-  const { data: comments } = useQuery('commentsData', () => getComments({
+  const { data: comments } = useQuery('comments-data', () => getComments({
     permlink: props.id,
     author: props.username,
   }));
 
-  const { data: user } = useQuery('userData', () => getUserProfile({
+  const { data: user } = useQuery('user-data', () => getUserProfile({
     author: props.username,
   }));
 
-  const account = 'kwskicky';
+  const username = useAuthorizationStore((state: { username: string; }) => state.username)
 
 
-  fetchFollowingAccounts(account)
-    .then((following) => {
-      console.log('Following:', following);
-    })
-    .catch((error) => {
-      console.error('Error:', error);
-    });
 
 
   if (data && user && comments) {
@@ -47,9 +39,7 @@ export function BlogPage({ ...props }: Props) {
       <Container fluid className={classes.default}>
         <Container size="xl">
           <Grid>
-            <ContentCard article={data} user={user} />
-            <Editor />
-            <CommentCard comments={comments} permlink={props.id} />
+            <ContentCard article={data} user={user} comments={comments} permlink={props.id} username={username} />
           </Grid>
         </Container>
       </Container>

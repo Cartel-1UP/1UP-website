@@ -1,5 +1,4 @@
-import { ActionIcon, Anchor, Group, Text } from '@mantine/core';
-import { IconBrandInstagram, IconBrandTwitter, IconBrandYoutube } from '@tabler/icons';
+import { Anchor, Group, Text } from '@mantine/core';
 import useStyles from './style';
 
 interface Props {
@@ -28,7 +27,7 @@ export function Footer({ links }: Props) {
         <Group className={classes.links}>{items}</Group>
         <Text color="dimmed">Copyright © 2023 ONEUP-CARTEL</Text>
         <Group spacing="xs" position="right" noWrap>
-          <ActionIcon size="lg" variant="default" radius="xl">
+          {/* <ActionIcon size="lg" variant="default" radius="xl">
             <IconBrandTwitter size={18} stroke={1.5} />
           </ActionIcon>
           <ActionIcon size="lg" variant="default" radius="xl">
@@ -36,7 +35,7 @@ export function Footer({ links }: Props) {
           </ActionIcon>
           <ActionIcon size="lg" variant="default" radius="xl">
             <IconBrandInstagram size={18} stroke={1.5} />
-          </ActionIcon>
+          </ActionIcon> */}
         </Group>
       </div>
     </div>

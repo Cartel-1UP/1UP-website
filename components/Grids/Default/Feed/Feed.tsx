@@ -3,15 +3,13 @@ import { useScrollIntoView } from '@mantine/hooks';
 import { IconArrowBarRight, IconArrowUp } from '@tabler/icons';
 import { useState } from 'react';
 import { useMutation, useQuery } from 'react-query';
-import { getMultiPosts } from '../../../../utils/actions/posts';
-import { RecentCard } from './RecentCard/RecentCard';
+import { getMultiFeedPosts } from '../../../../utils/actions/posts';
+import { FeedCard } from './FeedCard/FeedCard';
 import useStyles from './style';
 
-type Props = {
-  tag: string;
-};
 
-export function Recent({ tag }: Props) {
+
+export function Feed() {
   const { classes, theme } = useStyles();
 
   const [startAuthor, setStartAuthor] = useState('');
@@ -22,18 +20,22 @@ export function Recent({ tag }: Props) {
     offset: 60,
   });
 
+  const username = localStorage.getItem('username')
+
+
   const { isLoading, error } = useQuery(
-    'recent-data',
+    'feed-data',
     () =>
-      getMultiPosts({
-        tag,
-        sort: 'created',
+      getMultiFeedPosts({
+        account: username ? username : '',
+        sort: 'feed',
         limit: 10,
         start_author: startAuthor,
         start_permlink: startPermlink,
       }),
     {
       onSuccess: (data) => {
+        console.log(data)
         setPosts((prevPosts) => [...prevPosts, ...data.result]);
         const lastPost = data.result[data.result.length - 1];
         setStartAuthor(lastPost.author);
@@ -44,9 +46,9 @@ export function Recent({ tag }: Props) {
 
   const loadMorePosts = useMutation(
     () =>
-      getMultiPosts({
-        tag,
-        sort: 'created',
+      getMultiFeedPosts({
+        account: username ? username : '',
+        sort: 'feed',
         limit: 10,
         start_author: startAuthor,
         start_permlink: startPermlink,
@@ -67,7 +69,7 @@ export function Recent({ tag }: Props) {
       <Space h="xl" />
       <SimpleGrid cols={1} mt={0} spacing={0} breakpoints={[{ maxWidth: 'sm', cols: 1 }]}>
         <Card withBorder p="md" radius={0} className={classes.cardHeader}>
-          <Title order={2}>Recent</Title>
+          <Title order={2}>Following feed</Title>
         </Card>
         {isLoading ? (
           Array.from({ length: 5 }).map((_, index) => (
@@ -103,7 +105,7 @@ export function Recent({ tag }: Props) {
           ))
         ) : (
           posts.map((item: any, index: any) => (
-            <RecentCard article={item} key={index} tag={tag} />
+            <FeedCard article={item} key={index} />
           ))
         )}
         <Card withBorder p="md" radius={0} className={classes.cardFooter}>

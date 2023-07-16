@@ -3,23 +3,62 @@ import apiHive from '../apiHive';
 
 interface Posts {
     sort: string,
-    tag: string,
-    recentUser?: {
-        start: string,
-        link: string
-    }
-    nextUser?: {
-        start: string,
-        link: string
-    }
+    tag?: string,
     isRecent?: boolean,
     limit?: number,
+    observer?: string
+    account?: string
+    start_author?: string,
+    start_permlink?: string
 }
 
 interface Post {
     author: string
     permlink: string
 }
+
+
+export async function getMultiPosts({ ...props }: Posts) {
+    try {
+        const { data } = await apiHive.post('', {
+            "jsonrpc": "2.0",
+            "method": "bridge.get_ranked_posts",
+            "params": {
+                "limit": props.limit,
+                "observer": props.observer,
+                "sort": props.sort,
+                "start_author": props.start_author,
+                "start_permlink": props.start_permlink,
+                "tag": props.tag,
+            },
+            "id": 1
+        })
+        return data
+
+    } catch {
+    }
+}
+
+export async function getMultiFeedPosts({ ...props }: Posts) {
+    try {
+        const { data } = await apiHive.post('', {
+            "jsonrpc": "2.0",
+            "method": "bridge.get_account_posts",
+            "params": {
+                "limit": props.limit,
+                "account": props.account,
+                "sort": props.sort,
+                "start_author": props.start_author,
+                "start_permlink": props.start_permlink,
+            },
+            "id": 1
+        })
+        return data
+
+    } catch {
+    }
+}
+
 
 export async function getPosts({ ...props }: Posts) {
     try {
@@ -38,6 +77,25 @@ export async function getPosts({ ...props }: Posts) {
     } catch {
     }
 }
+
+export async function postComment({ ...props }: Posts) {
+    try {
+        const { data } = await apiHive.post('', {
+            "jsonrpc": "2.0",
+            "method": "bridge.get_ranked_posts",
+            "params": {
+                "sort": props.sort,
+                "tag": props.tag,
+                "limit": props.limit
+            },
+            "id": 1
+        })
+        return data
+
+    } catch {
+    }
+}
+
 
 
 export async function getPost({ ...props }: Post): Promise<{ data: Article, time: number }> {
@@ -98,3 +156,23 @@ export function readTime(content: string) {
 
     return minutes
 }
+
+
+
+// export const handleCommentSubmit = async ({ permlink, parentAuthor, body }: PostComment) => {
+//     try {
+//         const commentOptions = {
+//             author: 'kwskicky',
+//             permlink: permlink,  // Permlink of the post you want to comment on
+//             parentAuthor: parentAuthor,  // Leave empty for new posts, specify the author if it's a reply to an existing comment
+//             parentPermlink: permlink,  // Permlink of the post you want to comment on
+//             title: '',
+//             body: body,
+//             jsonMetadata: {}
+//         };
+//         await window.hive_keychain.requestPost(commentOptions);
+
+//     } catch (error) {
+//         console.error('Error submitting comment:', error);
+//     }
+// };

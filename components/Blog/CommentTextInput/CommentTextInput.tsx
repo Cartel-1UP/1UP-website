@@ -84,54 +84,50 @@ const Editor = () => {
 
     return (
         <>
-            <Grid grow sx={{ width: '-webkit-fill-available' }}>
-                <Grid.Col span={laptop ? 12 : 9}>
-                    <SimpleGrid cols={1} mt={0} spacing={0} breakpoints={[{ maxWidth: 'sm', cols: 1 }]}>
-                        <Card withBorder p="md" radius={0}>
-                            <Grid grow>
-                                <Grid.Col>
-                                    <Group spacing={3}>
-                                        <ActionIcon variant="default" onClick={() => handleTagButtonClick('Link', 'link')}>
-                                            <IconLink size="1rem" />
-                                        </ActionIcon>
-                                        <ActionIcon variant="default" onClick={() => handleTagButtonClick('Heading', 'heading')}>
-                                            <IconHeading size="1rem" />
-                                        </ActionIcon>
-                                        <ActionIcon variant="default" onClick={() => handleTagButtonClick('Bold', 'bold')}>
-                                            <IconBold size="1rem" />
-                                        </ActionIcon>
-                                        <ActionIcon variant="default" onClick={() => handleTagButtonClick('Italic', 'italic')}>
-                                            <IconItalic size="1rem" />
-                                        </ActionIcon>
-                                        <ActionIcon variant="default" onClick={() => handleTagButtonClick('Image', 'image')}>
-                                            <IconPhotoDown size="1rem" />
-                                        </ActionIcon>
-                                    </Group>
-                                </Grid.Col>
-                                <Grid.Col>
-                                    <Space w="sm" />
-                                    <Textarea value={markdown} onChange={handleMarkdownChange} ref={textareaRef} autosize minRows={4} />
-                                    <Space w="sm" />
-                                </Grid.Col>
-                                {/* <Grid.Col>
-                                    <Button onClick={handlePreviewModalOpen}>Show Preview</Button>
-                                </Grid.Col> */}
-                                <Grid.Col>
-                                    <Button
-                                        radius="md"
-                                        size="md"
-                                        color={theme.colorScheme === 'dark' ? undefined : 'dark'}
-                                        onClick={handleReply}
-                                    >
-                                        Reply
-                                    </Button>
-                                </Grid.Col>
-                            </Grid>
-                        </Card>
-                    </SimpleGrid>
-                </Grid.Col>
-                <Grid.Col span={laptop ? 12 : 3}></Grid.Col>
-            </Grid>
+
+
+            <SimpleGrid cols={1} mt={1} spacing={2}>
+                <Card p="md" radius={0}>
+                    <Grid grow>
+                        <Grid.Col>
+                            <Group spacing={3}>
+                                <ActionIcon variant="default" onClick={() => handleTagButtonClick('Link', 'link')}>
+                                    <IconLink size="1rem" />
+                                </ActionIcon>
+                                <ActionIcon variant="default" onClick={() => handleTagButtonClick('Heading', 'heading')}>
+                                    <IconHeading size="1rem" />
+                                </ActionIcon>
+                                <ActionIcon variant="default" onClick={() => handleTagButtonClick('Bold', 'bold')}>
+                                    <IconBold size="1rem" />
+                                </ActionIcon>
+                                <ActionIcon variant="default" onClick={() => handleTagButtonClick('Italic', 'italic')}>
+                                    <IconItalic size="1rem" />
+                                </ActionIcon>
+                                <ActionIcon variant="default" onClick={() => handleTagButtonClick('Image', 'image')}>
+                                    <IconPhotoDown size="1rem" />
+                                </ActionIcon>
+                            </Group>
+                        </Grid.Col>
+                        <Grid.Col>
+                            <Space w="sm" />
+                            <Textarea value={markdown} onChange={handleMarkdownChange} ref={textareaRef} autosize minRows={4} />
+                            <Space w="sm" />
+                        </Grid.Col>
+                        <Grid.Col>
+                            <Button
+                                radius="md"
+                                size="md"
+                                color={theme.colorScheme === 'dark' ? undefined : 'dark'}
+                                onClick={handleReply}
+                            >
+                                Reply
+                            </Button>
+                        </Grid.Col>
+                    </Grid>
+                </Card>
+            </SimpleGrid>
+
+
 
             {/* <Modal size={'xl'} opened={previewModalOpen} onClose={handlePreviewModalClose} title="Comment preview">
                 <ReactMarkdown components={markdownComponents}>{markdown}</ReactMarkdown>

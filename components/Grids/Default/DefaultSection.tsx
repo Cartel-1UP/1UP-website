@@ -6,13 +6,13 @@ type Props = {
   children: ReactNode
 
 }
-export function ArticlesCardsGrid({children}:Props) {
+export function ArticlesCardsGrid({ children }: Props) {
   const { classes } = useStyles()
 
   return (
     <Container fluid className={classes.default}>
       <Container size="xl">
-          {children}
+        {children}
       </Container>
     </Container>
   )

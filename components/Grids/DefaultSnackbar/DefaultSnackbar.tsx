@@ -9,7 +9,7 @@ interface Props {
     id: string;
     title: string;
     message: string;
-    queryKey: string;
+    queryKey?: string;
 }
 
 export function DefaultSnackbar({ id, title, message, queryKey }: Props) {
@@ -20,9 +20,8 @@ export function DefaultSnackbar({ id, title, message, queryKey }: Props) {
     useEffect(() => {
         const timeout = setTimeout(() => {
             removeSnackbar(id);
-            queryCache.invalidateQueries(queryKey);
-            console.log(queryKey)
-        }, 3000);
+            queryKey && queryCache.invalidateQueries(queryKey);
+        }, 10000);
 
         return () => {
             clearTimeout(timeout);

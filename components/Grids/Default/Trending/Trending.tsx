@@ -1,7 +1,5 @@
 'use client'
 import { Card, Container, Grid, SimpleGrid, Skeleton, Space, Title } from '@mantine/core'
-import { IconArrowBarRight } from '@tabler/icons'
-import Link from 'next/link'
 import { useQuery } from 'react-query'
 import { getPosts } from '../../../../utils/actions/posts'
 import useStyles from './style'
@@ -9,6 +7,7 @@ import { TrendingCard } from './TrendingCard/TrendingCard'
 
 type Props = {
   tag: string
+  title?: string
 }
 
 export function Trending({ ...props }: Props) {
@@ -27,7 +26,7 @@ export function Trending({ ...props }: Props) {
       <SimpleGrid cols={1} spacing={0} mt={0} breakpoints={[{ maxWidth: 'sm', cols: 1 }]}>
         <Card withBorder p="md" radius={0} className={classes.cardHeader}>
           <Title order={2}>
-            Trending
+            {props.title ? props.title : 'Trending'}
           </Title>
         </Card>
         {
@@ -61,9 +60,9 @@ export function Trending({ ...props }: Props) {
             ))
         }
         <Card withBorder p="md" radius={0} className={classes.cardFooter}>
-          <Link href={'community/' + props.tag + '/popular'} className={classes.link}>
+          {/* <Link href={'community/' + props.tag + '/popular'} className={classes.link}>
             Check for more <Space w='sm' /> <IconArrowBarRight />
-          </Link>
+          </Link> */}
         </Card>
       </SimpleGrid>
     </>
