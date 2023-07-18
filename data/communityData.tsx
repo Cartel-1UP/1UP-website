@@ -15,10 +15,10 @@ import woo from '../images/woo.png'
 
 
 export const comumnityData = [
-  {
-    image: 'https://images.hive.blog/u/hive-102223/avatar',
-    tag: 'hive-102223',
-  },
+  // {
+  //   image: 'https://images.hive.blog/u/hive-102223/avatar',
+  //   tag: 'hive-102223',
+  // },
   {
     image: splinterlands.src,
     tag: 'hive-13323',
