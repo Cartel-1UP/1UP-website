@@ -1,6 +1,6 @@
 'use client'
 import { Box, Text, Title } from '@mantine/core';
-import useStyles from './style';
+import useStyles from '../style';
 
 interface CardProps {
   image: string;
@@ -14,7 +14,6 @@ export function Card({ image, title, category, author, permlink }: CardProps) {
   const { classes } = useStyles();
 
   const handleGoToPage = () => {
-    // Navigate to the specified URL
     window.location.href = `community/cartel/post/${author}/${permlink}`;
   };
 
