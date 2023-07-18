@@ -14,6 +14,7 @@ interface Props {
 export function Markdown({ text }: Props) {
   const { classes } = useStyles();
   const imageRegex = /!\[(.*?)\]\((?!.*\*.*)(.*?)\)/gi;
+  const youtubeRegex = /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be)\/.+/;
 
   const markdownBody = useMemo(() => {
     const replacedBody = text.replace(imageRegex, (match, alt, url) => {
@@ -31,7 +32,7 @@ export function Markdown({ text }: Props) {
         components={{
           // Render the anchor element for the "a" Markdown element
           a: ({ href, children }: any) => {
-            if (href.match(/^https?:\/\/.*\.(jpg|jpeg|png|gif|bmp|svg)$/i)) {
+            if (href.match(/\.(jpg|jpeg|png|gif|bmp|svg)$/i)) {
               return (
                 <div className={classes.image}>
                   <Image src={href} alt="Image" className={classes.responsiveImage} />
@@ -40,6 +41,22 @@ export function Markdown({ text }: Props) {
             } else if (href.match(/^https:\/\/twitter\.com\/[^/]+\/status\/\d+$/)) {
               const tweetId = href.match(/\/status\/(\d+)$/)[1];
               return <Tweet tweetId={tweetId} options={{ width: 350 }} />;
+            } else if (href.match(youtubeRegex)) {
+              const videoId = href.match(/(?:\?v=|\/embed\/|\.be\/)([^&\n?#]+)/)?.[1];
+              if (videoId) {
+                return (
+                  <div className={classes.video}>
+                    <iframe
+                      width="560"
+                      height="315"
+                      src={`https://www.youtube.com/embed/${videoId}`}
+                      title="YouTube Video"
+                      frameBorder="0"
+                      allowFullScreen
+                    ></iframe>
+                  </div>
+                );
+              }
             }
             return <a href={href}>{children}</a>;
           },
