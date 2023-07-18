@@ -45,7 +45,7 @@ const useStyles = createStyles((theme) => ({
   },
 
   link: {
-    color: '#868e96', // Example usage of a color from the theme
+    color: '#228be6', // Example usage of a color from the theme
     textDecoration: 'none',
     '&:hover': {
       // color: theme.color.red,

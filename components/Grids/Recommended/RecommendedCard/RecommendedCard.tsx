@@ -22,7 +22,7 @@ export function RecommendedCard({ article }: CardProps) {
   }
 
   return (
-    <Card key={article?.userpostpost_id} p="md" withBorder radius={0} component="a" href="#" className={classes.card}>
+    <Card key={article?.userpostpost_id} p="md" withBorder radius={0} component="a" href={`community/userschoice/post/` + article.author + '/' + article.permlink} className={classes.card}>
       <Grid grow>
         <Grid.Col span={12}>
           <Container className={classes.headerContainer}>
