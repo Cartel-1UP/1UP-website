@@ -33,9 +33,12 @@ export function Markdown({ text }: Props) {
           // Render the anchor element for the "a" Markdown element
           a: ({ href, children }: any) => {
             if (href.match(/\.(jpg|jpeg|png|gif|bmp|svg)$/i)) {
+              const width = 'auto';
+              const height = 'auto';
+
               return (
                 <div className={classes.image}>
-                  <Image src={href} alt="Image" className={classes.responsiveImage} />
+                  <Image src={href} alt="Image" className={classes.responsiveImage} style={{ width, height }} />
                 </div>
               );
             } else if (href.match(/^https:\/\/twitter\.com\/[^/]+\/status\/\d+$/)) {
@@ -58,7 +61,7 @@ export function Markdown({ text }: Props) {
                 );
               }
             }
-            return <a href={href}>{children}</a>;
+            return <a href={href} className={classes.link}>{children}</a>;
           },
 
           table: ({ children }: any) => (
