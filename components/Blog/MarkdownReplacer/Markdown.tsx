@@ -18,7 +18,7 @@ export function Markdown({ text }: Props) {
 
   const markdownBody = useMemo(() => {
     const replacedBody = text.replace(imageRegex, (match, alt, url) => {
-      if (url.match(/\.(png|jpe?g|gif|bmp|svg)$/i)) {
+      if (url.match(/\.(png|jpe?g|gif|bmp|svg|webp)$/i)) {
         return `<div class="${classes.image}"><Image alt="${alt}" src="${url}" className="${classes.responsiveImage}" /></div>`;
       } else {
         return match;
