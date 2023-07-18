@@ -13,7 +13,7 @@ import { RecommendedCardsGrid } from '../components/Grids/Recommended/Recommende
 import { useAuthorizationStore } from '../zustand/stores/useAuthorizationStore';
 import { useNotifiactionStore } from '../zustand/stores/useNotificationStore';
 
-// export const runtime = 'experimental-edge';
+export const runtime = 'experimental-edge';
 
 export default function Home() {
   const laptop = useMediaQuery(`(max-width: 1000px)`);
