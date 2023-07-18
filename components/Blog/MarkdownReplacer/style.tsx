@@ -6,6 +6,8 @@ const useStyles = createStyles((theme) => ({
     justifyContent: 'center',
     alignItems: 'center',
     margin: '20px 0',
+    maxWidth: '100%',
+    height: 'auto',
   },
 
   centeredImage: {
@@ -40,6 +42,15 @@ const useStyles = createStyles((theme) => ({
     justifyContent: 'center',
     marginTop: '1rem',
     marginBottom: '1rem',
+  },
+
+  link: {
+    color: '#868e96', // Example usage of a color from the theme
+    textDecoration: 'none',
+    '&:hover': {
+      // color: theme.color.red,
+      textDecoration: 'underline',
+    },
   },
 
 
