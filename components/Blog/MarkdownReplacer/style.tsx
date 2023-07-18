@@ -33,6 +33,15 @@ const useStyles = createStyles((theme) => ({
     // Add any other styles for table cells
   },
 
+  video: {
+    // Define your styles for the video container
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'center',
+    marginTop: '1rem',
+    marginBottom: '1rem',
+  },
+
 
 }))
 
