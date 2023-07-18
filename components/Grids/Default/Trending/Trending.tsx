@@ -12,7 +12,7 @@ type Props = {
 
 export function Trending({ ...props }: Props) {
   const { classes, theme } = useStyles()
-  const { isLoading, error, data } = useQuery('trendingData', () => getPosts({
+  const { isLoading, error, data } = useQuery('trending-data', () => getPosts({
     tag: props.tag,
     sort: 'trending',
     limit: 10

@@ -1,4 +1,5 @@
 'use client'
+
 import { Card, Container, Grid, SimpleGrid, Skeleton } from '@mantine/core';
 import { useQuery } from 'react-query';
 import { getComments, getPost } from '../../utils/actions/posts';
