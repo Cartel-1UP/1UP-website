@@ -4,7 +4,7 @@ import { DefaultSnackbar } from "../../../components/Grids/DefaultSnackbar/Defau
 import { RecommendedCardsGrid } from "../../../components/Grids/Recommended/RecommendedSection";
 import { useNotifiactionStore } from "../../../zustand/stores/useNotificationStore";
 
-export const runtime = 'experimental-edge';
+// export const runtime = 'experimental-edge';
 
 export default function Page({ params }: { params: { slug: string } }) {
   const snackbars = useNotifiactionStore((state) => state.snackbars);
