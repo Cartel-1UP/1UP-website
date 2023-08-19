@@ -12,6 +12,7 @@ const useStyles = createStyles((theme) => ({
 
   default: {
     background: '#E9ECEF',
+    minHeight: '85vh'
   },
 
   title: {

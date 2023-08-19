@@ -11,7 +11,14 @@ const useStyles = createStyles((theme) => ({
             backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[6] : '#eeeeee',
         }),
 
-      }
+      },
+    buttonLogin:{
+        backgroundColor: '#072f37',
+        border: 0,
+        ...theme.fn.hover({
+            backgroundColor: '#0b4b57',
+        }),
+    }
 
 }))
 

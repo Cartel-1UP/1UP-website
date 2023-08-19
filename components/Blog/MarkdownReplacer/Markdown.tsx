@@ -15,6 +15,8 @@ export function Markdown({ text }: Props) {
   const { classes } = useStyles();
   const imageRegex = /!\[(.*?)\]\((?!.*\*.*)(.*?)\)/gi;
   const youtubeRegex = /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be)\/.+/;
+  const steemitRegex = /^(https?:\/\/)?(www\.)?(steemitimages\.com)\/.+/;
+  const ecencyRegex = /^(https?:\/\/)?(www\.)?(images.ecency\.com)\/.+/;
 
   const markdownBody = useMemo(() => {
     const replacedBody = text.replace(imageRegex, (match, alt, url) => {
@@ -25,6 +27,7 @@ export function Markdown({ text }: Props) {
       }
     });
 
+
     return (
       <ReactMarkdown
         rehypePlugins={[rehypeRaw]}
@@ -32,7 +35,7 @@ export function Markdown({ text }: Props) {
         components={{
           // Render the anchor element for the "a" Markdown element
           a: ({ href, children }: any) => {
-            if (href.match(/\.(jpg|jpeg|png|gif|bmp|svg)$/i)) {
+            if (href.match(/\.(jpg|jpeg|png|gif|bmp|svg)$/i) || href.match(steemitRegex) || href.match(ecencyRegex)) {
               const width = 'auto';
               const height = 'auto';
 
@@ -41,9 +44,10 @@ export function Markdown({ text }: Props) {
                   <Image src={href} alt="Image" className={classes.responsiveImage} style={{ width, height }} />
                 </div>
               );
-            } else if (href.match(/^https:\/\/twitter\.com\/[^/]+\/status\/\d+$/)) {
+            }
+            else if (href.match(/^https:\/\/twitter\.com\/[^/]+\/status\/\d+$/)) {
               const tweetId = href.match(/\/status\/(\d+)$/)[1];
-              return <Tweet tweetId={tweetId} options={{ width: 350 }} />;
+              return <div className={classes.image}><Tweet tweetId={tweetId} /></div>
             } else if (href.match(youtubeRegex)) {
               const videoId = href.match(/(?:\?v=|\/embed\/|\.be\/)([^&\n?#]+)/)?.[1];
               if (videoId) {

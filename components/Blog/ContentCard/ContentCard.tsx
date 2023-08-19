@@ -1,7 +1,7 @@
 'use client'
 import { ActionIcon, Avatar, Badge, Box, Button, Card, Container, Grid, Group, SimpleGrid, Space, Text, Title } from '@mantine/core';
 import { useMediaQuery, useScrollIntoView } from '@mantine/hooks';
-import { IconArrowDown, IconHeart, IconMessage } from '@tabler/icons';
+import { IconHeart, IconMessage } from '@tabler/icons';
 import { Custom, KeychainKeyTypes, KeychainSDK } from 'keychain-sdk';
 import { useState } from 'react';
 import { useMutation, useQuery } from 'react-query';
@@ -155,9 +155,9 @@ export function ContentCard({ ...props }: Props) {
                     {article.pending_payout_value}
                   </Text>
                 </Group>
-                <ActionIcon color="dark" onClick={() => scrollIntoView({ alignment: 'end' })}>
+                {/* <ActionIcon color="dark" onClick={() => scrollIntoView({ alignment: 'end' })}>
                   <IconArrowDown size="1.125rem" />
-                </ActionIcon>
+                </ActionIcon> */}
               </Container>
               {
                 isVote &&

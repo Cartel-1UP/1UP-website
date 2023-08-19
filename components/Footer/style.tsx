@@ -3,7 +3,7 @@ import { createStyles } from '@mantine/styles'
 const useStyles = createStyles((theme) => ({
 
   footer: {
-      background: ' #072f37'
+    background: ' #072f37',
   },
   inner: {
     display: 'flex',
