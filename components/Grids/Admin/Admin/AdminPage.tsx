@@ -26,7 +26,10 @@ export function AdminPage() {
             <Tabs.Panel value="first">
               <AdminMainCards />
             </Tabs.Panel>
-            <Tabs.Panel value="second">Second panel</Tabs.Panel>
+            <Tabs.Panel value="second">
+              {/* <UserChoiceCards /> */}
+              In progres...
+            </Tabs.Panel>
           </Tabs>
         </Card>
       </SimpleGrid>
