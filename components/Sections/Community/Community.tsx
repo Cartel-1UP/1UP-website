@@ -1,17 +1,14 @@
-'use client'
 import { Carousel } from '@mantine/carousel';
 import { Container, useMantineTheme } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
 import Autoplay from 'embla-carousel-autoplay';
 import { useRef } from 'react';
 import { comumnityData } from '../../../data/communityData';
-import CommunityCard from './CommunityCard/CommunityCard';
-import useStyles from './style';
+import CommunityCard from './CommunityCard';
 
-export function CommunityGrid() {
-  const { classes } = useStyles();
+export function Community() {
   const theme = useMantineTheme();
-  const mobile = useMediaQuery(`(max-width: ${theme.breakpoints.sm}px)`);
+  const isMobile = useMediaQuery(`(max-width: ${theme.breakpoints.sm}px)`);
 
   const autoplayOptions = {
     delay: 100,
@@ -23,15 +20,15 @@ export function CommunityGrid() {
 
   return (
     <>
-      {!mobile &&
-        <Container fluid className={classes.containerLogos} pt={10} pb={30}>
+      {!isMobile &&
+        <Container fluid bg={'linear-gradient(to bottom, #275c672d, #275c67bb)'} pt={10} pb={30}>
           <Container size="xl">
             <Carousel
-              slideSize={mobile ? '20%' : "10%"}
+              slideSize={isMobile ? '20%' : "10%"}
               breakpoints={[{ maxWidth: 'sm', slideSize: '100%', slideGap: 1 }]}
               slideGap="xl"
               align="start"
-              slidesToScroll={mobile ? 2 : 1}
+              slidesToScroll={isMobile ? 2 : 1}
               loop
               withControls={false}
               plugins={[autoplay.current]}

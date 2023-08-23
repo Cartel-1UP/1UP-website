@@ -1,9 +1,11 @@
 import { createStyles } from '@mantine/styles'
 
 const useStyles = createStyles((theme) => ({
-
-  containerLogos: {
-    background: 'linear-gradient(to bottom, #275c672d, #275c67bb);',
+  snackbarContainer: {
+    position: 'fixed',
+    top: '20px',
+    left: '20px',
+    zIndex: 9999
   },
 
 }))

@@ -21,12 +21,13 @@ interface CommentProps {
   comment: Comment;
   subcomments: Comment[];
   article: any;
-  queryKey: string
+  queryKey: string;
+  depth: number; // Add depth as a prop
 }
 
 
 
-const CommentComponent: React.FC<CommentProps> = ({ comment, subcomments, queryKey }) => {
+const CommentComponent: React.FC<CommentProps> = ({ comment, subcomments, queryKey, depth }) => {
   const { classes, theme } = useStyles();
   const [isVote, setIsVote] = useState(false);
   const [isComment, setIsComment] = useState(false);
@@ -46,6 +47,8 @@ const CommentComponent: React.FC<CommentProps> = ({ comment, subcomments, queryK
   const handleCommentClick = () => {
     setIsComment(!isComment);
   };
+
+  console.log(subcomments)
 
   return (
     <Paper withBorder m={10} p={15} radius="md" className={classes.comment}>
@@ -80,10 +83,17 @@ const CommentComponent: React.FC<CommentProps> = ({ comment, subcomments, queryK
             <Space w="sm" />
           </Container>
         </Grid.Col>
-        {subcomments.length > 0 && (
-          <div>
+        {(
+          <div style={{ marginLeft: `${depth * 20}px` }}> {/* Adjust the indentation based on depth */}
             {subcomments.map(subcomment => (
-              <CommentComponent key={subcomment.id} comment={subcomment} subcomments={[]} article={undefined} queryKey={queryKey} />
+              <CommentComponent
+                key={subcomment.id}
+                comment={subcomment}
+                subcomments={[]} // You can leave this as an empty array for sub-comments of sub-comments
+                article={undefined} // You might need to pass the correct article data if required
+                queryKey={queryKey}
+                depth={depth + 1} // Increment depth for sub-comments
+              />
             ))}
           </div>
         )}

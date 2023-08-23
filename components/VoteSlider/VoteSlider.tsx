@@ -9,7 +9,7 @@ import { KeychainSDK, Vote } from 'keychain-sdk';
 import { Dispatch, SetStateAction, useState } from 'react';
 import { useMutation } from 'react-query';
 import { useNotifiactionStore } from '../../zustand/stores/useNotificationStore';
-import { DefaultSnackbar } from '../Grids/DefaultSnackbar/DefaultSnackbar';
+import { DefaultSnackbar } from '../ui/DefaultSnackbar/DefaultSnackbar';
 import useStyles from './style';
 
 interface Props {

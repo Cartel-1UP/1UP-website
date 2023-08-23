@@ -2,7 +2,10 @@ import { Anchor, Group, Text } from '@mantine/core';
 import useStyles from './style';
 
 interface Props {
-  links: { link: string; label: string }[];
+  links: {
+    link: string;
+    label: string
+  }[];
 }
 
 export function Footer({ links }: Props) {
@@ -26,17 +29,7 @@ export function Footer({ links }: Props) {
       <div className={classes.inner}>
         <Group className={classes.links}>{items}</Group>
         <Text color="dimmed">Copyright © 2023 ONEUP-CARTEL</Text>
-        <Group spacing="xs" position="right" noWrap>
-          {/* <ActionIcon size="lg" variant="default" radius="xl">
-            <IconBrandTwitter size={18} stroke={1.5} />
-          </ActionIcon>
-          <ActionIcon size="lg" variant="default" radius="xl">
-            <IconBrandYoutube size={18} stroke={1.5} />
-          </ActionIcon>
-          <ActionIcon size="lg" variant="default" radius="xl">
-            <IconBrandInstagram size={18} stroke={1.5} />
-          </ActionIcon> */}
-        </Group>
+        <Group spacing="xs" position="right" noWrap />
       </div>
     </div>
   );

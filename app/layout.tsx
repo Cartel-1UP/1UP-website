@@ -1,32 +1,41 @@
 'use client'
 
-import { ColorScheme, ColorSchemeProvider, MantineProvider } from '@mantine/core';
-import { useState } from 'react';
-import { QueryClient, QueryClientProvider } from 'react-query';
-import { Footer } from '../components/Footer/Footer';
-import { WebHeader } from '../components/Header/Header';
+
+import { Footer } from '@/components/Footer/Footer';
+import { Navbar } from '@/components/Navbar/Navbar';
+import { DefaultSnackbar } from '@/components/ui/DefaultSnackbar/DefaultSnackbar';
+import { ColorProvider } from '@/providers/color-provider.tsx';
+import { MantineUIProvider } from '@/providers/mantine-provider';
+import { ReactQueryProvider } from '@/providers/reactquery-provider';
+import { useNotifiactionStore } from '@/zustand/stores/useNotificationStore';
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  const [colorScheme, setColorScheme] = useState<ColorScheme>('light')
-  const toggleColorScheme = (value?: ColorScheme) =>
-    setColorScheme(value || (colorScheme === 'dark' ? 'light' : 'dark'))
-  const queryClient = new QueryClient()
-  
-  
+  const snackbars = useNotifiactionStore((state) => state.snackbars);
+
   return (
-    <QueryClientProvider client={queryClient}>
-    <ColorSchemeProvider colorScheme={colorScheme} toggleColorScheme={toggleColorScheme}>
-      <MantineProvider theme={{ colorScheme }} withGlobalStyles withNormalizeCSS>
-        <html lang="en">
-          <head />
-          <body>
-            <WebHeader/>
-            {children}
-            <Footer links={[]}/>
-          </body>
-        </html>
-      </MantineProvider>
-    </ColorSchemeProvider>
-    </QueryClientProvider>
+    <ReactQueryProvider>
+      <ColorProvider>
+        <MantineUIProvider>
+          <html lang="en">
+            <head />
+            <body>
+              <Navbar />
+              {children}
+              <Footer links={[]} />
+              {snackbars.map((snackbar) => (
+                <DefaultSnackbar
+                  key={snackbar.id}
+                  id={snackbar.id}
+                  title={snackbar.title}
+                  message={snackbar.message}
+                  queryKey={snackbar.queryKey}
+                  color={snackbar.color}
+                />
+              ))}
+            </body>
+          </html>
+        </MantineUIProvider>
+      </ColorProvider>
+    </ReactQueryProvider>
   )
 }

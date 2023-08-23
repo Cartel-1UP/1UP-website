@@ -1,7 +1,7 @@
 'use client'
 import { CommunityPage } from "../../../components/Grids/CommunityPage/CommunityPage";
-import { DefaultSnackbar } from "../../../components/Grids/DefaultSnackbar/DefaultSnackbar";
 import { RecommendedCardsGrid } from "../../../components/Grids/Recommended/RecommendedSection";
+import { DefaultSnackbar } from "../../../components/ui/DefaultSnackbar/DefaultSnackbar";
 import { useNotifiactionStore } from "../../../zustand/stores/useNotificationStore";
 
 export const runtime = 'experimental-edge';
