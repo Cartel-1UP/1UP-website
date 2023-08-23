@@ -1,4 +1,3 @@
-'use client'
 import { Notification } from '@mantine/core';
 import { useEffect } from 'react';
 import { useQueryClient } from 'react-query';
@@ -10,12 +9,13 @@ interface Props {
     title: string;
     message: string;
     queryKey?: string;
+    color?: string;
 }
 
-export function DefaultSnackbar({ id, title, message, queryKey }: Props) {
+export function DefaultSnackbar({ id, title, message, queryKey, color }: Props) {
+    const { classes, theme } = useStyles();
     const { removeSnackbar } = useNotifiactionStore((state) => state);
     const queryCache = useQueryClient();
-    const { classes, theme } = useStyles();
 
     useEffect(() => {
         const timeout = setTimeout(() => {
@@ -30,7 +30,7 @@ export function DefaultSnackbar({ id, title, message, queryKey }: Props) {
 
     return (
         <div className={classes.snackbarContainer}>
-            <Notification title={title}>{message}</Notification>
+            <Notification title={title} color={color}>{message}</Notification>
         </div>
     );
 }

@@ -1,8 +1,7 @@
-'use client'
 import { Box, Text, Title } from '@mantine/core';
-import useStyles from '../style';
+import useStyles from './style';
 
-interface CardProps {
+interface Props {
   image: string;
   title: string;
   category: string;
@@ -10,7 +9,7 @@ interface CardProps {
   author: string
 }
 
-export function Card({ image, title, category, author, permlink }: CardProps) {
+export function Card({ image, title, category, author, permlink }: Props) {
   const { classes } = useStyles();
 
   const handleGoToPage = () => {

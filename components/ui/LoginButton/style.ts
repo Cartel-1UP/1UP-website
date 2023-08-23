@@ -1,20 +1,20 @@
 import { createStyles } from '@mantine/styles'
 
 const useStyles = createStyles((theme) => ({
-
     button:{
         backgroundColor: 'white',
         color: '#072f37',
         border: 0,
 
         ...theme.fn.hover({
-            backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[6] : '#eeeeee',
+            backgroundColor: '#eeeeee',
         }),
 
       },
     buttonLogin:{
         backgroundColor: '#072f37',
         border: 0,
+        
         ...theme.fn.hover({
             backgroundColor: '#0b4b57',
         }),

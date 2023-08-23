@@ -1,12 +1,12 @@
 import { createStyles } from '@mantine/styles'
 
 const useStyles = createStyles((theme, _params, getRef) => ({
+
   container: {
     position: 'relative',
     height: 400,
     backgroundSize: 'cover',
     backgroundPosition: 'center',
-
     display: 'flex',
     flexDirection: 'row',
     flexWrap: 'wrap',
@@ -14,20 +14,18 @@ const useStyles = createStyles((theme, _params, getRef) => ({
     alignItems: 'flex-end',
 
     [`&:hover .${getRef('overlay')}`]: {
-      transition: '0.5s linear',
+      transition: '0.3s linear',
       opacity: 1
     },
 
 
     [`&:hover .${getRef('image')}`]: {
-      transition: '0.5s linear',
-      filter: 'brightness(70%)',
+      transition: '0.3s linear',
+      filter: 'brightness(60%)',
       boxShadow: '0 0 10px 0 #00000081',
-
     },
 
   },
-
 
   image: {
     ref: getRef('image'),
@@ -45,8 +43,7 @@ const useStyles = createStyles((theme, _params, getRef) => ({
     ref: getRef('overlay'),
     position: 'absolute',
     bottom: 0,
-    background: 'rgba(0, 0, 0, 0.5)',
-    color: '#f1f1f1',
+    background: 'rgba(0, 0, 0, 1)',
     width: '100%',
     transition: '0.5s linear',
     opacity: '0.75',
@@ -54,28 +51,21 @@ const useStyles = createStyles((theme, _params, getRef) => ({
     padding: '20px',
     textAlign: 'center',
     borderRadius: '0 0 10px 10px',
-
   },
 
 
   title: {
     ref: getRef('title'),
-
     fontFamily: `Greycliff CF, ${theme.fontFamily}`,
     fontWeight: 900,
     color: theme.white,
     lineHeight: 1.2,
     fontSize: 32,
 
-
     [theme.fn.smallerThan('sm')]: {
       fontSize: 24,
     },
 
-  },
-
-  gradientBot: {
-    background: 'linear-gradient(to top, #275c672d, #072f37)'
   },
 
   category: {

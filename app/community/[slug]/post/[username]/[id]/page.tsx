@@ -1,7 +1,7 @@
 'use client'
 
 import { BlogPage } from "../../../../../../components/Blog/BlogPage";
-import { DefaultSnackbar } from "../../../../../../components/Grids/DefaultSnackbar/DefaultSnackbar";
+import { DefaultSnackbar } from "../../../../../../components/ui/DefaultSnackbar/DefaultSnackbar";
 import { useNotifiactionStore } from "../../../../../../zustand/stores/useNotificationStore";
 
 

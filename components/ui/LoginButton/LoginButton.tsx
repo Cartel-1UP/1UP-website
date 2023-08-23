@@ -1,42 +1,42 @@
 'use client'
 
+import loginKeychain from "@/utils/actions/login";
+import { isKeychain } from "@/utils/methods/checkKeychain";
+import { useAuthorizationStore } from "@/zustand/stores/useAuthorizationStore";
+import { useNotifiactionStore } from "@/zustand/stores/useNotificationStore";
 import { Button, Dialog, Group, Text, TextInput } from "@mantine/core";
 import { useEffect, useState } from "react";
-import loginKeychain from "../../utils/actions/login";
-import { useAuthorizationStore } from "../../zustand/stores/useAuthorizationStore";
 import useStyles from './style';
 
-declare global {
-  interface Window {
-    hive_keychain: any; // 👈️ turn off type checking
-  }
-}
-
-const isKeychain = () => {
-  return !!window.hive_keychain
-}
 
 function LoginButton() {
   const { classes, theme } = useStyles()
-  const authorized = useAuthorizationStore((state: { authorized: any; }) => state.authorized)
+
   const [opened, setOpened] = useState(false);
   const [value, setValue] = useState('');
 
+  const authorized = useAuthorizationStore((state: { authorized: boolean; }) => state.authorized)
+  const addSnackbar = useNotifiactionStore((state) => state.addSnackbar);
+
   useEffect(() => {
     if (isKeychain() && localStorage.getItem('username') && !authorized) {
-      const username = localStorage.getItem('username')
+      let username = localStorage.getItem('username')
       loginKeychain(username)
     }
   }, [])
 
 
-
   const loginUser = async () => {
     if (isKeychain()) {
       loginKeychain(value)
-
     } else {
-      console.log("You have to install keychain")
+      addSnackbar({
+        id: '1',
+        title: 'Error',
+        message: 'You have to install keychain!',
+        queryKey: undefined,
+        color: 'red'
+      });
     }
   };
 
