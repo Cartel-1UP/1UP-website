@@ -1,10 +1,9 @@
-'use client'
+import { getComments, getPost } from '@/utils/actions/posts';
+import { getUserProfile } from '@/utils/actions/user';
+import { useAuthorizationStore } from '@/zustand/stores/useAuthorizationStore';
 import { Card, Center, Container, Grid, SimpleGrid, Skeleton } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
 import { useQuery } from 'react-query';
-import { getComments, getPost } from '../../utils/actions/posts';
-import { getUserProfile } from '../../utils/actions/user';
-import { useAuthorizationStore } from '../../zustand/stores/useAuthorizationStore';
 import { ContentCard } from './ContentCard/ContentCard';
 import useStyles from './style';
 

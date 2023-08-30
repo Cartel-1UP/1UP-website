@@ -1,3 +1,5 @@
+import CommentEditor from '@/components/ui/CommentEditor/CommentEditor';
+import { VoteSlider } from '@/components/ui/VoteSlider/VoteSlider';
 import { HiveArticle } from '@/types/blog.type';
 import { useAuthorizationStore } from '@/zustand/stores/useAuthorizationStore';
 import { useNotifiactionStore } from '@/zustand/stores/useNotificationStore';
@@ -6,8 +8,7 @@ import { useMediaQuery } from '@mantine/hooks';
 import { IconArrowBack, IconHeart, IconMessage } from '@tabler/icons';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import CommentEditor from '../../../../ui/CommentEditor/CommentEditor';
-import { VoteSlider } from '../../../../ui/VoteSlider/VoteSlider';
+
 import useStyles from '../style';
 
 interface Props {
@@ -19,6 +20,11 @@ export function FeedCard({ article }: Props) {
   const [isVote, setIsVote] = useState(false)
   const [isComment, setIsComment] = useState(false)
   const [isImageExists, setIsImageExists] = useState(false)
+
+  const numericalValue = parseFloat(article?.pending_payout_value);
+  const roundedValue = Math.ceil(numericalValue * 100) / 100;
+  const formattedCurrency = `$${roundedValue.toFixed(2)}`;
+
 
   const isMobile = useMediaQuery(`(max-width: ${theme.breakpoints.sm}px)`);
   const authorized = useAuthorizationStore((state: { authorized: boolean; }) => state.authorized)
@@ -67,8 +73,8 @@ export function FeedCard({ article }: Props) {
             </>
           }
           <Container className={classes.headerContainer}>
-            <Indicator color={'#114f5c'} inline label={`${article.author_reputation.toFixed()}`} size={25} position="bottom-end" withBorder>
-              <Avatar color="gray" radius="xl" src={`https://images.hive.blog/u/${article?.author}/avatar`} />
+            <Indicator color={'#114f5c'} inline label={`${article.author_reputation.toFixed()}`} size={30} position="bottom-end" withBorder>
+              <Avatar color="gray" size={45} radius="xl" src={`https://images.hive.blog/u/${article?.author}/avatar`} />
             </Indicator>
             {
               article.stats.is_pinned && <Badge ml={10} color="red" variant="outline">Pinned</Badge>
@@ -156,7 +162,7 @@ export function FeedCard({ article }: Props) {
             </Text>
             <Space w="sm" />
             <Text color="dimmed" align={"right"}>
-              {article?.pending_payout_value}
+              {formattedCurrency}
             </Text>
           </Container>
         </Grid.Col>

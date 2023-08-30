@@ -26,6 +26,7 @@ export function CommunityBar({ communityLogo, tag }: Props) {
                             src={communityLogo}
                             alt="Logo"
                             fit="contain"
+                            withPlaceholder
                         />
                     </AspectRatio>
                     <Group position="center" spacing={'xs'}>

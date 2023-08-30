@@ -53,6 +53,11 @@ const useStyles = createStyles((theme) => ({
     alignItems: 'center',
     alignContent: 'left'
   },
+
+  link: {
+    textDecoration: 'none',
+  },
+
 }))
 
 export default useStyles
