@@ -1,14 +1,10 @@
+import { ArticleStats } from "./blog.type"
+
 export interface Vote {
     rshares: number
     voter: string
 }
 
-export interface ArticleStats {
-    flag_weight: number
-    gray: boolean
-    hide: boolean
-    total_votes: number
-}
 
 export interface ArticleMetaData {
     app: string

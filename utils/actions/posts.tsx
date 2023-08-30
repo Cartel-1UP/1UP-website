@@ -1,16 +1,8 @@
+import { Posts } from '@/types/blog.type';
 import { Article } from '../../types/blog.interface';
 import apiHive from '../apiHive';
 
-interface Posts {
-    sort: string,
-    tag?: string,
-    isRecent?: boolean,
-    limit?: number,
-    observer?: string
-    account?: string
-    start_author?: string,
-    start_permlink?: string
-}
+
 
 interface Post {
     author: string

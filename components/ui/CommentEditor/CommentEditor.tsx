@@ -3,9 +3,9 @@ import { IconBold, IconHeading, IconItalic, IconLink, IconPhotoDown } from '@tab
 import { KeychainSDK, Post } from "keychain-sdk";
 import React, { Dispatch, SetStateAction, useRef, useState } from 'react';
 import { useMutation } from 'react-query';
-import { generateRandomLetters } from '../../utils/methods/generateRandom';
-import { useAuthorizationStore } from '../../zustand/stores/useAuthorizationStore';
-import { useNotifiactionStore } from '../../zustand/stores/useNotificationStore';
+import { generateRandomLetters } from '../../../utils/methods/generateRandom';
+import { useAuthorizationStore } from '../../../zustand/stores/useAuthorizationStore';
+import { useNotifiactionStore } from '../../../zustand/stores/useNotificationStore';
 import useStyles from './style';
 
 type Tag = {
@@ -13,7 +13,7 @@ type Tag = {
     type: 'link' | 'heading' | 'bold' | 'italic' | 'image';
 }
 
-interface Props {
+type Props = {
     setIsComment: Dispatch<SetStateAction<boolean>> | any;
     permlink: string;
     parentAuthor: string;
@@ -25,6 +25,8 @@ const CommentEditor = ({ setIsComment, permlink, parentAuthor, queryKey }: Props
     const { classes, theme } = useStyles();
     const [markdown, setMarkdown] = useState('');
     const textareaRef = useRef<HTMLTextAreaElement | null>(null);
+    const addSnackbar = useNotifiactionStore((state) => state.addSnackbar);
+    const username = useAuthorizationStore((state: { username: string; }) => state.username)
 
     const handleMarkdownChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
         setMarkdown(event.target.value);
@@ -62,7 +64,6 @@ const CommentEditor = ({ setIsComment, permlink, parentAuthor, queryKey }: Props
             }
 
             modifiedValue += value.slice(end);
-
             setMarkdown(modifiedValue);
             textarea.focus();
             textarea.setSelectionRange(start, start + selectedText.length);
@@ -70,31 +71,10 @@ const CommentEditor = ({ setIsComment, permlink, parentAuthor, queryKey }: Props
     };
 
 
-
-    const markdownComponents = {
-        a: ({ href, children }: any) => (
-            <a href={href} target="_blank" rel="noopener noreferrer">
-                {children}
-            </a>
-        ),
-        h1: ({ node, children }: any) => <h1>{children}</h1>,
-        h2: ({ node, children }: any) => <h2>{children}</h2>,
-        strong: ({ node, children }: any) => <strong>{children}</strong>,
-        em: ({ node, children }: any) => <em>{children}</em>,
-        img: ({ src, alt }: any) => <img src={src} alt={alt} />,
-        p: ({ node, children }: any) => <p>{children}</p>,
-        ul: ({ node, children }: any) => <ul>{children}</ul>,
-        li: ({ node, children }: any) => <li>{children}</li>,
-    };
-    const addSnackbar = useNotifiactionStore((state) => state.addSnackbar);
-    const username = useAuthorizationStore((state: { username: string; }) => state.username)
     const randomChars = generateRandomLetters(6);
-
     const commentPermlink = `re-${permlink}-${randomChars}`
-
     const handlePostComment = useMutation<void, any, void, unknown>(
         async () => {
-
             const keychain = new KeychainSDK(window);
             const formParamsAsObject = {
                 "data": {
@@ -166,18 +146,20 @@ const CommentEditor = ({ setIsComment, permlink, parentAuthor, queryKey }: Props
                         <Space w="sm" />
                     </Grid.Col>
                     <Grid.Col>
-                        <Group>
+                        <Group className={classes.buttonContainer}>
                             <Button
-                                color={theme.colorScheme === 'dark' ? undefined : 'dark'}
+                                variant="outline"
+                                color={'dark'}
+                                onClick={() => handlePostComment.mutate()}
+                            >
+                                Submit
+                            </Button>
+                            <Button
+                                variant="outline"
+                                color={'dark'}
                                 onClick={() => setIsComment(false)}
                             >
                                 Cancel
-                            </Button>
-                            <Button
-                                color={theme.colorScheme === 'dark' ? undefined : 'dark'}
-                                onClick={() => handlePostComment.mutate()}
-                            >
-                                Reply
                             </Button>
                         </Group>
                     </Grid.Col>

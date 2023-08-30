@@ -8,11 +8,11 @@ import { useMediaQuery } from '@mantine/hooks';
 import { KeychainSDK, Vote } from 'keychain-sdk';
 import { Dispatch, SetStateAction, useState } from 'react';
 import { useMutation } from 'react-query';
-import { useNotifiactionStore } from '../../zustand/stores/useNotificationStore';
-import { DefaultSnackbar } from '../ui/DefaultSnackbar/DefaultSnackbar';
+import { useNotifiactionStore } from '../../../zustand/stores/useNotificationStore';
+import { DefaultSnackbar } from '../../DefaultSnackbar/DefaultSnackbar';
 import useStyles from './style';
 
-interface Props {
+type Props = {
   setIsVote?: Dispatch<SetStateAction<boolean>> | any;
   permlink: string;
   author: string;
@@ -21,6 +21,9 @@ interface Props {
 }
 
 export function VoteSlider({ setIsVote, permlink, author, setSuccessfullUpvoted, queryKey }: Props) {
+  const { classes, theme } = useStyles();
+  const [value, setValue] = useState(50);
+  const [endValue, setEndValue] = useState(50);
   const username = localStorage.getItem('username');
   const marks = [
     { value: 0, label: '0%' },
@@ -30,11 +33,6 @@ export function VoteSlider({ setIsVote, permlink, author, setSuccessfullUpvoted,
     { value: 80, label: '80%' },
     { value: 100, label: '100%' },
   ];
-
-  const [value, setValue] = useState(50);
-  const [endValue, setEndValue] = useState(50);
-
-  const { classes, theme } = useStyles();
   const laptop = useMediaQuery(`(max-width: ${theme.breakpoints.md}px)`);
   const snackbars = useNotifiactionStore((state) => state.snackbars);
   const addSnackbar = useNotifiactionStore((state) => state.addSnackbar);
@@ -93,16 +91,18 @@ export function VoteSlider({ setIsVote, permlink, author, setSuccessfullUpvoted,
       </Container>
       <Space h="xl" />
       <Space h="xl" />
-      <Container size={'sm'} className={classes.buttonContainer}>
-        <Group>
-          <Button variant="outline" color="dark" onClick={() => setIsVote(false)}>
-            Cancel
-          </Button>
+
+      <Container size={'sm'}>
+        <Group className={classes.buttonContainer}>
           <Button variant="outline" color="dark" onClick={() => handleRequestVote.mutate()}>
             Submit
           </Button>
+          <Button variant="outline" color="dark" onClick={() => setIsVote(false)}>
+            Cancel
+          </Button>
         </Group>
       </Container>
+
       <>
         {snackbars.map((snackbar) => (
           <DefaultSnackbar

@@ -1,9 +1,9 @@
 'use client'
 
 
+import { DefaultSnackbar } from '@/components/DefaultSnackbar/DefaultSnackbar';
 import { Footer } from '@/components/Footer/Footer';
 import { Navbar } from '@/components/Navbar/Navbar';
-import { DefaultSnackbar } from '@/components/ui/DefaultSnackbar/DefaultSnackbar';
 import { ColorProvider } from '@/providers/color-provider.tsx';
 import { MantineUIProvider } from '@/providers/mantine-provider';
 import { ReactQueryProvider } from '@/providers/reactquery-provider';
