@@ -89,7 +89,7 @@ export function ContentCard({ ...props }: Props) {
       <Space h="xl" />
       <Grid grow>
         <Grid.Col span={laptop ? 12 : 9}>
-          <SimpleGrid cols={1} spacing={2} >
+          <SimpleGrid cols={1} spacing={0} >
             <Card p="md" radius={0} className={classes.cardHeader}>
               <Grid grow>
                 <Grid.Col span={10}>
@@ -120,59 +120,60 @@ export function ContentCard({ ...props }: Props) {
                 <Markdown text={article.body} />
               </Container>
             </Card>
-          </SimpleGrid>
-          <SimpleGrid cols={1} spacing={1} ref={targetRef}>
-            <Card p="md" radius={0} className={classes.cardSticky} sx={{ position: 'sticky', bottom: 0 }}>
-              <Container className={classes.metadataContainer} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <Group style={{ display: 'flex', alignItems: 'center' }}>
-                  <Group spacing={3}>
-                    <ActionIcon
-                      variant="transparent"
-                      onClick={() => setIsVote(!isVote)}
-                      onMouseEnter={() => (setColor('red'))}
-                      onMouseLeave={() => (setColor('grey'))}
-                      disabled={successfullUpvoted || !authorized}
-                    >
-                      <IconHeart color={successfullUpvoted ? 'red' : color} size="1rem" />
-                    </ActionIcon>
-                    <Text color="dimmed" size={"md"}>
-                      {article.active_votes.length}
+
+            <div style={{ position: 'sticky', bottom: '0' }}>
+              <Card p="md" radius={0} className={classes.cardSticky}>
+                <Container className={classes.metadataContainer} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <Group style={{ display: 'flex', alignItems: 'center' }}>
+                    <Group spacing={3}>
+                      <ActionIcon
+                        variant="transparent"
+                        onClick={() => setIsVote(!isVote)}
+                        onMouseEnter={() => (setColor('red'))}
+                        onMouseLeave={() => (setColor('grey'))}
+                        disabled={successfullUpvoted || !authorized}
+                      >
+                        <IconHeart color={successfullUpvoted ? 'red' : color} size="1rem" />
+                      </ActionIcon>
+                      <Text color="dimmed" size={"md"}>
+                        {article.active_votes.length}
+                      </Text>
+                    </Group>
+                    <Group spacing={3}>
+                      <ActionIcon
+                        variant="transparent"
+                        onClick={() => setIsComment(!isComment)}
+                        disabled={!authorized}
+                      >
+                        <IconMessage color="grey" size={16} />
+                      </ActionIcon>
+                      <Text color="dimmed" size={"md"}>
+                        {article.children}
+                      </Text>
+                    </Group>
+                    <Text color="dimmed" size={"md"} align={"end"}>
+                      {article.pending_payout_value}
                     </Text>
                   </Group>
-                  <Group spacing={3}>
-                    <ActionIcon
-                      variant="transparent"
-                      onClick={() => setIsComment(!isComment)}
-                      disabled={!authorized}
-                    >
-                      <IconMessage color="grey" size={16} />
-                    </ActionIcon>
-                    <Text color="dimmed" size={"md"}>
-                      {article.children}
-                    </Text>
-                  </Group>
-                  <Text color="dimmed" size={"md"} align={"end"}>
-                    {article.pending_payout_value}
-                  </Text>
-                </Group>
-                {/* <ActionIcon color="dark" onClick={() => scrollIntoView({ alignment: 'end' })}>
+                  {/* <ActionIcon color="dark" onClick={() => scrollIntoView({ alignment: 'end' })}>
                   <IconArrowDown size="1.125rem" />
                 </ActionIcon> */}
-              </Container>
-              {
-                isVote &&
-                <Grid.Col span={12}>
-                  <VoteSlider permlink={article.permlink} author={article.author} setIsVote={setIsVote} setSuccessfullUpvoted={setSuccessfullUpvoted} queryKey={'post-data'} />
-                </Grid.Col>
-              }
-              {
-                isComment &&
-                <Grid.Col span={12}>
-                  <CommentEditor setIsComment={setIsComment} permlink={article.permlink} parentAuthor={article.author} parentPermlink={''} />
-                </Grid.Col>
-              }
+                </Container>
+                {
+                  isVote &&
+                  <Grid.Col span={12}>
+                    <VoteSlider permlink={article.permlink} author={article.author} setIsVote={setIsVote} setSuccessfullUpvoted={setSuccessfullUpvoted} queryKey={'post-data'} />
+                  </Grid.Col>
+                }
+                {
+                  isComment &&
+                  <Grid.Col span={12}>
+                    <CommentEditor setIsComment={setIsComment} permlink={article.permlink} parentAuthor={article.author} parentPermlink={''} />
+                  </Grid.Col>
+                }
 
-            </Card>
+              </Card>
+            </div>
             {/* <Editor /> */}
             <CommentCard comments={props.comments} permlink={props.permlink} article={article} queryKey={'comments-data'} />
           </SimpleGrid>

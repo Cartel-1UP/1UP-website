@@ -1,6 +1,5 @@
 'use client'
 
-
 import { DefaultSnackbar } from '@/components/DefaultSnackbar/DefaultSnackbar';
 import { Footer } from '@/components/Footer/Footer';
 import { Navbar } from '@/components/Navbar/Navbar';

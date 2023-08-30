@@ -46,14 +46,12 @@ const CommentComponent: React.FC<CommentProps> = ({ comment, subcomments, queryK
     setIsComment(!isComment);
   };
 
-  console.log(subcomments)
-
   return (
-    <Paper withBorder m={10} p={15} radius="md" className={classes.comment}>
+    <Paper m={10} p={15} radius="md" className={classes.comment}>
       <Container size="lg">
         <Group spacing={0}>
-          <Indicator color={'#114f5c'} inline label={comment.author_reputation.toFixed()} size={25} position="bottom-end" withBorder>
-            <Avatar color="gray" radius="xl" src={`https://images.hive.blog/u/${comment.author}/avatar`} />
+          <Indicator color={'#114f5c'} inline label={comment.author_reputation.toFixed()} size={29} position="bottom-end" withBorder>
+            <Avatar size={45} color="gray" radius="xl" src={`https://images.hive.blog/u/${comment.author}/avatar`} />
           </Indicator>
           <Text pl={20} color="dimmed" size="xs" transform="uppercase" weight={500}>
             {comment.author} - {formattedDate}

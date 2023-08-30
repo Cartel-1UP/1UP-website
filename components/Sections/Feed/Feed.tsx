@@ -14,9 +14,11 @@ import useStyles from './style';
 
 type Props = {
   sort: string
+  tag?: string
+  isCommunity?: boolean
 };
 
-export function Feed({ sort }: Props) {
+export function Feed({ sort, tag, isCommunity }: Props) {
   const { classes, theme } = useStyles();
 
   const [startAuthor, setStartAuthor] = useState('');
@@ -49,7 +51,7 @@ export function Feed({ sort }: Props) {
           break;
         default:
           queryData = await getRecentBlogs({
-            tag: 'hive-102223',
+            tag: tag,
             sort: postType,
             limit: 10,
           });
@@ -82,7 +84,7 @@ export function Feed({ sort }: Props) {
           break;
         default:
           queryData = await getRecentBlogs({
-            tag: 'hive-102223',
+            tag: tag,
             sort: postType,
             limit: 10,
             start_author: startAuthor,
@@ -128,7 +130,7 @@ export function Feed({ sort }: Props) {
       <Space h="xl" />
       <SimpleGrid cols={1} mt={0} spacing={0} breakpoints={[{ maxWidth: 'sm', cols: 1 }]}>
         <Card withBorder p="md" radius={0} className={classes.cardHeader}>
-          <TabButtons authorized={authorized} defaultTab={defaultTab} onChange={handleTabChange} />
+          <TabButtons authorized={authorized} defaultTab={defaultTab} onChange={handleTabChange} isCommunity={isCommunity} />
         </Card>
         {!data ? (
           Array.from({ length: 5 }).map((_, index) => (

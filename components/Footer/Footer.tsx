@@ -1,3 +1,5 @@
+'use client'
+
 import { Anchor, Group, Text } from '@mantine/core';
 import useStyles from './style';
 

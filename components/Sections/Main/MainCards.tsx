@@ -1,6 +1,6 @@
 import { useGetMaincards } from '@/actions/database/get-maincards';
 import { Carousel } from '@mantine/carousel';
-import { Center, Container, Skeleton, useMantineTheme } from '@mantine/core';
+import { Container, Skeleton, useMantineTheme } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
 import { Card } from './MainCard';
 import useStyles from './style';
@@ -11,54 +11,38 @@ export function MainCards() {
 
   const isMobile = useMediaQuery(`(max-width: ${theme.breakpoints.sm}px)`);
 
-  const { data } = useGetMaincards()
+  const { data, isLoading } = useGetMaincards()
 
-  if (data) {
-    return (
-      <Container fluid bg={'linear-gradient(to top, #275c672d, #072f37)'} pb={25}>
-        <Container size="xl" pt={0}>
-          <Carousel
-            slideSize="33.33%"
-            breakpoints={[{ maxWidth: 'xs', slideSize: '100%', slideGap: 3 }]}
-            slideGap="xl"
-            align="start"
-            slidesToScroll={isMobile ? 1 : 3}
-            loop
-          >
-            {data.map?.((item: any, index: any) => (
-              <Carousel.Slide key={index}>
-                <Card {...item} />
-              </Carousel.Slide>
-            ))}
-          </Carousel>
-        </Container>
-      </Container>
-    );
-  }
 
   return (
-    <Container fluid bg={'linear-gradient(to top, #275c672d, #072f37)'}>
+    <Container fluid bg={'linear-gradient(to top, #275c672d, #072f37)'} pb={25}>
       <Container size="xl" pt={0}>
-        <Center>
-          <Carousel
-            slideSize="33.33%"
-            breakpoints={[{ maxWidth: 'xs', slideSize: '100%', slideGap: 3 }]}
-            slideGap="xl"
-            align="start"
-            slidesToScroll={isMobile ? 1 : 3}
-            loop
-          >
-            {
+        <Carousel
+          slideSize="33.33%"
+          breakpoints={[{ maxWidth: 'xs', slideSize: '100%', slideGap: 3 }]}
+          slideGap="xl"
+          align="start"
+          slidesToScroll={isMobile ? 1 : 3}
+          loop
+        >
+          {
+            isLoading ?
               Array.from(Array(3)).map((_, index) => (
                 <Carousel.Slide key={index}>
-                  <Skeleton width="30vh" height="30vh" />
+                  <Skeleton width="20vh" height="20vh" />
+                </Carousel.Slide>))
+              :
+              data?.map?.((item: any, index: any) => (
+                <Carousel.Slide key={index}>
+                  <Card {...item} />
                 </Carousel.Slide>
-              ))
-            }
-          </Carousel>
-        </Center>
+              ))}
+        </Carousel>
       </Container>
     </Container>
   );
-
 }
+
+
+
+
