@@ -1,5 +1,5 @@
 import { UsersChoiceCard } from '@/types/blog.type';
-import { AspectRatio, Avatar, Badge, Card, Container, Grid, Group, Image, Text } from '@mantine/core';
+import { AspectRatio, Avatar, Badge, Card, Container, Grid, Group, Image, Indicator, Text } from '@mantine/core';
 import useStyles from '../style';
 
 type CardProps = {
@@ -28,27 +28,27 @@ export function RecommendedCard({ article }: CardProps) {
       <Grid grow>
         <Grid.Col span={12}>
           <Container className={classes.headerContainer}>
-            <Avatar color="blue" radius="xl" src={`https://images.hive.blog/u/${article.userpost?.author}/avatar`} />
-            <Badge ml={10} color="dark" variant="outline">{article.userpost.author_reputation.toFixed()} lvl</Badge>
-            <Text pl={10} color="dimmed" size="xs" transform="uppercase" weight={500}>
+            <Indicator color={'#114f5c'} inline label={article.userpost.author_reputation.toFixed()} size={25} position="bottom-end" withBorder>
+              <Avatar color="gray" radius="xl" src={`https://images.hive.blog/u/${article.userpost?.author}/avatar/`} />
+            </Indicator>
+            <Text pl={20} color="dimmed" size="xs" transform="uppercase" weight={500}>
               {article.userpost?.author}
             </Text>
           </Container>
         </Grid.Col>
-        <Grid.Col span={12}>
+        <Grid.Col span={12} mt={5}>
           <Container >
             <AspectRatio ratio={16 / 9}>
               {imageExists ?
                 <Image
                   radius={10}
                   src={article.userpost.json_metadata.image[0]}
+                  withPlaceholder
                 /> :
                 <Image
                   src={null}
-                  alt="Image placeholder"
                   withPlaceholder
                   radius={10}
-                  height={120}
                 />
               }
             </AspectRatio>

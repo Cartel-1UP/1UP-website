@@ -1,10 +1,8 @@
 import {
   ActionIcon,
-  Avatar,
-  Badge, Container,
+  Avatar, Container,
   Grid,
-  Group,
-  Paper, Space,
+  Group, Indicator, Paper, Space,
   Text,
   TypographyStylesProvider
 } from '@mantine/core';
@@ -54,11 +52,10 @@ const CommentComponent: React.FC<CommentProps> = ({ comment, subcomments, queryK
     <Paper withBorder m={10} p={15} radius="md" className={classes.comment}>
       <Container size="lg">
         <Group spacing={0}>
-          <Avatar alt={comment.author} src={`https://images.hive.blog/u/${comment.author}/avatar`} radius="xl" />
-          <Badge ml={10} color="dark" variant="outline">
-            {comment.author_reputation.toFixed()} lvl
-          </Badge>
-          <Text pl={10} color="dimmed" size="xs" transform="uppercase" weight={500}>
+          <Indicator color={'#114f5c'} inline label={comment.author_reputation.toFixed()} size={25} position="bottom-end" withBorder>
+            <Avatar color="gray" radius="xl" src={`https://images.hive.blog/u/${comment.author}/avatar`} />
+          </Indicator>
+          <Text pl={20} color="dimmed" size="xs" transform="uppercase" weight={500}>
             {comment.author} - {formattedDate}
           </Text>
         </Group>

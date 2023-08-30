@@ -1,7 +1,7 @@
 import { HiveArticle } from '@/types/blog.type';
 import { useAuthorizationStore } from '@/zustand/stores/useAuthorizationStore';
 import { useNotifiactionStore } from '@/zustand/stores/useNotificationStore';
-import { AspectRatio, Avatar, Badge, Card, Container, Grid, Group, Image, Space, Text, ThemeIcon } from '@mantine/core';
+import { AspectRatio, Avatar, Badge, Card, Container, Grid, Group, Image, Indicator, Space, Text, ThemeIcon } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
 import { IconArrowBack, IconHeart, IconMessage } from '@tabler/icons';
 import Link from 'next/link';
@@ -67,21 +67,22 @@ export function FeedCard({ article }: Props) {
             </>
           }
           <Container className={classes.headerContainer}>
-            <Avatar color="blue" radius="xl" src={`https://images.hive.blog/u/${article?.author}/avatar`} />
-            <Badge ml={10} color="dark" variant="outline">{article.author_reputation.toFixed()} lvl</Badge>
+            <Indicator color={'#114f5c'} inline label={`${article.author_reputation.toFixed()}`} size={25} position="bottom-end" withBorder>
+              <Avatar color="gray" radius="xl" src={`https://images.hive.blog/u/${article?.author}/avatar`} />
+            </Indicator>
             {
               article.stats.is_pinned && <Badge ml={10} color="red" variant="outline">Pinned</Badge>
             }
-            <Text pl={10} color="dimmed" size="xs" transform="uppercase" weight={600}>
+            <Text pl={20} color="dimmed" size="xs" transform="uppercase" weight={600}>
               {`${article?.author} - ${formatedDate}`}
             </Text>
           </Container>
           <Link href={`community/${article.community}/post/` + article.author + '/' + article.permlink} className={classes.link}>
             <Container >
-              <Text weight={600} mt={10}>
+              <Text weight={600} mt={15}>
                 {article?.title}
               </Text>
-              <Text color="dimmed" size="sm" weight={600} mt={10} className={classes.turncate}>
+              <Text color="dimmed" size="sm" weight={600} mt={5} className={classes.turncate}>
                 {bodyOfArticle}
               </Text>
             </Container>
@@ -92,13 +93,15 @@ export function FeedCard({ article }: Props) {
             <Container >
               <AspectRatio ratio={16 / 9}>
                 {isImageExists ?
-                  <Image radius={10} src={article?.json_metadata.image[0]} /> :
+                  <Image
+                    radius={10}
+                    src={article?.json_metadata.image[0]}
+                    withPlaceholder
+                  /> :
                   <Image
                     src={null}
-                    alt="Image placeholder"
                     withPlaceholder
                     radius={10}
-                    height={120}
                   />
                 }
               </AspectRatio>

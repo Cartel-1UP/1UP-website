@@ -1,5 +1,5 @@
 'use client'
-import { Avatar, Badge, Card, Container, Grid, Space, Text } from '@mantine/core';
+import { Avatar, Badge, Card, Container, Grid, Indicator, Space, Text } from '@mantine/core';
 import { IconHeart, IconMessage } from '@tabler/icons';
 import useStyles from './style';
 
@@ -16,8 +16,9 @@ export function TrendingCard({ article }: CardProps) {
       <Grid grow>
         <Grid.Col span={12}>
           <Container className={classes.headerContainer}>
-            <Avatar color="blue" radius="xl" src={`https://images.hive.blog/u/${article?.author}/avatar/`} />
-            <Badge ml={10} color="dark" variant="outline">{article.author_reputation.toFixed()} lvl</Badge>
+            <Indicator color={'#072f37'} inline label={article.author_reputation.toFixed()} size={25} position="bottom-end" withBorder>
+              <Avatar color="gray" radius="xl" src={`https://images.hive.blog/u/${article?.author}/avatar/`} />
+            </Indicator>
             {
               article.stats.is_pinned && <Badge ml={10} color="red" variant="outline">Pinned</Badge>
             }
