@@ -1,7 +1,7 @@
 import { Client, cryptoUtils, Signature } from '@hiveio/dhive';
 import { NextApiRequest, NextApiResponse } from 'next';
 
-const hiveClient  = new Client('https://api.hive.blog');
+const hiveClient = new Client('https://api.hive.blog');
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { username, sig, ts, smartlock } = req.body
@@ -28,38 +28,38 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             break
           }
         }
-    }
+      }
 
-    // Trying to validate using posting authority
-    if (!validSignature && authorizedAccountsPosting.size > 0) {
-      let accountsData:any = await hiveClient.database.getAccounts(
-        Array.from(authorizedAccountsPosting.keys())
-      )
+      // Trying to validate using posting authority
+      if (!validSignature && authorizedAccountsPosting.size > 0) {
+        let accountsData: any = await hiveClient.database.getAccounts(
+          Array.from(authorizedAccountsPosting.keys())
+        )
 
-      accountsData = accountsData.map((a: { posting: { key_auths: any[]; }; }) => a.posting.key_auths[0])
+        accountsData = accountsData.map((a: { posting: { key_auths: any[]; }; }) => a.posting.key_auths[0])
 
-      for (let i = 0; i < accountsData.length; i += 1) {
-        const auth = accountsData[i]
+        for (let i = 0; i < accountsData.length; i += 1) {
+          const auth = accountsData[i]
 
-        if (auth[0] === publicKey && auth[1] >= thresholdPosting) {
-          validSignature = true
-          break
+          if (auth[0] === publicKey && auth[1] >= thresholdPosting) {
+            validSignature = true
+            break
+          }
         }
       }
-    }
 
-    if (validSignature) {
-      req.body.user = username
-      req.body.smartlock = smartlock
-      let authorized = true
-      return res.json({ username, smartlock, authorized})
-    }
-  } catch (e : any) {
-    res.status(500).json({ error: e.message })
+      if (validSignature) {
+        req.body.user = username
+        req.body.smartlock = smartlock
+        let authorized = true
+        return res.json({ username, smartlock, authorized })
+      }
+    } catch (e: any) {
+      res.status(500).json({ error: e.message })
 
-    return res.status(401)
-    } 
-  } 
+      return res.status(401)
+    }
+  }
   else {
     return 0
   }

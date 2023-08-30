@@ -1,13 +1,29 @@
 import { createStyles } from '@mantine/styles'
 
 const useStyles = createStyles((theme) => ({
+
+  cardHeader: {
+    borderColor: '#e2e8f0d2',
+    borderWidth: 1,
+    borderRadius: '10px 10px 0 0'
+  },
+
   card: {
     borderColor: '#e2e8f0d2',
-    borderWidth: 0.1,
-    transition: 'backgroundColor 0.3s',
-    '&:hover': {
-      backgroundColor: '#f8f9fc',
-    },
+    borderWidth: 1,
+    backgroundColor: '#ffff'
+  },
+
+  cardFooter: {
+    borderColor: '#e2e8f0d2',
+    borderWidth: 1,
+    borderRadius: '0 0 10px 10px',
+  },
+
+  headerContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center'
   },
 
   title: {
@@ -26,33 +42,10 @@ const useStyles = createStyles((theme) => ({
     maxHeight: '3.5em'
   },
 
-
   price: {
     fontFamily: `Greycliff CF, ${theme.fontFamily}`,
     fontWeight: 400,
     fontSize: 12
-  },
-
-  gradient: {
-    background: 'linear-gradient(to bottom, #E9ECEF, #072f37);'
-  },
-  cardHeader: {
-    borderColor: '#e2e8f0d2',
-    borderWidth: 1,
-    borderRadius: '10px 10px 0 0'
-  },
-
-  cardFooter: {
-    borderColor: '#e2e8f0d2',
-    borderWidth: 1,
-    borderRadius: '0 0 10px 10px',
-
-  },
-
-  headerContainer: {
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center'
   },
 
   metadataContainer: {
@@ -60,19 +53,6 @@ const useStyles = createStyles((theme) => ({
     alignItems: 'center',
     alignContent: 'left'
   },
-
-  link: {
-    textDecoration: 'none',
-    color: '#000000',
-    display: 'flex',
-    alignItems: 'center',
-
-    '&:hover': {
-      color: '#000000bd',
-    },
-  },
-
-
 }))
 
 export default useStyles

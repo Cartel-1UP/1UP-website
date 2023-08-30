@@ -12,8 +12,8 @@ import Link from 'next/link'
 import { useState } from 'react'
 import oneuplogo from '../../images/oneup1.png'
 import { logoutUser, useAuthorizationStore } from '../../zustand/stores/useAuthorizationStore'
-import LoginButton from '../ui/LoginButton/LoginButton'
-import { UserButton } from '../ui/UserButton/UserButton'
+import LoginButton from '../LoginButton/LoginButton'
+import { UserButton } from '../UserButton/UserButton'
 import useStyles from './style'
 
 export function Navbar() {

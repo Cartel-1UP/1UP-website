@@ -12,8 +12,8 @@ import { IconHeart, IconMessage } from '@tabler/icons';
 import React, { useState } from 'react';
 import { Comment } from '../../../types/blog.interface';
 import { useAuthorizationStore } from '../../../zustand/stores/useAuthorizationStore';
-import CommentEditor from '../../CommentEditor/CommentEditor';
-import { VoteSlider } from '../../VoteSlider/VoteSlider';
+import CommentEditor from '../../ui/CommentEditor/CommentEditor';
+import { VoteSlider } from '../../ui/VoteSlider/VoteSlider';
 import { Markdown } from '../MarkdownReplacer/Markdown';
 import useStyles from './style';
 

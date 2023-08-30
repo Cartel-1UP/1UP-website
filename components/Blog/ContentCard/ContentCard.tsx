@@ -11,8 +11,8 @@ import { fetchFollowingAccounts } from '../../../utils/actions/user';
 import { dateRefactor } from '../../../utils/methods/dateRefactor';
 import { useAuthorizationStore } from '../../../zustand/stores/useAuthorizationStore';
 import { useNotifiactionStore } from '../../../zustand/stores/useNotificationStore';
-import CommentEditor from '../../CommentEditor/CommentEditor';
-import { VoteSlider } from '../../VoteSlider/VoteSlider';
+import CommentEditor from '../../ui/CommentEditor/CommentEditor';
+import { VoteSlider } from '../../ui/VoteSlider/VoteSlider';
 import CommentCard from '../CommentCard/CommentCard';
 
 import { Markdown } from '../MarkdownReplacer/Markdown';

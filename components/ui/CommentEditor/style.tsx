@@ -48,6 +48,11 @@ const useStyles = createStyles((theme) => ({
     padding: '4px',
   },
 
+  buttonContainer: {
+    display: 'flex',
+    justifyContent: 'flex-end'
+  },
+
 }))
 
 export default useStyles

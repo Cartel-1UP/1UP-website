@@ -24,11 +24,11 @@ export function Community() {
         <Container fluid bg={'linear-gradient(to bottom, #275c672d, #275c67bb)'} pt={10} pb={30}>
           <Container size="xl">
             <Carousel
-              slideSize={isMobile ? '20%' : "10%"}
+              slideSize={"10%"}
               breakpoints={[{ maxWidth: 'sm', slideSize: '100%', slideGap: 1 }]}
               slideGap="xl"
               align="start"
-              slidesToScroll={isMobile ? 2 : 1}
+              slidesToScroll={1}
               loop
               withControls={false}
               plugins={[autoplay.current]}
