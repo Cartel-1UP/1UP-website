@@ -5,14 +5,12 @@ import { useMediaQuery } from '@mantine/hooks';
 import { Card } from './MainCard';
 import useStyles from './style';
 
-export function MainCards() {
+export function MainSection() {
   const { classes } = useStyles();
   const theme = useMantineTheme();
 
   const isMobile = useMediaQuery(`(max-width: ${theme.breakpoints.sm}px)`);
-
   const { data, isLoading } = useGetMaincards()
-
 
   return (
     <Container fluid bg={'linear-gradient(to top, #275c672d, #072f37)'} pb={25}>

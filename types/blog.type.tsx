@@ -21,6 +21,11 @@ export type Posts = {
     start_permlink?: string
 }
 
+export type Post = {
+    author: string
+    permlink: string
+}
+
 
 export type HiveArticle = {
     active_votes: Vote[]

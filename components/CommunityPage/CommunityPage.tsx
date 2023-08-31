@@ -1,9 +1,9 @@
 
 import { CommunityBar } from '@/components/CommunityBar/CommunityBar';
-import { Feed } from '@/components/Sections/Feed/Feed';
+import { FeedSection } from '@/components/Sections/Feed/FeedSection';
+import { comumnityData } from '@/data/communityData';
 import { Container, Grid, Space } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
-import { comumnityData } from '../../../data/communityData';
 
 import useStyles from './style';
 
@@ -23,7 +23,7 @@ export function CommunityPage({ image, tag }: Props) {
       <Container size="xl">
         <Grid>
           <Grid.Col span={isMd ? 12 : 9}>
-            <Feed sort={'created'} tag={tag} isCommunity={true} />
+            <FeedSection sort={'created'} tag={tag} isCommunity={true} />
           </Grid.Col>
           <Grid.Col span={isMd ? 12 : 3}>
             <div style={{ position: 'sticky', top: '0' }}>

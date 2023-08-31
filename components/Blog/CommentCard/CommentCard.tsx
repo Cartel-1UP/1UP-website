@@ -13,7 +13,7 @@ interface Props {
 const CommentCard: React.FC<Props> = ({ comments, permlink, article, queryKey }) => {
   const { classes, theme } = useStyles();
 
-  const commentArray: any[] = Object.values(comments.data.result);
+  const commentArray: any[] = Object.values(comments.result);
 
   const renderComment = (comment: any, depth: number = 0) => {
     const subcomments = commentArray.filter(
@@ -26,7 +26,7 @@ const CommentCard: React.FC<Props> = ({ comments, permlink, article, queryKey })
 
     return (
       <CommentComponent
-        key={comment.id}
+        key={comment.post_id}
         comment={comment}
         subcomments={subcomments}
         article={article}

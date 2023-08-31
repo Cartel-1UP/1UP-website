@@ -9,7 +9,7 @@ import { useScrollIntoView } from '@mantine/hooks';
 import { IconArrowBarRight, IconArrowUp } from '@tabler/icons';
 import { useEffect, useState } from 'react';
 import { useMutation } from 'react-query';
-import { FeedCard } from './FeedCard/FeedCard';
+import { FeedCard } from './FeedCard';
 import useStyles from './style';
 
 type Props = {
@@ -18,7 +18,7 @@ type Props = {
   isCommunity?: boolean
 };
 
-export function Feed({ sort, tag, isCommunity }: Props) {
+export function FeedSection({ sort, tag, isCommunity }: Props) {
   const { classes, theme } = useStyles();
 
   const [startAuthor, setStartAuthor] = useState('');
