@@ -1,6 +1,6 @@
 import { Custom, KeychainKeyTypes, KeychainSDK } from 'keychain-sdk'
 import { Community } from '../../types/blog.interface'
-import { User } from '../../types/user.interface'
+import { User } from '../../types/user.type'
 import apiHive from '../apiHive'
 
 interface Props {

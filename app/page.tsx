@@ -1,10 +1,10 @@
 "use client"
 
 import { CommunityBar } from '@/components/CommunityBar/CommunityBar';
-import { Community } from '@/components/Sections/Community/Community';
-import { Feed } from '@/components/Sections/Feed/Feed';
-import { MainCards } from '@/components/Sections/Main/MainCards';
-import { RecommendedCardsGrid } from '@/components/Sections/Recommended/RecommendedSection';
+import { CommunitySection } from '@/components/Sections/Community/CommunitySection';
+import { FeedSection } from '@/components/Sections/Feed/FeedSection';
+import { MainSection } from '@/components/Sections/Main/MainSection';
+import { RecommendedSection } from '@/components/Sections/Recommended/RecommendedSection';
 import oneuplogo2 from '@/images/oneup2.png';
 import { Container, Grid, Space } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
@@ -16,21 +16,20 @@ export default function Home() {
 
   return (
     <>
-      <MainCards />
-      <Community />
-
+      <MainSection />
+      <CommunitySection />
       {
         isMd ?
           <>
             <Container fluid bg={'#E9ECEF'}>
               <Grid>
                 <Grid.Col span={12}>
-                  <Feed sort={'created'} tag={'hive-102223'} />
+                  <FeedSection sort={'created'} tag={'hive-102223'} />
                 </Grid.Col>
               </Grid>
             </Container>
             <Container fluid bg={'linear-gradient(to bottom, #E9ECEF, #072f37)'}>
-              <RecommendedCardsGrid />
+              <RecommendedSection />
             </Container>
           </>
           :
@@ -39,7 +38,7 @@ export default function Home() {
               <Container size="xl">
                 <Grid>
                   <Grid.Col span={9}>
-                    <Feed sort={'created'} tag={'hive-102223'} />
+                    <FeedSection sort={'created'} tag={'hive-102223'} />
                   </Grid.Col>
                   <Grid.Col span={3}>
                     <div style={{ position: 'sticky', top: '0' }}>
@@ -52,13 +51,11 @@ export default function Home() {
             </Container>
             <Container fluid bg={'linear-gradient(to bottom, #E9ECEF, #072f37)'}>
               <Container size="xl">
-                <RecommendedCardsGrid />
+                <RecommendedSection />
               </Container>
             </Container>
           </>
       }
-
-
     </>
   )
 }

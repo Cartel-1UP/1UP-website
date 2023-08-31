@@ -1,4 +1,4 @@
-export interface UserMetaData {
+export type UserMetaData = {
     profile: {
         about: string
         blacklist_description: []
@@ -11,15 +11,15 @@ export interface UserMetaData {
     }
 }
 
-export interface UserStats {
+export type UserStats = {
     followers: number
     following: number
     rank: number
 }
 
-export interface User {
+export type User = {
     id: number
-    result: {
+    result?: {
         active: string
         blacklist: []
         created: string

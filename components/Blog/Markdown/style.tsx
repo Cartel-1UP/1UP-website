@@ -8,6 +8,8 @@ const useStyles = createStyles((theme) => ({
     margin: '20px 0',
     maxWidth: '100%',
     height: 'auto',
+    width: 'auto',
+
   },
 
   centeredImage: {

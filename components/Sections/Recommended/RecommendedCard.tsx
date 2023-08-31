@@ -1,7 +1,7 @@
 import { UsersChoiceCard } from '@/types/blog.type';
 import { AspectRatio, Avatar, Badge, Card, Container, Grid, Group, Image, Indicator, Text } from '@mantine/core';
 import Link from 'next/link';
-import useStyles from '../style';
+import useStyles from './style';
 
 type CardProps = {
   article: UsersChoiceCard;

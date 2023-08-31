@@ -1,12 +1,12 @@
+import { comumnityData } from '@/data/communityData';
 import { Carousel } from '@mantine/carousel';
 import { Container, useMantineTheme } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
 import Autoplay from 'embla-carousel-autoplay';
 import { useRef } from 'react';
-import { comumnityData } from '../../../data/communityData';
 import CommunityCard from './CommunityCard';
 
-export function Community() {
+export function CommunitySection() {
   const theme = useMantineTheme();
   const isMobile = useMediaQuery(`(max-width: ${theme.breakpoints.sm}px)`);
 

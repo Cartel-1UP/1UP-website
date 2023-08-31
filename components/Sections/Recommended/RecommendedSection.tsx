@@ -1,10 +1,10 @@
 import { useGetUsersChoice } from '@/actions/database/get-userschoice'
 import { UsersChoiceCard } from '@/types/blog.type'
 import { Card, Grid, SimpleGrid, Skeleton, Space, Text } from '@mantine/core'
-import { RecommendedCard } from './RecommendedCard/RecommendedCard'
+import { RecommendedCard } from './RecommendedCard'
 import useStyles from './style'
 
-export function RecommendedCardsGrid() {
+export function RecommendedSection() {
   const { classes, theme } = useStyles()
   const { isLoading, data } = useGetUsersChoice()
 

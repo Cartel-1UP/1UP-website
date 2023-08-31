@@ -16,11 +16,13 @@ export function Markdown({ text }: Props) {
   const imageRegex = /!\[(.*?)\]\((?!.*\*.*)(.*?)\)/gi;
   const youtubeRegex = /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be)\/.+/;
   const steemitRegex = /^(https?:\/\/)?(www\.)?(steemitimages\.com)\/.+/;
-  const ecencyRegex = /^(https?:\/\/)?(www\.)?(images.ecency\.com)\/.+/;
+  const ecencyRegex = /^(https?:\/\/)?(www\.)?(images\.ecency\.com)\/.+/;
+  const imagesDiscordApp = /^(https?:\/\/)?(www\.)?(images-ext-2\.discordapp\.net)\/.+/;
+  const hiveBlog = /^(https?:\/\/)?(www\.)?(images\.hive\.blog)\/.+/;
 
   const markdownBody = useMemo(() => {
     const replacedBody = text.replace(imageRegex, (match, alt, url) => {
-      if (url.match(/\.(png|jpe?g|gif|bmp|svg|webp)$/i)) {
+      if (url.match(/\.(png|jpe?g|gif|bmp|svg|webp)$/i) || url.match(steemitRegex) || url.match(ecencyRegex)) {
         return `<div class="${classes.image}"><Image alt="${alt}" src="${url}" className="${classes.responsiveImage}" /></div>`;
       } else {
         return match;
@@ -35,7 +37,7 @@ export function Markdown({ text }: Props) {
         components={{
           // Render the anchor element for the "a" Markdown element
           a: ({ href, children }: any) => {
-            if (href.match(/\.(jpg|jpeg|png|gif|bmp|svg)$/i) || href.match(steemitRegex) || href.match(ecencyRegex)) {
+            if (href.match(/\.(jpg|jpeg|png|gif|bmp|svg)$/i) || href.match(steemitRegex) || href.match(ecencyRegex) || href.match(imagesDiscordApp) || href.match(hiveBlog)) {
               const width = 'auto';
               const height = 'auto';
 

@@ -9,7 +9,7 @@ import { IconArrowBack, IconHeart, IconMessage } from '@tabler/icons';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
-import useStyles from '../style';
+import useStyles from './style';
 
 interface Props {
   article: HiveArticle;

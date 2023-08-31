@@ -12,7 +12,7 @@ import { Comment } from '../../../types/blog.interface';
 import { useAuthorizationStore } from '../../../zustand/stores/useAuthorizationStore';
 import CommentEditor from '../../ui/CommentEditor/CommentEditor';
 import { VoteSlider } from '../../ui/VoteSlider/VoteSlider';
-import { Markdown } from '../MarkdownReplacer/Markdown';
+import { Markdown } from '../Markdown/Markdown';
 import useStyles from './style';
 
 interface CommentProps {
