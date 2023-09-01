@@ -11,8 +11,8 @@ import React, { useState } from 'react';
 import { Comment } from '../../../types/blog.interface';
 import { useAuthorizationStore } from '../../../zustand/stores/useAuthorizationStore';
 import CommentEditor from '../../ui/CommentEditor/CommentEditor';
+import { Markdown } from '../../ui/Markdown/Markdown';
 import { VoteSlider } from '../../ui/VoteSlider/VoteSlider';
-import { Markdown } from '../Markdown/Markdown';
 import useStyles from './style';
 
 interface CommentProps {

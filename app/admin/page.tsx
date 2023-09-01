@@ -1,6 +1,5 @@
-import { AdminPage } from "../../components/Grids/Admin/Admin/AdminPage";
-import { AdminPanel } from "../../components/Grids/Admin/AdminPanel";
-
+import { AdminPage } from "@/components/Admin/Admin/AdminPage";
+import { AdminPanel } from "@/components/Admin/AdminPanel";
 
 export const runtime = 'experimental-edge';
 

@@ -21,7 +21,8 @@ export function DefaultSnackbar({ id, title, message, queryKey, color }: Props) 
     useEffect(() => {
         const timeout = setTimeout(() => {
             removeSnackbar(id);
-            queryKey && queryCache.invalidateQueries(queryKey);
+            console.log(queryKey)
+            queryKey ? queryCache.invalidateQueries(queryKey) : null;
         }, 10000);
 
         return () => {
