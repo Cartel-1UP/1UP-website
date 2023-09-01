@@ -25,7 +25,7 @@ export const getBlog = async ({ author, permlink }: Post): Promise<{ data: HiveA
 
 export const useGetBlog = ({ author, permlink }: Post) => {
     const queryFn = () => getBlog({ author, permlink });
-    return useQuery(['blog-data', author, permlink], queryFn, {
+    return useQuery(['blog-data'], queryFn, {
         refetchOnWindowFocus: false,
         retry: false,
         keepPreviousData: true,

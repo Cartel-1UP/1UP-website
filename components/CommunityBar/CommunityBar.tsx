@@ -3,7 +3,7 @@ import { AspectRatio, Avatar, Badge, Card, Divider, Group, Image, Text, ThemeIco
 import { useMediaQuery } from "@mantine/hooks";
 import { IconMessage2, IconPigMoney, IconUsers } from "@tabler/icons";
 import { useQuery } from "react-query";
-import { Markdown } from "../Blog/Markdown/Markdown";
+import { Markdown } from "../ui/Markdown/Markdown";
 import useStyles from "./style";
 
 type Props = {

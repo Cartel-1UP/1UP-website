@@ -21,6 +21,8 @@ export const getFollowing = async (account: string): Promise<string[]> => {
                 id: 1,
             });
 
+            console.log(response)
+
             const result = response.data.result;
             const fetchedAccounts = result.map((entry: any) => entry.following);
 
@@ -47,9 +49,7 @@ export const getFollowing = async (account: string): Promise<string[]> => {
 
 export const useGetFollowing = (username: string) => {
     const queryFn = () => getFollowing(username);
-    return useQuery(['following-data', username], queryFn, {
-        refetchOnWindowFocus: false,
-        retry: false,
-        keepPreviousData: true,
+    return useQuery(['following-data'], queryFn, {
+        refetchOnWindowFocus: false
     });
 };

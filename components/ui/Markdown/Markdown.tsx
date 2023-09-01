@@ -7,7 +7,7 @@ import gfm from 'remark-gfm';
 
 import useStyles from './style';
 
-interface Props {
+type Props = {
   text: string;
 }
 
@@ -22,13 +22,12 @@ export function Markdown({ text }: Props) {
 
   const markdownBody = useMemo(() => {
     const replacedBody = text.replace(imageRegex, (match, alt, url) => {
-      if (url.match(/\.(png|jpe?g|gif|bmp|svg|webp)$/i) || url.match(steemitRegex) || url.match(ecencyRegex)) {
+      if (url.match(/\.(png|jpe?g|gif|bmp|svg|webp)$/i)) {
         return `<div class="${classes.image}"><Image alt="${alt}" src="${url}" className="${classes.responsiveImage}" /></div>`;
       } else {
-        return match;
+        return match
       }
     });
-
 
     return (
       <ReactMarkdown
@@ -43,7 +42,7 @@ export function Markdown({ text }: Props) {
 
               return (
                 <div className={classes.image}>
-                  <Image src={href} alt="Image" className={classes.responsiveImage} style={{ width, height }} />
+                  <Image src={href} alt="Image" className={classes.responsiveImage} style={{ width, height, borderRadius: 5 }} />
                 </div>
               );
             }

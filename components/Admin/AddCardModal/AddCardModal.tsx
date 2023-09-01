@@ -1,7 +1,7 @@
+import { addMaincard } from '@/utils/actions/cartel';
 import { Button, Group, Modal, TextInput } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { QueryObserverResult, RefetchOptions, RefetchQueryFilters, useMutation } from 'react-query';
-import { addMaincard } from '../../../../utils/actions/cartel';
 import useStyles from '../style';
 
 type Props = {

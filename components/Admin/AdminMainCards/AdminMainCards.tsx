@@ -1,10 +1,10 @@
 'use client'
+import { fetchMaincards } from '@/utils/actions/cartel';
 import { ActionIcon, Button, SimpleGrid, Skeleton, Space, Table } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { IconPencil } from '@tabler/icons';
 import { useState } from 'react';
 import { useQuery } from 'react-query';
-import { fetchMaincards } from '../../../../utils/actions/cartel';
 import AddCardModal from '../AddCardModal/AddCardModal';
 import EditMainCardModal from '../EditCardModal/EditCardModal';
 import useStyles from './style';
@@ -84,7 +84,7 @@ export function AdminMainCards() {
           </thead>
           <tbody>
             {data &&
-              data.map((element) => (
+              data.map((element: any) => (
                 <tr key={element.id}>
                   <td>{element.author}</td>
                   <td>{element.category}</td>

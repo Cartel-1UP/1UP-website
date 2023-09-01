@@ -1,7 +1,7 @@
 'use client'
 import { useAuthorizationStore } from '@/zustand/stores/useAuthorizationStore';
 import { useNotifiactionStore } from '@/zustand/stores/useNotificationStore';
-import { useMediaQuery, useScrollIntoView } from '@mantine/hooks';
+import { useMediaQuery } from '@mantine/hooks';
 
 import { useGetBlog } from '@/actions/hive/get-blog';
 import { useGetComments } from '@/actions/hive/get-comments';
@@ -9,13 +9,14 @@ import { useGetFollowing } from '@/actions/hive/get-following';
 import { useGetUserProfile } from '@/actions/hive/get-userprofile';
 import CommentEditor from '@/components/ui/CommentEditor/CommentEditor';
 import { VoteSlider } from '@/components/ui/VoteSlider/VoteSlider';
-import { ActionIcon, Avatar, Badge, Box, Button, Card, Center, Container, Grid, Group, SimpleGrid, Skeleton, Space, Text, Title } from '@mantine/core';
+import { dateRefactor } from '@/utils/methods/dateRefactor';
+import { ActionIcon, Avatar, Badge, Box, Button, Card, Center, Container, Grid, Group, SimpleGrid, Skeleton, Space, Stack, Text, Title } from '@mantine/core';
 import { IconArrowDown, IconHeart, IconMessage } from '@tabler/icons';
 import { Custom, KeychainKeyTypes, KeychainSDK } from 'keychain-sdk';
-import { useState } from 'react';
-import { useMutation } from 'react-query';
+import { useRef, useState } from 'react';
+import { useMutation, useQueryClient } from 'react-query';
+import { Markdown } from '../ui/Markdown/Markdown';
 import CommentCard from './CommentCard/CommentCard';
-import { Markdown } from './Markdown/Markdown';
 import useStyles from './style';
 
 
@@ -31,11 +32,11 @@ export function BlogContent({ permlink, author }: Props) {
   const [isVote, setIsVote] = useState(false)
   const [isComment, setIsComment] = useState(false)
   const [successfullUpvoted, setSuccessfullUpvoted] = useState(false)
-  const [color, setColor] = useState("grey")
-  const { scrollIntoView, targetRef } = useScrollIntoView<HTMLDivElement>({ offset: 60, });
+  const queryCache = useQueryClient();
 
+  const endElementRef = useRef<HTMLDivElement>(null);
 
-  const username = useAuthorizationStore((state: { username: string; }) => state.username)
+  const username = localStorage.getItem('username') || ''
   const addSnackbar = useNotifiactionStore((state) => state.addSnackbar);
   const authorized = useAuthorizationStore((state: { authorized: boolean; }) => state.authorized)
 
@@ -44,7 +45,6 @@ export function BlogContent({ permlink, author }: Props) {
   const { data: userProfileData, isLoading: isLodingUserProfileData } = useGetUserProfile(author)
   const { data: following } = useGetFollowing(username)
 
-
   const numericalValue = parseFloat(blogData?.data?.result?.pending_payout_value);
   const roundedValue = Math.ceil(numericalValue * 100) / 100;
   const formattedCurrency = `$${roundedValue.toFixed(2)}`;
@@ -52,28 +52,35 @@ export function BlogContent({ permlink, author }: Props) {
   const handlePostFollow = useMutation<void, any, void, unknown>(
     async () => {
       const keychain = new KeychainSDK(window);
+      const isFollowing = following?.includes(author)
       const formParamsAsObject = {
         "data": {
-          "username": "kwskicky",
+          "username": `${username}`,
           "id": "follow",
           "method": KeychainKeyTypes.posting,
-          "json": `[    \"follow\",    {       \"follower\": \"${username}\",       \"following\": \"${author}\",       \"what\": [          \"blog\"       ]    } ]`,
-          "display_msg": "Follow"
+          "json": `[    "follow",    {       "follower": "${username}",       "following": "${author}",       "what": [          \"${isFollowing ? "" : "blog"}\"       ]    } ]`,
+          "required_posting_auths": [`${username}`],
+          "display_msg": isFollowing ? "Unfollow" : "Follow"
         }
       }
       await keychain.custom(formParamsAsObject.data as Custom).then(
-        (response) => {
-          console.log(response)
+        () => {
+          const timeout = setTimeout(() => {
+            queryCache.invalidateQueries('following-data');
+          }, 10000);
+          return () => {
+            clearTimeout(timeout);
+          };
         }
       );
     },
     {
       onSuccess: () => {
+        const isFollowing = following?.includes(author)
         addSnackbar({
           id: '3',
           title: 'Success',
-          message: 'Your followed corectly',
-          queryKey: 'blog-data'
+          message: `You ${isFollowing ? 'unfollowed' : 'followed'}: ${author}`
         });
       },
       onError: (e: any) => {
@@ -81,7 +88,6 @@ export function BlogContent({ permlink, author }: Props) {
       }
     }
   );
-
 
   return (
     <>
@@ -133,29 +139,34 @@ export function BlogContent({ permlink, author }: Props) {
               <Grid.Col span={isMd ? 12 : 9}>
                 <SimpleGrid cols={1} spacing={0} >
                   <Card p="md" radius={0} className={classes.cardHeader}>
-                    <Grid grow>
-                      <Grid.Col span={10}>
-                        <Title order={2}>
-                          {blogData?.data?.result.title}<Text span fz="sm" inherit style={{ verticalAlign: 'middle' }}> </Text>
-                        </Title>
-                        <Space h="md" />
-                        <Badge color="gray" variant="outline" size="md">comments {blogData?.data?.result.children}</Badge>
-                        <Badge color="gray" variant="outline" ml={10} size="md">votes {blogData?.data?.result.stats.total_votes}</Badge>
-                      </Grid.Col>
-                      <Grid.Col span={2}>
-                        <Box
-                          sx={(theme) => ({
-                            backgroundColor: theme.colors.gray[0],
-                            textAlign: 'center',
-                            borderRadius: theme.radius.md,
-                          })}
-                        >
-                          <Text className={classes.text}>
-                            {blogData?.time} MINS READ
-                          </Text>
-                        </Box>
-                      </Grid.Col>
-                    </Grid>
+                    <Container>
+                      <Grid grow>
+                        <Grid.Col span={10}>
+                          <Title color={'dimmed'} order={4}>{dateRefactor(blogData?.data?.result.created.slice(0, 10))}</Title>
+                          <Space h="sm" />
+                          <Title order={2}>
+                            {blogData?.data?.result.title}
+                          </Title>
+                          <Space h="md" />
+                          <Badge c={'#ffffff'} bg={'#02505f'} radius={5} mr={5}>comments {blogData?.data?.result.children}</Badge>
+                          <Badge c={'#ffffff'} bg={'#02505f'} radius={5}>votes {blogData?.data?.result.stats.total_votes}</Badge>
+                        </Grid.Col>
+                        <Grid.Col span={2}>
+                          <Box
+                            sx={(theme) => ({
+                              backgroundColor: '#02505f',
+                              color: '#ffffff',
+                              textAlign: 'center',
+                              borderRadius: theme.radius.sm,
+                            })}
+                          >
+                            <Text className={classes.text}>
+                              {blogData?.time} MINS READ
+                            </Text>
+                          </Box>
+                        </Grid.Col>
+                      </Grid>
+                    </Container>
                   </Card>
                   <Card withBorder p="md" radius={0} className={classes.card}>
                     <Container>
@@ -209,7 +220,15 @@ export function BlogContent({ permlink, author }: Props) {
                           </Text>
                         </Group>
                         <Group spacing={1}>
-                          <ActionIcon color="dark" onClick={() => scrollIntoView({ alignment: 'end' })}>
+                          <ActionIcon color="dark"
+                            onClick={() => {
+                              endElementRef.current &&
+                                endElementRef.current.scrollIntoView({
+                                  behavior: 'smooth',
+                                  block: 'end',
+                                  inline: 'nearest'
+                                });
+                            }}>
                             <IconArrowDown size="1.125rem" />
                           </ActionIcon>
                         </Group>
@@ -228,13 +247,14 @@ export function BlogContent({ permlink, author }: Props) {
                       }
                     </Card>
                   </div>
+                  <div ref={endElementRef}></div>
                   <CommentCard comments={commentsData} permlink={permlink} article={blogData?.data?.result} queryKey={'comments-data'} />
                 </SimpleGrid>
               </Grid.Col>
-              <Grid.Col span={isMd ? 12 : 3}>
+              <Grid.Col span={isMd ? 12 : 3} >
                 {!isMd &&
                   <div style={{ position: 'sticky', top: '10px' }}>
-                    <Card withBorder p="xl" radius="md">
+                    <Card p="xl" radius="md">
                       {
                         userProfileData?.result?.metadata.profile.cover_image ?
                           <Card.Section sx={{ backgroundImage: `url(${userProfileData?.result?.metadata.profile.cover_image})`, height: 140 }} />
@@ -250,34 +270,35 @@ export function BlogContent({ permlink, author }: Props) {
                       </Text>
                       <Grid grow pt={25}>
                         <Grid.Col span={4}>
-                          <Text align="center" size="sm" color="dimmed">
-                            Followers
-                          </Text>
+                          <Stack spacing={4}>
+                            <Text align="center" size="sm" color="dimmed">
+                              Followers
+                            </Text>
+                            <Text align="center" size="lg" weight={500} pt={0}>
+                              {userProfileData?.result?.stats.followers}
+                            </Text>
+                          </Stack>
+
                         </Grid.Col>
                         <Grid.Col span={4}>
-                          <Text align="center" size="sm" color="dimmed">
-                            Follows
-                          </Text>
+                          <Stack spacing={4}>
+                            <Text align="center" size="sm" color="dimmed">
+                              Follows
+                            </Text>
+                            <Text align="center" size="lg" weight={500}>
+                              {userProfileData?.result?.stats.following}
+                            </Text>
+                          </Stack>
                         </Grid.Col>
                         <Grid.Col span={4}>
-                          <Text align="center" size="sm" color="dimmed">
-                            Posts
-                          </Text>
-                        </Grid.Col>
-                        <Grid.Col span={4}>
-                          <Text align="center" size="lg" weight={500} pt={0}>
-                            {userProfileData?.result?.stats.followers}
-                          </Text>
-                        </Grid.Col>
-                        <Grid.Col span={4}>
-                          <Text align="center" size="lg" weight={500}>
-                            {userProfileData?.result?.stats.following}
-                          </Text>
-                        </Grid.Col>
-                        <Grid.Col span={4}>
-                          <Text align="center" size="lg" weight={500}>
-                            {userProfileData?.result?.post_count}
-                          </Text>
+                          <Stack spacing={4}>
+                            <Text align="center" size="sm" color="dimmed">
+                              Posts
+                            </Text>
+                            <Text align="center" size="lg" weight={500}>
+                              {userProfileData?.result?.post_count}
+                            </Text>
+                          </Stack>
                         </Grid.Col>
                       </Grid>
                       <Button
@@ -286,7 +307,7 @@ export function BlogContent({ permlink, author }: Props) {
                         radius="md"
                         mt="xl"
                         size="md"
-                        color={theme.colorScheme === 'dark' ? undefined : 'dark'}
+                        color={'dark'}
                         onClick={() => handlePostFollow.mutate()}
                       >
                         {following?.includes(author) ? 'Unfollow' : 'Follow'}

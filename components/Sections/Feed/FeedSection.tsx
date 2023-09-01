@@ -95,7 +95,6 @@ export function FeedSection({ sort, tag, isCommunity }: Props) {
     },
     {
       onSuccess: (newArticles) => {
-        console.log(newArticles)
         if (newArticles.length < 1) {
           return (
             addSnackbar({
