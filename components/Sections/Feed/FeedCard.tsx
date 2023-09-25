@@ -18,7 +18,7 @@ import {
   ThemeIcon,
 } from '@mantine/core'
 import { useMediaQuery } from '@mantine/hooks'
-import { IconArrowBack, IconHeart, IconMessage } from '@tabler/icons'
+import { IconArrowBack, IconBookmark, IconBookmarkOff, IconHeart, IconMessage } from '@tabler/icons'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 
@@ -57,6 +57,52 @@ export function FeedCard({ article }: Props) {
   })
   const bodyOfArticle = filteredBody.join(' ')
 
+  const storedBookmarksJSON = localStorage.getItem('bookmarks');
+  const storedBookmarks = storedBookmarksJSON ? JSON.parse(storedBookmarksJSON) : [];
+  const isInBookmarks = storedBookmarks.includes(article.permlink);
+
+
+  const toggleBookmark = () => {
+    const storedBookmarksJSON = localStorage.getItem('bookmarks');
+    const storedBookmarks = storedBookmarksJSON ? JSON.parse(storedBookmarksJSON) : [];
+    const isInBookmarks = storedBookmarks.includes(article.permlink);
+
+    if (!isInBookmarks) {
+      const newBookmarks = [...storedBookmarks, article.permlink];
+      localStorage.setItem('bookmarks', JSON.stringify(newBookmarks));
+      addSnackbar({
+        id: '5',
+        title: 'Bookmark added',
+        message: `You've successfully added this blog post to your bookmarks`,
+        queryKey: undefined,
+        color: 'green',
+        time: 3000
+      })
+    } else {
+      const updatedBookmarks = storedBookmarks.filter((bookmark: string) => bookmark !== article.permlink);
+      localStorage.setItem('bookmarks', JSON.stringify(updatedBookmarks));
+      addSnackbar({
+        id: '6',
+        title: 'Bookmark deleted',
+        message: `You've successfully deleted this blog post from your bookmarks`,
+        queryKey: undefined,
+        color: 'green',
+        time: 3000
+      })
+    }
+
+
+  };
+
+
+
+
+
+  // Function to add or delete a bookmark
+
+
+
+
   useEffect(() => {
     if (Array.isArray(article?.json_metadata.image) && article?.json_metadata.image.length === 0) {
       setIsImageExists(false)
@@ -81,7 +127,7 @@ export function FeedCard({ article }: Props) {
                   <Text size={'sm'} weight={400}>
                     Rebbloged by{' '}
                     <Text span c="blue" inherit>
-                      @{article.reblogged_by[0]}
+                      <a href={`https://peakd.com/@${article.reblogged_by[0]}`} className={classes.peakdLink} target="_blank" rel="noopener noreferrer">@{article.reblogged_by[0]}</a>
                     </Text>
                   </Text>
                 </Group>
@@ -145,10 +191,10 @@ export function FeedCard({ article }: Props) {
           <Container>
             {article?.json_metadata.tags
               ? article?.json_metadata.tags.slice(0, 3).map?.((item: string) => (
-                  <Badge mr={5} radius={5} color="gray" key={item}>
-                    {item}
-                  </Badge>
-                ))
+                <Badge mr={5} radius={5} color="gray" key={item}>
+                  {item}
+                </Badge>
+              ))
               : null}
           </Container>
         </Grid.Col>
@@ -161,12 +207,13 @@ export function FeedCard({ article }: Props) {
                   authorized
                     ? setIsVote(!isVote)
                     : addSnackbar({
-                        id: '1',
-                        title: 'Warning',
-                        message: 'You have to login to upvote post!',
-                        queryKey: undefined,
-                        color: 'red',
-                      })
+                      id: '1',
+                      title: 'Warning',
+                      message: 'You have to login to upvote post!',
+                      queryKey: undefined,
+                      color: 'red',
+                      time: 3000
+                    })
                 }
               />
             </span>
@@ -179,12 +226,13 @@ export function FeedCard({ article }: Props) {
                   authorized
                     ? setIsComment(!isComment)
                     : addSnackbar({
-                        id: '2',
-                        title: 'Warning',
-                        message: 'You have to login to add comment!',
-                        queryKey: undefined,
-                        color: 'red',
-                      })
+                      id: '2',
+                      title: 'Warning',
+                      message: 'You have to login to add comment!',
+                      queryKey: undefined,
+                      color: 'red',
+                      time: 3000
+                    })
                 }
               />
             </span>
@@ -193,6 +241,43 @@ export function FeedCard({ article }: Props) {
             <Text color="dimmed" align={'right'}>
               {formattedCurrency}
             </Text>
+            <Space w="sm" />
+            <span className={classes.icon}>
+              {isInBookmarks ?
+                <IconBookmarkOff
+                  size={'1.1rem'}
+                  onClick={() =>
+                    authorized
+                      ?
+                      toggleBookmark() :
+                      addSnackbar({
+                        id: '3',
+                        title: 'Warning',
+                        message: 'You have to login to save bookmark!',
+                        queryKey: undefined,
+                        color: 'red',
+                        time: 3000
+                      })
+                  }
+                />
+                :
+                <IconBookmark
+                  size={'1.1rem'}
+                  onClick={() =>
+                    authorized
+                      ?
+                      toggleBookmark() :
+                      addSnackbar({
+                        id: '4',
+                        title: 'Warning',
+                        message: 'You have to login to save bookmark!',
+                        queryKey: undefined,
+                        color: 'red',
+                        time: 3000
+                      })
+                  }
+                />}
+            </span>
           </Container>
         </Grid.Col>
       </Grid>

@@ -10,18 +10,21 @@ interface Props {
   message: string
   queryKey?: string
   color?: string
+  time?: number
 }
 
-export function DefaultSnackbar({ id, title, message, queryKey, color }: Props) {
+export function DefaultSnackbar({ id, title, message, queryKey, color, time }: Props) {
   const { classes, theme } = useStyles()
   const { removeSnackbar } = useNotifiactionStore((state) => state)
   const queryCache = useQueryClient()
+
+  console.log(time)
 
   useEffect(() => {
     const timeout = setTimeout(() => {
       removeSnackbar(id)
       queryKey ? queryCache.invalidateQueries(queryKey) : null
-    }, 10000)
+    }, time ? time : 10000)
 
     return () => {
       clearTimeout(timeout)

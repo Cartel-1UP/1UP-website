@@ -7,6 +7,7 @@ type Snackbar = {
   message: string
   queryKey?: string
   color?: string
+  time?: number
 }
 
 type NotificationStoreState = {

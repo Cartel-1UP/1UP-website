@@ -38,13 +38,13 @@ export function Navbar() {
                 <Group spacing={0}></Group>
               </Center>
             </Grid.Col>
-            <Grid.Col span={isMd ? 9 : 6}>
+            <Grid.Col span={isMd ? 8 : 6}>
               <Link href={''}>
                 <Image src={oneuplogo.src} alt="Logo" fit="contain" />
               </Link>
             </Grid.Col>
-            <Grid.Col span={3} pr={20} sx={{ display: 'flex', justifyContent: 'right' }}>
-              <Group className={classes.hiddenMobile}>
+            <Grid.Col span={isMd ? 4 : 3} pr={20} sx={{ display: 'flex', justifyContent: 'right' }}>
+              <Group className={classes.hiddenMobileLogin}>
                 {authorized ? (
                   <Menu
                     width={260}
@@ -58,7 +58,6 @@ export function Navbar() {
                       <UserButton
                         image={userImage}
                         name={username}
-                        className={classes.hiddenMobileLogin}
                         mana={userMana}
                         reputation={userReputation}
                       />
