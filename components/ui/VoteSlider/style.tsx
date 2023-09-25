@@ -3,9 +3,8 @@ import { createStyles } from '@mantine/styles'
 const useStyles = createStyles((theme) => ({
   buttonContainer: {
     display: 'flex',
-    justifyContent: 'flex-end'
+    justifyContent: 'flex-end',
   },
-
 }))
 
 export default useStyles

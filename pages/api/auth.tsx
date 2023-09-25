@@ -1,7 +1,7 @@
-import { Client, cryptoUtils, Signature } from '@hiveio/dhive';
-import { NextApiRequest, NextApiResponse } from 'next';
+import { Client, cryptoUtils, Signature } from '@hiveio/dhive'
+import { NextApiRequest, NextApiResponse } from 'next'
 
-const hiveClient = new Client('https://api.hive.blog');
+const hiveClient = new Client('https://api.hive.blog')
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { username, sig, ts, smartlock } = req.body
@@ -36,7 +36,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           Array.from(authorizedAccountsPosting.keys())
         )
 
-        accountsData = accountsData.map((a: { posting: { key_auths: any[]; }; }) => a.posting.key_auths[0])
+        accountsData = accountsData.map(
+          (a: { posting: { key_auths: any[] } }) => a.posting.key_auths[0]
+        )
 
         for (let i = 0; i < accountsData.length; i += 1) {
           const auth = accountsData[i]
@@ -59,8 +61,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
       return res.status(401)
     }
-  }
-  else {
+  } else {
     return 0
   }
 }

@@ -5,9 +5,8 @@ const useStyles = createStyles((theme) => ({
     position: 'fixed',
     top: '20px',
     left: '20px',
-    zIndex: 9999
+    zIndex: 9999,
   },
-
 }))
 
 export default useStyles

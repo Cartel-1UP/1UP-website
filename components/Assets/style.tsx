@@ -22,7 +22,7 @@ const useStyles = createStyles((theme) => ({
   price: {
     fontFamily: `Greycliff CF, ${theme.fontFamily}`,
     fontWeight: 400,
-    fontSize: 12
+    fontSize: 12,
   },
 }))
 

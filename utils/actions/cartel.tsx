@@ -1,60 +1,49 @@
-import { supabase } from '../../lib/supabaseClient';
+import { supabase } from '../../lib/supabaseClient'
 
 export const fetchMaincards = async () => {
   try {
-    const { data } = await supabase
-      .from("maincards")
-      .select("*");
+    const { data } = await supabase.from('maincards').select('*')
 
-    return data;
+    return data
   } catch (error: any) {
-    alert(error.message);
+    alert(error.message)
   }
-};
+}
 
 export const fetchRecommendedPosts = async () => {
   try {
-    const { data } = await supabase
-      .from("userschoice")
-      .select("*");
+    const { data } = await supabase.from('userschoice').select('*')
 
-    return data;
+    return data
   } catch (error: any) {
-    alert(error.message);
+    alert(error.message)
   }
-};
-
+}
 
 export const addMaincard = async (maincardData: any) => {
   try {
-    const { data, error } = await supabase
-      .from("maincards")
-      .insert(maincardData);
+    const { data, error } = await supabase.from('maincards').insert(maincardData)
 
     if (error) {
-      throw new Error(error.message);
+      throw new Error(error.message)
     }
 
-    return data;
+    return data
   } catch (error: any) {
-    alert(error.message);
+    alert(error.message)
   }
-};
+}
 
 export const editMaincard = async (maincardData: any) => {
   try {
-    const { data, error } = await supabase
-      .from("maincards")
-      .upsert(maincardData);
+    const { data, error } = await supabase.from('maincards').upsert(maincardData)
 
     if (error) {
-      throw new Error(error.message);
+      throw new Error(error.message)
     }
 
-    return data;
+    return data
   } catch (error: any) {
-    alert(error.message);
+    alert(error.message)
   }
-};
-
-
+}

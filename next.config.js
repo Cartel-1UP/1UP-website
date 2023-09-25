@@ -5,7 +5,7 @@ const nextConfig = {
     appDir: true,
   },
   api: {
-    bodyParser: true
+    bodyParser: true,
   },
   images: {
     remotePatterns: [

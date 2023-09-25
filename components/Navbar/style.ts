@@ -1,7 +1,6 @@
 import { createStyles } from '@mantine/styles'
 
 const useStyles = createStyles((theme) => ({
-
   hiddenMobile: {
     [theme.fn.smallerThan('md')]: {
       display: 'none',

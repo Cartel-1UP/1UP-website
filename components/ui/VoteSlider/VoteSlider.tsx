@@ -1,30 +1,31 @@
-import {
-  Button,
-  Container, Divider, Group,
-  Slider,
-  Space
-} from '@mantine/core';
-import { useMediaQuery } from '@mantine/hooks';
-import { KeychainSDK, Vote } from 'keychain-sdk';
-import { Dispatch, SetStateAction, useState } from 'react';
-import { useMutation } from 'react-query';
-import { useNotifiactionStore } from '../../../zustand/stores/useNotificationStore';
-import { DefaultSnackbar } from '../../DefaultSnackbar/DefaultSnackbar';
-import useStyles from './style';
+import { Button, Container, Divider, Group, Slider, Space } from '@mantine/core'
+import { useMediaQuery } from '@mantine/hooks'
+import { KeychainSDK, Vote } from 'keychain-sdk'
+import { Dispatch, SetStateAction, useState } from 'react'
+import { useMutation } from 'react-query'
+import { useNotifiactionStore } from '../../../zustand/stores/useNotificationStore'
+import { DefaultSnackbar } from '../../DefaultSnackbar/DefaultSnackbar'
+import useStyles from './style'
 
 type Props = {
-  setIsVote?: Dispatch<SetStateAction<boolean>> | any;
-  permlink: string;
-  author: string;
+  setIsVote?: Dispatch<SetStateAction<boolean>> | any
+  permlink: string
+  author: string
   setSuccessfullUpvoted?: Dispatch<SetStateAction<boolean>>
-  queryKey?: string;
+  queryKey?: string
 }
 
-export function VoteSlider({ setIsVote, permlink, author, setSuccessfullUpvoted, queryKey }: Props) {
-  const { classes, theme } = useStyles();
-  const [value, setValue] = useState(50);
-  const [endValue, setEndValue] = useState(50);
-  const username = localStorage.getItem('username');
+export function VoteSlider({
+  setIsVote,
+  permlink,
+  author,
+  setSuccessfullUpvoted,
+  queryKey,
+}: Props) {
+  const { classes, theme } = useStyles()
+  const [value, setValue] = useState(50)
+  const [endValue, setEndValue] = useState(50)
+  const username = localStorage.getItem('username')
   const marks = [
     { value: 0, label: '0%' },
     { value: 20, label: '20%' },
@@ -32,28 +33,27 @@ export function VoteSlider({ setIsVote, permlink, author, setSuccessfullUpvoted,
     { value: 60, label: '60%' },
     { value: 80, label: '80%' },
     { value: 100, label: '100%' },
-  ];
-  const laptop = useMediaQuery(`(max-width: ${theme.breakpoints.md}px)`);
-  const snackbars = useNotifiactionStore((state) => state.snackbars);
-  const addSnackbar = useNotifiactionStore((state) => state.addSnackbar);
+  ]
+  const laptop = useMediaQuery(`(max-width: ${theme.breakpoints.md}px)`)
+  const snackbars = useNotifiactionStore((state) => state.snackbars)
+  const addSnackbar = useNotifiactionStore((state) => state.addSnackbar)
 
   const handleRequestVote = useMutation<void, any, void, unknown>(
     async () => {
-      const keychain = new KeychainSDK(window);
+      const keychain = new KeychainSDK(window)
       const formParamsAsObject = {
-        "data": {
-          "username": username,
-          "permlink": permlink,
-          "author": author,
-          "weight": endValue * 100
-        }
+        data: {
+          username: username,
+          permlink: permlink,
+          author: author,
+          weight: endValue * 100,
+        },
       }
       return new Promise((resolve, reject) => {
         keychain.vote(formParamsAsObject.data as Vote).then((response: any) => {
-          resolve(response);
-        });
-
-      });
+          resolve(response)
+        })
+      })
     },
     {
       onSuccess: () => {
@@ -61,20 +61,20 @@ export function VoteSlider({ setIsVote, permlink, author, setSuccessfullUpvoted,
           id: '1',
           title: 'Success',
           message: 'Your upvote was sent correctly',
-          queryKey: queryKey
-        });
+          queryKey: queryKey,
+        })
 
         const timeout = setTimeout(() => {
-          setIsVote(false);
+          setIsVote(false)
           setSuccessfullUpvoted && setSuccessfullUpvoted(true)
-        }, 10500);
-        () => clearTimeout(timeout);
+        }, 10500)
+        ;() => clearTimeout(timeout)
       },
       onError: (e: any) => {
-        console.log(e);
-      }
+        console.log(e)
+      },
     }
-  );
+  )
 
   return (
     <>
@@ -115,5 +115,5 @@ export function VoteSlider({ setIsVote, permlink, author, setSuccessfullUpvoted,
         ))}
       </>
     </>
-  );
+  )
 }
