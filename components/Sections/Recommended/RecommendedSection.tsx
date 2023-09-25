@@ -49,7 +49,9 @@ export function RecommendedSection() {
           <></>
         )}
       </SimpleGrid>
-      <Card withBorder p="md" radius={0} className={classes.cardFooter}></Card>
+      <Card withBorder p="md" radius={0} className={classes.cardFooter}>
+
+      </Card>
     </>
   )
 }
