@@ -29,6 +29,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                   message={snackbar.message}
                   queryKey={snackbar.queryKey}
                   color={snackbar.color}
+                  time={snackbar.time}
                 />
               ))}
             </body>

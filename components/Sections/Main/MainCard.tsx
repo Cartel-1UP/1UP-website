@@ -23,7 +23,7 @@ export function Card({ image, title, category, author, permlink }: Props) {
         className={classes.container}
         style={{ cursor: 'pointer' }}
       >
-        <img src={image} alt={'Main'} className={classes.image} />
+        {image ? <img src={image} alt={'Main'} className={classes.image} /> : <div className={classes.image} style={{ backgroundColor: '#072f37' }}></div>}
         <div className={classes.overlay}>
           <Text className={classes.category} size="xs">
             {category}

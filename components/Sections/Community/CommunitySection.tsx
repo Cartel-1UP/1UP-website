@@ -8,7 +8,7 @@ import CommunityCard from './CommunityCard'
 
 export function CommunitySection() {
   const theme = useMantineTheme()
-  const isMobile = useMediaQuery(`(max-width: ${theme.breakpoints.sm}px)`)
+  const isSm = useMediaQuery(`(max-width: ${theme.breakpoints.sm}px)`)
 
   const autoplayOptions = {
     delay: 100,
@@ -20,7 +20,7 @@ export function CommunitySection() {
 
   return (
     <>
-      {!isMobile && (
+      {!isSm && (
         <Container fluid bg={'linear-gradient(to bottom, #275c672d, #275c67bb)'} pt={10} pb={30}>
           <Container size="xl">
             <Carousel

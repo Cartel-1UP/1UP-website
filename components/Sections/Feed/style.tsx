@@ -33,6 +33,15 @@ const useStyles = createStyles((theme) => ({
     },
   },
 
+
+  peakdLink: {
+    color: '#228be6',
+    textDecoration: 'none',
+    '&:hover': {
+      textDecoration: 'underline',
+    },
+  },
+
   headerContainer: {
     display: 'flex',
     flexDirection: 'row',
@@ -60,9 +69,10 @@ const useStyles = createStyles((theme) => ({
   },
 
   icon: {
+    paddingTop: 2.1,
     margin: '2px',
     color: 'grey',
-    fontSize: '1px',
+    fontSize: '0',
     '&:hover': {
       cursor: 'pointer',
       color: '#072f37',

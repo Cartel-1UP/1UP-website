@@ -8,7 +8,7 @@ const useStyles = createStyles((theme) => ({
   },
 
   hiddenMobileLogin: {
-    [theme.fn.smallerThan('lg')]: {
+    [theme.fn.smallerThan('sm')]: {
       display: 'none',
     },
   },
