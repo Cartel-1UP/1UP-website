@@ -1,11 +1,11 @@
+import { generateRandomLetters } from '@/utils/methods/generateRandom'
+import { useAuthorizationStore } from '@/zustand/stores/useAuthorizationStore'
+import { useNotifiactionStore } from '@/zustand/stores/useNotificationStore'
 import { ActionIcon, Button, Container, Divider, Grid, Group, Space, Textarea } from '@mantine/core'
 import { IconBold, IconHeading, IconItalic, IconLink, IconPhotoDown } from '@tabler/icons'
 import { KeychainSDK, Post } from 'keychain-sdk'
 import React, { Dispatch, SetStateAction, useRef, useState } from 'react'
 import { useMutation } from 'react-query'
-import { generateRandomLetters } from '../../../utils/methods/generateRandom'
-import { useAuthorizationStore } from '../../../zustand/stores/useAuthorizationStore'
-import { useNotifiactionStore } from '../../../zustand/stores/useNotificationStore'
 import useStyles from './style'
 
 type Tag = {
@@ -103,7 +103,7 @@ const CommentEditor = ({ setIsComment, permlink, parentAuthor, queryKey }: Props
           setIsComment(false)
           setMarkdown('')
         }, 4000)
-        ;() => clearTimeout(timeout)
+          ; () => clearTimeout(timeout)
       },
       onError: (e: any) => {
         console.log(e)

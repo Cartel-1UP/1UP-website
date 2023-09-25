@@ -1,5 +1,6 @@
-import { AssetsPage } from '../../components/Grids/Assets/AssetsPage/AssetsPage'
-import { AssetsSection } from '../../components/Grids/Assets/AssetsSection'
+import { AssetsPage } from "@/components/Assets/AssetsPage/AssetsPage"
+import { AssetsSection } from "@/components/Assets/AssetsSection"
+
 
 export const runtime = 'experimental-edge'
 

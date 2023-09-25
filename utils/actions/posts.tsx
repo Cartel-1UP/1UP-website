@@ -1,5 +1,5 @@
+import { Article } from '@/types/blog.interface'
 import { Posts } from '@/types/blog.type'
-import { Article } from '../../types/blog.interface'
 import apiHive from '../apiHive'
 
 interface Post {
@@ -23,7 +23,7 @@ export async function getMultiPosts({ ...props }: Posts) {
       id: 1,
     })
     return data
-  } catch {}
+  } catch { }
 }
 
 export async function getMultiFeedPosts({ ...props }: Posts) {
@@ -41,7 +41,7 @@ export async function getMultiFeedPosts({ ...props }: Posts) {
       id: 1,
     })
     return data
-  } catch {}
+  } catch { }
 }
 
 export async function getPosts({ ...props }: Posts) {
@@ -57,7 +57,7 @@ export async function getPosts({ ...props }: Posts) {
       id: 1,
     })
     return data
-  } catch {}
+  } catch { }
 }
 
 export async function postComment({ ...props }: Posts) {
@@ -73,7 +73,7 @@ export async function postComment({ ...props }: Posts) {
       id: 1,
     })
     return data
-  } catch {}
+  } catch { }
 }
 
 export async function getPost({ ...props }: Post): Promise<{ data: Article; time: number }> {

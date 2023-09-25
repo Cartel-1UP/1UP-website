@@ -1,9 +1,9 @@
+import { useNotifiactionStore } from '@/zustand/stores/useNotificationStore'
 import { Button, Container, Divider, Group, Slider, Space } from '@mantine/core'
 import { useMediaQuery } from '@mantine/hooks'
 import { KeychainSDK, Vote } from 'keychain-sdk'
 import { Dispatch, SetStateAction, useState } from 'react'
 import { useMutation } from 'react-query'
-import { useNotifiactionStore } from '../../../zustand/stores/useNotificationStore'
 import { DefaultSnackbar } from '../../DefaultSnackbar/DefaultSnackbar'
 import useStyles from './style'
 
@@ -68,7 +68,7 @@ export function VoteSlider({
           setIsVote(false)
           setSuccessfullUpvoted && setSuccessfullUpvoted(true)
         }, 10500)
-        ;() => clearTimeout(timeout)
+          ; () => clearTimeout(timeout)
       },
       onError: (e: any) => {
         console.log(e)

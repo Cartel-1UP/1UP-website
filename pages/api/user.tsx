@@ -1,5 +1,5 @@
+import apiHive from '@/utils/apiHive'
 import { NextApiRequest, NextApiResponse } from 'next'
-import apiHive from '../../utils/apiHive'
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { ...body } = req.body
