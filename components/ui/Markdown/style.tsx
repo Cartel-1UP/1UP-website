@@ -9,7 +9,6 @@ const useStyles = createStyles((theme) => ({
     maxWidth: '100%',
     height: 'auto',
     width: 'auto',
-
   },
 
   centeredImage: {
@@ -55,7 +54,41 @@ const useStyles = createStyles((theme) => ({
     },
   },
 
-
+  blockquote: {
+    display: 'flex',
+    alignItems: 'center',
+    padding: theme.spacing.xs,
+    paddingLeft: theme.spacing.md,
+    borderLeft: `4px solid ${theme.colors.blue[6]}`,
+    backgroundColor: theme.colors.blue[0],
+    borderRadius: theme.radius.sm,
+    marginBottom: theme.spacing.md,
+  },
+  blockquoteIcon: {
+    fontSize: 24,
+    marginRight: theme.spacing.xs,
+    color: theme.colors.blue[6],
+  },
+  blockquoteText: {
+    fontSize: theme.fontSizes.sm,
+    fontWeight: 500,
+    color: theme.colors.gray[7],
+  },
+  code: {
+    display: 'flex',
+    alignItems: 'center',
+    backgroundColor: theme.colors.gray[0],
+    borderRadius: theme.radius.sm,
+    padding: theme.spacing.xs,
+    marginBottom: theme.spacing.md,
+    width: '100%', // Set the width to 100% to prevent it from overflowing.
+    overflowX: 'auto', // Add horizontal scrollbar if content overflows.
+  },
+  hr: {
+    border: 0,
+    borderTop: `1px solid ${theme.colors.gray[2]}`,
+    margin: `${theme.spacing.md}px 0`,
+  },
 }))
 
 export default useStyles

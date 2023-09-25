@@ -1,7 +1,6 @@
 import { createStyles } from '@mantine/styles'
 
 const useStyles = createStyles((theme, _params, getRef) => ({
-
   container: {
     position: 'relative',
     height: 400,
@@ -15,16 +14,14 @@ const useStyles = createStyles((theme, _params, getRef) => ({
 
     [`&:hover .${getRef('overlay')}`]: {
       transition: '0.3s linear',
-      opacity: 1
+      opacity: 1,
     },
-
 
     [`&:hover .${getRef('image')}`]: {
       transition: '0.3s linear',
       filter: 'brightness(60%)',
       boxShadow: '0 0 10px 0 #00000081',
     },
-
   },
 
   image: {
@@ -53,7 +50,6 @@ const useStyles = createStyles((theme, _params, getRef) => ({
     borderRadius: '0 0 10px 10px',
   },
 
-
   title: {
     ref: getRef('title'),
     fontFamily: `Greycliff CF, ${theme.fontFamily}`,
@@ -65,7 +61,6 @@ const useStyles = createStyles((theme, _params, getRef) => ({
     [theme.fn.smallerThan('sm')]: {
       fontSize: 24,
     },
-
   },
 
   link: {
@@ -83,7 +78,7 @@ const useStyles = createStyles((theme, _params, getRef) => ({
     color: theme.white,
     opacity: 0.7,
     fontWeight: 700,
-    textTransform: 'uppercase'
+    textTransform: 'uppercase',
   },
 }))
 

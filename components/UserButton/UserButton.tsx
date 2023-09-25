@@ -1,12 +1,12 @@
-import { Avatar, Badge, Group, Text, UnstyledButton } from '@mantine/core';
-import { IconChevronRight } from '@tabler/icons';
-import { forwardRef } from 'react';
+import { Avatar, Badge, Group, Text, UnstyledButton } from '@mantine/core'
+import { IconChevronRight } from '@tabler/icons'
+import { forwardRef } from 'react'
 
 interface UserButtonProps extends React.ComponentPropsWithoutRef<'button'> {
-  image: string;
-  name: string;
-  icon?: React.ReactNode;
-  mana: number;
+  image: string
+  name: string
+  icon?: React.ReactNode
+  mana: number
   reputation: number
 }
 
@@ -34,14 +34,22 @@ const UserButton = forwardRef<HTMLButtonElement, UserButtonProps>(
         <Avatar src={image} radius="xl" />
         <div style={{ flex: 1 }}>
           <Text size="sm" weight={500}>
-            {name} <Badge sx={(theme) => ({ padding: 5 })} ml={5} radius="sm" color="gray" variant="outline">{reputation.toFixed()}</Badge>
+            {name}{' '}
+            <Badge
+              sx={(theme) => ({ padding: 5 })}
+              ml={5}
+              radius="sm"
+              color="gray"
+              variant="outline"
+            >
+              {reputation.toFixed()}
+            </Badge>
           </Text>
         </div>
         {icon || <IconChevronRight size={16} />}
       </Group>
     </UnstyledButton>
   )
-);
+)
 
-export { UserButton };
-
+export { UserButton }

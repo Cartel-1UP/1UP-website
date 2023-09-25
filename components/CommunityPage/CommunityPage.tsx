@@ -1,11 +1,10 @@
+import { CommunityBar } from '@/components/CommunityBar/CommunityBar'
+import { FeedSection } from '@/components/Sections/Feed/FeedSection'
+import { comumnityData } from '@/data/communityData'
+import { Container, Grid, Space } from '@mantine/core'
+import { useMediaQuery } from '@mantine/hooks'
 
-import { CommunityBar } from '@/components/CommunityBar/CommunityBar';
-import { FeedSection } from '@/components/Sections/Feed/FeedSection';
-import { comumnityData } from '@/data/communityData';
-import { Container, Grid, Space } from '@mantine/core';
-import { useMediaQuery } from '@mantine/hooks';
-
-import useStyles from './style';
+import useStyles from './style'
 
 interface Props {
   image: string
@@ -14,9 +13,8 @@ interface Props {
 
 export function CommunityPage({ image, tag }: Props) {
   const { classes, theme } = useStyles()
-  const isMd = useMediaQuery(`(max-width: ${theme.breakpoints.md}px)`);
-  const result = comumnityData.filter(data => data.tag === tag)[0];
-
+  const isMd = useMediaQuery(`(max-width: ${theme.breakpoints.md}px)`)
+  const result = comumnityData.filter((data) => data.tag === tag)[0]
 
   return (
     <Container fluid className={classes.default}>
@@ -34,5 +32,5 @@ export function CommunityPage({ image, tag }: Props) {
         </Grid>
       </Container>
     </Container>
-  );
+  )
 }

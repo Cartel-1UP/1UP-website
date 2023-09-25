@@ -1,17 +1,17 @@
 'use client'
 
-import { Anchor, Group, Text } from '@mantine/core';
-import useStyles from './style';
+import { Anchor, Group, Text } from '@mantine/core'
+import useStyles from './style'
 
 interface Props {
   links: {
-    link: string;
+    link: string
     label: string
-  }[];
+  }[]
 }
 
 export function Footer({ links }: Props) {
-  const { classes } = useStyles();
+  const { classes } = useStyles()
 
   const items = links.map((link) => (
     <Anchor<'a'>
@@ -24,7 +24,7 @@ export function Footer({ links }: Props) {
     >
       {link.label}
     </Anchor>
-  ));
+  ))
 
   return (
     <div className={classes.footer}>
@@ -34,5 +34,5 @@ export function Footer({ links }: Props) {
         <Group spacing="xs" position="right" noWrap />
       </div>
     </div>
-  );
+  )
 }

@@ -1,15 +1,15 @@
-import { useGetMaincards } from '@/actions/database/get-maincards';
-import { Carousel } from '@mantine/carousel';
-import { Container, Skeleton, useMantineTheme } from '@mantine/core';
-import { useMediaQuery } from '@mantine/hooks';
-import { Card } from './MainCard';
-import useStyles from './style';
+import { useGetMaincards } from '@/actions/database/get-maincards'
+import { Carousel } from '@mantine/carousel'
+import { Container, Skeleton, useMantineTheme } from '@mantine/core'
+import { useMediaQuery } from '@mantine/hooks'
+import { Card } from './MainCard'
+import useStyles from './style'
 
 export function MainSection() {
-  const { classes } = useStyles();
-  const theme = useMantineTheme();
+  const { classes } = useStyles()
+  const theme = useMantineTheme()
 
-  const isMobile = useMediaQuery(`(max-width: ${theme.breakpoints.sm}px)`);
+  const isMobile = useMediaQuery(`(max-width: ${theme.breakpoints.sm}px)`)
   const { data, isLoading } = useGetMaincards()
 
   return (
@@ -23,14 +23,13 @@ export function MainSection() {
           slidesToScroll={isMobile ? 1 : 3}
           loop
         >
-          {
-            isLoading ?
-              Array.from(Array(3)).map((_, index) => (
+          {isLoading
+            ? Array.from(Array(3)).map((_, index) => (
                 <Carousel.Slide key={index}>
                   <Skeleton width="20vh" height="20vh" />
-                </Carousel.Slide>))
-              :
-              data?.map?.((item: any, index: any) => (
+                </Carousel.Slide>
+              ))
+            : data?.map?.((item: any, index: any) => (
                 <Carousel.Slide key={index}>
                   <Card {...item} />
                 </Carousel.Slide>
@@ -38,9 +37,5 @@ export function MainSection() {
         </Carousel>
       </Container>
     </Container>
-  );
+  )
 }
-
-
-
-

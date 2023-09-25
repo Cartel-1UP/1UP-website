@@ -13,14 +13,13 @@ const useStyles = createStyles((theme) => ({
   cardHeader: {
     borderColor: '#e2e8f0d2',
     borderWidth: 1,
-    borderRadius: '10px 10px 0 0'
+    borderRadius: '10px 10px 0 0',
   },
 
   cardFooter: {
     borderColor: '#e2e8f0d2',
     borderWidth: 1,
     borderRadius: '0 0 10px 10px',
-
   },
 
   link: {
@@ -37,7 +36,7 @@ const useStyles = createStyles((theme) => ({
   headerContainer: {
     display: 'flex',
     flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'center',
   },
 
   turncate: {
@@ -51,13 +50,13 @@ const useStyles = createStyles((theme) => ({
     display: '-webkit-box',
     WebkitLineClamp: 3,
     WebkitBoxOrient: 'vertical',
-    maxHeight: '4.5em'
+    maxHeight: '4.5em',
   },
 
   metadataContainer: {
     display: 'flex',
     alignItems: 'center',
-    alignContent: 'right'
+    alignContent: 'right',
   },
 
   icon: {
@@ -66,10 +65,9 @@ const useStyles = createStyles((theme) => ({
     fontSize: '1px',
     '&:hover': {
       cursor: 'pointer',
-      color: '#072f37'
+      color: '#072f37',
     },
-  }
-
+  },
 }))
 
 export default useStyles

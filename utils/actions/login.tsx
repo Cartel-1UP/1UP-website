@@ -1,35 +1,45 @@
-import { setAuthorized, setProfileImage, setReputation, setUsername } from '@/zustand/stores/useAuthorizationStore'
+import {
+  setAuthorized,
+  setProfileImage,
+  setReputation,
+  setUsername,
+} from '@/zustand/stores/useAuthorizationStore'
 import api from '../api'
 import { getUserDataProfile } from './user'
 
 function loginKeychain(username: string | null) {
-  if (!username) { return }
-  if (!window.hive_keychain) { return }
+  if (!username) {
+    return
+  }
+  if (!window.hive_keychain) {
+    return
+  }
 
   const ts = Date.now()
 
-  window.hive_keychain.requestSignBuffer(username, `${username}${ts}`, 'Posting', async (r: any) => {
-    if (r.success) {
-      processLogin({ username, ts, sig: r.result }).then(async () => {
-        const { data } = await api.post('user', { username })
+  window.hive_keychain.requestSignBuffer(
+    username,
+    `${username}${ts}`,
+    'Posting',
+    async (r: any) => {
+      if (r.success) {
+        processLogin({ username, ts, sig: r.result }).then(async () => {
+          const { data } = await api.post('user', { username })
 
-        let userImage = data?.result[0]?.posting_json_metadata
+          let userImage = data?.result[0]?.posting_json_metadata
 
-        if (userImage) {
-          userImage = JSON.parse(userImage)
-          userImage = userImage.profile.profile_image
-        }
+          if (userImage) {
+            userImage = JSON.parse(userImage)
+            userImage = userImage.profile.profile_image
+          }
 
-        setProfileImage(userImage)
-        setUsername(data.result[0].name)
+          setProfileImage(userImage)
+          setUsername(data.result[0].name)
+        })
       }
-
-      )
     }
-  })
+  )
 }
-
-
 
 async function processLogin({ username, ts, sig, smartlock = false }: any) {
   const { data } = await api.post('auth', { username, ts, sig, smartlock })
@@ -42,8 +52,5 @@ async function processLogin({ username, ts, sig, smartlock = false }: any) {
     setReputation(data.result.reputation)
   })
 }
-
-
-
 
 export default loginKeychain

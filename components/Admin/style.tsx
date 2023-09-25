@@ -12,7 +12,7 @@ const useStyles = createStyles((theme) => ({
 
   default: {
     background: '#E9ECEF',
-    minHeight: '85vh'
+    minHeight: '85vh',
   },
 
   title: {
@@ -23,7 +23,7 @@ const useStyles = createStyles((theme) => ({
   price: {
     fontFamily: `Greycliff CF, ${theme.fontFamily}`,
     fontWeight: 400,
-    fontSize: 12
+    fontSize: 12,
   },
 }))
 

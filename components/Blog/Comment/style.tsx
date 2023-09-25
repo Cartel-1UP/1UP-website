@@ -1,8 +1,10 @@
-import { createStyles } from '@mantine/styles';
+import { createStyles } from '@mantine/styles'
 
 const useStyles = createStyles((theme) => ({
   comment: {
-    padding: `${theme.spacing.lg} ${theme.spacing.xl}`,
+    // padding: `${theme.spacing.lg} ${theme.spacing.xl}`,
+    borderColor: '#e2e8f0d2',
+    borderWidth: 1,
   },
 
   body: {
@@ -21,19 +23,18 @@ const useStyles = createStyles((theme) => ({
     borderColor: '#e2e8f0d2',
     borderWidth: 1,
     borderRadius: '0 0 10px 10px',
-    width: '-webkit-fill-available'
+    width: '-webkit-fill-available',
   },
   price: {
     fontFamily: `Greycliff CF, ${theme.fontFamily}`,
     fontWeight: 400,
-    fontSize: 14
+    fontSize: 14,
   },
   metadataContainer: {
     display: 'flex',
     alignItems: 'center',
-    alignContent: 'left'
+    alignContent: 'left',
   },
-
-}));
+}))
 
 export default useStyles

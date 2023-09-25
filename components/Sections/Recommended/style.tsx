@@ -1,17 +1,16 @@
 import { createStyles } from '@mantine/styles'
 
 const useStyles = createStyles((theme) => ({
-
   cardHeader: {
     borderColor: '#e2e8f0d2',
     borderWidth: 1,
-    borderRadius: '10px 10px 0 0'
+    borderRadius: '10px 10px 0 0',
   },
 
   card: {
     borderColor: '#e2e8f0d2',
     borderWidth: 1,
-    backgroundColor: '#ffff'
+    backgroundColor: '#ffff',
   },
 
   cardFooter: {
@@ -23,7 +22,7 @@ const useStyles = createStyles((theme) => ({
   headerContainer: {
     display: 'flex',
     flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'center',
   },
 
   title: {
@@ -39,25 +38,24 @@ const useStyles = createStyles((theme) => ({
     display: '-webkit-box',
     WebkitLineClamp: 2,
     WebkitBoxOrient: 'vertical',
-    maxHeight: '3.5em'
+    maxHeight: '3.5em',
   },
 
   price: {
     fontFamily: `Greycliff CF, ${theme.fontFamily}`,
     fontWeight: 400,
-    fontSize: 12
+    fontSize: 12,
   },
 
   metadataContainer: {
     display: 'flex',
     alignItems: 'center',
-    alignContent: 'left'
+    alignContent: 'left',
   },
 
   link: {
     textDecoration: 'none',
   },
-
 }))
 
 export default useStyles

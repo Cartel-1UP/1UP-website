@@ -1,22 +1,21 @@
 'use client'
 
-import loginKeychain from "@/utils/actions/login";
-import { isKeychain } from "@/utils/methods/checkKeychain";
-import { useAuthorizationStore } from "@/zustand/stores/useAuthorizationStore";
-import { useNotifiactionStore } from "@/zustand/stores/useNotificationStore";
-import { Button, Dialog, Group, Text, TextInput } from "@mantine/core";
-import { useEffect, useState } from "react";
-import useStyles from './style';
-
+import loginKeychain from '@/utils/actions/login'
+import { isKeychain } from '@/utils/methods/checkKeychain'
+import { useAuthorizationStore } from '@/zustand/stores/useAuthorizationStore'
+import { useNotifiactionStore } from '@/zustand/stores/useNotificationStore'
+import { Button, Dialog, Group, Text, TextInput } from '@mantine/core'
+import { useEffect, useState } from 'react'
+import useStyles from './style'
 
 function LoginButton() {
   const { classes, theme } = useStyles()
 
-  const [opened, setOpened] = useState(false);
-  const [value, setValue] = useState('');
+  const [opened, setOpened] = useState(false)
+  const [value, setValue] = useState('')
 
-  const authorized = useAuthorizationStore((state: { authorized: boolean; }) => state.authorized)
-  const addSnackbar = useNotifiactionStore((state) => state.addSnackbar);
+  const authorized = useAuthorizationStore((state: { authorized: boolean }) => state.authorized)
+  const addSnackbar = useNotifiactionStore((state) => state.addSnackbar)
 
   useEffect(() => {
     if (isKeychain() && localStorage.getItem('username') && !authorized) {
@@ -24,7 +23,6 @@ function LoginButton() {
       loginKeychain(username)
     }
   }, [])
-
 
   const loginUser = async () => {
     if (isKeychain()) {
@@ -35,15 +33,17 @@ function LoginButton() {
         title: 'Error',
         message: 'You have to install keychain!',
         queryKey: undefined,
-        color: 'red'
-      });
+        color: 'red',
+      })
     }
-  };
+  }
 
   return (
     <>
       <Group position="center">
-        <Button className={classes.button} onClick={() => setOpened((o) => !o)}>Log in</Button>
+        <Button className={classes.button} onClick={() => setOpened((o) => !o)}>
+          Log in
+        </Button>
       </Group>
       <Dialog
         opened={opened}
@@ -57,8 +57,21 @@ function LoginButton() {
           Put your Hive username
         </Text>
         <Group align="flex-end">
-          <TextInput placeholder="Username" value={value} style={{ flex: 1 }} onChange={(event) => setValue(event.currentTarget.value)} />
-          <Button className={classes.buttonLogin} onClick={() => { setOpened(false); loginUser() }}>Log in</Button>
+          <TextInput
+            placeholder="Username"
+            value={value}
+            style={{ flex: 1 }}
+            onChange={(event) => setValue(event.currentTarget.value)}
+          />
+          <Button
+            className={classes.buttonLogin}
+            onClick={() => {
+              setOpened(false)
+              loginUser()
+            }}
+          >
+            Log in
+          </Button>
         </Group>
       </Dialog>
     </>
