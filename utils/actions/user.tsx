@@ -1,6 +1,6 @@
+import { Community } from '@/types/blog.interface'
+import { User } from '@/types/user.type'
 import { Custom, KeychainKeyTypes, KeychainSDK } from 'keychain-sdk'
-import { Community } from '../../types/blog.interface'
-import { User } from '../../types/user.type'
 import apiHive from '../apiHive'
 
 interface Props {
@@ -18,7 +18,7 @@ export async function getUserData(username: string) {
       id: 1,
     })
     return data
-  } catch {}
+  } catch { }
 }
 
 export async function getUserDataProfile(username: string) {
@@ -32,7 +32,7 @@ export async function getUserDataProfile(username: string) {
       id: 1,
     })
     return data
-  } catch {}
+  } catch { }
 }
 
 export async function getUserProfile({ ...props }: Props): Promise<{ data: User }> {

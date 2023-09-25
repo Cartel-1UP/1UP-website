@@ -1,12 +1,12 @@
 'use client'
 
+import { logoutUser, useAuthorizationStore } from '@/zustand/stores/useAuthorizationStore'
 import { Center, Container, Grid, Group, Header, Image, Menu } from '@mantine/core'
 import { useMediaQuery } from '@mantine/hooks'
 import { IconLogout } from '@tabler/icons'
 import Link from 'next/link'
 import { useState } from 'react'
 import oneuplogo from '../../images/oneup1.png'
-import { logoutUser, useAuthorizationStore } from '../../zustand/stores/useAuthorizationStore'
 import LoginButton from '../LoginButton/LoginButton'
 import { UserButton } from '../UserButton/UserButton'
 import useStyles from './style'

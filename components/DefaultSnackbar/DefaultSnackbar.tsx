@@ -1,7 +1,7 @@
+import { useNotifiactionStore } from '@/zustand/stores/useNotificationStore'
 import { Notification } from '@mantine/core'
 import { useEffect } from 'react'
 import { useQueryClient } from 'react-query'
-import { useNotifiactionStore } from '../../zustand/stores/useNotificationStore'
 import useStyles from './style'
 
 interface Props {
