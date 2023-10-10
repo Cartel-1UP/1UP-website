@@ -3,7 +3,7 @@
 import { logoutUser, useAuthorizationStore } from '@/zustand/stores/useAuthorizationStore'
 import { Center, Container, Grid, Group, Header, Image, Menu } from '@mantine/core'
 import { useMediaQuery } from '@mantine/hooks'
-import { IconLogout } from '@tabler/icons'
+import { IconBookmark, IconLogout, IconUser } from '@tabler/icons'
 import Link from 'next/link'
 import { useState } from 'react'
 import oneuplogo from '../../images/oneup1.png'
@@ -65,11 +65,29 @@ export function Navbar() {
                     <Menu.Dropdown bg={'#072f37'} sx={{ borderColor: '#031418' }}>
                       <Menu.Item
                         className={classes.subLink}
+                        onClick={() => window.open(`https://www.peakd.com/@${username}`, '_blank')}
+                        icon={<IconUser
+                          color={'white'} size={20} stroke={1.5} />}
+                      >
+                        Profile
+                      </Menu.Item>
+                      <Menu.Item
+                        className={classes.subLink}
+                        onClick={() => console.log('bobokmarks')}
+                        icon={<IconBookmark
+                          color={'white'} size={20} stroke={1.5} />}
+                      >
+                        Bookmarks
+                      </Menu.Item>
+                      <Menu.Divider />
+                      <Menu.Item
+                        className={classes.subLink}
                         onClick={() => logoutUser()}
                         icon={<IconLogout color={'white'} size={20} stroke={1.5} />}
                       >
                         Log out
                       </Menu.Item>
+
                     </Menu.Dropdown>
                   </Menu>
                 ) : (
