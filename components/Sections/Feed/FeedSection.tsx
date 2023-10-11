@@ -1,3 +1,5 @@
+'use client'
+
 import { getFeedBlogs, getRecentBlogs } from '@/actions/hive/get-blogs'
 import TabButtons from '@/components/TabButtons/TabButtons'
 import { Tabs } from '@/enums/blog.enum'
@@ -13,7 +15,7 @@ import {
   Grid,
   SimpleGrid,
   Skeleton,
-  Space,
+  Space
 } from '@mantine/core'
 import { useScrollIntoView } from '@mantine/hooks'
 import { IconArrowBarRight, IconArrowUp } from '@tabler/icons'
@@ -39,7 +41,7 @@ export function FeedSection({ sort, tag, isCommunity }: Props) {
 
   const { scrollIntoView, targetRef } = useScrollIntoView<HTMLDivElement>({ offset: 60 })
 
-  const username = localStorage.getItem('username')
+  const [username, setUsername] = useState('')
   const authorized = useAuthorizationStore((state: { authorized: boolean }) => state.authorized)
   const defaultTab = Tabs.New
 
@@ -47,6 +49,13 @@ export function FeedSection({ sort, tag, isCommunity }: Props) {
   const handleTabChange = (tab: string) => {
     setPostType(tab)
   }
+
+  useEffect(() => {
+    const user = localStorage.getItem('username')
+    if (user) {
+      setUsername(user)
+    }
+  }, [])
 
   const loadPosts = useMutation(
     async () => {
@@ -146,36 +155,36 @@ export function FeedSection({ sort, tag, isCommunity }: Props) {
         </Card>
         {!data
           ? Array.from({ length: 5 }).map((_, index) => (
-              <Card withBorder p="md" radius={0} className={classes.card} key={index}>
-                <Grid grow>
-                  <Grid.Col span={7}>
-                    <Container>
-                      <Skeleton height={50} circle mb="xl" />
-                    </Container>
-                    <Container>
-                      <Skeleton height={8} radius="xl" />
-                      <Skeleton height={8} mt={6} radius="xl" />
-                      <Skeleton height={8} mt={6} radius="xl" />
-                    </Container>
-                  </Grid.Col>
-                  <Grid.Col span={5}>
-                    <Container>
-                      <Skeleton height={100} radius="sm" />
-                    </Container>
-                  </Grid.Col>
-                  <Grid.Col span={7}>
-                    <Container>
-                      <Skeleton height={16} width={'30%'} radius="xl" />
-                    </Container>
-                  </Grid.Col>
-                  <Grid.Col span={5}>
-                    <Container>
-                      <Skeleton height={16} radius="xl" />
-                    </Container>
-                  </Grid.Col>
-                </Grid>
-              </Card>
-            ))
+            <Card withBorder p="md" radius={0} className={classes.card} key={index}>
+              <Grid grow>
+                <Grid.Col span={7}>
+                  <Container>
+                    <Skeleton height={50} circle mb="xl" />
+                  </Container>
+                  <Container>
+                    <Skeleton height={8} radius="xl" />
+                    <Skeleton height={8} mt={6} radius="xl" />
+                    <Skeleton height={8} mt={6} radius="xl" />
+                  </Container>
+                </Grid.Col>
+                <Grid.Col span={5}>
+                  <Container>
+                    <Skeleton height={100} radius="sm" />
+                  </Container>
+                </Grid.Col>
+                <Grid.Col span={7}>
+                  <Container>
+                    <Skeleton height={16} width={'30%'} radius="xl" />
+                  </Container>
+                </Grid.Col>
+                <Grid.Col span={5}>
+                  <Container>
+                    <Skeleton height={16} radius="xl" />
+                  </Container>
+                </Grid.Col>
+              </Grid>
+            </Card>
+          ))
           : data?.map((item: HiveArticle) => <FeedCard article={item} key={item.post_id} />)}
         {posts?.map((item: HiveArticle) => (
           <FeedCard article={item} key={item.post_id} />

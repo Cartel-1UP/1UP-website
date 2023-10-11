@@ -7,6 +7,7 @@ import { useGetBlog } from '@/actions/hive/get-blog'
 import { useGetComments } from '@/actions/hive/get-comments'
 import { useGetFollowing } from '@/actions/hive/get-following'
 import { useGetUserProfile } from '@/actions/hive/get-userprofile'
+import CommentEditor from '@/components/ui/CommentEditor/CommentEditor'
 import { VoteSlider } from '@/components/ui/VoteSlider/VoteSlider'
 import { dateRefactor } from '@/utils/methods/dateRefactor'
 import {
@@ -29,7 +30,7 @@ import {
 } from '@mantine/core'
 import { IconArrowDown, IconHeart, IconMessage } from '@tabler/icons'
 import { Custom, KeychainKeyTypes, KeychainSDK } from 'keychain-sdk'
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useMutation, useQueryClient } from 'react-query'
 import { Markdown } from '../ui/Markdown/Markdown'
 import Comment from './Comment/Comment'
@@ -50,7 +51,9 @@ export function BlogContent({ permlink, author }: Props) {
 
   const endElementRef = useRef<HTMLDivElement>(null)
 
-  const username = localStorage.getItem('username') || ''
+
+  const [username, setUsername] = useState<string>('')
+
   const addSnackbar = useNotifiactionStore((state) => state.addSnackbar)
   const authorized = useAuthorizationStore((state: { authorized: boolean }) => state.authorized)
 
@@ -65,6 +68,14 @@ export function BlogContent({ permlink, author }: Props) {
   const numericalValue = parseFloat(blogData?.data?.result?.pending_payout_value)
   const roundedValue = Math.ceil(numericalValue * 100) / 100
   const formattedCurrency = `$${roundedValue.toFixed(2)}`
+
+  useEffect(() => {
+    const user = localStorage.getItem('username')
+    if (user) {
+      setUsername(user)
+    }
+  }, [])
+
 
   const handlePostFollow = useMutation<void, any, void, unknown>(
     async () => {
@@ -273,12 +284,12 @@ export function BlogContent({ permlink, author }: Props) {
                     )}
                     {isComment && (
                       <Grid.Col span={12}>
-                        {/* <CommentEditor
+                        <CommentEditor
                           setIsComment={setIsComment}
                           permlink={blogData?.data?.result.permlink}
                           parentAuthor={blogData?.data?.result.author}
                           parentPermlink={''}
-                        /> */}
+                        />
                       </Grid.Col>
                     )}
                   </Card>

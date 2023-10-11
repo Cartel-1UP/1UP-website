@@ -2,6 +2,7 @@
 //   const { classes, theme } = useStyles();
 //   const [root, setRoot] = useState([])
 
+import CommentEditor from '@/components/ui/CommentEditor/CommentEditor'
 import { Markdown } from '@/components/ui/Markdown/Markdown'
 import { VoteSlider } from '@/components/ui/VoteSlider/VoteSlider'
 import { getTimeAgo } from '@/utils/methods/dateRefactor'
@@ -115,13 +116,13 @@ export default function CommentCard({ comment, nestedComments, isVisible }: Prop
         )}
         {isComment && (
           <Grid.Col span={12}>
-            {/* <CommentEditor
+            <CommentEditor
               setIsComment={setIsComment}
               permlink={comment.permlink}
               parentAuthor={comment.author}
               parentPermlink={comment?.parent_permlink}
               queryKey={'comments-data'}
-            /> */}
+            />
           </Grid.Col>
         )}
         {areChildrenVisible && (
