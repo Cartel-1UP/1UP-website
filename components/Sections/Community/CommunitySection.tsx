@@ -5,20 +5,25 @@ import { Carousel } from '@mantine/carousel'
 import { Container, useMantineTheme } from '@mantine/core'
 import { useMediaQuery } from '@mantine/hooks'
 import Autoplay from 'embla-carousel-autoplay'
-import { useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import CommunityCard from './CommunityCard'
 
 export function CommunitySection() {
   const theme = useMantineTheme()
   const isSm = useMediaQuery(`(max-width: ${theme.breakpoints.sm}px)`)
+  const autoplayRef = useRef<any>(null);
 
-  const autoplayOptions = {
-    delay: 100,
-    playOnInit: true,
-    stopOnInteraction: false,
-    rootNode: (emblaRoot: any) => emblaRoot.parentElement,
-  }
-  const autoplay = useRef(Autoplay(autoplayOptions))
+  useEffect(() => {
+
+    const autoplayOptions = {
+      delay: 100,
+      playOnInit: true,
+      stopOnInteraction: false,
+      rootNode: (emblaRoot: any) => emblaRoot.parentElement,
+    };
+    autoplayRef.current = Autoplay(autoplayOptions);
+
+  }, []);
 
   return (
     <>
@@ -33,9 +38,9 @@ export function CommunitySection() {
               slidesToScroll={1}
               loop
               withControls={false}
-              plugins={[autoplay.current]}
-              onMouseEnter={autoplay.current.stop}
-              onMouseLeave={autoplay.current.reset}
+              plugins={[autoplayRef.current]}
+              onMouseEnter={autoplayRef.current.stop}
+              onMouseLeave={autoplayRef.current.reset}
               dragFree={true}
               speed={0.01}
             >
