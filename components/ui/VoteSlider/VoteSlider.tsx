@@ -1,8 +1,10 @@
+'use client'
+
 import { useNotifiactionStore } from '@/zustand/stores/useNotificationStore'
 import { Button, Container, Divider, Group, Slider, Space } from '@mantine/core'
 import { useMediaQuery } from '@mantine/hooks'
 import { KeychainSDK, Vote } from 'keychain-sdk'
-import { Dispatch, SetStateAction, useState } from 'react'
+import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import { useMutation } from 'react-query'
 import { DefaultSnackbar } from '../../DefaultSnackbar/DefaultSnackbar'
 import useStyles from './style'
@@ -25,7 +27,15 @@ export function VoteSlider({
   const { classes, theme } = useStyles()
   const [value, setValue] = useState(50)
   const [endValue, setEndValue] = useState(50)
-  const username = localStorage.getItem('username')
+  const [username, setUsername] = useState('')
+
+  useEffect(() => {
+    const user = localStorage.getItem('username')
+    if (user) {
+      setUsername(user)
+    }
+  }, [])
+
   const marks = [
     { value: 0, label: '0%' },
     { value: 20, label: '20%' },

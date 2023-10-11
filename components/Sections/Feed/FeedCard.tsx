@@ -1,3 +1,6 @@
+'use clinet'
+
+import CommentEditor from '@/components/ui/CommentEditor/CommentEditor'
 import { VoteSlider } from '@/components/ui/VoteSlider/VoteSlider'
 import { HiveArticle } from '@/types/blog.type'
 import { useAuthorizationStore } from '@/zustand/stores/useAuthorizationStore'
@@ -56,13 +59,15 @@ export function FeedCard({ article }: Props) {
   })
   const bodyOfArticle = filteredBody.join(' ')
 
-  const storedBookmarksJSON = localStorage.getItem('bookmarks');
+
+
+
+  const [storedBookmarksJSON, setStoredBookmarksJSON] = useState('');
   const storedBookmarks = storedBookmarksJSON ? JSON.parse(storedBookmarksJSON) : [];
   const isInBookmarks = storedBookmarks.includes(article.permlink);
 
 
   const toggleBookmark = () => {
-    const storedBookmarksJSON = localStorage.getItem('bookmarks');
     const storedBookmarks = storedBookmarksJSON ? JSON.parse(storedBookmarksJSON) : [];
     const isInBookmarks = storedBookmarks.includes(article.permlink);
 
@@ -99,7 +104,12 @@ export function FeedCard({ article }: Props) {
 
   // Function to add or delete a bookmark
 
-
+  useEffect(() => {
+    const storedBookmarksJSON = localStorage.getItem('bookmarks');
+    if (storedBookmarksJSON) {
+      setStoredBookmarksJSON(storedBookmarksJSON);
+    }
+  })
 
 
   useEffect(() => {
@@ -287,12 +297,12 @@ export function FeedCard({ article }: Props) {
       )}
       {isComment && (
         <Grid.Col span={12}>
-          {/* <CommentEditor
+          <CommentEditor
             setIsComment={setIsComment}
             permlink={article.permlink}
             parentAuthor={article.author}
             parentPermlink={article?.parent_permlink}
-          /> */}
+          />
         </Grid.Col>
       )}
     </Card>
