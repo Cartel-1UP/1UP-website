@@ -1,4 +1,3 @@
-import CommentEditor from '@/components/ui/CommentEditor/CommentEditor'
 import { VoteSlider } from '@/components/ui/VoteSlider/VoteSlider'
 import { HiveArticle } from '@/types/blog.type'
 import { useAuthorizationStore } from '@/zustand/stores/useAuthorizationStore'
@@ -15,7 +14,7 @@ import {
   Indicator,
   Space,
   Text,
-  ThemeIcon,
+  ThemeIcon
 } from '@mantine/core'
 import { useMediaQuery } from '@mantine/hooks'
 import { IconArrowBack, IconBookmark, IconBookmarkOff, IconHeart, IconMessage } from '@tabler/icons'
@@ -288,12 +287,12 @@ export function FeedCard({ article }: Props) {
       )}
       {isComment && (
         <Grid.Col span={12}>
-          <CommentEditor
+          {/* <CommentEditor
             setIsComment={setIsComment}
             permlink={article.permlink}
             parentAuthor={article.author}
             parentPermlink={article?.parent_permlink}
-          />
+          /> */}
         </Grid.Col>
       )}
     </Card>

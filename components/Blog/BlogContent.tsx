@@ -7,7 +7,6 @@ import { useGetBlog } from '@/actions/hive/get-blog'
 import { useGetComments } from '@/actions/hive/get-comments'
 import { useGetFollowing } from '@/actions/hive/get-following'
 import { useGetUserProfile } from '@/actions/hive/get-userprofile'
-import CommentEditor from '@/components/ui/CommentEditor/CommentEditor'
 import { VoteSlider } from '@/components/ui/VoteSlider/VoteSlider'
 import { dateRefactor } from '@/utils/methods/dateRefactor'
 import {
@@ -26,7 +25,7 @@ import {
   Space,
   Stack,
   Text,
-  Title,
+  Title
 } from '@mantine/core'
 import { IconArrowDown, IconHeart, IconMessage } from '@tabler/icons'
 import { Custom, KeychainKeyTypes, KeychainSDK } from 'keychain-sdk'
@@ -76,9 +75,8 @@ export function BlogContent({ permlink, author }: Props) {
           username: `${username}`,
           id: 'follow',
           method: KeychainKeyTypes.posting,
-          json: `[    "follow",    {       "follower": "${username}",       "following": "${author}",       "what": [          \"${
-            isFollowing ? '' : 'blog'
-          }\"       ]    } ]`,
+          json: `[    "follow",    {       "follower": "${username}",       "following": "${author}",       "what": [          \"${isFollowing ? '' : 'blog'
+            }\"       ]    } ]`,
           required_posting_auths: [`${username}`],
           display_msg: isFollowing ? 'Unfollow' : 'Follow',
         },
@@ -213,12 +211,12 @@ export function BlogContent({ permlink, author }: Props) {
                               authorized
                                 ? setIsVote(!isVote)
                                 : addSnackbar({
-                                    id: '1',
-                                    title: 'Warning',
-                                    message: 'You have to login to upvote post!',
-                                    queryKey: undefined,
-                                    color: 'red',
-                                  })
+                                  id: '1',
+                                  title: 'Warning',
+                                  message: 'You have to login to upvote post!',
+                                  queryKey: undefined,
+                                  color: 'red',
+                                })
                             }
                           />
                         </span>
@@ -231,12 +229,12 @@ export function BlogContent({ permlink, author }: Props) {
                               authorized
                                 ? setIsComment(!isComment)
                                 : addSnackbar({
-                                    id: '2',
-                                    title: 'Warning',
-                                    message: 'You have to login to add comment!',
-                                    queryKey: undefined,
-                                    color: 'red',
-                                  })
+                                  id: '2',
+                                  title: 'Warning',
+                                  message: 'You have to login to add comment!',
+                                  queryKey: undefined,
+                                  color: 'red',
+                                })
                             }
                           />
                         </span>
@@ -275,12 +273,12 @@ export function BlogContent({ permlink, author }: Props) {
                     )}
                     {isComment && (
                       <Grid.Col span={12}>
-                        <CommentEditor
+                        {/* <CommentEditor
                           setIsComment={setIsComment}
                           permlink={blogData?.data?.result.permlink}
                           parentAuthor={blogData?.data?.result.author}
                           parentPermlink={''}
-                        />
+                        /> */}
                       </Grid.Col>
                     )}
                   </Card>

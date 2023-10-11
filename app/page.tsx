@@ -1,6 +1,7 @@
 'use client'
 
 import { CommunityBar } from '@/components/CommunityBar/CommunityBar'
+import { CommunitySection } from '@/components/Sections/Community/CommunitySection'
 import { FeedSection } from '@/components/Sections/Feed/FeedSection'
 import { MainSection } from '@/components/Sections/Main/MainSection'
 import { RecommendedSection } from '@/components/Sections/Recommended/RecommendedSection'
@@ -16,7 +17,7 @@ export default function Home() {
   return (
     <>
       <MainSection />
-      {/* <CommunitySection /> */}
+      <CommunitySection />
       {isMd ? (
         <>
           <Container fluid bg={'#E9ECEF'}>
