@@ -1,3 +1,5 @@
+'use client'
+
 import { generateRandomLetters } from '@/utils/methods/generateRandom'
 import { useAuthorizationStore } from '@/zustand/stores/useAuthorizationStore'
 import { useNotifiactionStore } from '@/zustand/stores/useNotificationStore'

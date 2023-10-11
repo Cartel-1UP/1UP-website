@@ -1,3 +1,5 @@
+'use client'
+
 import { ActionIcon, Button, Card, Grid, Group, SimpleGrid, Space, Textarea } from '@mantine/core'
 import { useMediaQuery } from '@mantine/hooks'
 import { IconBold, IconHeading, IconItalic, IconLink, IconPhotoDown } from '@tabler/icons'
