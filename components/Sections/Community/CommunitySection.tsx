@@ -1,3 +1,5 @@
+'use client'
+
 import { comumnityData } from '@/data/communityData'
 import { Carousel } from '@mantine/carousel'
 import { Container, useMantineTheme } from '@mantine/core'
