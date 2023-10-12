@@ -1,7 +1,6 @@
 'use client'
 
 import { ActionIcon, Button, Card, Grid, Group, SimpleGrid, Space, Textarea } from '@mantine/core'
-import { useMediaQuery } from '@mantine/hooks'
 import { IconBold, IconHeading, IconItalic, IconLink, IconPhotoDown } from '@tabler/icons'
 import React, { useRef, useState } from 'react'
 import useStyles from './style'
@@ -13,8 +12,6 @@ type Tag = {
 
 const Editor = () => {
   const { classes, theme } = useStyles()
-  const laptop = useMediaQuery(`(max-width: ${theme.breakpoints.md}px)`)
-
   const [markdown, setMarkdown] = useState('')
   const [previewModalOpen, setPreviewModalOpen] = useState(false)
   const textareaRef = useRef<HTMLTextAreaElement | null>(null)
@@ -66,21 +63,7 @@ const Editor = () => {
     setPreviewModalOpen(true)
   }
 
-  const markdownComponents = {
-    a: ({ href, children }: any) => (
-      <a href={href} target="_blank" rel="noopener noreferrer">
-        {children}
-      </a>
-    ),
-    h1: ({ node, children }: any) => <h1>{children}</h1>,
-    h2: ({ node, children }: any) => <h2>{children}</h2>,
-    strong: ({ node, children }: any) => <strong>{children}</strong>,
-    em: ({ node, children }: any) => <em>{children}</em>,
-    img: ({ src, alt }: any) => <img src={src} alt={alt} />,
-    p: ({ node, children }: any) => <p>{children}</p>,
-    ul: ({ node, children }: any) => <ul>{children}</ul>,
-    li: ({ node, children }: any) => <li>{children}</li>,
-  }
+
 
   return (
     <>
@@ -139,10 +122,6 @@ const Editor = () => {
           </Grid>
         </Card>
       </SimpleGrid>
-
-      {/* <Modal size={'xl'} opened={previewModalOpen} onClose={handlePreviewModalClose} title="Comment preview">
-                <ReactMarkdown components={markdownComponents}>{markdown}</ReactMarkdown>
-            </Modal> */}
     </>
   )
 }

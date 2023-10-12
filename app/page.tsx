@@ -1,12 +1,7 @@
 'use client'
 
-import { CommunityBar } from '@/components/CommunityBar/CommunityBar'
 import { CommunitySection } from '@/components/Sections/Community/CommunitySection'
-import { FeedSection } from '@/components/Sections/Feed/FeedSection'
 import { MainSection } from '@/components/Sections/Main/MainSection'
-import { RecommendedSection } from '@/components/Sections/Recommended/RecommendedSection'
-import oneuplogo2 from '@/images/oneup2.png'
-import { Container, Grid, Space } from '@mantine/core'
 import { useMediaQuery } from '@mantine/hooks'
 
 export const runtime = 'experimental-edge'
@@ -18,7 +13,7 @@ export default function Home() {
     <>
       <MainSection />
       <CommunitySection />
-      {isMd ? (
+      {/* {isMd ? (
         <>
           <Container fluid bg={'#E9ECEF'}>
             <Grid>
@@ -54,7 +49,7 @@ export default function Home() {
             </Container>
           </Container>
         </>
-      )}
+      )} */}
     </>
   )
 }
