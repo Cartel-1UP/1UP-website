@@ -1,3 +1,5 @@
+'use client'
+
 import { getCommunityData } from '@/utils/actions/user'
 import {
   AspectRatio,
@@ -9,9 +11,8 @@ import {
   Image,
   Text,
   ThemeIcon,
-  Tooltip,
+  Tooltip
 } from '@mantine/core'
-import { useMediaQuery } from '@mantine/hooks'
 import { IconMessage2, IconPigMoney, IconUsers } from '@tabler/icons'
 import { useQuery } from 'react-query'
 import { Markdown } from '../ui/Markdown/Markdown'
@@ -25,12 +26,11 @@ type Props = {
 export function CommunityBar({ communityLogo, tag }: Props) {
   const { classes, theme } = useStyles()
   const { data: community } = useQuery('community-data', () => getCommunityData(tag))
-  const isMd = useMediaQuery(`(max-width: 1000px)`)
   const communityInfo = community?.data?.result
 
   return (
     <>
-      {!isMd && (
+      {communityInfo && (
         <Card withBorder p="md" radius={10} className={classes.card}>
           <AspectRatio ratio={1 / 1} sx={{ maxWidth: 300 }} mx="auto">
             <Image src={communityLogo} alt="Logo" fit="contain" withPlaceholder />
