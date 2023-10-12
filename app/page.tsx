@@ -1,9 +1,11 @@
 'use client'
 
+import { CommunityBar } from '@/components/CommunityBar/CommunityBar'
 import { CommunitySection } from '@/components/Sections/Community/CommunitySection'
 import { FeedSection } from '@/components/Sections/Feed/FeedSection'
 import { MainSection } from '@/components/Sections/Main/MainSection'
 import { RecommendedSection } from '@/components/Sections/Recommended/RecommendedSection'
+import oneuplogo2 from '@/images/oneup2.png'
 import { Container, Grid, Space } from '@mantine/core'
 import { useMediaQuery } from '@mantine/hooks'
 
@@ -40,7 +42,7 @@ export default function Home() {
                 <Grid.Col span={3}>
                   <div style={{ position: 'sticky', top: '0' }}>
                     <Space h="xl" />
-                    {/* <CommunityBar communityLogo={oneuplogo2.src} tag={'hive-102223'} /> */}
+                    <CommunityBar communityLogo={oneuplogo2.src} tag={'hive-102223'} />
                   </div>
                 </Grid.Col>
               </Grid>
