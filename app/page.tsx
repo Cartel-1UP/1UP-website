@@ -20,16 +20,16 @@ export default function Home() {
       <CommunitySection />
       {isMd ? (
         <>
-          <Container fluid bg={'#E9ECEF'}>
+          {/* <Container fluid bg={'#E9ECEF'}>
             <Grid>
               <Grid.Col span={12}>
                 <FeedSection sort={'created'} tag={'hive-102223'} />
               </Grid.Col>
             </Grid>
-          </Container>
-          {/* <Container fluid bg={'linear-gradient(to bottom, #E9ECEF, #072f37)'}>
-            <RecommendedSection />
           </Container> */}
+          <Container fluid bg={'linear-gradient(to bottom, #E9ECEF, #072f37)'}>
+            <RecommendedSection />
+          </Container>
         </>
       ) : (
         <>
