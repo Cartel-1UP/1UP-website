@@ -30,7 +30,7 @@ interface Props {
   article: HiveArticle
 }
 
-export function FeedCard({ article }: Props) {
+export function BookmarkCard({ article }: Props) {
   const { classes, theme } = useStyles()
   const [isVote, setIsVote] = useState(false)
   const [isComment, setIsComment] = useState(false)
