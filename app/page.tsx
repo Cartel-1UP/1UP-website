@@ -1,9 +1,11 @@
 'use client'
 
 import { CommunitySection } from '@/components/Sections/Community/CommunitySection'
+import { FeedSection } from '@/components/Sections/Feed/FeedSection'
 import { MainSection } from '@/components/Sections/Main/MainSection'
 import { RecommendedSection } from '@/components/Sections/Recommended/RecommendedSection'
 import { Container } from '@mantine/core'
+import { Grid } from '@mantine/core/lib/Grid'
 import { useMediaQuery } from '@mantine/hooks'
 
 export const runtime = 'experimental-edge'
@@ -17,13 +19,13 @@ export default function Home() {
       <CommunitySection />
       {isMd ? (
         <>
-          {/* <Container fluid bg={'#E9ECEF'}>
+          <Container fluid bg={'#E9ECEF'}>
             <Grid>
               <Grid.Col span={12}>
                 <FeedSection sort={'created'} tag={'hive-102223'} />
               </Grid.Col>
             </Grid>
-          </Container> */}
+          </Container>
           <Container fluid bg={'linear-gradient(to bottom, #E9ECEF, #072f37)'}>
             <RecommendedSection />
           </Container>
