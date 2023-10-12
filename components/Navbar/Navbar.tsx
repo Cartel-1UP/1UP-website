@@ -5,6 +5,7 @@ import { Center, Container, Grid, Group, Header, Image, Menu } from '@mantine/co
 import { useMediaQuery } from '@mantine/hooks'
 import { IconBookmark, IconLogout, IconUser } from '@tabler/icons'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import oneuplogo from '../../images/oneup1.png'
 import LoginButton from '../LoginButton/LoginButton'
@@ -13,6 +14,7 @@ import useStyles from './style'
 
 export function Navbar() {
   const { classes, theme } = useStyles()
+  const router = useRouter();
 
   const [userMenuOpened, setUserMenuOpened] = useState(false)
 
@@ -73,7 +75,7 @@ export function Navbar() {
                       </Menu.Item>
                       <Menu.Item
                         className={classes.subLink}
-                        onClick={() => console.log('bobokmarks')}
+                        onClick={() => router.push('/bookmarks')}
                         icon={<IconBookmark
                           color={'white'} size={20} stroke={1.5} />}
                       >
