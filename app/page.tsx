@@ -4,8 +4,7 @@ import { CommunitySection } from '@/components/Sections/Community/CommunitySecti
 import { FeedSection } from '@/components/Sections/Feed/FeedSection'
 import { MainSection } from '@/components/Sections/Main/MainSection'
 import { RecommendedSection } from '@/components/Sections/Recommended/RecommendedSection'
-import { Container } from '@mantine/core'
-import { Grid } from '@mantine/core/lib/Grid'
+import { Container, Grid } from '@mantine/core'
 import { useMediaQuery } from '@mantine/hooks'
 
 export const runtime = 'experimental-edge'
