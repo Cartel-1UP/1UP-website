@@ -4,7 +4,7 @@ import { CommunitySection } from '@/components/Sections/Community/CommunitySecti
 import { FeedSection } from '@/components/Sections/Feed/FeedSection'
 import { MainSection } from '@/components/Sections/Main/MainSection'
 import { RecommendedSection } from '@/components/Sections/Recommended/RecommendedSection'
-import { Container, Grid } from '@mantine/core'
+import { Container, Grid, Space } from '@mantine/core'
 import { useMediaQuery } from '@mantine/hooks'
 
 export const runtime = 'experimental-edge'
@@ -31,7 +31,7 @@ export default function Home() {
         </>
       ) : (
         <>
-          {/* <Container fluid bg={'#E9ECEF'}>
+          <Container fluid bg={'#E9ECEF'}>
             <Container size="xl">
               <Grid>
                 <Grid.Col span={9}>
@@ -40,7 +40,7 @@ export default function Home() {
                 <Grid.Col span={3}>
                   <div style={{ position: 'sticky', top: '0' }}>
                     <Space h="xl" />
-                    <CommunityBar communityLogo={oneuplogo2.src} tag={'hive-102223'} />
+                    {/* <CommunityBar communityLogo={oneuplogo2.src} tag={'hive-102223'} /> */}
                   </div>
                 </Grid.Col>
               </Grid>
@@ -50,7 +50,7 @@ export default function Home() {
             <Container size="xl">
               <RecommendedSection />
             </Container>
-          </Container> */}
+          </Container>
         </>
       )}
     </>
