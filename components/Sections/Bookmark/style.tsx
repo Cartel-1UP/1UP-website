@@ -1,6 +1,13 @@
 import { createStyles } from '@mantine/styles'
 
 const useStyles = createStyles((theme) => ({
+
+  default: {
+    background: `linear-gradient(to bottom, #072f37 0%, #E9ECEF 20%, #E9ECEF 20%, #E9ECEF 100%)`,
+    minHeight: '85vh',
+  },
+
+
   card: {
     borderColor: '#e2e8f0d2',
     borderWidth: 1,
@@ -25,8 +32,6 @@ const useStyles = createStyles((theme) => ({
   link: {
     textDecoration: 'none',
     color: '#000000',
-    display: 'flex',
-    alignItems: 'center',
 
     '&:hover': {
       color: '#16093fbc',

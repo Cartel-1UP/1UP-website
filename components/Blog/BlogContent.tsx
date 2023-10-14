@@ -121,34 +121,35 @@ export function BlogContent({ permlink, author }: Props) {
       {isLodingBlogData || isLodingCommentsData || isLodingUserProfileData ? (
         <>
           <Container fluid className={classes.default}>
-            <Container size="lg" sx={{ height: '90vh' }}>
-              <Grid grow>
-                <Grid.Col span={isMd ? 12 : 9}>
-                  <SimpleGrid
-                    cols={1}
-                    pt={25}
-                    spacing={0}
-                    breakpoints={[{ maxWidth: 'sm', cols: 1 }]}
-                  >
-                    <Card withBorder p="md" radius={0} className={classes.cardHeader}>
-                      <Grid grow>
-                        <Grid.Col span={10}>
-                          <Skeleton height="5vh" />
-                        </Grid.Col>
-                        <Grid.Col span={2}>
-                          <Skeleton height="5vh" />
-                        </Grid.Col>
-                      </Grid>
-                    </Card>
-                    <Card withBorder p="md" radius={0} className={classes.card}>
-                      <Skeleton height="65vh" />
-                    </Card>
-                    <Card withBorder p="md" mb={25} radius={0} className={classes.cardFooter}>
-                      <Skeleton height={'5vh'} />
-                    </Card>
-                  </SimpleGrid>
-                </Grid.Col>
-                <Grid.Col span={isMd ? 12 : 3}>
+
+            <Grid grow>
+              <Grid.Col span={isMd ? 12 : 9}>
+                <SimpleGrid
+                  cols={1}
+                  pt={25}
+                  spacing={0}
+                  breakpoints={[{ maxWidth: 'sm', cols: 1 }]}
+                >
+                  <Card withBorder p="md" radius={0} className={classes.cardHeader}>
+                    <Grid grow>
+                      <Grid.Col span={10}>
+                        <Skeleton height="5vh" />
+                      </Grid.Col>
+                      <Grid.Col span={2}>
+                        <Skeleton height="5vh" />
+                      </Grid.Col>
+                    </Grid>
+                  </Card>
+                  <Card withBorder p="md" radius={0} className={classes.card}>
+                    <Skeleton height="65vh" />
+                  </Card>
+                  <Card withBorder p="md" mb={25} radius={0} className={classes.cardFooter}>
+                    <Skeleton height={'5vh'} />
+                  </Card>
+                </SimpleGrid>
+              </Grid.Col>
+              {!isMd && (
+                <Grid.Col span={3}>
                   <SimpleGrid
                     cols={1}
                     pt={25}
@@ -164,8 +165,10 @@ export function BlogContent({ permlink, author }: Props) {
                     </Card>
                   </SimpleGrid>
                 </Grid.Col>
-              </Grid>
-            </Container>
+              )}
+
+            </Grid>
+
           </Container>
         </>
       ) : (
