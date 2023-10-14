@@ -32,7 +32,7 @@ export function CommunityBar({ communityLogo, tag }: Props) {
     <>
       {communityInfo && (
         <Card withBorder p="md" radius={10} className={classes.card}>
-          <AspectRatio ratio={1 / 1} sx={{ maxWidth: 300 }} mx="auto">
+          <AspectRatio ratio={1 / 1} sx={{ maxWidth: 200 }} mx="auto">
             <Image src={communityLogo} alt="Logo" fit="contain" withPlaceholder />
           </AspectRatio>
           <Group position="center" spacing={'xs'}>

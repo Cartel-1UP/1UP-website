@@ -11,6 +11,15 @@ const useStyles = createStyles((theme) => ({
     width: 'auto',
   },
 
+  tweet: {
+    margin: '20px',
+    marginBottom: '40px',
+    maxHeight: '600px',
+    maxWidth: '600px',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+  },
+
   centeredImage: {
     display: 'block',
     margin: '0 auto',

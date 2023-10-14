@@ -73,7 +73,7 @@ export function Markdown({ text }: Props) {
             } else if (href.match(/^https:\/\/twitter\.com\/[^/]+\/status\/\d+$/)) {
               const tweetId = href.match(/\/status\/(\d+)$/)[1]
               return (
-                <div className={classes.image}>
+                <div className={classes.tweet}>
                   <Tweet tweetId={tweetId} />
                 </div>
               )

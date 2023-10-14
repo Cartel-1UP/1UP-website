@@ -1,3 +1,5 @@
+'use client'
+
 import { Container } from '@mantine/core'
 import { useMediaQuery } from '@mantine/hooks'
 import { BlogContent } from './BlogContent'

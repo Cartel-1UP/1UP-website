@@ -6,21 +6,16 @@ import { HiveArticle } from '@/types/blog.type'
 import { useAuthorizationStore } from '@/zustand/stores/useAuthorizationStore'
 import { useNotifiactionStore } from '@/zustand/stores/useNotificationStore'
 import {
-  AspectRatio,
   Avatar,
   Badge,
   Card,
   Container,
-  Grid,
-  Group,
-  Image,
-  Indicator,
+  Grid, Group, Indicator,
   Space,
-  Text,
-  ThemeIcon
+  Text
 } from '@mantine/core'
 import { useMediaQuery } from '@mantine/hooks'
-import { IconArrowBack, IconBookmark, IconBookmarkOff, IconHeart, IconMessage } from '@tabler/icons'
+import { IconHeart, IconMessage, IconX } from '@tabler/icons'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 
@@ -124,27 +119,12 @@ export function BookmarkCard({ article }: Props) {
 
   return (
     <Card key={article.post_id} withBorder p="md" radius={0} className={classes.card}>
+
       <Grid grow>
-        <Grid.Col span={7}>
-          {article.reblogged_by && (
-            <>
-              <Container>
-                <Group spacing={'xs'}>
-                  <ThemeIcon variant="light" color="gray" size={'sm'} radius="xl">
-                    <IconArrowBack />
-                  </ThemeIcon>
-                  <Text size={'sm'} weight={400}>
-                    Rebbloged by{' '}
-                    <Text span c="blue" inherit>
-                      <a href={`https://peakd.com/@${article.reblogged_by[0]}`} className={classes.peakdLink} target="_blank" rel="noopener noreferrer">@{article.reblogged_by[0]}</a>
-                    </Text>
-                  </Text>
-                </Group>
-                <Space h={'md'} />
-              </Container>
-            </>
-          )}
-          <Container className={classes.headerContainer}>
+        <Grid.Col span={12}>
+
+          <Container fluid className={classes.headerContainer} display={'flex'}>
+
             <Indicator
               color={'#114f5c'}
               inline
@@ -160,44 +140,64 @@ export function BookmarkCard({ article }: Props) {
                 src={`https://images.hive.blog/u/${article?.author}/avatar`}
               />
             </Indicator>
-            {article.stats.is_pinned && (
-              <Badge ml={10} color="red" variant="outline">
-                Pinned
-              </Badge>
-            )}
-            <Text pl={20} color="dimmed" size="xs" transform="uppercase" weight={600}>
-              {`${article?.author} - ${formatedDate}`}
-            </Text>
+            <Group position='apart' style={{ flex: 1 }}>
+
+              <Text pl={20} color="dimmed" size="xs" transform="uppercase" weight={600}>
+                {`${article?.author} - ${formatedDate}`}
+              </Text>
+
+              <span className={classes.icon}>
+                {isInBookmarks ?
+                  <IconX
+                    size={'1.3rem'}
+                    onClick={() =>
+                      authorized
+                        ?
+                        toggleBookmark() :
+                        addSnackbar({
+                          id: '3',
+                          title: 'Warning',
+                          message: 'You have to login to save bookmark!',
+                          queryKey: undefined,
+                          color: 'red',
+                          time: 3000
+                        })
+                    }
+                  />
+                  :
+                  <IconX
+                    size={'1.1rem'}
+                    onClick={() =>
+                      authorized
+                        ?
+                        toggleBookmark() :
+                        addSnackbar({
+                          id: '4',
+                          title: 'Warning',
+                          message: 'You have to login to save bookmark!',
+                          queryKey: undefined,
+                          color: 'red',
+                          time: 3000
+                        })
+                    }
+                  />}
+              </span>
+            </Group>
           </Container>
-          <Link
-            href={`community/${article.community}/post/` + article.author + '/' + article.permlink}
-            className={classes.link}
-          >
-            <Container>
-              <Text weight={600} mt={15}>
+          <Container fluid sx={{ display: 'flex', alignItems: 'start' }}>
+            <Link
+              href={`community/${article.community}/post/` + article.author + '/' + article.permlink}
+              className={classes.link}
+            >
+              <Text weight={600} mt={25}>
                 {article?.title}
               </Text>
-              <Text color="dimmed" size="sm" weight={600} mt={5} className={classes.turncate}>
-                {bodyOfArticle}
-              </Text>
-            </Container>
-          </Link>
+            </Link>
+          </Container>
+
         </Grid.Col>
-        {!isMobile && (
-          <Grid.Col span={5}>
-            <Container>
-              <AspectRatio ratio={16 / 9}>
-                {isImageExists ? (
-                  <Image radius={10} src={article?.json_metadata.image[0]} withPlaceholder />
-                ) : (
-                  <Image src={null} withPlaceholder radius={10} />
-                )}
-              </AspectRatio>
-            </Container>
-          </Grid.Col>
-        )}
-        <Grid.Col span={isMobile ? 12 : 7}>
-          <Container>
+        <Grid.Col span={12}>
+          <Container fluid>
             {article?.json_metadata.tags
               ? article?.json_metadata.tags.slice(0, 3).map?.((item: string) => (
                 <Badge mr={5} radius={5} color="gray" key={item}>
@@ -207,7 +207,7 @@ export function BookmarkCard({ article }: Props) {
               : null}
           </Container>
         </Grid.Col>
-        <Grid.Col span={isMobile ? 12 : 5} display="flex">
+        <Grid.Col span={12} display="flex">
           <Container mr={0} className={classes.metadataContainer}>
             <span className={classes.icon}>
               <IconHeart
@@ -251,60 +251,29 @@ export function BookmarkCard({ article }: Props) {
               {formattedCurrency}
             </Text>
             <Space w="sm" />
-            <span className={classes.icon}>
-              {isInBookmarks ?
-                <IconBookmarkOff
-                  size={'1.1rem'}
-                  onClick={() =>
-                    authorized
-                      ?
-                      toggleBookmark() :
-                      addSnackbar({
-                        id: '3',
-                        title: 'Warning',
-                        message: 'You have to login to save bookmark!',
-                        queryKey: undefined,
-                        color: 'red',
-                        time: 3000
-                      })
-                  }
-                />
-                :
-                <IconBookmark
-                  size={'1.1rem'}
-                  onClick={() =>
-                    authorized
-                      ?
-                      toggleBookmark() :
-                      addSnackbar({
-                        id: '4',
-                        title: 'Warning',
-                        message: 'You have to login to save bookmark!',
-                        queryKey: undefined,
-                        color: 'red',
-                        time: 3000
-                      })
-                  }
-                />}
-            </span>
           </Container>
         </Grid.Col>
       </Grid>
-      {isVote && (
-        <Grid.Col span={12}>
-          <VoteSlider permlink={article.permlink} author={article.author} setIsVote={setIsVote} />
-        </Grid.Col>
-      )}
-      {isComment && (
-        <Grid.Col span={12}>
-          <CommentEditor
-            setIsComment={setIsComment}
-            permlink={article.permlink}
-            parentAuthor={article.author}
-            parentPermlink={article?.parent_permlink}
-          />
-        </Grid.Col>
-      )}
-    </Card>
+      {
+        isVote && (
+          <Grid.Col span={12}>
+            <VoteSlider permlink={article.permlink} author={article.author} setIsVote={setIsVote} />
+          </Grid.Col>
+        )
+      }
+      {
+        isComment && (
+          <Grid.Col span={12}>
+            <CommentEditor
+              setIsComment={setIsComment}
+              permlink={article.permlink}
+              parentAuthor={article.author}
+              parentPermlink={article?.parent_permlink}
+            />
+          </Grid.Col>
+        )
+      }
+
+    </Card >
   )
 }

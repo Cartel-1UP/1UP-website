@@ -20,12 +20,31 @@ export function CommunitySection() {
 
   return (
     <>
-      {!isSm && (
-        <Container fluid bg={'linear-gradient(to bottom, #275c672d, #275c67bb)'} pt={10} pb={30}>
-          <Container size="xl">
+
+      <Container fluid bg={'linear-gradient(to bottom, #275c672d, #275c67bb)'} pt={10} pb={30}>
+        <Container size="xl">
+          {isSm ?
             <Carousel
-              slideSize={'10%'}
-              breakpoints={[{ maxWidth: 'sm', slideSize: '100%', slideGap: 1 }]}
+              slideSize="33.333333%"
+              align="start"
+              slidesToScroll={1}
+              loop
+              withControls={false}
+              plugins={[autoplay.current]}
+              onMouseEnter={autoplay.current.stop}
+              onMouseLeave={autoplay.current.reset}
+              dragFree={true}
+              speed={0.01}
+            >
+              {comumnityData.map((item, index) => (
+                <Carousel.Slide key={index}>
+                  <CommunityCard {...item} />
+                </Carousel.Slide>
+              ))}
+            </Carousel>
+            :
+            <Carousel
+              slideSize="10%"
               slideGap="xl"
               align="start"
               slidesToScroll={1}
@@ -43,9 +62,13 @@ export function CommunitySection() {
                 </Carousel.Slide>
               ))}
             </Carousel>
-          </Container>
+
+
+          }
+
         </Container>
-      )}
+      </Container>
+
     </>
   )
 }
