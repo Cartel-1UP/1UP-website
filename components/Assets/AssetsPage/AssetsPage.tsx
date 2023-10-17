@@ -3,10 +3,12 @@
 import { faker } from '@faker-js/faker';
 import { Card, Container, Grid, Space, Text } from '@mantine/core';
 import {
-  ArcElement, CategoryScale, Chart as ChartJS, Legend, LinearScale, LineElement, PointElement, Title,
+  ArcElement, CategoryScale, Chart as ChartJS, Legend,
+  LineElement,
+  LinearScale,
+  PointElement, Title,
   Tooltip
 } from 'chart.js';
-import { Line, Pie } from 'react-chartjs-2';
 import useStyles from '../style';
 
 ChartJS.register(
@@ -88,7 +90,7 @@ export function AssetsPage() {
               <Grid grow>
                 <Grid.Col span={8}>
                   <Text size={18} fw={400}>Total amount of vault</Text>
-                  <Grid grow>
+                  {/* <Grid grow>
                     <Grid.Col span={8}>
                       <Container size='sm'>
                         <Line options={options} data={data} />
@@ -97,7 +99,7 @@ export function AssetsPage() {
                     <Grid.Col span={4}>
                       <Pie data={data2} />
                     </Grid.Col>
-                  </Grid>
+                  </Grid> */}
                 </Grid.Col>
               </Grid>
             </Container>
