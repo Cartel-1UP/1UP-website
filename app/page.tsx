@@ -16,7 +16,15 @@ export default function Home() {
 
   return (
     <>
-      <MainSection />
+      <Container fluid bg={'linear-gradient(to top, #275c672d, #072f37)'} pb={isMd ? 0 : 25}>
+        {isMd ? (
+          <MainSection />
+        ) : (
+          <Container size="xl" pt={0}>
+            <MainSection />
+          </Container>
+        )}
+      </Container>
       <CommunitySection />
       {isMd ? (
         <>

@@ -1,8 +1,8 @@
 'use client'
 
 import { logoutUser, useAuthorizationStore } from '@/zustand/stores/useAuthorizationStore'
-import { Center, Container, Grid, Group, Header, Image, Menu } from '@mantine/core'
-import { useMediaQuery } from '@mantine/hooks'
+import { Avatar, Badge, Burger, Center, Container, Divider, Drawer, Grid, Group, Header, Image, Menu, NavLink, Text } from '@mantine/core'
+import { useDisclosure, useMediaQuery } from '@mantine/hooks'
 import { IconBookmark, IconLogout, IconUser } from '@tabler/icons'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
@@ -25,82 +25,155 @@ export function Navbar() {
   const username = useAuthorizationStore((state: { username: string }) => state.username)
   const isMd = useMediaQuery(`(max-width: ${theme.breakpoints.md}px)`)
 
-  return (
-    <Container fluid p={5} pb={25} bg={'#072f37'} sx={{ border: 0 }}>
-      <Container size={'xl'}>
-        <Header height={'100%'} bg={'#072f37'} sx={{ border: 0 }}>
-          <Grid justify="space-between" align="center">
-            <Grid.Col
-              span={3}
-              pl={20}
-              sx={{ display: 'flex', justifyContent: 'left' }}
-              className={classes.hiddenMobile}
-            >
-              <Center>
-                <Group spacing={0}></Group>
-              </Center>
-            </Grid.Col>
-            <Grid.Col span={isMd ? 8 : 6}>
-              <Link href={''}>
-                <Image src={oneuplogo.src} alt="Logo" fit="contain" />
-              </Link>
-            </Grid.Col>
-            <Grid.Col span={isMd ? 4 : 3} pr={20} sx={{ display: 'flex', justifyContent: 'right' }}>
-              <Group className={classes.hiddenMobileLogin}>
-                {authorized ? (
-                  <Menu
-                    width={260}
-                    position="bottom-end"
-                    transition="pop-top-right"
-                    onClose={() => setUserMenuOpened(false)}
-                    onOpen={() => setUserMenuOpened(true)}
-                    classNames={classes}
-                  >
-                    <Menu.Target>
-                      <UserButton
-                        image={userImage}
-                        name={username}
-                        mana={userMana}
-                        reputation={userReputation}
-                      />
-                    </Menu.Target>
-                    <Menu.Dropdown bg={'#072f37'} sx={{ borderColor: '#031418' }}>
-                      <Menu.Item
-                        className={classes.subLink}
-                        onClick={() => window.open(`https://www.peakd.com/@${username}`, '_blank')}
-                        icon={<IconUser
-                          color={'white'} size={20} stroke={1.5} />}
-                      >
-                        Profile
-                      </Menu.Item>
-                      <Menu.Item
-                        className={classes.subLink}
-                        onClick={() => router.push('/bookmarks')}
-                        icon={<IconBookmark
-                          color={'white'} size={20} stroke={1.5} />}
-                      >
-                        Bookmarks
-                      </Menu.Item>
-                      <Menu.Divider />
-                      <Menu.Item
-                        className={classes.subLink}
-                        onClick={() => logoutUser()}
-                        icon={<IconLogout color={'white'} size={20} stroke={1.5} />}
-                      >
-                        Log out
-                      </Menu.Item>
 
-                    </Menu.Dropdown>
-                  </Menu>
-                ) : (
-                  <LoginButton />
-                )}
+  const [opened, { open, close }] = useDisclosure(false);
+
+
+  return (
+    <div className={classes.mobileStickyHeader}>
+      <Container fluid sx={{ padding: isMd ? 0 : 5, paddingBottom: isMd ? 0 : 25, }} bg={'#072f37'} className={classes.navbar}>
+        <Container size={'xl'}>
+          <Header height={'100%'} bg={'#072f37'} sx={{ border: 0 }}>
+            <Grid justify="space-between" align="center">
+              <Grid.Col
+                span={3}
+                pl={20}
+                sx={{ display: 'flex', justifyContent: 'left' }}
+                className={classes.hiddenMobile}
+              >
+                <Center>
+                  <Group spacing={0}></Group>
+                </Center>
+              </Grid.Col>
+              <Grid.Col span={isMd ? 8 : 6}>
+                <Link href={''}>
+                  <Image src={oneuplogo.src} alt="Logo" fit="contain" />
+                </Link>
+              </Grid.Col>
+              <Grid.Col span={isMd ? 4 : 3} pr={20} sx={{ display: 'flex', justifyContent: 'right' }}>
+                <Group className={classes.hiddenMobileLogin}>
+                  {authorized ? (
+                    <Menu
+                      width={260}
+                      position="bottom-end"
+                      transition="pop-top-right"
+                      onClose={() => setUserMenuOpened(false)}
+                      onOpen={() => setUserMenuOpened(true)}
+                      classNames={classes}
+                    >
+                      <Menu.Target>
+                        <UserButton
+                          image={userImage}
+                          name={username}
+                          mana={userMana}
+                          reputation={userReputation}
+                        />
+                      </Menu.Target>
+                      <Menu.Dropdown bg={'#072f37'} sx={{ borderColor: '#031418' }}>
+                        <Menu.Item
+                          className={classes.subLink}
+                          onClick={() => window.open(`https://www.peakd.com/@${username}`, '_blank')}
+                          icon={<IconUser
+                            color={'white'} size={20} stroke={1.5} />}
+                        >
+                          Profile
+                        </Menu.Item>
+                        <Menu.Item
+                          className={classes.subLink}
+                          onClick={() => router.push('/bookmarks')}
+                          icon={<IconBookmark
+                            color={'white'} size={20} stroke={1.5} />}
+                        >
+                          Bookmarks
+                        </Menu.Item>
+                        <Menu.Divider />
+                        <Menu.Item
+                          className={classes.subLink}
+                          onClick={() => logoutUser()}
+                          icon={<IconLogout color={'white'} size={20} stroke={1.5} />}
+                        >
+                          Log out
+                        </Menu.Item>
+
+                      </Menu.Dropdown>
+                    </Menu>
+                  ) : (
+                    <LoginButton />
+                  )}
+                </Group>
+                <Burger opened={opened} onClick={open} className={classes.hiddenDesktop} color={'#E9ECEF'} />
+              </Grid.Col>
+            </Grid>
+          </Header>
+        </Container>
+        <Drawer
+          styles={{
+            closeButton: {
+              '& svg': {
+                width: 50,
+                height: 50,
+                color: '#E9ECEF'
+              }
+            }
+          }}
+          opened={opened}
+          onClose={close}
+          size="100%"
+          padding="md"
+          zIndex={1000000}
+          className={classes.drawer}
+        >
+          {authorized ? (
+            <>
+              <Group>
+                <Avatar src={userImage} radius="xl" />
+                <div style={{ flex: 1 }}>
+                  <Text size="md" weight={400} color="#E9ECEF">
+                    {username}{' '}
+                    <Badge
+                      sx={(theme) => ({ padding: 5 })}
+                      ml={5}
+                      radius="sm"
+                      color="gray"
+                      variant="outline"
+                    >
+                      {userReputation.toFixed()}
+                    </Badge>
+                  </Text>
+                </div>
               </Group>
-              {/* <Burger opened={drawerOpened} onClick={toggleDrawer} className={classes.hiddenDesktop} /> */}
-            </Grid.Col>
-          </Grid>
-        </Header>
+              <Divider mt={20} mb={10} />
+              <NavLink
+                label="Profile"
+                className={classes.subLink}
+                icon={<IconUser color={'white'} size={20} stroke={1.5} />}
+                onClick={() => {
+                  window.open(`https://www.peakd.com/@${username}`, '_blank')
+                  close()
+                }}
+              />
+              <NavLink
+                label="Bookmarks"
+                className={classes.subLink}
+                icon={<IconBookmark color={'white'} size={20} stroke={1.5} />}
+                onClick={() => {
+                  router.push('/bookmarks')
+                  close()
+                }}
+              />
+              <Menu.Divider />
+              <NavLink
+                label="Log out"
+                className={classes.subLink}
+                icon={<IconLogout color={'white'} size={20} stroke={1.5} />}
+                onClick={() => { logoutUser(); close() }}
+              />
+            </>
+          ) : (
+            <LoginButton />
+          )}
+        </Drawer>
       </Container>
-    </Container>
+    </div>
   )
 }
