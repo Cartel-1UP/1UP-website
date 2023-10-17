@@ -176,14 +176,14 @@ export function Navbar() {
                     className={classes.subLink}
                     label={item.name}
                     key={item.name}
+
                     onClick={() => {
                       close()
                       router.push('community/' + item.tag)
                     }
                     }
                     disabled={item.tag === 'none'}
-                    icon={<Avatar src={item.image} radius="xl" />
-                    }
+
                   />
                 ))}
               </NavLink>
