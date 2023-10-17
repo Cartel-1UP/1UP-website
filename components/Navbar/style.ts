@@ -7,6 +7,21 @@ const useStyles = createStyles((theme) => ({
     },
   },
 
+  mobileStickyHeader: {
+    [theme.fn.smallerThan('sm')]: {
+    position: 'sticky', 
+    top: '0' ,
+    zIndex: 1000,
+    }
+  },
+
+  navbar: {
+    [theme.fn.smallerThan('sm')]: {
+      paddingTop: 10,
+      paddaingBottom: 25,
+    }
+  },
+
   hiddenMobileLogin: {
     [theme.fn.smallerThan('sm')]: {
       display: 'none',
@@ -37,6 +52,11 @@ const useStyles = createStyles((theme) => ({
       color: theme.white,
     },
   },
+
+  drawer: {
+    backgroundColor: '#06272e',
+  }
+
 }))
 
 export default useStyles

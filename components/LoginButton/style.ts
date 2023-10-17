@@ -2,21 +2,12 @@ import { createStyles } from '@mantine/styles'
 
 const useStyles = createStyles((theme) => ({
   button: {
-    backgroundColor: 'white',
-    color: '#072f37',
-    border: 0,
-
-    ...theme.fn.hover({
-      backgroundColor: '#eeeeee',
-    }),
+    color: '#E9ECEF',
+    borderColor: '#E9ECEF',
   },
   buttonLogin: {
-    backgroundColor: '#072f37',
-    border: 0,
-
-    ...theme.fn.hover({
-      backgroundColor: '#0b4b57',
-    }),
+    color: '#072f37',
+    borderColor: '#072f37',
   },
 }))
 

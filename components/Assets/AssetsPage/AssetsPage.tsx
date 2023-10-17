@@ -1,16 +1,16 @@
 'use client'
 
-import { comumnityData } from '@/data/communityData';
 import { faker } from '@faker-js/faker';
-import { Accordion, Card, Container, Grid, Image, Space, Text } from '@mantine/core';
+import { Card, Container, Grid, Space, Text } from '@mantine/core';
 import {
-  CategoryScale, Chart as ChartJS, Legend, LinearScale, LineElement, PointElement, Title,
+  ArcElement, CategoryScale, Chart as ChartJS, Legend, LinearScale, LineElement, PointElement, Title,
   Tooltip
 } from 'chart.js';
-import { Line } from 'react-chartjs-2';
+import { Line, Pie } from 'react-chartjs-2';
 import useStyles from '../style';
 
 ChartJS.register(
+  ArcElement,
   CategoryScale,
   LinearScale,
   PointElement,
@@ -47,6 +47,33 @@ export const data = {
   ],
 };
 
+export const data2 = {
+  labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+  datasets: [
+    {
+      label: '# of Votes',
+      data: [12, 19, 3, 5, 2, 3],
+      backgroundColor: [
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(54, 162, 235, 0.2)',
+        'rgba(255, 206, 86, 0.2)',
+        'rgba(75, 192, 192, 0.2)',
+        'rgba(153, 102, 255, 0.2)',
+        'rgba(255, 159, 64, 0.2)',
+      ],
+      borderColor: [
+        'rgba(255, 99, 132, 1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(255, 206, 86, 1)',
+        'rgba(75, 192, 192, 1)',
+        'rgba(153, 102, 255, 1)',
+        'rgba(255, 159, 64, 1)',
+      ],
+      borderWidth: 1,
+    },
+  ],
+};
+
 
 export function AssetsPage() {
   const { classes, theme } = useStyles()
@@ -67,46 +94,12 @@ export function AssetsPage() {
                         <Line options={options} data={data} />
                       </Container>
                     </Grid.Col>
-                    {/* <Grid.Col span={4}>
-                      <PieChart />
-                    </Grid.Col> */}
+                    <Grid.Col span={4}>
+                      <Pie data={data2} />
+                    </Grid.Col>
                   </Grid>
                 </Grid.Col>
               </Grid>
-            </Container>
-          </Card>
-        </Grid.Col>
-        <Grid.Col span={6}>
-          <Card className={classes.card}>
-            <Container size='xl'>
-              <Grid grow>
-                <Grid.Col span={8}>
-                  <Text size={18} fw={400}>Splinterlands</Text>
-                </Grid.Col>
-                <Grid.Col span={4}>
-                  <Image
-                    radius="md"
-                    h={200}
-                    w="auto"
-                    fit="contain"
-                    src={comumnityData[0].image}
-                  />
-                </Grid.Col>
-              </Grid>
-
-              <Accordion defaultValue="Splinterlands">
-                <Accordion.Item key={1} value={'Splinterlands'}>
-                  <Accordion.Control>Assets of splinterlands</Accordion.Control>
-                  <Accordion.Panel>Assets</Accordion.Panel>
-                </Accordion.Item>
-              </Accordion>
-            </Container>
-          </Card>
-        </Grid.Col>
-        <Grid.Col span={6}>
-          <Card className={classes.card}>
-            <Container size='xl'>
-              <Text size={18} fw={400}>Woo</Text>
             </Container>
           </Card>
         </Grid.Col>

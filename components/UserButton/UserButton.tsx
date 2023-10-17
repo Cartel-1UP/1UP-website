@@ -10,6 +10,8 @@ interface UserButtonProps extends React.ComponentPropsWithoutRef<'button'> {
   reputation: number
 }
 
+
+
 const UserButton = forwardRef<HTMLButtonElement, UserButtonProps>(
   ({ image, name, icon, mana, reputation, ...others }: UserButtonProps, ref) => (
     <UnstyledButton
@@ -24,8 +26,10 @@ const UserButton = forwardRef<HTMLButtonElement, UserButtonProps>(
           color: theme.colorScheme !== 'dark' ? theme.colors.gray[4] : theme.black,
           backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : '#06272e',
         },
-        [theme.fn.smallerThan('xs')]: {
-          display: 'none',
+        '@media (max-width: 768px)': {
+          '& .chevron-icon': {
+            display: 'none',
+          },
         },
       })}
       {...others}
@@ -46,7 +50,10 @@ const UserButton = forwardRef<HTMLButtonElement, UserButtonProps>(
             </Badge>
           </Text>
         </div>
-        {icon || <IconChevronRight size={16} />}
+        {(
+          icon || <IconChevronRight size={16} />
+        )}
+
       </Group>
     </UnstyledButton>
   )
