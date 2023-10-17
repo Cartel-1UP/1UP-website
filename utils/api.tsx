@@ -1,8 +1,8 @@
 import Axios from 'axios'
 
 const api = Axios.create({
-  // baseURL: "https://oneup-pi.vercel.app/api",
-  baseURL: 'http://localhost:3000/api',
+  baseURL: "https://oneup-pi.vercel.app/api",
+  // baseURL: 'http://localhost:3000/api',
   headers: {
     'Content-Type': 'application/json',
     accept: 'application/json',
