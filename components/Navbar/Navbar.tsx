@@ -1,9 +1,10 @@
 'use client'
 
+import { comumnityData } from '@/data/communityData'
 import { logoutUser, useAuthorizationStore } from '@/zustand/stores/useAuthorizationStore'
 import { Avatar, Badge, Burger, Center, Container, Divider, Drawer, Grid, Group, Header, Image, Menu, NavLink, Text } from '@mantine/core'
 import { useDisclosure, useMediaQuery } from '@mantine/hooks'
-import { IconBookmark, IconLogout, IconUser } from '@tabler/icons'
+import { IconBookmark, IconLogout, IconUser, IconUsers } from '@tabler/icons'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
@@ -148,8 +149,9 @@ export function Navbar() {
                 className={classes.subLink}
                 icon={<IconUser color={'white'} size={20} stroke={1.5} />}
                 onClick={() => {
-                  window.open(`https://www.peakd.com/@${username}`, '_blank')
                   close()
+                  window.open(`https://www.peakd.com/@${username}`, '_blank')
+
                 }}
               />
               <NavLink
@@ -157,16 +159,40 @@ export function Navbar() {
                 className={classes.subLink}
                 icon={<IconBookmark color={'white'} size={20} stroke={1.5} />}
                 onClick={() => {
-                  router.push('/bookmarks')
                   close()
+                  router.push('/bookmarks')
+
                 }}
               />
+              <Menu.Divider />
+              <NavLink
+                className={classes.subLink}
+                label="Partners"
+                childrenOffset={28}
+                icon={<IconUsers color={'white'} size={20} stroke={1.5} />}
+              >
+                {comumnityData.map((item) => (
+                  <NavLink
+                    className={classes.subLink}
+                    label={item.name}
+                    key={item.name}
+                    onClick={() => {
+                      close()
+                      router.push('community/' + item.tag)
+                    }
+                    }
+                    disabled={item.tag === 'none'}
+                    icon={<Avatar src={item.image} radius="xl" />
+                    }
+                  />
+                ))}
+              </NavLink>
               <Menu.Divider />
               <NavLink
                 label="Log out"
                 className={classes.subLink}
                 icon={<IconLogout color={'white'} size={20} stroke={1.5} />}
-                onClick={() => { logoutUser(); close() }}
+                onClick={() => { close(), logoutUser() }}
               />
             </>
           ) : (
