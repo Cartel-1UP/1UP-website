@@ -2,16 +2,11 @@ import { createStyles } from '@mantine/styles'
 
 const useStyles = createStyles((theme) => ({
   card: {
-    transition: 'transform 150ms ease, box-shadow 150ms ease',
 
-    '&:hover': {
-      transform: 'scale(1.01)',
-      boxShadow: theme.shadows.md,
-    },
   },
 
   default: {
-    // background: 'linear-gradient(to top, white, #275c67bb);',
+    backgroundColor: '#E9ECEF'
   },
 
   title: {
