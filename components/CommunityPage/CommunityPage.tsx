@@ -1,3 +1,5 @@
+'use client'
+
 import { CommunityBar } from '@/components/CommunityBar/CommunityBar'
 import { FeedSection } from '@/components/Sections/Feed/FeedSection'
 import { comumnityData } from '@/data/communityData'

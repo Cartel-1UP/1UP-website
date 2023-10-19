@@ -2,9 +2,9 @@
 
 import { comumnityData } from '@/data/communityData'
 import { logoutUser, useAuthorizationStore } from '@/zustand/stores/useAuthorizationStore'
-import { Avatar, Badge, Burger, Center, Container, Divider, Drawer, Grid, Group, Header, Image, Menu, NavLink, Text } from '@mantine/core'
+import { Avatar, Badge, Burger, Center, Container, Divider, Drawer, Grid, Group, Header, Image, Menu, NavLink, ScrollArea, Text } from '@mantine/core'
 import { useDisclosure, useMediaQuery } from '@mantine/hooks'
-import { IconBookmark, IconLogout, IconUser, IconUsers } from '@tabler/icons'
+import { IconBookmark, IconExchange, IconLogout, IconUser, IconUsers } from '@tabler/icons'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
@@ -43,7 +43,17 @@ export function Navbar() {
                 className={classes.hiddenMobile}
               >
                 <Center>
-                  <Group spacing={0}></Group>
+                  <Group spacing={0}>
+                    <NavLink
+                      label="Swap"
+                      className={classes.subLink}
+                      onClick={() => {
+                        close()
+                        window.open(`https://swap.oneup-cartel.com/`, '_blank')
+
+                      }}
+                    />
+                  </Group>
                 </Center>
               </Grid.Col>
               <Grid.Col span={isMd ? 8 : 6}>
@@ -164,6 +174,16 @@ export function Navbar() {
 
                 }}
               />
+              <NavLink
+                label="Swap"
+                className={classes.subLink}
+                icon={<IconExchange color={'white'} size={20} stroke={1.5} />}
+                onClick={() => {
+                  close()
+                  window.open(`https://swap.oneup-cartel.com/`, '_blank')
+
+                }}
+              />
               <Menu.Divider />
               <NavLink
                 className={classes.subLink}
@@ -171,21 +191,31 @@ export function Navbar() {
                 childrenOffset={28}
                 icon={<IconUsers color={'white'} size={20} stroke={1.5} />}
               >
-                {comumnityData.map((item) => (
-                  <NavLink
-                    className={classes.subLink}
-                    label={item.name}
-                    key={item.name}
-
-                    onClick={() => {
-                      close()
-                      router.push('community/' + item.tag)
+                <ScrollArea
+                  h={250}
+                  styles={(theme) => ({
+                    scrollbar: {
+                      '&:hover': {
+                        background: '#06272e',
+                      },
                     }
-                    }
-                    disabled={item.tag === 'none'}
+                  })}>
+                  {comumnityData.map((item) => (
+                    <NavLink
+                      className={classes.subLink}
+                      label={item.name}
+                      key={item.name}
+                      icon={<Avatar radius="xl" src={item.image} />}
+                      onClick={() => {
+                        close()
+                        router.push('community/' + item.tag)
+                      }
+                      }
+                      disabled={item.tag === 'none'}
 
-                  />
-                ))}
+                    />
+                  ))}
+                </ScrollArea>
               </NavLink>
               <Menu.Divider />
               <NavLink

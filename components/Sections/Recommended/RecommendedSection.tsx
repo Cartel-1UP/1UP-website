@@ -1,3 +1,5 @@
+'use client'
+
 import { useGetUsersChoice } from '@/actions/database/get-userschoice'
 import { UsersChoiceCard } from '@/types/blog.type'
 import { Card, Grid, SimpleGrid, Skeleton, Space, Text } from '@mantine/core'
