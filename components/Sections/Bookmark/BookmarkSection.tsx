@@ -9,7 +9,7 @@ import {
   SimpleGrid,
   Skeleton,
   Space,
-  Text,
+  Text
 } from '@mantine/core'
 import { useScrollIntoView } from '@mantine/hooks'
 import { IconArrowUp } from '@tabler/icons'
@@ -25,8 +25,12 @@ export function BookmarkSection() {
   const { classes, theme } = useStyles()
   const { scrollIntoView, targetRef } = useScrollIntoView<HTMLDivElement>({ offset: 60 })
   const [storedBookmarksJSON, setStoredBookmarksJSON]: [Post[], any] = useState(JSON.parse(localStorage?.getItem('bookmarks') ?? '[]'));
+  let bookmarks
 
-  const bookmarks = localStorage.getItem('bookmarks')
+  if (typeof window !== 'undefined' && window.localStorage) {
+    bookmarks = localStorage.getItem('bookmarks');
+    // Rest of your code that uses bookmarks
+  }
 
 
 
