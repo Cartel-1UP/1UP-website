@@ -2,6 +2,7 @@
 
 
 import CommentEditor from '@/components/ui/CommentEditor/CommentEditor'
+import { Markdown } from '@/components/ui/Markdown/Markdown'
 import { VoteSlider } from '@/components/ui/VoteSlider/VoteSlider'
 import { getTimeAgo } from '@/utils/methods/dateRefactor'
 import { useAuthorizationStore } from '@/zustand/stores/useAuthorizationStore'
@@ -73,7 +74,7 @@ export default function CommentCard({ comment, nestedComments, isVisible }: Prop
           </Text>
         </Group>
         <TypographyStylesProvider className={classes.body}>
-          {/* <Markdown text={comment.body} /> */}
+          <Markdown text={comment.body} />
         </TypographyStylesProvider>
         <Grid.Col span={12} display="flex">
           <Container ml={24} className={classes.metadataContainer}>

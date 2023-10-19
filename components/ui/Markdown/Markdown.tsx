@@ -29,6 +29,16 @@ export function Markdown({ text }: Props) {
       }
     });
 
+    const anchoredText = replacedBody.replace(
+      /(?<=\s)@(\w+)/g,
+      '<a href="https://peakd.com/@$1">@$1</a>'
+    )
+    const centeredText = anchoredText.replace(
+      /<center>(.*?)<\/center>/gs,
+      '<center>$1</center>'.replace(/"/g, '')
+    )
+
+
 
     return (
       <ReactMarkdown
@@ -81,7 +91,7 @@ export function Markdown({ text }: Props) {
           ),
         }}
       >
-        {replacedBody}
+        {centeredText}
       </ReactMarkdown>
     );
   }, [text]);
