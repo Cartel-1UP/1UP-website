@@ -32,20 +32,13 @@ export function Markdown({ text }: Props) {
     }).replace(
       /(?<=\s)@(\w+)/g,
       '<a href="https://peakd.com/@$1">@$1</a>'
-    ).replace(
-      /<center>(.*?)<\/center>/gs,
-      '<center>$1</center>'.replace(/"/g, '')
     )
 
-    // const anchoredText = replacedBody.replace(
-    //   /(?<=\s)@(\w+)/g,
-    //   '<a href="https://peakd.com/@$1">@$1</a>'
-    // )
-    // const centeredText = anchoredText.replace(
+    // replace(
     //   /<center>(.*?)<\/center>/gs,
     //   '<center>$1</center>'.replace(/"/g, '')
     // )
-    // const wrappedText = centeredText.replace(/(\S{110})/g, '$1\n');
+
 
     return (
       <ReactMarkdown
