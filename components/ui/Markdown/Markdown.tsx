@@ -29,14 +29,10 @@ export function Markdown({ text }: Props) {
       } else {
         return match
       }
-    })
-
-
-
-    // replace(
-    //   /<center>(.*?)<\/center>/gs,
-    //   '<center>$1</center>'.replace(/"/g, '')
-    // )
+    }).replace(
+      /<center>(.*?)<\/center>/gs,
+      '<center>$1</center>'.replace(/"/g, '')
+    )
 
 
     // replace(
@@ -72,12 +68,6 @@ export function Markdown({ text }: Props) {
                     style={{ width, height, borderRadius: 5 }}
                   />
                 </div>
-              )
-            } else if (href.match(/(?<=\s)@(\w+)/g,)) {
-              return (
-                <a href={`https://peakd.com/@${href}`} className={classes.link}>
-                  {children}
-                </a>
               )
             }
 
