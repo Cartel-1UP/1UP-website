@@ -41,14 +41,12 @@ export function Markdown({ text }: Props) {
       /<center>(.*?)<\/center>/gs,
       '<center>$1</center>'.replace(/"/g, '')
     )
-    // const wrappedText = centeredText.replace(/(\S{110})/g, '$1\n');
 
     return (
       <ReactMarkdown
         rehypePlugins={[rehypeRaw]}
         remarkPlugins={[gfm]}
         components={{
-          // Render the anchor element for the "a" Markdown element
           a: ({ href, children }: any) => {
             if (
               href.match(/\.(jpg|jpeg|png|gif|bmp|svg)$/i) ||

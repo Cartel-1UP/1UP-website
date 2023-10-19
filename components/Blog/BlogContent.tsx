@@ -205,7 +205,8 @@ export function BlogContent({ permlink, author }: Props) {
                 </Card>
                 <Card withBorder p="md" radius={0} className={classes.card}>
                   <Container>
-                    <Markdown text={blogData?.data?.result.body} />
+                    {blogData?.data?.result?.body ?
+                      <Markdown text={blogData?.data?.result?.body} /> : 'Error'}
                   </Container>
                 </Card>
                 <div style={{ position: 'sticky', bottom: '0px' }}>

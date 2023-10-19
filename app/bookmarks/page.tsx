@@ -2,10 +2,10 @@
 
 import { BookmarkSection } from "@/components/Sections/Bookmark/BookmarkSection"
 
-import {
-  Container
-} from '@mantine/core'
+import { Container } from '@mantine/core'
 import { useMediaQuery } from "@mantine/hooks"
+
+export const runtime = 'experimental-edge'
 
 export default function Page() {
   const isMd = useMediaQuery(`(max-width: 1000px)`)
