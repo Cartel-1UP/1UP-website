@@ -12,7 +12,6 @@ export default function Comment({ comments }: Props) {
   const [root, setRoot] = useState({} as any)
 
   const commentArray: any[] = Object.values(comments.result)
-
   const permlinkCount: Record<string, number> = {}
 
   const updatedCommentArray = commentArray.map((comment) => {

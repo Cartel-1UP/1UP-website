@@ -1,3 +1,5 @@
+'use client'
+
 // export default function CommentCard({ comments, permlink, article, queryKey }: Props) {
 //   const { classes, theme } = useStyles();
 //   const [root, setRoot] = useState([])
