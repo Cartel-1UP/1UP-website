@@ -1,3 +1,5 @@
+'use client'
+
 import { Image, Table } from '@mantine/core'
 import { useMemo } from 'react'
 import ReactMarkdown from 'react-markdown'
