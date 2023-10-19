@@ -1,7 +1,4 @@
 'use client'
-import { useAuthorizationStore } from '@/zustand/stores/useAuthorizationStore'
-import { useNotifiactionStore } from '@/zustand/stores/useNotificationStore'
-import { useMediaQuery } from '@mantine/hooks'
 
 import { useGetBlog } from '@/actions/hive/get-blog'
 import { useGetComments } from '@/actions/hive/get-comments'
@@ -10,6 +7,8 @@ import { useGetUserProfile } from '@/actions/hive/get-userprofile'
 import CommentEditor from '@/components/ui/CommentEditor/CommentEditor'
 import { VoteSlider } from '@/components/ui/VoteSlider/VoteSlider'
 import { dateRefactor } from '@/utils/methods/dateRefactor'
+import { useAuthorizationStore } from '@/zustand/stores/useAuthorizationStore'
+import { useNotifiactionStore } from '@/zustand/stores/useNotificationStore'
 import {
   ActionIcon,
   Avatar,
@@ -28,11 +27,11 @@ import {
   Text,
   Title
 } from '@mantine/core'
+import { useMediaQuery } from '@mantine/hooks'
 import { IconArrowDown, IconHeart, IconMessage } from '@tabler/icons'
 import { Custom, KeychainKeyTypes, KeychainSDK } from 'keychain-sdk'
 import { useEffect, useRef, useState } from 'react'
 import { useMutation, useQueryClient } from 'react-query'
-import { Markdown } from '../ui/Markdown/Markdown'
 import Comment from './Comment/Comment'
 import useStyles from './style'
 
@@ -58,10 +57,7 @@ export function BlogContent({ permlink, author }: Props) {
   const authorized = useAuthorizationStore((state: { authorized: boolean }) => state.authorized)
 
   const { data: blogData, isLoading: isLodingBlogData } = useGetBlog({ permlink, author })
-  const { data: commentsData, isLoading: isLodingCommentsData } = useGetComments({
-    permlink,
-    author,
-  })
+  const { data: commentsData, isLoading: isLodingCommentsData } = useGetComments({ permlink, author })
   const { data: userProfileData, isLoading: isLodingUserProfileData } = useGetUserProfile(author)
   const { data: following } = useGetFollowing(username)
 
@@ -121,7 +117,6 @@ export function BlogContent({ permlink, author }: Props) {
       {isLodingBlogData || isLodingCommentsData || isLodingUserProfileData ? (
         <>
           <Container fluid className={classes.default}>
-
             <Grid grow>
               <Grid.Col span={isMd ? 12 : 9}>
                 <SimpleGrid
@@ -166,9 +161,7 @@ export function BlogContent({ permlink, author }: Props) {
                   </SimpleGrid>
                 </Grid.Col>
               )}
-
             </Grid>
-
           </Container>
         </>
       ) : (
@@ -211,7 +204,7 @@ export function BlogContent({ permlink, author }: Props) {
                 </Card>
                 <Card withBorder p="md" radius={0} className={classes.card}>
                   <Container>
-                    <Markdown text={blogData?.data?.result.body} />
+                    {/* <Markdown text={blogData?.data?.result.body} /> */}
                   </Container>
                 </Card>
                 <div style={{ position: 'sticky', bottom: '0px' }}>
