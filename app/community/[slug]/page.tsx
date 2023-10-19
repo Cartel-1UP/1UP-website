@@ -4,7 +4,7 @@ import { CommunityPage } from '@/components/CommunityPage/CommunityPage'
 import { RecommendedSection } from '@/components/Sections/Recommended/RecommendedSection'
 import { Container } from '@mantine/core'
 
-export const runtime = 'experimental-edge'
+
 
 export default function Page({ params }: { params: { slug: string } }) {
   return (

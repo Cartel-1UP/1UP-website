@@ -9,7 +9,7 @@ import oneuplogo2 from '@/images/oneup2.png'
 import { Container, Grid, Space } from '@mantine/core'
 import { useMediaQuery } from '@mantine/hooks'
 
-export const runtime = 'experimental-edge'
+
 
 export default function Home() {
   const isMd = useMediaQuery(`(max-width: 1000px)`)
