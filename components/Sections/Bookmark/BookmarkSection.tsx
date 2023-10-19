@@ -13,9 +13,7 @@ import {
 } from '@mantine/core'
 import { useScrollIntoView } from '@mantine/hooks'
 import { IconArrowUp } from '@tabler/icons'
-import { Post } from 'keychain-sdk'
 import { useEffect, useState } from 'react'
-import { useQueryClient } from 'react-query'
 import { BookmarkCard } from './BookmarkCard'
 import useStyles from './style'
 
@@ -24,15 +22,21 @@ import useStyles from './style'
 export function BookmarkSection() {
   const { classes, theme } = useStyles()
   const { scrollIntoView, targetRef } = useScrollIntoView<HTMLDivElement>({ offset: 60 })
-  const [storedBookmarksJSON, setStoredBookmarksJSON]: [Post[], any] = useState(JSON.parse(localStorage?.getItem('bookmarks') ?? '[]'));
-  let bookmarks
+  const [storedBookmarksJSON, setStoredBookmarksJSON] = useState([]);
+  const [bookmarks, setBookmarks] = useState<string | null>('');
 
-  if (typeof window !== 'undefined' && window.localStorage) {
-    bookmarks = localStorage.getItem('bookmarks');
-    // Rest of your code that uses bookmarks
-  }
+  useEffect(() => {
+    const bookmarks = localStorage.getItem('bookmarks')
+    if (bookmarks) {
+      setBookmarks(bookmarks)
+    }
+  }, [])
 
 
+
+  useEffect(() => {
+
+  }, [])
 
   const { data, isLoading, refetch } = useGetBookmarksBlogs(
     storedBookmarksJSON.map((bookmark: any) => ({
@@ -41,7 +45,7 @@ export function BookmarkSection() {
     }))
   );
 
-  const queryClient = useQueryClient();
+
 
   useEffect(() => {
     setStoredBookmarksJSON(JSON.parse(localStorage?.getItem('bookmarks') ?? '[]'));
@@ -53,9 +57,7 @@ export function BookmarkSection() {
 
 
 
-  console.log(bookmarks)
-  console.log(storedBookmarksJSON)
-  console.log(data)
+
 
   return (
     <>
