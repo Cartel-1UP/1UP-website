@@ -2,6 +2,7 @@
 
 import { Container } from '@mantine/core'
 import { useMediaQuery } from '@mantine/hooks'
+import { BlogContent } from './BlogContent'
 import useStyles from './style'
 
 interface Props {
@@ -17,12 +18,12 @@ export function BlogPage({ permlink, author }: Props) {
     <>
       {isMobile ? (
         <Container fluid className={classes.default}>
-          {/* <BlogContent permlink={permlink} author={author} /> */}
+          <BlogContent permlink={permlink} author={author} />
         </Container>
       ) : (
         <Container fluid className={classes.default}>
           <Container size="xl">
-            {/* <BlogContent permlink={permlink} author={author} /> */}
+            <BlogContent permlink={permlink} author={author} />
           </Container>
         </Container>
       )}
