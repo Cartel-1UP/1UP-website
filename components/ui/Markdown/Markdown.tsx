@@ -29,7 +29,13 @@ export function Markdown({ text }: Props) {
       } else {
         return match
       }
-    })
+    }).replace(
+      /(?<=\s)@(\w+)/g,
+      '<a href="https://peakd.com/@$1">@$1</a>'
+    ).replace(
+      /<center>(.*?)<\/center>/gs,
+      '<center>$1</center>'.replace(/"/g, '')
+    )
 
     // const anchoredText = replacedBody.replace(
     //   /(?<=\s)@(\w+)/g,
