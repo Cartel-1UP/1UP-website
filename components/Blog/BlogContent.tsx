@@ -33,7 +33,6 @@ import { Custom, KeychainKeyTypes, KeychainSDK } from 'keychain-sdk'
 import { useEffect, useRef, useState } from 'react'
 import { useMutation, useQueryClient } from 'react-query'
 import { Markdown } from '../ui/Markdown/Markdown'
-import Comment from './Comment/Comment'
 import useStyles from './style'
 
 type Props = {
@@ -292,7 +291,7 @@ export function BlogContent({ permlink, author }: Props) {
                   </Card>
                 </div>
                 <div ref={endElementRef}></div>
-                <Comment comments={commentsData} />
+                {/* <Comment comments={commentsData} /> */}
                 <Card withBorder p="xl" className={classes.cardFooter}>
                   <Container></Container>
                 </Card>
