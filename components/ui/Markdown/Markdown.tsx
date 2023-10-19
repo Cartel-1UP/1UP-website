@@ -31,16 +31,18 @@ export function Markdown({ text }: Props) {
       }
     })
 
-    // replace(
-    //   /(?<=\s)@(\w+)/g,
-    //   '<a href="https://peakd.com/@$1">@$1</a>'
-    // )
+
 
     // replace(
     //   /<center>(.*?)<\/center>/gs,
     //   '<center>$1</center>'.replace(/"/g, '')
     // )
 
+
+    // replace(
+    //   /(?<=\s)@(\w+)/g,
+    //   '<a href="https://peakd.com/@$1">@$1</a>'
+    // )
 
     return (
       <ReactMarkdown
@@ -71,7 +73,15 @@ export function Markdown({ text }: Props) {
                   />
                 </div>
               )
-            } else if (href.match(/^https:\/\/twitter\.com\/[^/]+\/status\/\d+$/)) {
+            } else if (href.match(/(?<=\s)@(\w+)/g,)) {
+              return (
+                <a href={`https://peakd.com/@${href}`} className={classes.link}>
+                  {children}
+                </a>
+              )
+            }
+
+            else if (href.match(/^https:\/\/twitter\.com\/[^/]+\/status\/\d+$/)) {
               const tweetId = href.match(/\/status\/(\d+)$/)[1]
               return (
                 <div className={classes.tweet}>
