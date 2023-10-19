@@ -1,3 +1,5 @@
+'use client'
+
 import CommentCard from './CommentCard'
 
 type Props = {
