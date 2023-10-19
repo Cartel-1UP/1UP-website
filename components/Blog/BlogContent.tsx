@@ -32,6 +32,7 @@ import { IconArrowDown, IconHeart, IconMessage } from '@tabler/icons'
 import { Custom, KeychainKeyTypes, KeychainSDK } from 'keychain-sdk'
 import { useEffect, useRef, useState } from 'react'
 import { useMutation, useQueryClient } from 'react-query'
+import { Markdown } from '../ui/Markdown/Markdown'
 import Comment from './Comment/Comment'
 import useStyles from './style'
 
@@ -204,7 +205,7 @@ export function BlogContent({ permlink, author }: Props) {
                 </Card>
                 <Card withBorder p="md" radius={0} className={classes.card}>
                   <Container>
-                    {/* <Markdown text={blogData?.data?.result.body} /> */}
+                    <Markdown text={blogData?.data?.result.body} />
                   </Container>
                 </Card>
                 <div style={{ position: 'sticky', bottom: '0px' }}>
