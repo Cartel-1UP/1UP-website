@@ -1,4 +1,5 @@
 'use client'
+
 import { CommunityPage } from '@/components/CommunityPage/CommunityPage'
 import { RecommendedSection } from '@/components/Sections/Recommended/RecommendedSection'
 import { Container } from '@mantine/core'
