@@ -7,6 +7,7 @@ const useStyles = createStyles((theme) => ({
     },
   },
 
+
   mobileStickyHeader: {
     [theme.fn.smallerThan('sm')]: {
     position: 'sticky', 
