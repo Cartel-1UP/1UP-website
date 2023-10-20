@@ -6,8 +6,10 @@ import { FeedSection } from '@/components/Sections/Feed/FeedSection'
 import { MainSection } from '@/components/Sections/Main/MainSection'
 import { RecommendedSection } from '@/components/Sections/Recommended/RecommendedSection'
 import oneuplogo2 from '@/images/oneup2.png'
-import { Container, Grid, Space } from '@mantine/core'
+import { Card, Container, Grid, NavLink, Space } from '@mantine/core'
 import { useMediaQuery } from '@mantine/hooks'
+import { IconBrandDiscord } from '@tabler/icons'
+import { Timeline } from 'react-twitter-widgets'
 
 export const runtime = 'experimental-edge'
 
@@ -48,9 +50,33 @@ export default function Home() {
                   <FeedSection sort={'created'} tag={'hive-102223'} />
                 </Grid.Col>
                 <Grid.Col span={3}>
+                  <Space h="xl" />
+                  <CommunityBar communityLogo={oneuplogo2.src} tag={'hive-102223'} />
+
                   <div style={{ position: 'sticky', top: '0' }}>
-                    <Space h="xl" />
-                    <CommunityBar communityLogo={oneuplogo2.src} tag={'hive-102223'} />
+                    <Space h={20} />
+                    <Card withBorder p={10} radius={10} sx={{
+                      borderColor: '#e2e8f0d2',
+                      borderWidth: 1
+                    }}>
+                      <NavLink
+                        label={'Check our Discord'}
+                        // description={item.description}
+                        icon={<IconBrandDiscord size={24} stroke={1.5} color='#7289da' />}
+                        onClick={() => window.open('https://discord.gg/f7sHEHYZJZ', '_blank')}
+                      />
+                    </Card>
+
+                    <Space h={20} />
+                    <Card withBorder p={0} radius={10} sx={{
+                      borderColor: '#e2e8f0d2',
+                      borderWidth: 1
+                    }}>
+                      <Timeline
+                        dataSource={{ sourceType: "profile", screenName: "CartelOneup" }}
+                        options={{ height: "600", chrome: " noborders, transparent" }}
+                      />
+                    </Card>
                   </div>
                 </Grid.Col>
               </Grid>
