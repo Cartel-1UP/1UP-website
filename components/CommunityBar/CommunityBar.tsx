@@ -90,7 +90,7 @@ export function CommunityBar({ communityLogo, tag }: Props) {
             {communityInfo?.team.map((user: any) => {
               return (
                 <>
-                  <Group spacing={'xs'} pb={10}>
+                  <Group spacing={'xs'} pb={10} key={user[0]}>
                     <Avatar
                       size={'sm'}
                       color="blue"

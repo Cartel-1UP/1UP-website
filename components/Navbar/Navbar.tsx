@@ -4,7 +4,7 @@ import { comumnityData } from '@/data/communityData'
 import { logoutUser, useAuthorizationStore } from '@/zustand/stores/useAuthorizationStore'
 import { Avatar, Badge, Burger, Center, Container, Divider, Drawer, Grid, Group, Header, Image, Menu, NavLink, ScrollArea, Text } from '@mantine/core'
 import { useDisclosure, useMediaQuery } from '@mantine/hooks'
-import { IconBookmark, IconExchange, IconLogout, IconUser, IconUsers } from '@tabler/icons'
+import { IconBookmark, IconExchange, IconLogout, IconPhoto, IconUser, IconUsers } from '@tabler/icons'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
@@ -43,22 +43,37 @@ export function Navbar() {
                 className={classes.hiddenMobile}
               >
                 <Center>
-                  <Group spacing={0}>
-                    <NavLink
-                      label="Swap"
-                      className={classes.subLink}
-                      onClick={() => {
-                        close()
-                        window.open(`https://swap.oneup-cartel.com/`, '_blank')
-                      }}
-                    />
+                  <Group>
+                    <div>
+                      <NavLink
+                        label="Swap"
+                        className={classes.subLink}
+                        onClick={() => {
+                          close()
+                          window.open(`https://swap.oneup-cartel.com/`, '_blank')
+                        }}
+                      />
+                    </div>
+                    <div>
+                      <NavLink
+                        label="Resources"
+                        className={classes.subLink}
+                        onClick={() => {
+                          close()
+                          router.push('/resources')
+                        }}
+                      />
+                    </div>
                   </Group>
                 </Center>
               </Grid.Col>
               <Grid.Col span={isMd ? 8 : 6}>
-                <Link href="/">
-                  <Image src={oneuplogo.src} alt="Logo" fit="contain" />
-                </Link>
+                {isMd ?
+                  <Image src={oneuplogo.src} alt="Logo" fit="contain" onClick={() => router.push('/')} sx={{ cursor: 'pointer' }} /> :
+                  <Link href="/">
+                    <Image src={oneuplogo.src} alt="Logo" fit="contain" />
+                  </Link>
+                }
               </Grid.Col>
               <Grid.Col span={isMd ? 4 : 3} pr={20} sx={{ display: 'flex', justifyContent: 'right' }}>
                 <Group className={classes.hiddenMobileLogin}>
@@ -181,6 +196,15 @@ export function Navbar() {
                   close()
                   window.open(`https://swap.oneup-cartel.com/`, '_blank')
 
+                }}
+              />
+              <NavLink
+                label="Swap"
+                className={classes.subLink}
+                icon={<IconPhoto color={'white'} size={20} stroke={1.5} />}
+                onClick={() => {
+                  close()
+                  router.push('/resources')
                 }}
               />
               <Menu.Divider />

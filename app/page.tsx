@@ -15,7 +15,7 @@ export const runtime = 'experimental-edge'
 
 export default function Home() {
   const isMd = useMediaQuery(`(max-width: 1000px)`)
-
+  console.log(process.env.NEXT_PUBLIC_API_KEY)
   return (
     <>
       <Container fluid bg={'linear-gradient(to top, #275c672d, #072f37)'} pb={isMd ? 0 : 25}>
