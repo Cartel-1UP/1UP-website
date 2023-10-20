@@ -50,14 +50,13 @@ export function Navbar() {
                       onClick={() => {
                         close()
                         window.open(`https://swap.oneup-cartel.com/`, '_blank')
-
                       }}
                     />
                   </Group>
                 </Center>
               </Grid.Col>
               <Grid.Col span={isMd ? 8 : 6}>
-                <Link href={''}>
+                <Link href="/">
                   <Image src={oneuplogo.src} alt="Logo" fit="contain" />
                 </Link>
               </Grid.Col>
