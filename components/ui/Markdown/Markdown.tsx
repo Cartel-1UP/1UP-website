@@ -34,12 +34,6 @@ export function Markdown({ text }: Props) {
       '<center>$1</center>'.replace(/"/g, '')
     )
 
-
-    // replace(
-    //   /(?<=\s)@(\w+)/g,
-    //   '<a href="https://peakd.com/@$1">@$1</a>'
-    // )
-
     return (
       <ReactMarkdown
         rehypePlugins={[rehypeRaw]}

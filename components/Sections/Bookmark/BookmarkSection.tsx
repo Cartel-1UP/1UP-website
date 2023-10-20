@@ -32,14 +32,12 @@ export function BookmarkSection() {
     }
   }, [])
 
-
-
   useEffect(() => {
-
-  }, [])
+    setStoredBookmarksJSON(JSON.parse(localStorage?.getItem('bookmarks') ?? '[]'));
+  }, [bookmarks]);
 
   const { data, isLoading, refetch } = useGetBookmarksBlogs(
-    storedBookmarksJSON.map((bookmark: any) => ({
+    storedBookmarksJSON?.map((bookmark: any) => ({
       author: bookmark.author,
       permlink: bookmark.permlink,
     }))
@@ -48,14 +46,11 @@ export function BookmarkSection() {
 
 
   useEffect(() => {
-    setStoredBookmarksJSON(JSON.parse(localStorage?.getItem('bookmarks') ?? '[]'));
-  }, [bookmarks]);
-
-  useEffect(() => {
     refetch();
+    console.log(storedBookmarksJSON)
   }, [storedBookmarksJSON]);
 
-
+  console.log(data)
 
 
 
@@ -101,7 +96,13 @@ export function BookmarkSection() {
             ))
             : (data && data?.length > 0) ? data?.map(
               (item: any) =>
-                <BookmarkCard article={item?.data.result} key={item?.data?.result.post_id} />
+                <BookmarkCard
+                  article={item?.data.result}
+                  key={item?.data?.result.post_id}
+                  refetch={refetch}
+                  storedBookmarksJSON={storedBookmarksJSON}
+                  setStoredBookmarksJSON={setStoredBookmarksJSON}
+                />
             ) :
               <>
                 <Card withBorder p="md" radius={0} className={classes.card}>

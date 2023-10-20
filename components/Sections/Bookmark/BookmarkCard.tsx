@@ -23,9 +23,12 @@ import useStyles from './style'
 
 interface Props {
   article: HiveArticle
+  refetch: () => void
+  storedBookmarksJSON: any
+  setStoredBookmarksJSON: any
 }
 
-export function BookmarkCard({ article }: Props) {
+export function BookmarkCard({ article, refetch, storedBookmarksJSON, setStoredBookmarksJSON }: Props) {
   const { classes, theme } = useStyles()
   const [isVote, setIsVote] = useState(false)
   const [isComment, setIsComment] = useState(false)
@@ -45,41 +48,22 @@ export function BookmarkCard({ article }: Props) {
     year: 'numeric',
   })
 
-  const forbiddenChars = ['!', '<', '>', '[', ']']
-  const body = article.body.split(' ')
-  const filteredBody = body.filter(function (word: string) {
-    return !word.split('').some(function (char: string) {
-      return forbiddenChars.includes(char)
-    })
-  })
-  const bodyOfArticle = filteredBody.join(' ')
+
+  const isInBookmarks = storedBookmarksJSON.map((bookmark: any) => bookmark.permlink).includes(article.permlink);
 
 
 
-
-  const [storedBookmarksJSON, setStoredBookmarksJSON] = useState('');
-  const storedBookmarks = storedBookmarksJSON ? JSON.parse(storedBookmarksJSON) : [];
-  const isInBookmarks = storedBookmarks.map((bookmark: any) => bookmark.permlink).includes(article.permlink);
-
-
+  // Function to add or delete a bookmark
   const toggleBookmark = () => {
-    const storedBookmarks = storedBookmarksJSON ? JSON.parse(storedBookmarksJSON) : [];
-    const isInBookmarks = storedBookmarks.map((bookmark: any) => bookmark.permlink).includes(article.permlink);
+    const isInBookmarks = storedBookmarksJSON.map((bookmark: any) => bookmark.permlink).includes(article.permlink);
 
-    if (!isInBookmarks) {
-      const newBookmarks = [...storedBookmarks, { permlink: article.permlink, author: article.author }];
-      localStorage.setItem('bookmarks', JSON.stringify(newBookmarks));
-      addSnackbar({
-        id: '5',
-        title: 'Bookmark added',
-        message: `You've successfully added this blog post to your bookmarks`,
-        queryKey: undefined,
-        color: 'green',
-        time: 3000
-      })
-    } else {
-      const updatedBookmarks = storedBookmarks.filter((bookmark: any) => bookmark.permlink !== article.permlink)
+    if (isInBookmarks) {
+      const updatedBookmarks = storedBookmarksJSON.filter((bookmark: any) => bookmark.permlink !== article.permlink);
+
+
       localStorage.setItem('bookmarks', JSON.stringify(updatedBookmarks));
+      setStoredBookmarksJSON(updatedBookmarks); // Update the storedBookmarksJSON
+      console.log(storedBookmarksJSON)
       addSnackbar({
         id: '6',
         title: 'Bookmark deleted',
@@ -87,25 +71,9 @@ export function BookmarkCard({ article }: Props) {
         queryKey: undefined,
         color: 'green',
         time: 3000
-      })
+      });
     }
-
-
   };
-
-
-
-
-
-  // Function to add or delete a bookmark
-
-  useEffect(() => {
-    const storedBookmarksJSON = localStorage.getItem('bookmarks');
-    if (storedBookmarksJSON) {
-      setStoredBookmarksJSON(storedBookmarksJSON);
-    }
-  })
-
 
   useEffect(() => {
     if (Array.isArray(article?.json_metadata.image) && article?.json_metadata.image.length === 0) {
@@ -119,12 +87,9 @@ export function BookmarkCard({ article }: Props) {
 
   return (
     <Card key={article.post_id} withBorder p="md" radius={0} className={classes.card}>
-
       <Grid grow>
         <Grid.Col span={12}>
-
           <Container fluid className={classes.headerContainer} display={'flex'}>
-
             <Indicator
               color={'#114f5c'}
               inline
@@ -141,11 +106,9 @@ export function BookmarkCard({ article }: Props) {
               />
             </Indicator>
             <Group position='apart' style={{ flex: 1 }}>
-
               <Text pl={20} color="dimmed" size="xs" transform="uppercase" weight={600}>
                 {`${article?.author} - ${formatedDate}`}
               </Text>
-
               <span className={classes.icon}>
                 {isInBookmarks ?
                   <IconX
