@@ -11,9 +11,9 @@ export function AssetsSection({ children }: Props) {
 
   return (
     <Container fluid className={classes.default}>
-      {/* <Container size="xl" color={theme.colorScheme === 'dark' ? 'dark.5' : 'gray.1'}>
+      <Container size="xl" color={theme.colorScheme === 'dark' ? 'dark.5' : 'gray.1'}>
         {children}
-      </Container> */}
+      </Container>
     </Container >
   )
 }
