@@ -3,8 +3,11 @@
 import { Space } from "@mantine/core";
 import React from "react";
 import { AxisOptions, Chart } from "react-charts";
+import useStyles from "./style";
 
 export default function Line() {
+    const { classes, theme } = useStyles()
+
     type DailyMoney = {
         date: Date,
         money: number,
@@ -53,6 +56,41 @@ export default function Line() {
                 , {
                     date: new Date("2022-04-02"),
                     money: 700,
+                },
+                {
+                    date: new Date("2022-04-03"),
+                    money: 200,
+                },
+                {
+                    date: new Date("2022-04-04"),
+                    money: 300,
+                },
+                {
+                    date: new Date("2022-04-05"),
+                    money: 400,
+                },
+                {
+                    date: new Date("2022-04-06"),
+                    money: 300,
+                },
+                {
+                    date: new Date("2022-04-07"),
+                    money: 300,
+                },
+                {
+                    date: new Date("2022-04-08"),
+                    money: 500,
+                }, {
+                    date: new Date("2022-04-09"),
+                    money: 650,
+                }
+                , {
+                    date: new Date("2022-04-10"),
+                    money: 600,
+                }
+                , {
+                    date: new Date("2022-04-11"),
+                    money: 700,
                 }
                 // ...
             ]
@@ -83,7 +121,7 @@ export default function Line() {
         <>
             <Space h="xl" />
 
-            <div style={{ minWidth: 300, maxWidth: 500, height: 350, background: "#072f37" }}>
+            <div className={classes.chartContainer}>
                 <Chart
                     options={{
                         data,
@@ -91,6 +129,7 @@ export default function Line() {
                         secondaryAxes,
                         dark: true,
                         padding: 10,
+
 
                     }}
                 />
