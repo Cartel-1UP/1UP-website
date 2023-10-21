@@ -5,6 +5,36 @@ const useStyles = createStyles((theme) => ({
 
   },
 
+  frame: {
+    display: 'inline-block',
+    position: 'relative',
+    width: 'fit-content',
+
+    '*::before': {
+      content: '""',
+      position: 'absolute',
+      top: '-4px', /* Adjust the top offset as needed */
+      left: '-4px', /* Adjust the left offset as needed */
+      right: '-4px', /* Adjust the right offset as needed */
+      bottom: '-4px', /* Adjust the bottom offset as needed */
+      border: '5px solid transparent', /* Set the border to transparent */
+      borderImage: `linear-gradient(to bottom, #165865, #80aab3) 1`,
+      pointerEvents: 'none',
+      clipPath: `polygon(
+        0 3%,
+        2% 0,
+        98% 0,
+        100% 3%,
+        100% 97%,
+        98% 100%,
+        2% 100%,
+        0% 97%,
+        0% 2%
+      )
+    }`,
+    },
+  },
+
   default: {
     backgroundColor: '#E9ECEF'
   },
@@ -23,7 +53,7 @@ const useStyles = createStyles((theme) => ({
   chartContainer: {
     minWidth: '100%',
     maxWidth: '100%',
-    height: '350px',
+    height: '300px',
     background: "#072f37",
     [theme.fn.smallerThan('sm')]: {
       height: '250px',
