@@ -19,6 +19,18 @@ const useStyles = createStyles((theme) => ({
     fontWeight: 400,
     fontSize: 12,
   },
+
+  chartContainer: {
+    minWidth: '100%',
+    maxWidth: '100%',
+    height: '350px',
+    background: "#072f37",
+    [theme.fn.smallerThan('sm')]: {
+      height: '250px',
+    }
+
+  },
+
 }))
 
 export default useStyles
