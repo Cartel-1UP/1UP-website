@@ -15,7 +15,6 @@ export const runtime = 'experimental-edge'
 
 export default function Home() {
   const isMd = useMediaQuery(`(max-width: 1000px)`)
-  console.log(process.env.NEXT_PUBLIC_API_KEY)
   return (
     <>
       <Container fluid bg={'linear-gradient(to top, #275c672d, #072f37)'} pb={isMd ? 0 : 25}>
@@ -36,6 +35,19 @@ export default function Home() {
                 <FeedSection sort={'created'} tag={'hive-102223'} />
               </Grid.Col>
             </Grid>
+          </Container>
+          <Container fluid bg={'#E9ECEF'}>
+            <Space h="xl" />
+            <Space h="xl" />
+            <Card withBorder p={0} radius={10} sx={{
+              borderColor: '#e2e8f0d2',
+              borderWidth: 1
+            }}>
+              <Timeline
+                dataSource={{ sourceType: "profile", screenName: "CartelOneup" }}
+                options={{ height: "600", chrome: " noborders, transparent" }}
+              />
+            </Card>
           </Container>
           <Container fluid bg={'linear-gradient(to bottom, #E9ECEF, #072f37)'}>
             <RecommendedSection />
