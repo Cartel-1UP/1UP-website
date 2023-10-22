@@ -38,18 +38,20 @@ export function CommunityPage({ image, tag }: Props) {
               <>
                 <Space h="xl" />
                 <CommunityBar communityLogo={result.image} tag={result.tag} />
-                <div style={!isMd ? { position: 'sticky', top: 0 } : {}}>
-                  <Space h={20} />
-                  <Card withBorder p={0} radius={10} sx={{
-                    borderColor: '#e2e8f0d2',
-                    borderWidth: 1
-                  }}>
-                    <Timeline
-                      dataSource={{ sourceType: "profile", screenName: name }}
-                      options={{ height: "600", chrome: "noborders, transparent" }}
-                    />
-                  </Card>
-                </div>
+                {!isMd &&
+                  <div style={{ position: 'sticky', top: 0 }}>
+                    <Space h="xl" />
+                    <Card withBorder p={0} radius={10} sx={{
+                      borderColor: '#e2e8f0d2',
+                      borderWidth: 1
+                    }}>
+                      <Timeline
+                        dataSource={{ sourceType: "profile", screenName: name }}
+                        options={{ height: "600", chrome: "noborders, transparent" }}
+                      />
+                    </Card>
+                  </div>
+                }
               </>
             ) :
               (

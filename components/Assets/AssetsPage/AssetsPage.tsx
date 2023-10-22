@@ -49,7 +49,6 @@ export function AssetsPage() {
             <Container size='xl' h={400}>
               <Grid grow>
                 <Grid.Col span={12}>
-                  <Text size={18} fw={400} c={'#ffffff'}>Community assets</Text>
                   <Select
                     maw={300}
                     pt={20}

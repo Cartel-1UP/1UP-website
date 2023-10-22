@@ -1,29 +1,13 @@
 import { createStyles } from '@mantine/styles'
 
 const useStyles = createStyles((theme) => ({
-  hiddenMobile: {
+  hiddenMd: {
     [theme.fn.smallerThan('md')]: {
       display: 'none',
     },
   },
 
-
-  mobileStickyHeader: {
-    [theme.fn.smallerThan('sm')]: {
-    position: 'sticky', 
-    top: '0' ,
-    zIndex: 1000,
-    }
-  },
-
-  navbar: {
-    [theme.fn.smallerThan('sm')]: {
-      paddingTop: 10,
-      paddaingBottom: 25,
-    }
-  },
-
-  hiddenMobileLogin: {
+  hiddenSm: {
     [theme.fn.smallerThan('sm')]: {
       display: 'none',
     },
@@ -33,6 +17,25 @@ const useStyles = createStyles((theme) => ({
     [theme.fn.largerThan('sm')]: {
       display: 'none',
     },
+  },
+
+  mobileStickyHeader: {
+    [theme.fn.smallerThan('sm')]: {
+      position: 'sticky', 
+      top: '0' ,
+      zIndex: 1000,
+    }
+  },
+
+  navbar: {
+    padding: 0,
+    paddingBottom: 0,
+    [theme.fn.smallerThan('sm')]: {
+      padding: 5,
+      paddingBottom: 15,
+      paddingTop: 10,
+      paddaingBottom: 25,
+    }
   },
 
   subLink: {

@@ -10,60 +10,91 @@ import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import oneuplogo from '../../images/oneup1.png'
 import LoginButton from '../LoginButton/LoginButton'
-import { UserButton } from '../UserButton/UserButton'
+import { NavLinkSection } from './NavLinkSection'
 import useStyles from './style'
+import { UserMenu } from './UserMenu'
 
 export function Navbar() {
   const { classes, theme } = useStyles()
   const router = useRouter();
 
-  const [userMenuOpened, setUserMenuOpened] = useState(false)
-
   const authorized = useAuthorizationStore((state: { authorized: boolean }) => state.authorized)
   const userImage = useAuthorizationStore((state: { profile_image: string }) => state.profile_image)
-  const userMana = useAuthorizationStore((state: { mana: number }) => state.mana)
   const userReputation = useAuthorizationStore((state: { reputation: number }) => state.reputation)
   const username = useAuthorizationStore((state: { username: string }) => state.username)
+
   const isMd = useMediaQuery(`(max-width: ${theme.breakpoints.md}px)`)
 
+  const [userMenuOpened, setUserMenuOpened] = useState(false)
+  const [opened, { open, close: closeDrawer }] = useDisclosure(false);
 
-  const [opened, { open, close }] = useDisclosure(false);
+  const navLinks = [
+    {
+      label: 'Swap',
+      handleAction: () => {
+        window.open(`https://swap.oneup-cartel.com/`, '_blank')
+      }
+    },
+    {
+      label: 'Resources',
+      handleAction: () => {
+        router.push('/resources')
+      }
+    },
+  ]
 
+  const navLinksMobile = [
+    {
+      label: 'Profile',
+      icon: <IconUser color={'white'} size={20} stroke={1.5} />,
+      loggedIn: true,
+      handleAction: () => {
+        closeDrawer()
+        window.open(`https://www.peakd.com/@${username}`, '_blank')
+      }
+    },
+    {
+      label: 'Bookmarks',
+      icon: <IconBookmark color={'white'} size={20} stroke={1.5} />,
+      loggedIn: true,
+      handleAction: () => {
+        closeDrawer()
+        router.push('/bookmarks')
+      }
+    },
+    {
+      label: 'Swap',
+      icon: <IconExchange color={'white'} size={20} stroke={1.5} />,
+      handleAction: () => {
+        closeDrawer()
+        window.open(`https://swap.oneup-cartel.com/`, '_blank')
+      }
+    },
+    {
+      label: 'Resources',
+      icon: <IconPhoto color={'white'} size={20} stroke={1.5} />,
+      handleAction: () => {
+        closeDrawer()
+        router.push('/resources')
+      }
+    },
+  ]
 
   return (
     <div className={classes.mobileStickyHeader}>
-      <Container fluid sx={{ padding: isMd ? 0 : 5, paddingBottom: isMd ? 0 : 25, }} bg={'#072f37'} className={classes.navbar}>
+      <Container fluid bg={'#072f37'} className={classes.navbar}>
         <Container size={'xl'}>
           <Header height={'100%'} bg={'#072f37'} sx={{ border: 0 }}>
             <Grid justify="space-between" align="center">
               <Grid.Col
                 span={3}
                 pl={20}
+                className={classes.hiddenMd}
                 sx={{ display: 'flex', justifyContent: 'left' }}
-                className={classes.hiddenMobile}
               >
                 <Center>
                   <Group>
-                    <div>
-                      <NavLink
-                        label="Swap"
-                        className={classes.subLink}
-                        onClick={() => {
-                          close()
-                          window.open(`https://swap.oneup-cartel.com/`, '_blank')
-                        }}
-                      />
-                    </div>
-                    <div>
-                      <NavLink
-                        label="Resources"
-                        className={classes.subLink}
-                        onClick={() => {
-                          close()
-                          router.push('/resources')
-                        }}
-                      />
-                    </div>
+                    <NavLinkSection navLinks={navLinks} />
                   </Group>
                 </Center>
               </Grid.Col>
@@ -76,52 +107,14 @@ export function Navbar() {
                 }
               </Grid.Col>
               <Grid.Col span={isMd ? 4 : 3} pr={20} sx={{ display: 'flex', justifyContent: 'right' }}>
-                <Group className={classes.hiddenMobileLogin}>
+                <Group className={classes.hiddenSm}>
                   {authorized ? (
-                    <Menu
-                      width={260}
-                      position="bottom-end"
-                      transition="pop-top-right"
-                      onClose={() => setUserMenuOpened(false)}
-                      onOpen={() => setUserMenuOpened(true)}
-                      classNames={classes}
-                    >
-                      <Menu.Target>
-                        <UserButton
-                          image={userImage}
-                          name={username}
-                          mana={userMana}
-                          reputation={userReputation}
-                        />
-                      </Menu.Target>
-                      <Menu.Dropdown bg={'#072f37'} sx={{ borderColor: '#031418' }}>
-                        <Menu.Item
-                          className={classes.subLink}
-                          onClick={() => window.open(`https://www.peakd.com/@${username}`, '_blank')}
-                          icon={<IconUser
-                            color={'white'} size={20} stroke={1.5} />}
-                        >
-                          Profile
-                        </Menu.Item>
-                        <Menu.Item
-                          className={classes.subLink}
-                          onClick={() => router.push('/bookmarks')}
-                          icon={<IconBookmark
-                            color={'white'} size={20} stroke={1.5} />}
-                        >
-                          Bookmarks
-                        </Menu.Item>
-                        <Menu.Divider />
-                        <Menu.Item
-                          className={classes.subLink}
-                          onClick={() => logoutUser()}
-                          icon={<IconLogout color={'white'} size={20} stroke={1.5} />}
-                        >
-                          Log out
-                        </Menu.Item>
-
-                      </Menu.Dropdown>
-                    </Menu>
+                    <UserMenu
+                      userImage={userImage}
+                      username={username}
+                      userReputation={userReputation}
+                      setUserMenuOpened={setUserMenuOpened}
+                    />
                   ) : (
                     <LoginButton />
                   )}
@@ -142,115 +135,76 @@ export function Navbar() {
             }
           }}
           opened={opened}
-          onClose={close}
+          onClose={closeDrawer}
           size="100%"
           padding="md"
           zIndex={1000000}
           className={classes.drawer}
         >
-          {authorized ? (
-            <>
-              <Group>
-                <Avatar src={userImage} radius="xl" />
-                <div style={{ flex: 1 }}>
-                  <Text size="md" weight={400} color="#E9ECEF">
-                    {username}{' '}
-                    <Badge
-                      sx={(theme) => ({ padding: 5 })}
-                      ml={5}
-                      radius="sm"
-                      color="gray"
-                      variant="outline"
-                    >
-                      {userReputation.toFixed()}
-                    </Badge>
-                  </Text>
-                </div>
-              </Group>
-              <Divider mt={20} mb={10} />
-              <NavLink
-                label="Profile"
-                className={classes.subLink}
-                icon={<IconUser color={'white'} size={20} stroke={1.5} />}
-                onClick={() => {
-                  close()
-                  window.open(`https://www.peakd.com/@${username}`, '_blank')
-
-                }}
-              />
-              <NavLink
-                label="Bookmarks"
-                className={classes.subLink}
-                icon={<IconBookmark color={'white'} size={20} stroke={1.5} />}
-                onClick={() => {
-                  close()
-                  router.push('/bookmarks')
-
-                }}
-              />
-              <NavLink
-                label="Swap"
-                className={classes.subLink}
-                icon={<IconExchange color={'white'} size={20} stroke={1.5} />}
-                onClick={() => {
-                  close()
-                  window.open(`https://swap.oneup-cartel.com/`, '_blank')
-
-                }}
-              />
-              <NavLink
-                label="Resources"
-                className={classes.subLink}
-                icon={<IconPhoto color={'white'} size={20} stroke={1.5} />}
-                onClick={() => {
-                  close()
-                  router.push('/resources')
-                }}
-              />
-              <Menu.Divider />
-              <NavLink
-                className={classes.subLink}
-                label="Partners"
-                childrenOffset={28}
-                icon={<IconUsers color={'white'} size={20} stroke={1.5} />}
-              >
-                <ScrollArea
-                  h={250}
-                  styles={(theme) => ({
-                    scrollbar: {
-                      '&:hover': {
-                        background: '#06272e',
-                      },
+          <>
+            <Group pl={10}>
+              <Avatar src={userImage} radius="xl" />
+              <div style={{ flex: 1 }}>
+                <Text size="md" weight={400} color="#E9ECEF">
+                  {username}{' '}
+                  <Badge
+                    sx={(theme) => ({ padding: 5 })}
+                    ml={5}
+                    radius="sm"
+                    color="gray"
+                    variant="outline"
+                  >
+                    {userReputation.toFixed()}
+                  </Badge>
+                </Text>
+              </div>
+            </Group>
+            <Divider mt={20} mb={10} />
+            <NavLinkSection navLinks={navLinksMobile} authorized={authorized} />
+            <Menu.Divider />
+            <NavLink
+              className={classes.subLink}
+              label="Partners"
+              childrenOffset={28}
+              icon={<IconUsers color={'white'} size={20} stroke={1.5} />}
+            >
+              <ScrollArea
+                h={250}
+                styles={(theme) => ({
+                  scrollbar: {
+                    '&:hover': {
+                      background: '#06272e',
+                    },
+                  }
+                })}>
+                {comumnityData.map((item) => (
+                  <NavLink
+                    className={classes.subLink}
+                    label={item.name}
+                    key={item.name}
+                    icon={<Avatar radius="xl" src={item.image} />}
+                    onClick={() => {
+                      closeDrawer()
+                      router.push('/community/' + item.tag)
                     }
-                  })}>
-                  {comumnityData.map((item) => (
-                    <NavLink
-                      className={classes.subLink}
-                      label={item.name}
-                      key={item.name}
-                      icon={<Avatar radius="xl" src={item.image} />}
-                      onClick={() => {
-                        close()
-                        router.push('/community/' + item.tag)
-                      }
-                      }
-                      disabled={item.tag === 'none'}
-
-                    />
-                  ))}
-                </ScrollArea>
-              </NavLink>
-              <Menu.Divider />
+                    }
+                    disabled={item.tag === 'none'}
+                  />
+                ))}
+              </ScrollArea>
+            </NavLink>
+            <Menu.Divider />
+            {authorized ?
               <NavLink
                 label="Log out"
                 className={classes.subLink}
                 icon={<IconLogout color={'white'} size={20} stroke={1.5} />}
-                onClick={() => { close(), logoutUser() }}
+                onClick={() => { closeDrawer(), logoutUser() }}
               />
-            </>
-          ) : (
-            <LoginButton />
-          )}
+              :
+              <LoginButton />
+            }
+          </>
         </Drawer>
       </Container>
     </div>

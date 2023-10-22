@@ -13,7 +13,6 @@ export function RecommendedSection() {
   return (
     <>
       <Space h="xl" />
-      <Space h="xl" />
       <Card withBorder p="md" radius={0} className={classes.cardHeader}>
         <Text size={24} fw={500}>
           Cartel users choice
