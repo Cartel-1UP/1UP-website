@@ -36,20 +36,9 @@ export default function Home() {
               </Grid.Col>
             </Grid>
           </Container>
-          <Container fluid bg={'#E9ECEF'}>
-            <Space h="xl" />
-            <Space h="xl" />
-            <Card withBorder p={0} radius={10} sx={{
-              borderColor: '#e2e8f0d2',
-              borderWidth: 1
-            }}>
-              <Timeline
-                dataSource={{ sourceType: "profile", screenName: 'CartelOneup' }}
-                options={{ height: "600", chrome: "noborders, transparent" }}
-              />
-            </Card>
-          </Container>
           <Container fluid bg={'linear-gradient(to bottom, #E9ECEF, #072f37)'}>
+            <Space h="xl" />
+            <CommunityBar communityLogo={oneuplogo2.src} tag={'hive-102223'} />
             <RecommendedSection />
           </Container>
         </>

@@ -5,6 +5,13 @@ const useStyles = createStyles((theme) => ({
 
   },
 
+  item: {
+
+    '&:focus': {
+      backgroundColor: '#165865',
+    },
+  },
+
   frame: {
     display: 'inline-block',
     position: 'relative',

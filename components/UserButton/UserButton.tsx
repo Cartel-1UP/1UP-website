@@ -6,14 +6,11 @@ interface UserButtonProps extends React.ComponentPropsWithoutRef<'button'> {
   image: string
   name: string
   icon?: React.ReactNode
-  mana: number
   reputation: number
 }
 
-
-
 const UserButton = forwardRef<HTMLButtonElement, UserButtonProps>(
-  ({ image, name, icon, mana, reputation, ...others }: UserButtonProps, ref) => (
+  ({ image, name, icon, reputation, ...others }: UserButtonProps, ref) => (
     <UnstyledButton
       ref={ref}
       sx={(theme) => ({
