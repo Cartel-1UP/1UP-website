@@ -44,8 +44,8 @@ export default function Home() {
               borderWidth: 1
             }}>
               <Timeline
-                dataSource={{ sourceType: "profile", screenName: "CartelOneup" }}
-                options={{ height: "600", chrome: " noborders, transparent" }}
+                dataSource={{ sourceType: "profile", screenName: 'CartelOneup' }}
+                options={{ height: "600", chrome: "noborders, transparent" }}
               />
             </Card>
           </Container>
@@ -85,8 +85,8 @@ export default function Home() {
                       borderWidth: 1
                     }}>
                       <Timeline
-                        dataSource={{ sourceType: "profile", screenName: "CartelOneup" }}
-                        options={{ height: "600", chrome: " noborders, transparent" }}
+                        dataSource={{ sourceType: "profile", screenName: 'CartelOneup' }}
+                        options={{ height: "600", chrome: "noborders, transparent" }}
                       />
                     </Card>
                   </div>
