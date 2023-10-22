@@ -142,24 +142,28 @@ export function Navbar() {
           className={classes.drawer}
         >
           <>
-            <Group pl={10}>
-              <Avatar src={userImage} radius="xl" />
-              <div style={{ flex: 1 }}>
-                <Text size="md" weight={400} color="#E9ECEF">
-                  {username}{' '}
-                  <Badge
-                    sx={(theme) => ({ padding: 5 })}
-                    ml={5}
-                    radius="sm"
-                    color="gray"
-                    variant="outline"
-                  >
-                    {userReputation.toFixed()}
-                  </Badge>
-                </Text>
-              </div>
-            </Group>
-            <Divider mt={20} mb={10} />
+            {authorized &&
+              <>
+                <Group pl={10}>
+                  <Avatar src={userImage} radius="xl" />
+                  <div style={{ flex: 1 }}>
+                    <Text size="md" weight={400} color="#E9ECEF">
+                      {username}{' '}
+                      <Badge
+                        sx={(theme) => ({ padding: 5 })}
+                        ml={5}
+                        radius="sm"
+                        color="gray"
+                        variant="outline"
+                      >
+                        {userReputation.toFixed()}
+                      </Badge>
+                    </Text>
+                  </div>
+                </Group>
+                <Divider mt={20} mb={10} />
+              </>
+            }
             <NavLinkSection navLinks={navLinksMobile} authorized={authorized} />
             <Menu.Divider />
             <NavLink
