@@ -199,7 +199,7 @@ export function Navbar() {
                 }}
               />
               <NavLink
-                label="Swap"
+                label="Resources"
                 className={classes.subLink}
                 icon={<IconPhoto color={'white'} size={20} stroke={1.5} />}
                 onClick={() => {
@@ -231,7 +231,7 @@ export function Navbar() {
                       icon={<Avatar radius="xl" src={item.image} />}
                       onClick={() => {
                         close()
-                        router.push('community/' + item.tag)
+                        router.push('/community/' + item.tag)
                       }
                       }
                       disabled={item.tag === 'none'}

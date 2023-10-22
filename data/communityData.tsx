@@ -32,10 +32,10 @@ export const comumnityData = [
     value: 'DCity',
   },
   {
-    name: 'MusicForLife',
+    name: 'MuTerra',
     image: mu.src,
     tag: 'hive-196251',
-    value: 'MusicForLife',
+    value: 'MuTerra',
   },
   {
     name: 'RisingStar',
@@ -50,6 +50,18 @@ export const comumnityData = [
     value: 'Woo',
   },
   {
+    name: 'CryptoCompany',
+    image: cryptocompany.src,
+    tag: 'hive-196769',
+    value: 'CryptoCompany',
+  },
+  {
+    name: 'PsyberX',
+    image: psyber.src,
+    tag: 'hive-168109',
+    value: 'PsyberX',
+  },
+  {
     name: 'AstralRevelations',
     image: astralrevelations.src,
     tag: 'none',
@@ -61,12 +73,7 @@ export const comumnityData = [
     tag: 'none',
     value: 'CraftInk',
   },
-  {
-    name: 'CryptoCompany',
-    image: cryptocompany.src,
-    tag: 'hive-196769',
-    value: 'CryptoCompany',
-  },
+
   {
     name: 'GLS',
     image: gls.src,
@@ -85,12 +92,7 @@ export const comumnityData = [
     tag: 'none',
     value: 'KOD',
   },
-  {
-    name: 'PsyberX',
-    image: psyber.src,
-    tag: 'hive-168109',
-    value: 'PsyberX',
-  },
+
 ]
 
 
@@ -112,8 +114,8 @@ export const communityAssetsData = [
   },
   {
     image: mu.src,
-    label: 'MusicForLife',
-    value: 'MusicForLife',
+    label: 'MuTerra',
+    value: 'MuTerra',
   },
   {
     image: risingstar.src,
@@ -126,6 +128,16 @@ export const communityAssetsData = [
     value: 'Woo',
   },
   {
+    image: cryptocompany.src,
+    label: 'CryptoCompany',
+    value: 'CryptoCompany',
+  },
+  {
+    image: psyber.src,
+    label: 'PsyberX',
+    value: 'PsyberX',
+  },
+  {
     image: astralrevelations.src,
     label: 'AstralRevelations',
     value: 'AstralRevelations',
@@ -134,11 +146,6 @@ export const communityAssetsData = [
     image: craftInk.src,
     label: 'CraftInk',
     value: 'CraftInk',
-  },
-  {
-    image: cryptocompany.src,
-    label: 'CryptoCompany',
-    value: 'CryptoCompany',
   },
   {
     image: gls.src,
@@ -155,10 +162,6 @@ export const communityAssetsData = [
     label: 'KOD',
     value: 'KOD',
   },
-  {
-    image: psyber.src,
-    label: 'PsyberX',
-    value: 'PsyberX',
-  },
+
 
 ]
