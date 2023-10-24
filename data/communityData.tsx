@@ -11,6 +11,7 @@ import psyber from '../images/psyber.png'
 import risingstar from '../images/risingstar.png'
 import splinterlands from '../images/splinterlands.svg'
 import woo from '../images/woo.png'
+import holozing from '../images/holozing.png'
 
 export const comumnityData = [
   {
@@ -92,6 +93,12 @@ export const comumnityData = [
     tag: 'none',
     value: 'KOD',
   },
+  {
+    name: 'HoloZing',
+    image: holozing.src,
+    tag: 'hive-131131',
+    value: 'HoloZing',
+  },
 
 ]
 
@@ -161,6 +168,11 @@ export const communityAssetsData = [
     image: kod.src,
     label: 'KOD',
     value: 'KOD',
+  },
+  {
+    image: holozing.src,
+    label: 'HoloZing',
+    value: 'HoloZing',
   },
 
 
