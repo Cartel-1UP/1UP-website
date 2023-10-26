@@ -1,12 +1,11 @@
 'use client'
 
-import { useNotifiactionStore } from '@/zustand/stores/useNotificationStore'
 import { Button, Container, Divider, Group, Slider, Space } from '@mantine/core'
-import { useMediaQuery } from '@mantine/hooks'
+import { showNotification } from '@mantine/notifications'
 import { KeychainSDK, Vote } from 'keychain-sdk'
 import { Dispatch, SetStateAction, useEffect, useState } from 'react'
-import { useMutation } from 'react-query'
-import { DefaultSnackbar } from '../../DefaultSnackbar/DefaultSnackbar'
+import { useMutation, useQueryClient } from 'react-query'
+import { NotificationText } from '../ProgressBar/ProgressBar'
 import useStyles from './style'
 
 type Props = {
@@ -44,9 +43,8 @@ export function VoteSlider({
     { value: 80, label: '80%' },
     { value: 100, label: '100%' },
   ]
-  const laptop = useMediaQuery(`(max-width: ${theme.breakpoints.md}px)`)
-  const snackbars = useNotifiactionStore((state) => state.snackbars)
-  const addSnackbar = useNotifiactionStore((state) => state.addSnackbar)
+
+  const queryCache = useQueryClient()
 
   const handleRequestVote = useMutation<void, any, void, unknown>(
     async () => {
@@ -62,16 +60,34 @@ export function VoteSlider({
       return new Promise((resolve, reject) => {
         keychain.vote(formParamsAsObject.data as Vote).then((response: any) => {
           resolve(response)
+        }).catch((error: any) => {
+          reject(error)
         })
       })
     },
     {
       onSuccess: () => {
-        addSnackbar({
-          id: '1',
-          title: 'Success',
-          message: 'Your upvote was sent correctly',
-          queryKey: queryKey,
+        showNotification({
+          autoClose: 10000,
+          title: "Success",
+          message: <NotificationText message={`Your upvote was sent correctly`} time={10000} />,
+          styles: (theme) => ({
+            root: {
+              backgroundColor: '#072f37',
+              borderColor: '#072f37',
+              '&::before': { backgroundColor: theme.white },
+            },
+            title: { color: theme.white },
+            description: { color: theme.white },
+            closeButton: {
+              color: theme.white,
+              '&:hover': { backgroundColor: '#04191d' },
+            },
+          }),
+          loading: false,
+          onClose: () => {
+            queryCache.refetchQueries(queryKey)
+          },
         })
 
         const timeout = setTimeout(() => {
@@ -81,7 +97,25 @@ export function VoteSlider({
           ; () => clearTimeout(timeout)
       },
       onError: (e: any) => {
-        console.log(e)
+        showNotification({
+          autoClose: 3000,
+          title: "Error",
+          message: <NotificationText message={`You already upvoted this post wit same wieght!`} time={3000} />,
+          styles: (theme) => ({
+            root: {
+              backgroundColor: '#072f37',
+              borderColor: '#072f37',
+              '&::before': { backgroundColor: theme.white },
+            },
+            title: { color: theme.white },
+            description: { color: theme.white },
+            closeButton: {
+              color: theme.white,
+              '&:hover': { backgroundColor: '#04191d' },
+            },
+          }),
+          loading: false,
+        })
       },
     }
   )
@@ -112,18 +146,6 @@ export function VoteSlider({
           </Button>
         </Group>
       </Container>
-
-      <>
-        {snackbars.map((snackbar) => (
-          <DefaultSnackbar
-            key={snackbar.id}
-            id={snackbar.id}
-            title={snackbar.title}
-            message={snackbar.message}
-            queryKey={snackbar.queryKey}
-          />
-        ))}
-      </>
     </>
   )
 }

@@ -2,10 +2,10 @@
 
 import { getFeedBlogs, getRecentBlogs } from '@/actions/hive/get-blogs'
 import TabButtons from '@/components/TabButtons/TabButtons'
+import { NotificationText } from '@/components/ui/ProgressBar/ProgressBar'
 import { Tabs } from '@/enums/blog.enum'
 import { HiveArticle } from '@/types/blog.type'
 import { useAuthorizationStore } from '@/zustand/stores/useAuthorizationStore'
-import { useNotifiactionStore } from '@/zustand/stores/useNotificationStore'
 import {
   ActionIcon,
   Box,
@@ -18,6 +18,7 @@ import {
   Space
 } from '@mantine/core'
 import { useScrollIntoView } from '@mantine/hooks'
+import { showNotification } from '@mantine/notifications'
 import { IconArrowBarRight, IconArrowUp } from '@tabler/icons'
 import { useEffect, useState } from 'react'
 import { useMutation } from 'react-query'
@@ -45,7 +46,6 @@ export function FeedSection({ sort, tag, isCommunity }: Props) {
   const authorized = useAuthorizationStore((state: { authorized: boolean }) => state.authorized)
   const defaultTab = Tabs.New
 
-  const addSnackbar = useNotifiactionStore((state) => state.addSnackbar)
   const handleTabChange = (tab: string) => {
     setPostType(tab)
   }
@@ -115,10 +115,24 @@ export function FeedSection({ sort, tag, isCommunity }: Props) {
     {
       onSuccess: (newArticles) => {
         if (newArticles.length < 1) {
-          return addSnackbar({
-            id: '5',
-            title: 'Warning',
-            message: `There is no more ${postType} posts!`,
+          return showNotification({
+            autoClose: 3000,
+            title: "Warning",
+            message: <NotificationText message={`There is no more ${postType} posts!`} time={3000} />,
+            styles: (theme) => ({
+              root: {
+                backgroundColor: '#072f37',
+                borderColor: '#072f37',
+                '&::before': { backgroundColor: theme.white },
+              },
+              title: { color: theme.white },
+              description: { color: theme.white },
+              closeButton: {
+                color: theme.white,
+                '&:hover': { backgroundColor: '#04191d' },
+              },
+            }),
+            loading: false,
           })
         }
         setPosts((prevPosts) => [...prevPosts, ...newArticles])
