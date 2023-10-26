@@ -8,7 +8,6 @@ import CommentEditor from '@/components/ui/CommentEditor/CommentEditor'
 import { VoteSlider } from '@/components/ui/VoteSlider/VoteSlider'
 import { dateRefactor } from '@/utils/methods/dateRefactor'
 import { useAuthorizationStore } from '@/zustand/stores/useAuthorizationStore'
-import { useNotifiactionStore } from '@/zustand/stores/useNotificationStore'
 import {
   ActionIcon,
   Avatar,
@@ -28,11 +27,13 @@ import {
   Title
 } from '@mantine/core'
 import { useMediaQuery } from '@mantine/hooks'
+import { showNotification } from '@mantine/notifications'
 import { IconArrowDown, IconHeart, IconMessage } from '@tabler/icons'
 import { Custom, KeychainKeyTypes, KeychainSDK } from 'keychain-sdk'
-import { useEffect, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import { useMutation, useQueryClient } from 'react-query'
 import { Markdown } from '../ui/Markdown/Markdown'
+import { NotificationText } from '../ui/ProgressBar/ProgressBar'
 import Comment from './Comment/Comment'
 import useStyles from './style'
 
@@ -51,27 +52,18 @@ export function BlogContent({ permlink, author }: Props) {
 
   const endElementRef = useRef<HTMLDivElement>(null)
 
+  const [username, setUsername] = useState<string | null>(localStorage.getItem('username') ? localStorage.getItem('username') : '')
 
-  const [username, setUsername] = useState<string>('')
-
-  const addSnackbar = useNotifiactionStore((state) => state.addSnackbar)
   const authorized = useAuthorizationStore((state: { authorized: boolean }) => state.authorized)
 
   const { data: blogData, isLoading: isLodingBlogData } = useGetBlog({ permlink, author })
-  const { data: commentsData, isLoading: isLodingCommentsData } = useGetComments({ permlink, author })
+  const { data: commentsData, isLoading: isLodingCommentsData, isFetching: isFetchingData } = useGetComments({ permlink, author })
   const { data: userProfileData, isLoading: isLodingUserProfileData } = useGetUserProfile(author)
-  const { data: following } = useGetFollowing(username)
+  const { data: following } = useGetFollowing(username ? username : '')
 
   const numericalValue = parseFloat(blogData?.data?.result?.pending_payout_value)
   const roundedValue = Math.ceil(numericalValue * 100) / 100
   const formattedCurrency = `$${roundedValue.toFixed(2)}`
-
-  useEffect(() => {
-    const user = localStorage.getItem('username')
-    if (user) {
-      setUsername(user)
-    }
-  }, [])
 
 
   const handlePostFollow = useMutation<void, any, void, unknown>(
@@ -89,26 +81,57 @@ export function BlogContent({ permlink, author }: Props) {
           display_msg: isFollowing ? 'Unfollow' : 'Follow',
         },
       }
-      await keychain.custom(formParamsAsObject.data as Custom).then(() => {
-        const timeout = setTimeout(() => {
-          queryCache.invalidateQueries('following-data')
-        }, 10000)
-        return () => {
-          clearTimeout(timeout)
-        }
-      })
+      await keychain.custom(formParamsAsObject.data as Custom)
     },
     {
       onSuccess: () => {
         const isFollowing = following?.includes(author)
-        addSnackbar({
-          id: '3',
-          title: 'Success',
-          message: `You ${isFollowing ? 'unfollowed' : 'followed'}: ${author}`,
+        showNotification({
+          autoClose: 10000,
+          title: "Success",
+          message: <NotificationText message={`You ${isFollowing ? 'unfollowed' : 'followed'}: ${author}`} time={10000} />,
+          styles: (theme) => ({
+            root: {
+              backgroundColor: '#072f37',
+              borderColor: '#072f37',
+              '&::before': { backgroundColor: theme.white },
+            },
+            title: { color: theme.white },
+            description: { color: theme.white },
+            closeButton: {
+              color: theme.white,
+              '&:hover': { backgroundColor: '#04191d' },
+            },
+          }),
+          loading: false,
+          onClose: () => {
+            queryCache.refetchQueries('following-data')
+          }
         })
       },
       onError: (e: any) => {
-        console.log(e)
+        showNotification({
+          autoClose: 3000,
+          title: "Warning",
+          message: <NotificationText message={`You already upvoted this post with same wieght`} time={10000} />,
+          styles: (theme) => ({
+            root: {
+              backgroundColor: '#072f37',
+              borderColor: '#072f37',
+              '&::before': { backgroundColor: theme.white },
+            },
+            title: { color: theme.white },
+            description: { color: theme.white },
+            closeButton: {
+              color: theme.white,
+              '&:hover': { backgroundColor: '#04191d' },
+            },
+          }),
+          loading: false,
+          onClose: () => {
+            queryCache.refetchQueries('following-data')
+          }
+        })
       },
     }
   )
@@ -219,12 +242,26 @@ export function BlogContent({ permlink, author }: Props) {
                             onClick={() =>
                               authorized
                                 ? setIsVote(!isVote)
-                                : addSnackbar({
-                                  id: '1',
-                                  title: 'Warning',
-                                  message: 'You have to login to upvote post!',
-                                  queryKey: undefined,
-                                  color: 'red',
+                                :
+
+                                showNotification({
+                                  autoClose: 3000,
+                                  title: "Warning",
+                                  message: <NotificationText message='You have to login to upvote post!' time={3000} />,
+                                  styles: (theme) => ({
+                                    root: {
+                                      backgroundColor: '#072f37',
+                                      borderColor: '#072f37',
+                                      '&::before': { backgroundColor: theme.white },
+                                    },
+                                    title: { color: theme.white },
+                                    description: { color: theme.white },
+                                    closeButton: {
+                                      color: theme.white,
+                                      '&:hover': { backgroundColor: '#04191d' },
+                                    },
+                                  }),
+                                  loading: false,
                                 })
                             }
                           />
@@ -237,12 +274,24 @@ export function BlogContent({ permlink, author }: Props) {
                             onClick={() =>
                               authorized
                                 ? setIsComment(!isComment)
-                                : addSnackbar({
-                                  id: '2',
-                                  title: 'Warning',
-                                  message: 'You have to login to add comment!',
-                                  queryKey: undefined,
-                                  color: 'red',
+                                : showNotification({
+                                  autoClose: 3000,
+                                  title: "Warning",
+                                  message: <NotificationText message='You have to login to comment post!' time={3000} />,
+                                  styles: (theme) => ({
+                                    root: {
+                                      backgroundColor: '#072f37',
+                                      borderColor: '#072f37',
+                                      '&::before': { backgroundColor: theme.white },
+                                    },
+                                    title: { color: theme.white },
+                                    description: { color: theme.white },
+                                    closeButton: {
+                                      color: theme.white,
+                                      '&:hover': { backgroundColor: '#04191d' },
+                                    },
+                                  }),
+                                  loading: false,
                                 })
                             }
                           />
@@ -293,7 +342,9 @@ export function BlogContent({ permlink, author }: Props) {
                   </Card>
                 </div>
                 <div ref={endElementRef}></div>
-                <Comment comments={commentsData} />
+                {!isFetchingData && (
+                  <Comment comments={commentsData} />
+                )}
                 <Card withBorder p="xl" className={classes.cardFooter}>
                   <Container></Container>
                 </Card>

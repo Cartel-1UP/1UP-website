@@ -1,10 +1,10 @@
 'use clinet'
 
 import CommentEditor from '@/components/ui/CommentEditor/CommentEditor'
+import { NotificationText } from '@/components/ui/ProgressBar/ProgressBar'
 import { VoteSlider } from '@/components/ui/VoteSlider/VoteSlider'
 import { HiveArticle } from '@/types/blog.type'
 import { useAuthorizationStore } from '@/zustand/stores/useAuthorizationStore'
-import { useNotifiactionStore } from '@/zustand/stores/useNotificationStore'
 import {
   AspectRatio,
   Avatar,
@@ -20,6 +20,7 @@ import {
   ThemeIcon
 } from '@mantine/core'
 import { useMediaQuery } from '@mantine/hooks'
+import { showNotification } from '@mantine/notifications'
 import { IconArrowBack, IconBookmark, IconBookmarkOff, IconHeart, IconMessage } from '@tabler/icons'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
@@ -42,7 +43,6 @@ export function FeedCard({ article }: Props) {
 
   const isMobile = useMediaQuery(`(max-width: ${theme.breakpoints.sm}px)`)
   const authorized = useAuthorizationStore((state: { authorized: boolean }) => state.authorized)
-  const addSnackbar = useNotifiactionStore((state) => state.addSnackbar)
   const date = new Date(article.created)
   const formatedDate = date.toLocaleDateString('en-US', {
     month: 'short',
@@ -61,56 +61,66 @@ export function FeedCard({ article }: Props) {
 
 
 
+  interface Bookmark {
+    author: string;
+    permlink: string;
+  }
 
-  const [storedBookmarksJSON, setStoredBookmarksJSON] = useState('');
-  const storedBookmarks = storedBookmarksJSON ? JSON.parse(storedBookmarksJSON) : [];
-  const isInBookmarks = storedBookmarks.map((bookmark: any) => bookmark.permlink).includes(article.permlink);
+  const [isToggle, setIsToggle] = useState(false);
+
 
 
   const toggleBookmark = () => {
-    const storedBookmarks = storedBookmarksJSON ? JSON.parse(storedBookmarksJSON) : [];
-    const isInBookmarks = storedBookmarks.map((bookmark: any) => bookmark.permlink).includes(article.permlink);
+    const bookmarks: Bookmark[] = JSON.parse(localStorage.getItem('bookmarks') || '[]');
+    if (!bookmarks.some((bookmark: any) => bookmark.permlink === article.permlink)) {
+      const newBookmark = { author: article.author, permlink: article.permlink };
 
-    if (!isInBookmarks) {
-      const newBookmarks = [...storedBookmarks, { permlink: article.permlink, author: article.author }];
-      localStorage.setItem('bookmarks', JSON.stringify(newBookmarks));
-      addSnackbar({
-        id: '5',
-        title: 'Bookmark added',
-        message: `You've successfully added this blog post to your bookmarks`,
-        queryKey: undefined,
-        color: 'green',
-        time: 3000
+      localStorage.setItem('bookmarks', JSON.stringify([...bookmarks, newBookmark]));
+      setIsToggle(!isToggle)
+      showNotification({
+        autoClose: 3000,
+        title: "Bookmark",
+        message: <NotificationText message='Post correctly added to boomarks' time={3000} />,
+        styles: (theme) => ({
+          root: {
+            backgroundColor: '#072f37',
+            borderColor: '#072f37',
+            '&::before': { backgroundColor: theme.white },
+          },
+          title: { color: theme.white },
+          description: { color: theme.white },
+          closeButton: {
+            color: theme.white,
+            '&:hover': { backgroundColor: '#04191d' },
+          },
+        }),
+        loading: false,
       })
     } else {
-      const updatedBookmarks = storedBookmarks.filter((bookmark: any) => bookmark.permlink !== article.permlink)
+      const updatedBookmarks = bookmarks.filter((bookmark: any) => bookmark.permlink !== article.permlink);
       localStorage.setItem('bookmarks', JSON.stringify(updatedBookmarks));
-      addSnackbar({
-        id: '6',
-        title: 'Bookmark deleted',
-        message: `You've successfully deleted this blog post from your bookmarks`,
-        queryKey: undefined,
-        color: 'green',
-        time: 3000
+      setIsToggle(!isToggle)
+      showNotification({
+        autoClose: 3000,
+        title: "Bookmark",
+        message: <NotificationText message='Post correctly deleted from boomarks' time={3000} />,
+        styles: (theme) => ({
+          root: {
+            backgroundColor: '#072f37',
+            borderColor: '#072f37',
+            '&::before': { backgroundColor: theme.white },
+          },
+          title: { color: theme.white },
+          description: { color: theme.white },
+          closeButton: {
+            color: theme.white,
+            '&:hover': { backgroundColor: '#04191d' },
+          },
+        }),
+        loading: false,
       })
     }
-
-
   };
-
-
-
-
-
-  // Function to add or delete a bookmark
-
-  useEffect(() => {
-    const storedBookmarksJSON = localStorage.getItem('bookmarks');
-    if (storedBookmarksJSON) {
-      setStoredBookmarksJSON(storedBookmarksJSON);
-    }
-  })
-
 
   useEffect(() => {
     if (Array.isArray(article?.json_metadata.image) && article?.json_metadata.image.length === 0) {
@@ -215,13 +225,24 @@ export function FeedCard({ article }: Props) {
                 onClick={() =>
                   authorized
                     ? setIsVote(!isVote)
-                    : addSnackbar({
-                      id: '1',
-                      title: 'Warning',
-                      message: 'You have to login to upvote post!',
-                      queryKey: undefined,
-                      color: 'red',
-                      time: 3000
+                    : showNotification({
+                      autoClose: 3000,
+                      title: "Warning",
+                      message: <NotificationText message='You have to login to upvote post!' time={3000} />,
+                      styles: (theme) => ({
+                        root: {
+                          backgroundColor: '#072f37',
+                          borderColor: '#072f37',
+                          '&::before': { backgroundColor: theme.white },
+                        },
+                        title: { color: theme.white },
+                        description: { color: theme.white },
+                        closeButton: {
+                          color: theme.white,
+                          '&:hover': { backgroundColor: '#04191d' },
+                        },
+                      }),
+                      loading: false,
                     })
                 }
               />
@@ -234,13 +255,24 @@ export function FeedCard({ article }: Props) {
                 onClick={() =>
                   authorized
                     ? setIsComment(!isComment)
-                    : addSnackbar({
-                      id: '2',
-                      title: 'Warning',
-                      message: 'You have to login to add comment!',
-                      queryKey: undefined,
-                      color: 'red',
-                      time: 3000
+                    : showNotification({
+                      autoClose: 3000,
+                      title: "Warning",
+                      message: <NotificationText message='You have to login to comment post!' time={3000} />,
+                      styles: (theme) => ({
+                        root: {
+                          backgroundColor: '#072f37',
+                          borderColor: '#072f37',
+                          '&::before': { backgroundColor: theme.white },
+                        },
+                        title: { color: theme.white },
+                        description: { color: theme.white },
+                        closeButton: {
+                          color: theme.white,
+                          '&:hover': { backgroundColor: '#04191d' },
+                        },
+                      }),
+                      loading: false,
                     })
                 }
               />
@@ -252,20 +284,31 @@ export function FeedCard({ article }: Props) {
             </Text>
             <Space w="sm" />
             <span className={classes.icon}>
-              {isInBookmarks ?
+              {JSON.parse(localStorage.getItem('bookmarks') || '[]').some((bookmark: any) => bookmark.permlink === article.permlink) ?
                 <IconBookmarkOff
                   size={'1.1rem'}
                   onClick={() =>
                     authorized
                       ?
                       toggleBookmark() :
-                      addSnackbar({
-                        id: '3',
-                        title: 'Warning',
-                        message: 'You have to login to save bookmark!',
-                        queryKey: undefined,
-                        color: 'red',
-                        time: 3000
+                      showNotification({
+                        autoClose: 3000,
+                        title: "Warning",
+                        message: <NotificationText message='You have to login to delete bookmark!' time={3000} />,
+                        styles: (theme) => ({
+                          root: {
+                            backgroundColor: '#072f37',
+                            borderColor: '#072f37',
+                            '&::before': { backgroundColor: theme.white },
+                          },
+                          title: { color: theme.white },
+                          description: { color: theme.white },
+                          closeButton: {
+                            color: theme.white,
+                            '&:hover': { backgroundColor: '#04191d' },
+                          },
+                        }),
+                        loading: false,
                       })
                   }
                 />
@@ -276,13 +319,24 @@ export function FeedCard({ article }: Props) {
                     authorized
                       ?
                       toggleBookmark() :
-                      addSnackbar({
-                        id: '4',
-                        title: 'Warning',
-                        message: 'You have to login to save bookmark!',
-                        queryKey: undefined,
-                        color: 'red',
-                        time: 3000
+                      showNotification({
+                        autoClose: 3000,
+                        title: "Warning",
+                        message: <NotificationText message='You have to login to add bookmark!' time={3000} />,
+                        styles: (theme) => ({
+                          root: {
+                            backgroundColor: '#072f37',
+                            borderColor: '#072f37',
+                            '&::before': { backgroundColor: theme.white },
+                          },
+                          title: { color: theme.white },
+                          description: { color: theme.white },
+                          closeButton: {
+                            color: theme.white,
+                            '&:hover': { backgroundColor: '#04191d' },
+                          },
+                        }),
+                        loading: false,
                       })
                   }
                 />}

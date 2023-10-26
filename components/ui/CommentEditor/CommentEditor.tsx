@@ -2,12 +2,13 @@
 
 import { generateRandomLetters } from '@/utils/methods/generateRandom'
 import { useAuthorizationStore } from '@/zustand/stores/useAuthorizationStore'
-import { useNotifiactionStore } from '@/zustand/stores/useNotificationStore'
 import { ActionIcon, Button, Container, Divider, Grid, Group, Space, Textarea } from '@mantine/core'
+import { showNotification } from '@mantine/notifications'
 import { IconBold, IconHeading, IconItalic, IconLink, IconPhotoDown } from '@tabler/icons'
 import { KeychainSDK, Post } from 'keychain-sdk'
 import React, { Dispatch, SetStateAction, useRef, useState } from 'react'
-import { useMutation } from 'react-query'
+import { useMutation, useQueryClient } from 'react-query'
+import { NotificationText } from '../ProgressBar/ProgressBar'
 import useStyles from './style'
 
 type Tag = {
@@ -27,9 +28,8 @@ const CommentEditor = ({ setIsComment, permlink, parentAuthor, queryKey }: Props
   const { classes, theme } = useStyles()
   const [markdown, setMarkdown] = useState('')
   const textareaRef = useRef<HTMLTextAreaElement | null>(null)
-  const addSnackbar = useNotifiactionStore((state) => state.addSnackbar)
   const username = useAuthorizationStore((state: { username: string }) => state.username)
-
+  const queryCache = useQueryClient()
   const handleMarkdownChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setMarkdown(event.target.value)
   }
@@ -95,11 +95,27 @@ const CommentEditor = ({ setIsComment, permlink, parentAuthor, queryKey }: Props
     },
     {
       onSuccess: () => {
-        addSnackbar({
-          id: '2',
-          title: 'Success',
-          message: 'Your comment was sent correctly',
-          queryKey: queryKey,
+        showNotification({
+          autoClose: 10000,
+          title: "Success",
+          message: <NotificationText message={`Your comment was sent correctly`} time={10000} />,
+          styles: (theme) => ({
+            root: {
+              backgroundColor: '#072f37',
+              borderColor: '#072f37',
+              '&::before': { backgroundColor: theme.white },
+            },
+            title: { color: theme.white },
+            description: { color: theme.white },
+            closeButton: {
+              color: theme.white,
+              '&:hover': { backgroundColor: '#04191d' },
+            },
+          }),
+          loading: false,
+          onClose: () => {
+            queryCache.refetchQueries(queryKey)
+          },
         })
         const timeout = setTimeout(() => {
           setIsComment(false)
@@ -108,7 +124,30 @@ const CommentEditor = ({ setIsComment, permlink, parentAuthor, queryKey }: Props
           ; () => clearTimeout(timeout)
       },
       onError: (e: any) => {
-        console.log(e)
+        showNotification({
+          autoClose: 3000,
+          title: "Error",
+          message: <NotificationText message={`Something went wrong`} time={3000} />,
+          styles: (theme) => ({
+            root: {
+              backgroundColor: '#072f37',
+              borderColor: '#072f37',
+              '&::before': { backgroundColor: theme.white },
+            },
+            title: { color: theme.white },
+            description: { color: theme.white },
+            closeButton: {
+              color: theme.white,
+              '&:hover': { backgroundColor: '#04191d' },
+            },
+          }),
+          loading: false,
+        })
+        const timeout = setTimeout(() => {
+          setIsComment(false)
+          setMarkdown('')
+        }, 2500)
+          ; () => clearTimeout(timeout)
       },
     }
   )

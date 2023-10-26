@@ -3,10 +3,11 @@
 import loginKeychain from '@/utils/actions/login'
 import { isKeychain } from '@/utils/methods/checkKeychain'
 import { useAuthorizationStore } from '@/zustand/stores/useAuthorizationStore'
-import { useNotifiactionStore } from '@/zustand/stores/useNotificationStore'
 import { Button, Container, Dialog, Group, Stack, Text, TextInput } from '@mantine/core'
 import { useMediaQuery } from '@mantine/hooks'
+import { showNotification } from '@mantine/notifications'
 import { useEffect, useState } from 'react'
+import { NotificationText } from '../ui/ProgressBar/ProgressBar'
 import useStyles from './style'
 
 function LoginButton() {
@@ -17,7 +18,7 @@ function LoginButton() {
   const [error, setError] = useState(false)
 
   const authorized = useAuthorizationStore((state: { authorized: boolean }) => state.authorized)
-  const addSnackbar = useNotifiactionStore((state) => state.addSnackbar)
+
 
   const isMobile = useMediaQuery(`(max-width: ${theme.breakpoints.sm}px)`)
 
@@ -37,12 +38,24 @@ function LoginButton() {
     if (isKeychain()) {
       loginKeychain(value)
     } else {
-      addSnackbar({
-        id: '1',
-        title: 'Error',
-        message: 'You have to install keychain!',
-        queryKey: undefined,
-        color: 'red',
+      showNotification({
+        autoClose: 3000,
+        title: "Keychain isn't installed",
+        message: <NotificationText message="You have to install keychain extension" time={3000} />,
+        styles: (theme) => ({
+          root: {
+            backgroundColor: '#072f37',
+            borderColor: '#072f37',
+            '&::before': { backgroundColor: theme.white },
+          },
+          title: { color: theme.white },
+          description: { color: theme.white },
+          closeButton: {
+            color: theme.white,
+            '&:hover': { backgroundColor: '#04191d' },
+          },
+        }),
+        loading: false,
       })
     }
   }

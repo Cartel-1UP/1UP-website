@@ -1,10 +1,10 @@
 'use clinet'
 
 import CommentEditor from '@/components/ui/CommentEditor/CommentEditor'
+import { NotificationText } from '@/components/ui/ProgressBar/ProgressBar'
 import { VoteSlider } from '@/components/ui/VoteSlider/VoteSlider'
 import { HiveArticle } from '@/types/blog.type'
 import { useAuthorizationStore } from '@/zustand/stores/useAuthorizationStore'
-import { useNotifiactionStore } from '@/zustand/stores/useNotificationStore'
 import {
   Avatar,
   Badge,
@@ -14,7 +14,7 @@ import {
   Space,
   Text
 } from '@mantine/core'
-import { useMediaQuery } from '@mantine/hooks'
+import { showNotification } from '@mantine/notifications'
 import { IconHeart, IconMessage, IconX } from '@tabler/icons'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
@@ -38,9 +38,7 @@ export function BookmarkCard({ article, refetch, storedBookmarksJSON, setStoredB
   const roundedValue = Math.ceil(numericalValue * 100) / 100
   const formattedCurrency = `$${roundedValue.toFixed(2)}`
 
-  const isMobile = useMediaQuery(`(max-width: ${theme.breakpoints.sm}px)`)
   const authorized = useAuthorizationStore((state: { authorized: boolean }) => state.authorized)
-  const addSnackbar = useNotifiactionStore((state) => state.addSnackbar)
   const date = new Date(article.created)
   const formatedDate = date.toLocaleDateString('en-US', {
     month: 'short',
@@ -64,14 +62,25 @@ export function BookmarkCard({ article, refetch, storedBookmarksJSON, setStoredB
       localStorage.setItem('bookmarks', JSON.stringify(updatedBookmarks));
       setStoredBookmarksJSON(updatedBookmarks); // Update the storedBookmarksJSON
       console.log(storedBookmarksJSON)
-      addSnackbar({
-        id: '6',
-        title: 'Bookmark deleted',
-        message: `You've successfully deleted this blog post from your bookmarks`,
-        queryKey: undefined,
-        color: 'green',
-        time: 3000
-      });
+      showNotification({
+        autoClose: 3000,
+        title: "Bookmark deleted",
+        message: <NotificationText message="You've successfully deleted this blog post from your bookmarks" time={3000} />,
+        styles: (theme) => ({
+          root: {
+            backgroundColor: '#072f37',
+            borderColor: '#072f37',
+            '&::before': { backgroundColor: theme.white },
+          },
+          title: { color: theme.white },
+          description: { color: theme.white },
+          closeButton: {
+            color: theme.white,
+            '&:hover': { backgroundColor: '#04191d' },
+          },
+        }),
+        loading: false,
+      })
     }
   };
 
@@ -110,40 +119,35 @@ export function BookmarkCard({ article, refetch, storedBookmarksJSON, setStoredB
                 {`${article?.author} - ${formatedDate}`}
               </Text>
               <span className={classes.icon}>
-                {isInBookmarks ?
+                {isInBookmarks &&
                   <IconX
                     size={'1.3rem'}
                     onClick={() =>
                       authorized
                         ?
                         toggleBookmark() :
-                        addSnackbar({
-                          id: '3',
-                          title: 'Warning',
-                          message: 'You have to login to save bookmark!',
-                          queryKey: undefined,
-                          color: 'red',
-                          time: 3000
+                        showNotification({
+                          autoClose: 3000,
+                          title: "Warning",
+                          message: <NotificationText message='You have to login to delete bookmark!' time={3000} />,
+                          styles: (theme) => ({
+                            root: {
+                              backgroundColor: '#072f37',
+                              borderColor: '#072f37',
+                              '&::before': { backgroundColor: theme.white },
+                            },
+                            title: { color: theme.white },
+                            description: { color: theme.white },
+                            closeButton: {
+                              color: theme.white,
+                              '&:hover': { backgroundColor: '#04191d' },
+                            },
+                          }),
+                          loading: false,
                         })
                     }
                   />
-                  :
-                  <IconX
-                    size={'1.1rem'}
-                    onClick={() =>
-                      authorized
-                        ?
-                        toggleBookmark() :
-                        addSnackbar({
-                          id: '4',
-                          title: 'Warning',
-                          message: 'You have to login to save bookmark!',
-                          queryKey: undefined,
-                          color: 'red',
-                          time: 3000
-                        })
-                    }
-                  />}
+                }
               </span>
             </Group>
           </Container>
@@ -178,13 +182,24 @@ export function BookmarkCard({ article, refetch, storedBookmarksJSON, setStoredB
                 onClick={() =>
                   authorized
                     ? setIsVote(!isVote)
-                    : addSnackbar({
-                      id: '1',
-                      title: 'Warning',
-                      message: 'You have to login to upvote post!',
-                      queryKey: undefined,
-                      color: 'red',
-                      time: 3000
+                    : showNotification({
+                      autoClose: 3000,
+                      title: "Warning",
+                      message: <NotificationText message='You have to login to upvote post!' time={3000} />,
+                      styles: (theme) => ({
+                        root: {
+                          backgroundColor: '#072f37',
+                          borderColor: '#072f37',
+                          '&::before': { backgroundColor: theme.white },
+                        },
+                        title: { color: theme.white },
+                        description: { color: theme.white },
+                        closeButton: {
+                          color: theme.white,
+                          '&:hover': { backgroundColor: '#04191d' },
+                        },
+                      }),
+                      loading: false,
                     })
                 }
               />
@@ -197,13 +212,24 @@ export function BookmarkCard({ article, refetch, storedBookmarksJSON, setStoredB
                 onClick={() =>
                   authorized
                     ? setIsComment(!isComment)
-                    : addSnackbar({
-                      id: '2',
-                      title: 'Warning',
-                      message: 'You have to login to add comment!',
-                      queryKey: undefined,
-                      color: 'red',
-                      time: 3000
+                    : showNotification({
+                      autoClose: 3000,
+                      title: "Warning",
+                      message: <NotificationText message='You have to login to add comment!' time={3000} />,
+                      styles: (theme) => ({
+                        root: {
+                          backgroundColor: '#072f37',
+                          borderColor: '#072f37',
+                          '&::before': { backgroundColor: theme.white },
+                        },
+                        title: { color: theme.white },
+                        description: { color: theme.white },
+                        closeButton: {
+                          color: theme.white,
+                          '&:hover': { backgroundColor: '#04191d' },
+                        },
+                      }),
+                      loading: false,
                     })
                 }
               />

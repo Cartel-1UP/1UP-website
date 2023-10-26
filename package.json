@@ -26,7 +26,7 @@
     "@mantine/ds": "^5.8.2",
     "@mantine/form": "^6.0.14",
     "@mantine/hooks": "^5.8.2",
-    "@mantine/notifications": "^6.0.19",
+    "@mantine/notifications": "5.8.2",
     "@mantine/prism": "^5.8.2",
     "@mantine/styles": "^5.8.2",
     "@supabase/supabase-js": "^2.4.1",
