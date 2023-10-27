@@ -15,7 +15,6 @@ type Props = {
     setUserMenuOpened: Dispatch<SetStateAction<boolean>>
 }
 
-
 export function UserMenu({ userImage, username, userReputation, setUserMenuOpened }: Props) {
     const { classes, theme } = useStyles()
     const router = useRouter();

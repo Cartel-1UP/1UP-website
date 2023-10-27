@@ -1,6 +1,6 @@
 'use client'
 
-import { BookmarkSection } from "@/components/Sections/Bookmark/BookmarkSection"
+import { BookmarkSection } from "@/components/ui/Bookmark/BookmarkSection"
 
 import { Container } from '@mantine/core'
 import { useMediaQuery } from "@mantine/hooks"

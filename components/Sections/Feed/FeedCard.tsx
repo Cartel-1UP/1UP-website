@@ -4,6 +4,7 @@ import CommentEditor from '@/components/ui/CommentEditor/CommentEditor'
 import { NotificationText } from '@/components/ui/ProgressBar/ProgressBar'
 import { VoteSlider } from '@/components/ui/VoteSlider/VoteSlider'
 import { HiveArticle } from '@/types/blog.type'
+import { formatedDate } from '@/utils/methods/formateDate'
 import { useAuthorizationStore } from '@/zustand/stores/useAuthorizationStore'
 import {
   AspectRatio,
@@ -33,24 +34,20 @@ interface Props {
 
 export function FeedCard({ article }: Props) {
   const { classes, theme } = useStyles()
+  const authorized = useAuthorizationStore((state: { authorized: boolean }) => state.authorized)
+
   const [isVote, setIsVote] = useState(false)
   const [isComment, setIsComment] = useState(false)
   const [isImageExists, setIsImageExists] = useState(false)
+  const [isToggle, setIsToggle] = useState(false);
 
   const numericalValue = parseFloat(article?.pending_payout_value)
   const roundedValue = Math.ceil(numericalValue * 100) / 100
   const formattedCurrency = `$${roundedValue.toFixed(2)}`
 
-  const isMobile = useMediaQuery(`(max-width: ${theme.breakpoints.sm}px)`)
-  const authorized = useAuthorizationStore((state: { authorized: boolean }) => state.authorized)
+  const isSm = useMediaQuery(`(max-width: ${theme.breakpoints.sm}px)`)
   const date = new Date(article.created)
-  const formatedDate = date.toLocaleDateString('en-US', {
-    month: 'short',
-    day: 'numeric',
-    year: 'numeric',
-  })
-
-  const forbiddenChars = ['!', '<', '>', '[', ']']
+  const forbiddenChars = ['!', '<', '>', '[', ']', '#']
   const body = article.body.split(' ')
   const filteredBody = body.filter(function (word: string) {
     return !word.split('').some(function (char: string) {
@@ -59,20 +56,14 @@ export function FeedCard({ article }: Props) {
   })
   const bodyOfArticle = filteredBody.join(' ')
 
-
-
-  interface Bookmark {
+  type Bookmark = {
     author: string;
     permlink: string;
   }
 
-  const [isToggle, setIsToggle] = useState(false);
-
-
-
   const toggleBookmark = () => {
     const bookmarks: Bookmark[] = JSON.parse(localStorage.getItem('bookmarks') || '[]');
-    if (!bookmarks.some((bookmark: any) => bookmark.permlink === article.permlink)) {
+    if (!bookmarks.some((bookmark: Bookmark) => bookmark.permlink === article.permlink)) {
       const newBookmark = { author: article.author, permlink: article.permlink };
 
       localStorage.setItem('bookmarks', JSON.stringify([...bookmarks, newBookmark]));
@@ -176,7 +167,7 @@ export function FeedCard({ article }: Props) {
               </Badge>
             )}
             <Text pl={20} color="dimmed" size="xs" transform="uppercase" weight={600}>
-              {`${article?.author} - ${formatedDate}`}
+              {`${article?.author} - ${formatedDate(date)}`}
             </Text>
           </Container>
           <Link
@@ -193,7 +184,7 @@ export function FeedCard({ article }: Props) {
             </Container>
           </Link>
         </Grid.Col>
-        {!isMobile && (
+        {!isSm && (
           <Grid.Col span={5}>
             <Container>
               <AspectRatio ratio={16 / 9}>
@@ -206,7 +197,7 @@ export function FeedCard({ article }: Props) {
             </Container>
           </Grid.Col>
         )}
-        <Grid.Col span={isMobile ? 12 : 7}>
+        <Grid.Col span={isSm ? 12 : 7}>
           <Container>
             {article?.json_metadata.tags
               ? article?.json_metadata.tags.slice(0, 3).map?.((item: string) => (
@@ -217,7 +208,7 @@ export function FeedCard({ article }: Props) {
               : null}
           </Container>
         </Grid.Col>
-        <Grid.Col span={isMobile ? 12 : 5} display="flex">
+        <Grid.Col span={isSm ? 12 : 5} display="flex">
           <Container mr={0} className={classes.metadataContainer}>
             <span className={classes.icon}>
               <IconHeart

@@ -10,7 +10,11 @@ import { useEffect, useState } from 'react'
 import { NotificationText } from '../ui/ProgressBar/ProgressBar'
 import useStyles from './style'
 
-function LoginButton() {
+type Props = {
+  closeDrawer?: () => void
+}
+
+function LoginButton({ closeDrawer }: Props) {
   const { classes, theme } = useStyles()
 
   const [opened, setOpened] = useState(false)
@@ -20,7 +24,7 @@ function LoginButton() {
   const authorized = useAuthorizationStore((state: { authorized: boolean }) => state.authorized)
 
 
-  const isMobile = useMediaQuery(`(max-width: ${theme.breakpoints.sm}px)`)
+  const isSm = useMediaQuery(`(max-width: ${theme.breakpoints.sm}px)`)
 
   useEffect(() => {
     if (isKeychain() && localStorage.getItem('username') && !authorized) {
@@ -62,8 +66,7 @@ function LoginButton() {
 
   return (
     <>
-      {isMobile ?
-
+      {isSm ?
         <Container size={'xs'} pt={25}>
           <Stack spacing="xl">
             <TextInput
@@ -80,7 +83,7 @@ function LoginButton() {
               fullWidth
               variant="outline"
               onClick={() => {
-                setOpened(false)
+                closeDrawer && closeDrawer()
                 loginUser()
               }}
               color="gray"
@@ -89,9 +92,7 @@ function LoginButton() {
             </Button>
           </Stack>
         </Container>
-
         :
-
         <>
           <Group position="center">
             <Button
@@ -134,7 +135,6 @@ function LoginButton() {
           </Dialog>
         </>
       }
-
     </>
   )
 }
