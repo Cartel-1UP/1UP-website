@@ -2,18 +2,19 @@
 
 import { generateRandomLetters } from '@/utils/methods/generateRandom'
 import { useAuthorizationStore } from '@/zustand/stores/useAuthorizationStore'
-import { ActionIcon, Button, Container, Divider, Grid, Group, Space, Textarea } from '@mantine/core'
+import { ActionIcon, Button, Card, Container, Divider, Grid, Group, Space, Text, Textarea } from '@mantine/core'
 import { showNotification } from '@mantine/notifications'
-import { IconBold, IconHeading, IconItalic, IconLink, IconPhotoDown } from '@tabler/icons'
+import { IconBold, IconHeading, IconItalic, IconLink, IconList, IconPhotoDown, IconQuote } from '@tabler/icons'
 import { KeychainSDK, Post } from 'keychain-sdk'
 import React, { Dispatch, SetStateAction, useRef, useState } from 'react'
 import { useMutation, useQueryClient } from 'react-query'
+import { Markdown } from '../Markdown/Markdown'
 import { NotificationText } from '../ProgressBar/ProgressBar'
 import useStyles from './style'
 
 type Tag = {
   name: string
-  type: 'link' | 'heading' | 'bold' | 'italic' | 'image'
+  type: 'link' | 'heading' | 'bold' | 'italic' | 'image' | 'quote' | 'list'
 }
 
 type Props = {
@@ -26,10 +27,12 @@ type Props = {
 
 const CommentEditor = ({ setIsComment, permlink, parentAuthor, queryKey }: Props) => {
   const { classes, theme } = useStyles()
+  const queryCache = useQueryClient()
   const [markdown, setMarkdown] = useState('')
   const textareaRef = useRef<HTMLTextAreaElement | null>(null)
+
   const username = useAuthorizationStore((state: { username: string }) => state.username)
-  const queryCache = useQueryClient()
+
   const handleMarkdownChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setMarkdown(event.target.value)
   }
@@ -60,6 +63,12 @@ const CommentEditor = ({ setIsComment, permlink, parentAuthor, queryKey }: Props
         case 'image':
           modifiedValue += `![${selectedText}]()`
           break
+        case 'quote':
+          modifiedValue += `> ${selectedText}`
+          break
+        case 'list':
+          modifiedValue += `\n - ${selectedText}`
+          break
         default:
           modifiedValue += selectedText
           break
@@ -89,9 +98,7 @@ const CommentEditor = ({ setIsComment, permlink, parentAuthor, queryKey }: Props
           comment_options: `{\"author\":\"${username}\",\"permlink\":\"${commentPermlink}\",\"max_accepted_payout\":\"10000.000 HBD\",\"allow_votes\":true,\"allow_curation_rewards\":true,\"extensions\":[],\"percent_hbd\":63}`,
         },
       }
-      await keychain.post(formParamsAsObject.data as Post).then((response) => {
-        console.log(response)
-      })
+      await keychain.post(formParamsAsObject.data as Post)
     },
     {
       onSuccess: () => {
@@ -160,9 +167,6 @@ const CommentEditor = ({ setIsComment, permlink, parentAuthor, queryKey }: Props
         <Grid grow>
           <Grid.Col>
             <Group spacing={3}>
-              <ActionIcon variant="default" onClick={() => handleTagButtonClick('Link', 'link')}>
-                <IconLink size="1rem" />
-              </ActionIcon>
               <ActionIcon
                 variant="default"
                 onClick={() => handleTagButtonClick('Heading', 'heading')}
@@ -178,8 +182,17 @@ const CommentEditor = ({ setIsComment, permlink, parentAuthor, queryKey }: Props
               >
                 <IconItalic size="1rem" />
               </ActionIcon>
+              <ActionIcon variant="default" onClick={() => handleTagButtonClick('Link', 'link')}>
+                <IconLink size="1rem" />
+              </ActionIcon>
               <ActionIcon variant="default" onClick={() => handleTagButtonClick('Image', 'image')}>
                 <IconPhotoDown size="1rem" />
+              </ActionIcon>
+              <ActionIcon variant="default" onClick={() => handleTagButtonClick('Quote', 'quote')}>
+                <IconQuote size="1rem" />
+              </ActionIcon>
+              <ActionIcon variant="default" onClick={() => handleTagButtonClick('List', 'list')}>
+                <IconList size="1rem" />
               </ActionIcon>
             </Group>
           </Grid.Col>
@@ -193,6 +206,17 @@ const CommentEditor = ({ setIsComment, permlink, parentAuthor, queryKey }: Props
               minRows={4}
             />
             <Space w="sm" />
+          </Grid.Col>
+          <Grid.Col>
+            {markdown !== '' && (
+              <>
+                <Text pb={5}>Preview</Text>
+                <Card withBorder radius={4} sx={{ borderColor: '#CED4DA' }}>
+                  <Markdown text={markdown} />
+                </Card>
+              </>
+            )
+            }
           </Grid.Col>
           <Grid.Col>
             <Group className={classes.buttonContainer}>

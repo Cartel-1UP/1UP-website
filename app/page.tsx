@@ -53,7 +53,6 @@ export default function Home() {
                 <Grid.Col span={3}>
                   <Space h="xl" />
                   <CommunityBar communityLogo={oneuplogo2.src} tag={'hive-102223'} />
-
                   <div style={{ position: 'sticky', top: '0' }}>
                     <Space h={20} />
                     <Card withBorder p={10} radius={10} sx={{
@@ -62,12 +61,10 @@ export default function Home() {
                     }}>
                       <NavLink
                         label={'Check our Discord'}
-                        // description={item.description}
                         icon={<IconBrandDiscord size={24} stroke={1.5} color='#7289da' />}
                         onClick={() => window.open('https://discord.gg/f7sHEHYZJZ', '_blank')}
                       />
                     </Card>
-
                     <Space h={20} />
                     <Card withBorder p={0} radius={10} sx={{
                       borderColor: '#e2e8f0d2',

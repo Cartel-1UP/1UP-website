@@ -9,7 +9,7 @@ import {
   Group,
   Image,
   Indicator,
-  Text,
+  Text
 } from '@mantine/core'
 import Link from 'next/link'
 import useStyles from './style'
@@ -101,21 +101,6 @@ export function RecommendedCard({ article }: CardProps) {
             </Container>
           </Grid.Col>
           <Grid.Col span={12}>
-            {/* <Container mr={0} className={classes.metadataContainer}>
-            <IconHeart color="grey" size={14} />
-            <Text color="dimmed" className={classes.price}>
-              {article.userpost?.active_votes.length}
-            </Text>
-            <Space w="sm" />
-            <IconMessage color="grey" size={14} />
-            <Text color="dimmed" className={classes.price}>
-              {article.userpost?.children}
-            </Text>
-            <Space w="sm" />
-            <Text color="dimmed" className={classes.price}>
-              {article.userpost?.pending_payout_value}
-            </Text>
-          </Container> */}
             <Container>
               <Group position="right">
                 <Badge c={'#072f37'} bg={'#072f371A'} radius={5}>

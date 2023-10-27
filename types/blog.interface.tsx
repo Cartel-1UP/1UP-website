@@ -78,7 +78,7 @@ export interface Comment {
 }
 
 export interface Community {
-  result: {
+  result?: {
     about: string
     avatar_url: string
     created_at: string

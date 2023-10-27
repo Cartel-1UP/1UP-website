@@ -8,8 +8,9 @@ import { useMutation, useQueryClient } from 'react-query'
 import { NotificationText } from '../ProgressBar/ProgressBar'
 import useStyles from './style'
 
+
 type Props = {
-  setIsVote?: Dispatch<SetStateAction<boolean>> | any
+  setIsVote?: Dispatch<SetStateAction<boolean>>
   permlink: string
   author: string
   setSuccessfullUpvoted?: Dispatch<SetStateAction<boolean>>
@@ -23,6 +24,7 @@ export function VoteSlider({
   setSuccessfullUpvoted,
   queryKey,
 }: Props) {
+  const queryCache = useQueryClient()
   const { classes, theme } = useStyles()
   const [value, setValue] = useState(50)
   const [endValue, setEndValue] = useState(50)
@@ -44,7 +46,6 @@ export function VoteSlider({
     { value: 100, label: '100%' },
   ]
 
-  const queryCache = useQueryClient()
 
   const handleRequestVote = useMutation<void, any, void, unknown>(
     async () => {
@@ -91,7 +92,7 @@ export function VoteSlider({
         })
 
         const timeout = setTimeout(() => {
-          setIsVote(false)
+          setIsVote && setIsVote(false)
           setSuccessfullUpvoted && setSuccessfullUpvoted(true)
         }, 10500)
           ; () => clearTimeout(timeout)
@@ -135,13 +136,12 @@ export function VoteSlider({
       </Container>
       <Space h="xl" />
       <Space h="xl" />
-
       <Container size={'sm'}>
         <Group className={classes.buttonContainer}>
           <Button variant="outline" color="dark" onClick={() => handleRequestVote.mutate()}>
             Submit
           </Button>
-          <Button variant="outline" color="dark" onClick={() => setIsVote(false)}>
+          <Button variant="outline" color="dark" onClick={() => setIsVote && setIsVote(false)}>
             Cancel
           </Button>
         </Group>

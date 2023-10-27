@@ -10,12 +10,7 @@ import {
   ActionIcon,
   Box,
   Button,
-  Card,
-  Container,
-  Grid,
-  SimpleGrid,
-  Skeleton,
-  Space
+  Card, SimpleGrid, Space
 } from '@mantine/core'
 import { useScrollIntoView } from '@mantine/hooks'
 import { showNotification } from '@mantine/notifications'
@@ -23,6 +18,7 @@ import { IconArrowBarRight, IconArrowUp } from '@tabler/icons'
 import { useEffect, useState } from 'react'
 import { useMutation } from 'react-query'
 import { FeedCard } from './FeedCard'
+import { FeedCardSkeleton } from './FeedCardSkeleton'
 import useStyles from './style'
 
 type Props = {
@@ -44,18 +40,10 @@ export function FeedSection({ sort, tag, isCommunity }: Props) {
 
   const [username, setUsername] = useState('')
   const authorized = useAuthorizationStore((state: { authorized: boolean }) => state.authorized)
-  const defaultTab = Tabs.New
 
   const handleTabChange = (tab: string) => {
     setPostType(tab)
   }
-
-  useEffect(() => {
-    const user = localStorage.getItem('username')
-    if (user) {
-      setUsername(user)
-    }
-  }, [])
 
   const loadPosts = useMutation(
     async () => {
@@ -144,6 +132,13 @@ export function FeedSection({ sort, tag, isCommunity }: Props) {
   )
 
   useEffect(() => {
+    const user = localStorage.getItem('username')
+    if (user) {
+      setUsername(user)
+    }
+  }, [])
+
+  useEffect(() => {
     loadPosts.mutate()
   }, [postType, sort])
 
@@ -162,43 +157,12 @@ export function FeedSection({ sort, tag, isCommunity }: Props) {
         <Card withBorder p="md" radius={0} className={classes.cardHeader}>
           <TabButtons
             authorized={authorized}
-            defaultTab={defaultTab}
+            defaultTab={Tabs.New}
             onChange={handleTabChange}
             isCommunity={isCommunity}
           />
         </Card>
-        {!data
-          ? Array.from({ length: 5 }).map((_, index) => (
-            <Card withBorder p="md" radius={0} className={classes.card} key={index}>
-              <Grid grow>
-                <Grid.Col span={7}>
-                  <Container>
-                    <Skeleton height={50} circle mb="xl" />
-                  </Container>
-                  <Container>
-                    <Skeleton height={8} radius="xl" />
-                    <Skeleton height={8} mt={6} radius="xl" />
-                    <Skeleton height={8} mt={6} radius="xl" />
-                  </Container>
-                </Grid.Col>
-                <Grid.Col span={5}>
-                  <Container>
-                    <Skeleton height={100} radius="sm" />
-                  </Container>
-                </Grid.Col>
-                <Grid.Col span={7}>
-                  <Container>
-                    <Skeleton height={16} width={'30%'} radius="xl" />
-                  </Container>
-                </Grid.Col>
-                <Grid.Col span={5}>
-                  <Container>
-                    <Skeleton height={16} radius="xl" />
-                  </Container>
-                </Grid.Col>
-              </Grid>
-            </Card>
-          ))
+        {!data ? <FeedCardSkeleton />
           : data?.map((item: HiveArticle) => <FeedCard article={item} key={item.post_id} />)}
         {posts?.map((item: HiveArticle) => (
           <FeedCard article={item} key={item.post_id} />

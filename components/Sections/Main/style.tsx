@@ -63,17 +63,6 @@ const useStyles = createStyles((theme, _params, getRef) => ({
     },
   },
 
-  link: {
-    textDecoration: 'none',
-    color: '#000000',
-    display: 'flex',
-    alignItems: 'center',
-
-    '&:hover': {
-      color: '#16093fbc',
-    },
-  },
-
   category: {
     color: theme.white,
     opacity: 0.7,

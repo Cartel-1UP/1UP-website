@@ -81,7 +81,7 @@ export function Navbar() {
   ]
 
   return (
-    <div className={classes.mobileStickyHeader}>
+    <div className={classes.header}>
       <Container fluid bg={'#072f37'} className={classes.navbar}>
         <Container size={'xl'}>
           <Header height={'100%'} bg={'#072f37'} sx={{ border: 0 }}>
@@ -138,7 +138,7 @@ export function Navbar() {
           onClose={closeDrawer}
           size="100%"
           padding="md"
-          zIndex={1000000}
+          zIndex={100000}
           className={classes.drawer}
         >
           <>
@@ -206,7 +206,7 @@ export function Navbar() {
                 onClick={() => { closeDrawer(), logoutUser() }}
               />
               :
-              <LoginButton />
+              <LoginButton closeDrawer={closeDrawer} />
             }
           </>
         </Drawer>
