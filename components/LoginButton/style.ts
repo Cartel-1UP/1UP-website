@@ -2,8 +2,8 @@ import { createStyles } from '@mantine/styles'
 
 const useStyles = createStyles((theme) => ({
   button: {
-    color: '#E9ECEF',
-    borderColor: '#E9ECEF',
+    color: '#f3f3f3',
+    borderColor: '#f3f3f3',
   },
   buttonLogin: {
     color: '#072f37',

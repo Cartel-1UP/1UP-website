@@ -43,7 +43,7 @@ const useStyles = createStyles((theme) => ({
   },
 
   default: {
-    backgroundColor: '#E9ECEF'
+    backgroundColor: '#f3f3f3'
   },
 
   title: {

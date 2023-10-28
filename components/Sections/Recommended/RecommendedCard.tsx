@@ -73,19 +73,21 @@ export function RecommendedCard({ article }: CardProps) {
                   src={`https://images.hive.blog/u/${article.userpost?.author}/avatar/`}
                 />
               </Indicator>
-              <Text pl={20} color="dimmed" size="xs" transform="uppercase" weight={500}>
+              <Text pl={20} size="xs" transform="uppercase" color={'dimmed'} fw={500}>
                 {article.userpost?.author}
               </Text>
             </Container>
           </Grid.Col>
           <Grid.Col span={12} mt={5}>
             <Container>
-              <AspectRatio ratio={16 / 9}>
+              <AspectRatio ratio={5 / 3}>
                 {imageExists ? (
                   <Image
-                    radius={10}
+                    radius={0}
                     src={article.userpost.json_metadata.image[0]}
                     withPlaceholder
+                    fit='fill'
+                    h={200}
                   />
                 ) : (
                   <Image src={null} withPlaceholder radius={10} />
@@ -95,7 +97,7 @@ export function RecommendedCard({ article }: CardProps) {
           </Grid.Col>
           <Grid.Col span={12}>
             <Container>
-              <Text className={classes.title} mt={5} sx={{ WebkitLineClamp: 1 }}>
+              <Text className={classes.title} mt={5} sx={{ WebkitLineClamp: 2 }}>
                 {article.userpost?.title}
               </Text>
             </Container>

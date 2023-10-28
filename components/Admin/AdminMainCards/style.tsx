@@ -7,7 +7,7 @@ const useStyles = createStyles((theme, _params, getRef) => ({
   },
 
   default: {
-    background: `linear-gradient(to bottom, #072f37 0%, #E9ECEF 10%, #E9ECEF 10%, #E9ECEF 100%)`,
+    background: `linear-gradient(to bottom, #072f37 0%, #f3f3f3 10%, #f3f3f3 10%, #f3f3f3 100%)`,
   },
 
   cardHeader: {

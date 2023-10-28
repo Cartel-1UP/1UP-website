@@ -15,7 +15,7 @@ export function RecommendedSection() {
     <>
       <Space h="xl" />
       <Card withBorder p="md" radius={0} className={classes.cardHeader}>
-        <Text size={24} fw={500}>
+        <Text size={24} fw={700} sx={{ fontFamily: 'Greycliff CF, sans-serif' }}>
           Cartel users choice
         </Text>
       </Card>

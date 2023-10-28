@@ -4,7 +4,7 @@ const useStyles = createStyles((theme) => ({
   cardHeader: {
     borderColor: '#e2e8f0d2',
     borderWidth: 1,
-    borderRadius: '10px 10px 0 0',
+    borderRadius: '5px 5px 0 0',
   },
 
   card: {
@@ -16,7 +16,7 @@ const useStyles = createStyles((theme) => ({
   cardFooter: {
     borderColor: '#e2e8f0d2',
     borderWidth: 1,
-    borderRadius: '0 0 10px 10px',
+    borderRadius: '0 0 5px 5px',
   },
 
   headerContainer: {
@@ -26,8 +26,8 @@ const useStyles = createStyles((theme) => ({
   },
 
   title: {
-    fontFamily: `Greycliff CF, ${theme.fontFamily}`,
-    fontWeight: 600,
+    fontFamily: `Greycliff CF, sans-serif`,
+    fontWeight: 700,
     textOverflow: 'ellipsis',
     overflowWrap: 'break-word',
     wordWrap: 'break-word',
@@ -38,7 +38,7 @@ const useStyles = createStyles((theme) => ({
     display: '-webkit-box',
     WebkitLineClamp: 2,
     WebkitBoxOrient: 'vertical',
-    maxHeight: '3.5em',
+    maxHeight: '6em',
   },
 
   price: {
