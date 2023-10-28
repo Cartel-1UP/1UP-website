@@ -102,7 +102,7 @@ export function Navbar() {
                 {isMd ?
                   <Image src={oneuplogo.src} alt="Logo" fit="contain" onClick={() => router.push('/')} sx={{ cursor: 'pointer' }} /> :
                   <Link href="/">
-                    <Image src={oneuplogo.src} alt="Logo" fit="contain" />
+                    <Image src={oneuplogo.src} alt="Logo" fit="contain" height={70} />
                   </Link>
                 }
               </Grid.Col>
@@ -119,7 +119,7 @@ export function Navbar() {
                     <LoginButton />
                   )}
                 </Group>
-                <Burger opened={opened} onClick={open} className={classes.hiddenDesktop} color={'#E9ECEF'} />
+                <Burger opened={opened} onClick={open} className={classes.hiddenDesktop} color={'#f3f3f3'} />
               </Grid.Col>
             </Grid>
           </Header>
@@ -130,7 +130,7 @@ export function Navbar() {
               '& svg': {
                 width: 50,
                 height: 50,
-                color: '#E9ECEF'
+                color: '#f3f3f3'
               }
             }
           }}
@@ -147,7 +147,7 @@ export function Navbar() {
                 <Group pl={10}>
                   <Avatar src={userImage} radius="xl" />
                   <div style={{ flex: 1 }}>
-                    <Text size="md" weight={400} color="#E9ECEF">
+                    <Text size="md" weight={400} color="#f3f3f3">
                       {username}{' '}
                       <Badge
                         sx={(theme) => ({ padding: 5 })}
@@ -189,7 +189,7 @@ export function Navbar() {
                     icon={<Avatar radius="xl" src={item.image} />}
                     onClick={() => {
                       closeDrawer()
-                      router.push('/community/' + item.tag)
+                      router.push(item.tag)
                     }
                     }
                     disabled={item.tag === 'none'}

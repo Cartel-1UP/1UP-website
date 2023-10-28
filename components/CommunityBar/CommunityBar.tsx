@@ -31,12 +31,12 @@ export function CommunityBar({ communityLogo, tag }: Props) {
   return (
     <>
       {isLoading ?
-        <Card withBorder p="md" radius={10} className={classes.card} >
+        <Card withBorder p="md" radius={5} className={classes.card} >
           <Skeleton width={'100%'} height={200} />
         </Card> :
         communityInfo && (
           <>
-            <Card withBorder p="md" radius={10} className={classes.card}>
+            <Card withBorder p="md" radius={5} className={classes.card}>
               <AspectRatio ratio={1 / 1} sx={{ maxWidth: 200 }} mx="auto">
                 <Image src={communityLogo} alt="Logo" fit="contain" withPlaceholder />
               </AspectRatio>
@@ -66,12 +66,13 @@ export function CommunityBar({ communityLogo, tag }: Props) {
                   </Tooltip>
                 </Group>
               </Group>
-              <Text fw={500} mb={10} mt={20}>
+              <Divider my="xs" />
+              <Text fw={700} mb={5} mt={10} sx={{ fontFamily: 'Greycliff CF, sans-serif' }}>
                 {communityInfo?.title}
               </Text>
-              <Text fz={'sm'}>{communityInfo?.about}</Text>
+              <Text fz={'sm'} >{communityInfo?.about}</Text>
               <Divider my="xs" />
-              <Text fw={500} mb={10}>
+              <Text fw={700} mb={5} mt={10} sx={{ fontFamily: 'Greycliff CF, sans-serif' }}>
                 Description
               </Text>
               <Text fz={'sm'}>
@@ -80,7 +81,7 @@ export function CommunityBar({ communityLogo, tag }: Props) {
               {communityInfo?.flag_text != '' ? (
                 <>
                   <Divider my="xs" />
-                  <Text fw={500} mb={10}>
+                  <Text fw={700} mb={5} mt={5} sx={{ fontFamily: 'Greycliff CF, sans-serif' }}>
                     Rules
                   </Text>
                   <Text fz={'sm'}>
@@ -89,7 +90,7 @@ export function CommunityBar({ communityLogo, tag }: Props) {
                 </>
               ) : null}
               <Divider my="xs" />
-              <Text fw={500} mb={10}>
+              <Text fw={700} mb={5} mt={10} sx={{ fontFamily: 'Greycliff CF, sans-serif' }}>
                 Team
               </Text>
               {communityInfo?.team.map((user: any) => {

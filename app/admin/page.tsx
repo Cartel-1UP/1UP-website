@@ -1,3 +1,5 @@
+'use client'
+
 import { AdminPage } from '@/components/Admin/Admin/AdminPage'
 import { AdminPanel } from '@/components/Admin/AdminPanel'
 

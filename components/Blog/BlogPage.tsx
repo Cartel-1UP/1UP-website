@@ -1,6 +1,6 @@
 'use client'
 
-import { Container } from '@mantine/core'
+import { Container, Space } from '@mantine/core'
 import { useMediaQuery } from '@mantine/hooks'
 import { BlogContent } from './BlogContent'
 import useStyles from './style'
@@ -12,18 +12,20 @@ interface Props {
 
 export function BlogPage({ permlink, author }: Props) {
   const { classes, theme } = useStyles()
-  const isMobile = useMediaQuery(`(max-width: ${theme.breakpoints.sm}px)`)
+  const isSm = useMediaQuery(`(max-width: ${theme.breakpoints.sm}px)`)
 
   return (
     <>
-      {isMobile ? (
-        <Container fluid className={classes.default}>
+      {isSm ? (
+        <div className={classes.default}>
           <BlogContent permlink={permlink} author={author} />
-        </Container>
+        </div>
       ) : (
-        <Container fluid className={classes.default}>
+        <Container fluid className={classes.default} bg={`linear-gradient(to bottom, #072f37 0%, #f3f3f3 20%, #f3f3f3 20%, #f3f3f3 100%)`}>
           <Container size="xl">
+            <Space h="xl" />
             <BlogContent permlink={permlink} author={author} />
+            <Space h="xl" />
           </Container>
         </Container>
       )}

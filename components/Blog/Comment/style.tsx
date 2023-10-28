@@ -8,8 +8,8 @@ const useStyles = createStyles((theme) => ({
   },
 
   body: {
-    paddingLeft: 54,
-    paddingTop: theme.spacing.sm,
+    paddingLeft: 30,
+    paddingTop: theme.spacing.md,
     fontSize: theme.fontSizes.sm,
   },
 
@@ -35,6 +35,9 @@ const useStyles = createStyles((theme) => ({
     alignItems: 'center',
     alignContent: 'left',
   },
+
+
+
 }))
 
 export default useStyles

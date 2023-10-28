@@ -17,7 +17,7 @@ export default function Home() {
   const isMd = useMediaQuery(`(max-width: 1000px)`)
   return (
     <>
-      <Container fluid bg={'linear-gradient(to top, #275c672d, #072f37)'} pb={isMd ? 0 : 25}>
+      <Container fluid bg={'linear-gradient(to top, #275c672d, #072f37 90%, #072f37 100%)'} pb={isMd ? 0 : 25}>
         {isMd ? (
           <MainSection />
         ) : (
@@ -29,14 +29,14 @@ export default function Home() {
       <CommunitySection />
       {isMd ? (
         <>
-          <Container fluid bg={'#E9ECEF'}>
+          <Container fluid bg={'#f3f3f3'}>
             <Grid>
               <Grid.Col span={12}>
                 <FeedSection sort={'created'} tag={'hive-102223'} />
               </Grid.Col>
             </Grid>
           </Container>
-          <Container fluid bg={'linear-gradient(to bottom, #E9ECEF, #072f37)'}>
+          <Container fluid bg={'linear-gradient(to bottom, #f3f3f3, #072f37)'}>
             <Space h="xl" />
             <CommunityBar communityLogo={oneuplogo2.src} tag={'hive-102223'} />
             <RecommendedSection />
@@ -44,7 +44,7 @@ export default function Home() {
         </>
       ) : (
         <>
-          <Container fluid bg={'#E9ECEF'}>
+          <Container fluid bg={'#f3f3f3'}>
             <Container size="xl">
               <Grid>
                 <Grid.Col span={9}>
@@ -55,8 +55,8 @@ export default function Home() {
                   <CommunityBar communityLogo={oneuplogo2.src} tag={'hive-102223'} />
                   <div style={{ position: 'sticky', top: '0' }}>
                     <Space h={20} />
-                    <Card withBorder p={10} radius={10} sx={{
-                      borderColor: '#e2e8f0d2',
+                    <Card withBorder p={10} radius={5} sx={{
+                      borderColor: '#f3f3f3',
                       borderWidth: 1
                     }}>
                       <NavLink
@@ -66,8 +66,8 @@ export default function Home() {
                       />
                     </Card>
                     <Space h={20} />
-                    <Card withBorder p={0} radius={10} sx={{
-                      borderColor: '#e2e8f0d2',
+                    <Card withBorder p={0} radius={5} sx={{
+                      borderColor: '#f3f3f3',
                       borderWidth: 1
                     }}>
                       <Timeline
@@ -80,7 +80,7 @@ export default function Home() {
               </Grid>
             </Container>
           </Container>
-          <Container fluid bg={'linear-gradient(to bottom, #E9ECEF, #072f37)'}>
+          <Container fluid bg={'linear-gradient(to bottom, #f3f3f3, #f3f3f3 10%, #072f37 100%)'}>
             <Container size="xl">
               <RecommendedSection />
             </Container>

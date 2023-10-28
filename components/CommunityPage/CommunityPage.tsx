@@ -19,15 +19,10 @@ export function CommunityPage({ image, tag }: Props) {
   const { classes, theme } = useStyles()
   const isMd = useMediaQuery(`(max-width: ${theme.breakpoints.md}px)`)
   const result = comumnityData.filter((data) => data.tag === tag)[0]
-
-
-
   const name = tagToTwitterAccount[tag];
 
-
-
   return (
-    <Container fluid className={classes.default}>
+    <Container fluid bg={`linear-gradient(to bottom, #072f37 0%, #072f37 10%, #f3f3f3 30%, #f3f3f3 100%)`}>
       <Container size="xl">
         <Grid>
           <Grid.Col span={isMd ? 12 : 9}>
@@ -39,9 +34,9 @@ export function CommunityPage({ image, tag }: Props) {
                 <Space h="xl" />
                 <CommunityBar communityLogo={result.image} tag={result.tag} />
                 {!isMd &&
-                  <div style={{ position: 'sticky', top: 0 }}>
+                  <div style={{ position: 'sticky', top: 80 }}>
                     <Space h="xl" />
-                    <Card withBorder p={0} radius={10} sx={{
+                    <Card withBorder p={0} radius={5} sx={{
                       borderColor: '#e2e8f0d2',
                       borderWidth: 1
                     }}>
@@ -55,7 +50,7 @@ export function CommunityPage({ image, tag }: Props) {
               </>
             ) :
               (
-                <div style={!isMd ? { position: 'sticky', top: 0 } : {}}>
+                <div style={!isMd ? { position: 'sticky', top: 80 } : {}}>
                   <Space h="xl" />
                   <CommunityBar communityLogo={result.image} tag={result.tag} />
                 </div>
@@ -64,6 +59,6 @@ export function CommunityPage({ image, tag }: Props) {
           </Grid.Col>
         </Grid>
       </Container>
-    </Container>
+    </Container >
   )
 }

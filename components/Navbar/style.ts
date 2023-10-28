@@ -20,11 +20,9 @@ const useStyles = createStyles((theme) => ({
   },
 
   header: {
-    [theme.fn.smallerThan('sm')]: {
       position: 'sticky', 
       top: '0' ,
       zIndex: 1000,
-    }
   },
 
   navbar: {

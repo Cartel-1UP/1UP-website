@@ -6,25 +6,21 @@ import { useGetFollowing } from '@/actions/hive/get-following'
 import { useGetUserProfile } from '@/actions/hive/get-userprofile'
 import CommentEditor from '@/components/ui/CommentEditor/CommentEditor'
 import { VoteSlider } from '@/components/ui/VoteSlider/VoteSlider'
-import { dateRefactor } from '@/utils/methods/dateRefactor'
+import { formatedDate } from '@/utils/methods/formateDate'
 import { useAuthorizationStore } from '@/zustand/stores/useAuthorizationStore'
 import {
   ActionIcon,
   Avatar,
-  Badge,
-  Box,
-  Button,
+  Badge, Button,
   Card,
   Center,
   Container,
   Grid,
-  Group,
-  SimpleGrid,
+  Group, SimpleGrid,
   Skeleton,
   Space,
   Stack,
-  Text,
-  Title
+  Text
 } from '@mantine/core'
 import { useMediaQuery } from '@mantine/hooks'
 import { showNotification } from '@mantine/notifications'
@@ -44,17 +40,17 @@ type Props = {
 
 export function BlogContent({ permlink, author }: Props) {
   const { classes, theme } = useStyles()
+  const queryCache = useQueryClient()
   const isMd = useMediaQuery(`(max-width: ${theme.breakpoints.md}px)`)
+  const isSm = useMediaQuery(`(max-width: ${theme.breakpoints.sm}px)`)
+  const endElementRef = useRef<HTMLDivElement>(null)
+  const authorized = useAuthorizationStore((state: { authorized: boolean }) => state.authorized)
+
   const [isVote, setIsVote] = useState(false)
   const [isComment, setIsComment] = useState(false)
   const [successfullUpvoted, setSuccessfullUpvoted] = useState(false)
-  const queryCache = useQueryClient()
-
-  const endElementRef = useRef<HTMLDivElement>(null)
-
   const [username, setUsername] = useState<string | null>(localStorage.getItem('username') ? localStorage.getItem('username') : '')
 
-  const authorized = useAuthorizationStore((state: { authorized: boolean }) => state.authorized)
 
   const { data: blogData, isLoading: isLodingBlogData } = useGetBlog({ permlink, author })
   const { data: commentsData, isLoading: isLodingCommentsData, isFetching: isFetchingData } = useGetComments({ permlink, author })
@@ -65,6 +61,7 @@ export function BlogContent({ permlink, author }: Props) {
   const roundedValue = Math.ceil(numericalValue * 100) / 100
   const formattedCurrency = `$${roundedValue.toFixed(2)}`
 
+  const date = new Date(blogData?.data?.result.created)
 
   const handlePostFollow = useMutation<void, any, void, unknown>(
     async () => {
@@ -190,7 +187,7 @@ export function BlogContent({ permlink, author }: Props) {
         </>
       ) : (
         <>
-          <Space h="xl" />
+
           <Grid grow>
             <Grid.Col span={isMd ? 12 : 9}>
               <SimpleGrid cols={1} spacing={0}>
@@ -198,12 +195,15 @@ export function BlogContent({ permlink, author }: Props) {
                   <Container>
                     <Grid grow>
                       <Grid.Col span={10}>
-                        <Title color={'dimmed'} order={4}>
-                          {dateRefactor(blogData?.data?.result.created.slice(0, 10))}
-                        </Title>
+                        <Text size={28} fw={700} sx={{ fontFamily: 'Greycliff CF, sans-serif' }}>
+                          {blogData?.data?.result.title}
+                        </Text>
+                        <Text color="dimmed" size="md" fw={600} mt={5}
+                          sx={{ fontFamily: 'Greycliff CF, sans-serif' }}
+                        >
+                          {`${blogData?.time} min read • ${formatedDate(date)}`}
+                        </Text>
                         <Space h="sm" />
-                        <Title order={2}>{blogData?.data?.result.title}</Title>
-                        <Space h="md" />
                         <Badge c={'#ffffff'} bg={'#02505f'} radius={5} mr={5}>
                           comments {blogData?.data?.result.children}
                         </Badge>
@@ -211,22 +211,11 @@ export function BlogContent({ permlink, author }: Props) {
                           votes {blogData?.data?.result.stats.total_votes}
                         </Badge>
                       </Grid.Col>
-                      <Grid.Col span={2}>
-                        <Box
-                          sx={(theme) => ({
-                            backgroundColor: '#02505f',
-                            color: '#ffffff',
-                            textAlign: 'center',
-                            borderRadius: theme.radius.sm,
-                          })}
-                        >
-                          <Text className={classes.text}>{blogData?.time} MINS READ</Text>
-                        </Box>
-                      </Grid.Col>
+
                     </Grid>
                   </Container>
                 </Card>
-                <Card withBorder p="md" radius={0} className={classes.card}>
+                <Card withBorder p="md" pt={0} radius={0} className={classes.card}>
                   <Container>
                     {blogData?.data?.result?.body ?
                       <Markdown text={blogData?.data?.result?.body} /> : 'Error'}
@@ -345,9 +334,13 @@ export function BlogContent({ permlink, author }: Props) {
                 {!isFetchingData && (
                   <Comment comments={commentsData} />
                 )}
-                <Card withBorder p="xl" className={classes.cardFooter}>
-                  <Container></Container>
-                </Card>
+                {!isSm && (
+                  <Card withBorder p="xl" className={classes.cardFooter}>
+                    <Container></Container>
+                  </Card>
+                )
+                }
+
               </SimpleGrid>
             </Grid.Col>
             <Grid.Col span={isMd ? 12 : 3}>
@@ -411,7 +404,7 @@ export function BlogContent({ permlink, author }: Props) {
                       </Grid.Col>
                     </Grid>
                     <Button
-                      disabled={!authorized}
+                      disabled={!authorized || username === author}
                       fullWidth
                       radius="md"
                       mt="xl"
@@ -426,8 +419,6 @@ export function BlogContent({ permlink, author }: Props) {
               )}
             </Grid.Col>
           </Grid>
-
-          <Space h="xl" />
         </>
       )}
     </>

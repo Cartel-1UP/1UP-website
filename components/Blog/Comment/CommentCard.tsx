@@ -15,6 +15,7 @@ import {
   Indicator,
   Paper,
   Space,
+  Stack,
   Text,
   TypographyStylesProvider
 } from '@mantine/core'
@@ -40,8 +41,6 @@ export default function CommentCard({ comment, nestedComments, isVisible }: Prop
     setChildrenVisible(!areChildrenVisible)
   }
 
-  const date = new Date(comment.created)
-
   const handleVoteClick = () => {
     setIsVote(!isVote)
   }
@@ -51,9 +50,10 @@ export default function CommentCard({ comment, nestedComments, isVisible }: Prop
   }
 
   return (
-    <Paper withBorder={comment.depth == 1} p={15} radius={0} className={classes.comment}>
-      <Container m={10} size="lg">
-        <Group spacing={0}>
+    <Paper withBorder={comment.depth == 1} p={comment.depth == 1 ? 15 : 0} radius={0} className={classes.comment}>
+      <Container p={0} m={comment.depth == 1 ? 10 : 0} size="lg">
+        <Group spacing={5}>
+
           <Indicator
             color={'#114f5c'}
             inline
@@ -69,15 +69,21 @@ export default function CommentCard({ comment, nestedComments, isVisible }: Prop
               src={`https://images.hive.blog/u/${comment.author}/avatar`}
             />
           </Indicator>
-          <Text pl={20} color="dimmed" size="xs" transform="uppercase" weight={500}>
-            {comment.author} - {getTimeAgo(comment.created)}
-          </Text>
+
+          <Stack spacing={0}>
+            <Text pl={20} size="xs" transform="uppercase" weight={500} >
+              {comment.author}
+            </Text>
+            <Text pl={20} color="dimmed" size="xs" weight={500} >
+              {getTimeAgo(comment.created)}
+            </Text>
+          </Stack>
         </Group>
-        <TypographyStylesProvider className={classes.body}>
+        <TypographyStylesProvider className={classes.body} pt={30}>
           <Markdown text={comment.body} />
         </TypographyStylesProvider>
         <Grid.Col span={12} display="flex">
-          <Container ml={24} className={classes.metadataContainer}>
+          <Container ml={0} className={classes.metadataContainer}>
             <ActionIcon variant="transparent" onClick={handleVoteClick} disabled={!authorized}>
               <IconHeart color="grey" size="1rem" />
             </ActionIcon>
@@ -125,17 +131,20 @@ export default function CommentCard({ comment, nestedComments, isVisible }: Prop
           </Grid.Col>
         )}
         {areChildrenVisible && (
-          <div style={{ marginLeft: `${(comment.depth - 1) * 20}px` }}>
+          <>
             {nestedComments &&
               nestedComments.map((childComment: any) => (
-                <CommentCard
-                  key={childComment.post_id}
-                  comment={childComment}
-                  nestedComments={childComment.newChildren}
-                  isVisible={true}
-                />
+                <div style={{ marginLeft: 20 }} key={childComment.post_id}>
+                  <CommentCard
+                    key={childComment.post_id}
+                    comment={childComment}
+                    nestedComments={childComment.newChildren}
+                    isVisible={true}
+                  />
+                </div>
+
               ))}
-          </div>
+          </>
         )}
       </Container>
     </Paper>

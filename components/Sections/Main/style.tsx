@@ -31,7 +31,7 @@ const useStyles = createStyles((theme, _params, getRef) => ({
     height: '100%',
     objectFit: 'cover',
     position: 'absolute',
-    borderRadius: '10px',
+    borderRadius: '5px',
     boxShadow: '0 0 4px 0 #00000081',
     transition: '0.5s linear',
   },

@@ -10,8 +10,7 @@ import {
   AspectRatio,
   Avatar,
   Badge,
-  Card,
-  Container,
+  Card, Container,
   Grid,
   Group,
   Image,
@@ -126,7 +125,7 @@ export function FeedCard({ article }: Props) {
   return (
     <Card key={article.post_id} withBorder p="md" radius={0} className={classes.card}>
       <Grid grow>
-        <Grid.Col span={7}>
+        <Grid.Col span={12}>
           {article.reblogged_by && (
             <>
               <Container>
@@ -145,6 +144,8 @@ export function FeedCard({ article }: Props) {
               </Container>
             </>
           )}
+        </Grid.Col>
+        <Grid.Col span={7}>
           <Container className={classes.headerContainer}>
             <Indicator
               color={'#114f5c'}
@@ -166,19 +167,23 @@ export function FeedCard({ article }: Props) {
                 Pinned
               </Badge>
             )}
-            <Text pl={20} color="dimmed" size="xs" transform="uppercase" weight={600}>
-              {`${article?.author} - ${formatedDate(date)}`}
+            <Text pl={20} size="xs" transform="uppercase" color={'dimmed'} fw={500}>
+              {`${article?.author} • ${formatedDate(date)}`}
             </Text>
           </Container>
           <Link
             href={`community/${article.community}/post/` + article.author + '/' + article.permlink}
             className={classes.link}
           >
-            <Container>
-              <Text weight={600} mt={15}>
+            <Container ml={0}>
+              <Text fw={700} mt={20} sx={{
+                fontFamily: 'Greycliff CF, sans-serif',
+              }}>
                 {article?.title}
               </Text>
-              <Text color="dimmed" size="sm" weight={600} mt={5} className={classes.turncate}>
+              <Text color="dimmed" size="sm" fw={500} mt={5} className={classes.turncate}
+                sx={{ fontFamily: 'Greycliff CF, sans-serif' }}
+              >
                 {bodyOfArticle}
               </Text>
             </Container>
@@ -187,9 +192,9 @@ export function FeedCard({ article }: Props) {
         {!isSm && (
           <Grid.Col span={5}>
             <Container>
-              <AspectRatio ratio={16 / 9}>
+              <AspectRatio ratio={5 / 3}>
                 {isImageExists ? (
-                  <Image radius={10} src={article?.json_metadata.image[0]} withPlaceholder />
+                  <Image radius={0} src={article?.json_metadata.image[0]} withPlaceholder fit='fill' h={200} />
                 ) : (
                   <Image src={null} withPlaceholder radius={10} />
                 )}
