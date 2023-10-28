@@ -22,7 +22,7 @@ export function Resources() {
     <>
       <Space h={'xl'} />
       <Card withBorder p="md" radius={0} className={classes.cardHeader}>
-        <Text size={24} fw={500}>Resources</Text>
+        <Text size={24} fw={700} sx={{ fontFamily: 'Greycliff CF, sans-serif' }}>Resources</Text>
         <Text>You are welcome to access and utilize the graphics available in our comprehensive vault on our website.</Text>
       </Card>
       <Card p={0} m={0} withBorder={false} radius={0} className={classes.card}>
