@@ -25,11 +25,11 @@ const useStyles = createStyles((theme) => ({
   link: {
     textDecoration: 'none',
     color: '#000000',
-    display: 'flex',
-    alignItems: 'center',
+
 
     '&:hover': {
       color: '#16093fbc',
+      cursor: 'pointer',
     },
   },
 

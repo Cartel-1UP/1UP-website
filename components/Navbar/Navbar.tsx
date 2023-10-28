@@ -189,7 +189,7 @@ export function Navbar() {
                     icon={<Avatar radius="xl" src={item.image} />}
                     onClick={() => {
                       closeDrawer()
-                      router.push(item.tag)
+                      router.push(`/community/` + item.tag)
                     }
                     }
                     disabled={item.tag === 'none'}
