@@ -22,7 +22,7 @@ import {
 import { useMediaQuery } from '@mantine/hooks'
 import { showNotification } from '@mantine/notifications'
 import { IconArrowBack, IconBookmark, IconBookmarkOff, IconHeart, IconMessage } from '@tabler/icons'
-import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 
 import useStyles from './style'
@@ -33,6 +33,7 @@ interface Props {
 
 export function FeedCard({ article }: Props) {
   const { classes, theme } = useStyles()
+  const router = useRouter();
   const authorized = useAuthorizationStore((state: { authorized: boolean }) => state.authorized)
 
   const [isVote, setIsVote] = useState(false)
@@ -171,23 +172,23 @@ export function FeedCard({ article }: Props) {
               {`${article?.author} • ${formatedDate(date)}`}
             </Text>
           </Container>
-          <Link
+          {/* <Link
             href={`community/${article.community}/post/` + article.author + '/' + article.permlink}
-            className={classes.link}
-          >
-            <Container ml={0}>
-              <Text fw={700} mt={20} sx={{
-                fontFamily: 'Greycliff CF, sans-serif',
-              }}>
-                {article?.title}
-              </Text>
-              <Text color="dimmed" size="sm" fw={500} mt={5} className={classes.turncate}
-                sx={{ fontFamily: 'Greycliff CF, sans-serif' }}
-              >
-                {bodyOfArticle}
-              </Text>
-            </Container>
-          </Link>
+           
+          > */}
+          <Container className={classes.link} ml={0} onClick={() => router.push(`/community/${article.community}/post/` + article.author + '/' + article.permlink)}>
+            <Text fw={700} mt={20} sx={{
+              fontFamily: 'Greycliff CF, sans-serif',
+            }}>
+              {article?.title}
+            </Text>
+            <Text color="dimmed" size="sm" fw={500} mt={5} className={classes.turncate}
+              sx={{ fontFamily: 'Greycliff CF, sans-serif' }}
+            >
+              {bodyOfArticle}
+            </Text>
+          </Container>
+          {/* </Link> */}
         </Grid.Col>
         {!isSm && (
           <Grid.Col span={5}>
