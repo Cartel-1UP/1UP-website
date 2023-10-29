@@ -36,6 +36,7 @@ export function CommunityPage({ image, tag }: Props) {
       : (
         <Grid grow>
           <Grid.Col span={9}>
+            <Space h="xl" />
             <FeedSection sort={'created'} tag={tag} isCommunity={true} />
           </Grid.Col>
           <Grid.Col span={3}>
@@ -58,7 +59,7 @@ export function CommunityPage({ image, tag }: Props) {
               </>
             ) :
               (
-                <div style={{ position: 'sticky', top: 80 }}>
+                <div style={{ position: 'sticky', top: '80px' }}>
                   <Space h="xl" />
                   <CommunityBar communityLogo={result.image} tag={result.tag} />
                 </div>
