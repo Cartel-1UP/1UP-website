@@ -17,25 +17,23 @@ export default function Home() {
   const isMd = useMediaQuery(`(max-width: 1000px)`)
   return (
     <>
-      <Container fluid bg={'linear-gradient(to top, #275c672d, #072f37 90%, #072f37 100%)'} pb={isMd ? 0 : 25}>
-        {isMd ? (
+      {isMd ? (
+        <div style={{ background: 'linear-gradient(to top, #275c672d, #072f37 90%, #072f37 100%)' }}>
           <MainSection />
-        ) : (
-          <Container size="xl" pt={0}>
-            <MainSection />
+        </div>
+      ) : (
+        <>
+          <Container fluid bg={'linear-gradient(to top, #275c672d, #072f37 90%, #072f37 100%)'} pb={25}>
+            <Container size="xl" pt={0}>
+              <MainSection />
+            </Container>
           </Container>
-        )}
-      </Container>
-      <CommunitySection />
+          <CommunitySection />
+        </>
+      )}
       {isMd ? (
         <>
-          <Container fluid bg={'#f3f3f3'}>
-            <Grid>
-              <Grid.Col span={12}>
-                <FeedSection sort={'created'} tag={'hive-102223'} />
-              </Grid.Col>
-            </Grid>
-          </Container>
+          <FeedSection sort={'created'} tag={'hive-102223'} />
           <Container fluid bg={'linear-gradient(to bottom, #f3f3f3, #072f37)'}>
             <Space h="xl" />
             <CommunityBar communityLogo={oneuplogo2.src} tag={'hive-102223'} />
@@ -44,10 +42,12 @@ export default function Home() {
         </>
       ) : (
         <>
+
           <Container fluid bg={'#f3f3f3'}>
             <Container size="xl">
               <Grid>
                 <Grid.Col span={9}>
+                  <Space h="xl" />
                   <FeedSection sort={'created'} tag={'hive-102223'} />
                 </Grid.Col>
                 <Grid.Col span={3}>

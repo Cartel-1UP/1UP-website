@@ -10,7 +10,7 @@ import {
   ActionIcon,
   Box,
   Button,
-  Card, SimpleGrid, Space
+  Card, SimpleGrid
 } from '@mantine/core'
 import { useScrollIntoView } from '@mantine/hooks'
 import { showNotification } from '@mantine/notifications'
@@ -152,7 +152,6 @@ export function FeedSection({ sort, tag, isCommunity }: Props) {
 
   return (
     <>
-      <Space h="xl" />
       <SimpleGrid cols={1} mt={0} spacing={0} breakpoints={[{ maxWidth: 'sm', cols: 1 }]}>
         <Card withBorder p="md" radius={0} className={classes.cardHeader}>
           <TabButtons

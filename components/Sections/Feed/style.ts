@@ -14,12 +14,18 @@ const useStyles = createStyles((theme) => ({
     borderColor: '#e2e8f0d2',
     borderWidth: 1,
     borderRadius: '5px 5px 0 0',
+    [theme.fn.smallerThan('md')]: {
+      borderRadius: 0,
+    },
   },
 
   cardFooter: {
     borderColor: '#e2e8f0d2',
     borderWidth: 1,
     borderRadius: '0 0 5px 5px',
+    [theme.fn.smallerThan('md')]: {
+      borderRadius: 0,
+    },
   },
 
   link: {
@@ -69,7 +75,7 @@ const useStyles = createStyles((theme) => ({
   },
 
   icon: {
-    paddingTop: 2.1,
+    paddingTop: 1.5,
     margin: '2px',
     color: 'grey',
     fontSize: '0',
