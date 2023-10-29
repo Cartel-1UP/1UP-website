@@ -36,6 +36,7 @@ export function FeedSection({ sort, tag, isCommunity }: Props) {
   const [postType, setPostType] = useState(sort)
   const [data, setData] = useState<any>([])
   const [loading, setLoading] = useState(false);
+  const [loadingMorePosts, setLoadingMorePosts] = useState(false);
   const { scrollIntoView, targetRef } = useScrollIntoView<HTMLDivElement>({ offset: 60 })
 
   const [username, setUsername] = useState('')
@@ -80,6 +81,7 @@ export function FeedSection({ sort, tag, isCommunity }: Props) {
 
   const loadMorePosts = useMutation(
     async () => {
+      setLoadingMorePosts(true)
       let queryData
       switch (postType) {
         case 'feed':
@@ -100,6 +102,7 @@ export function FeedSection({ sort, tag, isCommunity }: Props) {
             start_permlink: startPermlink,
           })
       }
+      setLoadingMorePosts(false)
       return queryData
     },
     {
@@ -183,6 +186,7 @@ export function FeedSection({ sort, tag, isCommunity }: Props) {
               color="dark"
               rightIcon={<IconArrowBarRight size="1rem" />}
               onClick={() => loadMorePosts.mutate()}
+              loading={loadingMorePosts}
             >
               Load more
             </Button>
