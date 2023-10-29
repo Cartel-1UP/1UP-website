@@ -27,9 +27,8 @@ export function CommunityPage({ image, tag }: Props) {
         <>
           <FeedSection sort={'created'} tag={tag} isCommunity={true} />
           {
-            name ? (
-              <CommunityBar communityLogo={result.image} tag={result.tag} />
-            ) : <CommunityBar communityLogo={result.image} tag={result.tag} />
+            name &&
+            <CommunityBar communityLogo={result.image} tag={result.tag} />
           }
         </>
       )
@@ -40,11 +39,12 @@ export function CommunityPage({ image, tag }: Props) {
             <FeedSection sort={'created'} tag={tag} isCommunity={true} />
           </Grid.Col>
           <Grid.Col span={3}>
-            {name ? (
+            {name && (
               <>
+                <Space h="xl" />
                 <CommunityBar communityLogo={result.image} tag={result.tag} />
-                <div style={{ position: 'sticky', top: 80 }}>
-                  <Space h="xl" />
+                <div style={{ position: 'sticky', top: 90 }}>
+                  <Space h="md" />
                   <Card withBorder p={0} radius={5} sx={{
                     borderColor: '#e2e8f0d2',
                     borderWidth: 1
@@ -57,13 +57,7 @@ export function CommunityPage({ image, tag }: Props) {
                 </div>
 
               </>
-            ) :
-              (
-                <div style={{ position: 'sticky', top: '80px' }}>
-                  <Space h="xl" />
-                  <CommunityBar communityLogo={result.image} tag={result.tag} />
-                </div>
-              )
+            )
             }
           </Grid.Col>
         </Grid>

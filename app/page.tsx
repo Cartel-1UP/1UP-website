@@ -49,7 +49,7 @@ export default function Home() {
                 <Grid.Col span={3}>
                   <Space h="xl" />
                   <CommunityBar communityLogo={oneuplogo2.src} tag={'hive-102223'} />
-                  <div style={{ position: 'sticky', top: '0' }}>
+                  <div style={{ position: 'sticky', top: '85px' }}>
                     <Space h={20} />
                     <Card withBorder p={10} radius={5} sx={{
                       borderColor: '#f3f3f3',
@@ -78,7 +78,7 @@ export default function Home() {
           </Container>
           <Container fluid bg={'linear-gradient(to bottom, #f3f3f3, #f3f3f3 10%, #072f37 100%)'}>
             <Container size="xl">
-              <Space h="xl" />
+              <Space h="md" />
               <RecommendedSection />
             </Container>
           </Container>

@@ -27,7 +27,7 @@ export default function Page({ params }: { params: { slug: string } }) {
             </Container>
             <Container fluid bg={'linear-gradient(to bottom, #f3f3f3, #072f37)'}>
               <Container size="xl">
-                <Space h="xl" />
+                <Space h="md" />
                 <RecommendedSection />
               </Container>
             </Container>
