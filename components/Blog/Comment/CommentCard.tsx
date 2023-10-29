@@ -9,9 +9,7 @@ import { useAuthorizationStore } from '@/zustand/stores/useAuthorizationStore'
 import {
   ActionIcon,
   Avatar,
-  Container,
-  Grid,
-  Group,
+  Container, Group,
   Indicator,
   Paper,
   Space,
@@ -50,10 +48,9 @@ export default function CommentCard({ comment, nestedComments, isVisible }: Prop
   }
 
   return (
-    <Paper withBorder={comment.depth == 1} p={comment.depth == 1 ? 15 : 0} radius={0} className={classes.comment}>
+    <Paper withBorder={comment.depth == 1} p={comment.depth == 1 ? 25 : 0} radius={0} className={classes.comment}>
       <Container p={0} m={comment.depth == 1 ? 10 : 0} size="lg">
         <Group spacing={5}>
-
           <Indicator
             color={'#114f5c'}
             inline
@@ -82,59 +79,59 @@ export default function CommentCard({ comment, nestedComments, isVisible }: Prop
         <TypographyStylesProvider className={classes.body} pt={30}>
           <Markdown text={comment.body} />
         </TypographyStylesProvider>
-        <Grid.Col span={12} display="flex">
-          <Container ml={0} className={classes.metadataContainer}>
-            <ActionIcon variant="transparent" onClick={handleVoteClick} disabled={!authorized}>
-              <IconHeart color="grey" size="1rem" />
+
+        <Container ml={0} className={classes.metadataContainer}>
+          <ActionIcon variant="transparent" onClick={handleVoteClick} disabled={!authorized}>
+            <IconHeart color="grey" size="1rem" />
+          </ActionIcon>
+          <Text color="dimmed" className={classes.price}>
+            {comment.active_votes?.length}
+          </Text>
+          <Space w="sm" />
+          <ActionIcon variant="transparent" onClick={handleCommentClick} disabled={!authorized}>
+            <IconMessage color="grey" size="1rem" />
+          </ActionIcon>
+          <Text color="dimmed" className={classes.price}>
+            {comment.children}
+          </Text>
+          <Space w="sm" />
+          {nestedComments?.length > 0 && (
+            <ActionIcon variant="transparent" onClick={handleToggleChildren}>
+              {areChildrenVisible ? (
+                <IconChevronUp color="grey" size="1rem" />
+              ) : (
+                <IconChevronDown color="grey" size="1rem" />
+              )}
             </ActionIcon>
-            <Text color="dimmed" className={classes.price}>
-              {comment.active_votes?.length}
-            </Text>
-            <Space w="sm" />
-            <ActionIcon variant="transparent" onClick={handleCommentClick} disabled={!authorized}>
-              <IconMessage color="grey" size="1rem" />
-            </ActionIcon>
-            <Text color="dimmed" className={classes.price}>
-              {comment.children}
-            </Text>
-            <Space w="sm" />
-            {nestedComments?.length > 0 && (
-              <ActionIcon variant="transparent" onClick={handleToggleChildren}>
-                {areChildrenVisible ? (
-                  <IconChevronUp color="grey" size="1rem" />
-                ) : (
-                  <IconChevronDown color="grey" size="1rem" />
-                )}
-              </ActionIcon>
-            )}
-          </Container>
-        </Grid.Col>
+          )}
+        </Container>
+
         {isVote && (
-          <Grid.Col span={12}>
-            <VoteSlider
-              permlink={comment.permlink}
-              author={comment.author}
-              setIsVote={setIsVote}
-              queryKey={'comments-data'}
-            />
-          </Grid.Col>
+
+          <VoteSlider
+            permlink={comment.permlink}
+            author={comment.author}
+            setIsVote={setIsVote}
+            queryKey={'comments-data'}
+          />
+
         )}
         {isComment && (
-          <Grid.Col span={12}>
-            <CommentEditor
-              setIsComment={setIsComment}
-              permlink={comment.permlink}
-              parentAuthor={comment.author}
-              parentPermlink={comment?.parent_permlink}
-              queryKey={'comments-data'}
-            />
-          </Grid.Col>
+
+          <CommentEditor
+            setIsComment={setIsComment}
+            permlink={comment.permlink}
+            parentAuthor={comment.author}
+            parentPermlink={comment?.parent_permlink}
+            queryKey={'comments-data'}
+          />
+
         )}
         {areChildrenVisible && (
           <>
             {nestedComments &&
               nestedComments.map((childComment: any) => (
-                <div style={{ marginLeft: 20 }} key={childComment.post_id}>
+                <div style={{ marginLeft: 20, marginTop: 20 }} key={childComment.post_id}>
                   <CommentCard
                     key={childComment.post_id}
                     comment={childComment}

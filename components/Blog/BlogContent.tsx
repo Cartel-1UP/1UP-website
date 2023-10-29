@@ -9,18 +9,7 @@ import { VoteSlider } from '@/components/ui/VoteSlider/VoteSlider'
 import { formatedDate } from '@/utils/methods/formateDate'
 import { useAuthorizationStore } from '@/zustand/stores/useAuthorizationStore'
 import {
-  ActionIcon,
-  Avatar,
-  Badge, Button,
-  Card,
-  Center,
-  Container,
-  Grid,
-  Group, SimpleGrid,
-  Skeleton,
-  Space,
-  Stack,
-  Text
+  ActionIcon, Avatar, Badge, Button, Card, Container, Grid, Group, SimpleGrid, Space, Stack, Text
 } from '@mantine/core'
 import { useMediaQuery } from '@mantine/hooks'
 import { showNotification } from '@mantine/notifications'
@@ -30,6 +19,7 @@ import { useRef, useState } from 'react'
 import { useMutation, useQueryClient } from 'react-query'
 import { Markdown } from '../ui/Markdown/Markdown'
 import { NotificationText } from '../ui/ProgressBar/ProgressBar'
+import { BlogContentSkeleton } from './BlogContentSkeleton'
 import Comment from './Comment/Comment'
 import useStyles from './style'
 
@@ -42,7 +32,6 @@ export function BlogContent({ permlink, author }: Props) {
   const { classes, theme } = useStyles()
   const queryCache = useQueryClient()
   const isMd = useMediaQuery(`(max-width: ${theme.breakpoints.md}px)`)
-  const isSm = useMediaQuery(`(max-width: ${theme.breakpoints.sm}px)`)
   const endElementRef = useRef<HTMLDivElement>(null)
   const authorized = useAuthorizationStore((state: { authorized: boolean }) => state.authorized)
 
@@ -137,102 +126,203 @@ export function BlogContent({ permlink, author }: Props) {
     <>
       {isLodingBlogData || isLodingCommentsData || isLodingUserProfileData ? (
         <>
-          <Container fluid className={classes.default}>
-            <Grid grow>
-              <Grid.Col span={isMd ? 12 : 9}>
-                <SimpleGrid
-                  cols={1}
-                  pt={25}
-                  spacing={0}
-                  breakpoints={[{ maxWidth: 'sm', cols: 1 }]}
-                >
-                  <Card withBorder p="md" radius={0} className={classes.cardHeader}>
-                    <Grid grow>
-                      <Grid.Col span={10}>
-                        <Skeleton height="5vh" />
-                      </Grid.Col>
-                      <Grid.Col span={2}>
-                        <Skeleton height="5vh" />
-                      </Grid.Col>
-                    </Grid>
-                  </Card>
-                  <Card withBorder p="md" radius={0} className={classes.card}>
-                    <Skeleton height="65vh" />
-                  </Card>
-                  <Card withBorder p="md" mb={25} radius={0} className={classes.cardFooter}>
-                    <Skeleton height={'5vh'} />
-                  </Card>
-                </SimpleGrid>
-              </Grid.Col>
-              {!isMd && (
-                <Grid.Col span={3}>
-                  <SimpleGrid
-                    cols={1}
-                    pt={25}
-                    spacing={0}
-                    breakpoints={[{ maxWidth: 'sm', cols: 1 }]}
-                  >
-                    <Card withBorder p="xl" radius="md" className={classes.card}>
-                      <Center>
-                        <Skeleton height={'6vh'} circle mb="xl" />
-                      </Center>
-                      <Skeleton height={'5vh'} mt={10} />
-                      <Skeleton height={'5vh'} mt={10} />
-                    </Card>
-                  </SimpleGrid>
-                </Grid.Col>
-              )}
-            </Grid>
-          </Container>
+          <BlogContentSkeleton />
         </>
       ) : (
         <>
+          {isMd ?
+            (
+              <>
+                <SimpleGrid cols={1} mt={0} spacing={0} breakpoints={[{ maxWidth: 'sm', cols: 1 }]}>
+                  <Card p="md" radius={0} className={classes.cardHeader}>
+                    <Container>
+                      <Grid grow>
+                        <Grid.Col span={10}>
+                          <Text size={28} fw={700} sx={{ fontFamily: 'Greycliff CF, sans-serif' }}>
+                            {blogData?.data?.result.title}
+                          </Text>
+                          <Text color="dimmed" size="md" fw={600} mt={5}
+                            sx={{ fontFamily: 'Greycliff CF, sans-serif' }}
+                          >
+                            {`${blogData?.time} min read • ${formatedDate(date)}`}
+                          </Text>
+                          <Space h="sm" />
+                          <Badge c={'#ffffff'} bg={'#02505f'} radius={5} mr={5}>
+                            comments {blogData?.data?.result.children}
+                          </Badge>
+                          <Badge c={'#ffffff'} bg={'#02505f'} radius={5}>
+                            votes {blogData?.data?.result.stats.total_votes}
+                          </Badge>
+                        </Grid.Col>
 
-          <Grid grow>
-            <Grid.Col span={isMd ? 12 : 9}>
-              <SimpleGrid cols={1} spacing={0}>
-                <Card p="md" radius={0} className={classes.cardHeader}>
-                  <Container>
-                    <Grid grow>
-                      <Grid.Col span={10}>
-                        <Text size={28} fw={700} sx={{ fontFamily: 'Greycliff CF, sans-serif' }}>
-                          {blogData?.data?.result.title}
-                        </Text>
-                        <Text color="dimmed" size="md" fw={600} mt={5}
-                          sx={{ fontFamily: 'Greycliff CF, sans-serif' }}
-                        >
-                          {`${blogData?.time} min read • ${formatedDate(date)}`}
-                        </Text>
-                        <Space h="sm" />
-                        <Badge c={'#ffffff'} bg={'#02505f'} radius={5} mr={5}>
-                          comments {blogData?.data?.result.children}
-                        </Badge>
-                        <Badge c={'#ffffff'} bg={'#02505f'} radius={5}>
-                          votes {blogData?.data?.result.stats.total_votes}
-                        </Badge>
-                      </Grid.Col>
+                      </Grid>
+                    </Container>
+                  </Card>
+                  <Card withBorder p="md" pt={0} radius={0} className={classes.card}>
+                    <Container>
+                      {blogData?.data?.result?.body ?
+                        <Markdown text={blogData?.data?.result?.body} /> : 'Error'}
+                    </Container>
+                  </Card>
+                  <div style={{ position: 'sticky', bottom: '0px' }}>
+                    <Card withBorder p="md" radius={0} className={classes.card}>
+                      <Container className={classes.metadataContainer}>
+                        <Group spacing={1}>
+                          <span className={classes.icon}>
+                            <IconHeart
+                              size={'1rem'}
+                              onClick={() =>
+                                authorized
+                                  ? setIsVote(!isVote)
+                                  :
 
-                    </Grid>
-                  </Container>
-                </Card>
-                <Card withBorder p="md" pt={0} radius={0} className={classes.card}>
-                  <Container>
-                    {blogData?.data?.result?.body ?
-                      <Markdown text={blogData?.data?.result?.body} /> : 'Error'}
-                  </Container>
-                </Card>
-                <div style={{ position: 'sticky', bottom: '0px' }}>
-                  <Card withBorder p="md" radius={0} className={classes.card}>
-                    <Container className={classes.metadataContainer}>
-                      <Group spacing={1}>
-                        <span className={classes.icon}>
-                          <IconHeart
-                            size={'1rem'}
-                            onClick={() =>
-                              authorized
+                                  showNotification({
+                                    autoClose: 3000,
+                                    title: "Warning",
+                                    message: <NotificationText message='You have to login to upvote post!' time={3000} />,
+                                    styles: (theme) => ({
+                                      root: {
+                                        backgroundColor: '#072f37',
+                                        borderColor: '#072f37',
+                                        '&::before': { backgroundColor: theme.white },
+                                      },
+                                      title: { color: theme.white },
+                                      description: { color: theme.white },
+                                      closeButton: {
+                                        color: theme.white,
+                                        '&:hover': { backgroundColor: '#04191d' },
+                                      },
+                                    }),
+                                    loading: false,
+                                  })
+                              }
+                            />
+                          </span>
+                          <Text color="dimmed">{blogData?.data?.result?.active_votes.length}</Text>
+                          <Space w="sm" />
+                          <span className={classes.icon}>
+                            <IconMessage
+                              size={'1rem'}
+                              onClick={() =>
+                                authorized
+                                  ? setIsComment(!isComment)
+                                  : showNotification({
+                                    autoClose: 3000,
+                                    title: "Warning",
+                                    message: <NotificationText message='You have to login to comment post!' time={3000} />,
+                                    styles: (theme) => ({
+                                      root: {
+                                        backgroundColor: '#072f37',
+                                        borderColor: '#072f37',
+                                        '&::before': { backgroundColor: theme.white },
+                                      },
+                                      title: { color: theme.white },
+                                      description: { color: theme.white },
+                                      closeButton: {
+                                        color: theme.white,
+                                        '&:hover': { backgroundColor: '#04191d' },
+                                      },
+                                    }),
+                                    loading: false,
+                                  })
+                              }
+                            />
+                          </span>
+                          <Text color="dimmed">{blogData?.data?.result?.children}</Text>
+                          <Space w="sm" />
+                          <Text color="dimmed" align={'right'}>
+                            {formattedCurrency}
+                          </Text>
+                        </Group>
+                        <Group spacing={1}>
+                          <ActionIcon
+                            color="dark"
+                            onClick={() => {
+                              endElementRef.current &&
+                                endElementRef.current.scrollIntoView({
+                                  behavior: 'smooth',
+                                  block: 'end',
+                                  inline: 'nearest',
+                                })
+                            }}
+                          >
+                            <IconArrowDown size="1.125rem" />
+                          </ActionIcon>
+                        </Group>
+                      </Container>
+                      {isVote && (
+
+                        <VoteSlider
+                          permlink={blogData?.data?.result.permlink}
+                          author={blogData?.data?.result.author}
+                          setIsVote={setIsVote}
+                          setSuccessfullUpvoted={setSuccessfullUpvoted}
+                          queryKey={'post-data'}
+                        />
+
+                      )}
+                      {isComment && (
+
+                        <CommentEditor
+                          setIsComment={setIsComment}
+                          permlink={blogData?.data?.result.permlink}
+                          parentAuthor={blogData?.data?.result.author}
+                          parentPermlink={''}
+                        />
+
+                      )}
+                    </Card>
+                  </div>
+                  <div ref={endElementRef}></div>
+                  {!isFetchingData && (
+                    <Comment comments={commentsData} />
+
+                  )}
+                </SimpleGrid>
+              </>
+            ) : (
+              <><Grid grow>
+                <Grid.Col span={9}>
+                  <Space h="xl" />
+                  <Card p="md" radius={0} className={classes.cardHeader}>
+                    <Container>
+                      <Grid grow>
+                        <Grid.Col span={10}>
+                          <Text size={28} fw={700} sx={{ fontFamily: 'Greycliff CF, sans-serif' }}>
+                            {blogData?.data?.result.title}
+                          </Text>
+                          <Text color="dimmed" size="md" fw={600} mt={5}
+                            sx={{ fontFamily: 'Greycliff CF, sans-serif' }}
+                          >
+                            {`${blogData?.time} min read • ${formatedDate(date)}`}
+                          </Text>
+                          <Space h="sm" />
+                          <Badge c={'#ffffff'} bg={'#02505f'} radius={5} mr={5}>
+                            comments {blogData?.data?.result.children}
+                          </Badge>
+                          <Badge c={'#ffffff'} bg={'#02505f'} radius={5}>
+                            votes {blogData?.data?.result.stats.total_votes}
+                          </Badge>
+                        </Grid.Col>
+                      </Grid>
+                    </Container>
+                  </Card>
+                  <Card withBorder p="md" pt={0} radius={0} className={classes.card}>
+                    <Container>
+                      {blogData?.data?.result?.body ?
+                        <Markdown text={blogData?.data?.result?.body} /> : 'Error'}
+                    </Container>
+                  </Card>
+                  <div style={{ position: 'sticky', bottom: '0px' }}>
+                    <Card withBorder p="md" radius={0} className={classes.card}>
+                      <Container className={classes.metadataContainer}>
+                        <Group spacing={1}>
+                          <span className={classes.icon}>
+                            <IconHeart
+                              size={'1rem'}
+                              onClick={() => authorized
                                 ? setIsVote(!isVote)
                                 :
-
                                 showNotification({
                                   autoClose: 3000,
                                   title: "Warning",
@@ -251,17 +341,14 @@ export function BlogContent({ permlink, author }: Props) {
                                     },
                                   }),
                                   loading: false,
-                                })
-                            }
-                          />
-                        </span>
-                        <Text color="dimmed">{blogData?.data?.result?.active_votes.length}</Text>
-                        <Space w="sm" />
-                        <span className={classes.icon}>
-                          <IconMessage
-                            size={'1rem'}
-                            onClick={() =>
-                              authorized
+                                })} />
+                          </span>
+                          <Text color="dimmed">{blogData?.data?.result?.active_votes.length}</Text>
+                          <Space w="sm" />
+                          <span className={classes.icon}>
+                            <IconMessage
+                              size={'1rem'}
+                              onClick={() => authorized
                                 ? setIsComment(!isComment)
                                 : showNotification({
                                   autoClose: 3000,
@@ -281,144 +368,138 @@ export function BlogContent({ permlink, author }: Props) {
                                     },
                                   }),
                                   loading: false,
+                                })} />
+                          </span>
+                          <Text color="dimmed">{blogData?.data?.result?.children}</Text>
+                          <Space w="sm" />
+                          <Text color="dimmed" align={'right'}>
+                            {formattedCurrency}
+                          </Text>
+                        </Group>
+                        <Group spacing={1}>
+                          <ActionIcon
+                            color="dark"
+                            onClick={() => {
+                              endElementRef.current &&
+                                endElementRef.current.scrollIntoView({
+                                  behavior: 'smooth',
+                                  block: 'end',
+                                  inline: 'nearest',
                                 })
-                            }
-                          />
-                        </span>
-                        <Text color="dimmed">{blogData?.data?.result?.children}</Text>
-                        <Space w="sm" />
-                        <Text color="dimmed" align={'right'}>
-                          {formattedCurrency}
-                        </Text>
-                      </Group>
-                      <Group spacing={1}>
-                        <ActionIcon
-                          color="dark"
-                          onClick={() => {
-                            endElementRef.current &&
-                              endElementRef.current.scrollIntoView({
-                                behavior: 'smooth',
-                                block: 'end',
-                                inline: 'nearest',
-                              })
-                          }}
-                        >
-                          <IconArrowDown size="1.125rem" />
-                        </ActionIcon>
-                      </Group>
-                    </Container>
-                    {isVote && (
-                      <Grid.Col span={12}>
-                        <VoteSlider
-                          permlink={blogData?.data?.result.permlink}
-                          author={blogData?.data?.result.author}
-                          setIsVote={setIsVote}
-                          setSuccessfullUpvoted={setSuccessfullUpvoted}
-                          queryKey={'post-data'}
-                        />
-                      </Grid.Col>
-                    )}
-                    {isComment && (
-                      <Grid.Col span={12}>
-                        <CommentEditor
-                          setIsComment={setIsComment}
-                          permlink={blogData?.data?.result.permlink}
-                          parentAuthor={blogData?.data?.result.author}
-                          parentPermlink={''}
-                        />
-                      </Grid.Col>
-                    )}
-                  </Card>
-                </div>
-                <div ref={endElementRef}></div>
-                {!isFetchingData && (
-                  <Comment comments={commentsData} />
-                )}
-                {!isSm && (
-                  <Card withBorder p="xl" className={classes.cardFooter}>
-                    <Container></Container>
-                  </Card>
-                )
-                }
+                            }}
+                          >
+                            <IconArrowDown size="1.125rem" />
+                          </ActionIcon>
+                        </Group>
+                      </Container>
+                      {isVote && (
+                        <Grid.Col span={12}>
+                          <VoteSlider
+                            permlink={blogData?.data?.result.permlink}
+                            author={blogData?.data?.result.author}
+                            setIsVote={setIsVote}
+                            setSuccessfullUpvoted={setSuccessfullUpvoted}
+                            queryKey={'post-data'} />
+                        </Grid.Col>
+                      )}
+                      {isComment && (
+                        <Grid.Col span={12}>
+                          <CommentEditor
+                            setIsComment={setIsComment}
+                            permlink={blogData?.data?.result.permlink}
+                            parentAuthor={blogData?.data?.result.author}
+                            parentPermlink={''} />
+                        </Grid.Col>
+                      )}
+                    </Card>
+                  </div>
+                  <div ref={endElementRef}></div>
+                  {!isFetchingData && (
+                    <Comment comments={commentsData} />
+                  )}
+                  {!isMd && (
+                    <Card withBorder p="xl" className={classes.cardFooter}>
+                      <Container></Container>
+                    </Card>
+                  )}
 
-              </SimpleGrid>
-            </Grid.Col>
-            <Grid.Col span={isMd ? 12 : 3}>
-              {!isMd && (
-                <div style={{ position: 'sticky', top: '10px' }}>
-                  <Card p="xl" radius="md">
-                    {userProfileData?.result?.metadata.profile.cover_image ? (
-                      <Card.Section
-                        sx={{
-                          backgroundImage: `url(${userProfileData?.result?.metadata.profile.cover_image})`,
-                          height: 140,
-                        }}
-                      />
-                    ) : (
-                      <Card.Section sx={{ backgroundColor: '#25262B', height: 140 }} />
-                    )}
-                    <Avatar
-                      src={userProfileData?.result?.metadata.profile.profile_image}
-                      size={80}
-                      radius={80}
-                      mx="auto"
-                      mt={-30}
-                      className={classes.avatar}
-                    />
-                    <Text align="center" size="lg" weight={500} mt="sm">
-                      {author}
-                    </Text>
-                    <Text align="center" size="sm" color="dimmed">
-                      {userProfileData?.result?.metadata.profile.about}
-                    </Text>
-                    <Grid grow pt={25}>
-                      <Grid.Col span={4}>
-                        <Stack spacing={4}>
-                          <Text align="center" size="sm" color="dimmed">
-                            Followers
-                          </Text>
-                          <Text align="center" size="lg" weight={500} pt={0}>
-                            {userProfileData?.result?.stats.followers}
-                          </Text>
-                        </Stack>
-                      </Grid.Col>
-                      <Grid.Col span={4}>
-                        <Stack spacing={4}>
-                          <Text align="center" size="sm" color="dimmed">
-                            Follows
-                          </Text>
-                          <Text align="center" size="lg" weight={500}>
-                            {userProfileData?.result?.stats.following}
-                          </Text>
-                        </Stack>
-                      </Grid.Col>
-                      <Grid.Col span={4}>
-                        <Stack spacing={4}>
-                          <Text align="center" size="sm" color="dimmed">
-                            Posts
-                          </Text>
-                          <Text align="center" size="lg" weight={500}>
-                            {userProfileData?.result?.post_count}
-                          </Text>
-                        </Stack>
-                      </Grid.Col>
-                    </Grid>
-                    <Button
-                      disabled={!authorized || username === author}
-                      fullWidth
-                      radius="md"
-                      mt="xl"
-                      size="md"
-                      color={'dark'}
-                      onClick={() => handlePostFollow.mutate()}
-                    >
-                      {following?.includes(author) ? 'Unfollow' : 'Follow'}
-                    </Button>
-                  </Card>
-                </div>
-              )}
-            </Grid.Col>
-          </Grid>
+                </Grid.Col>
+                <Grid.Col span={3}>
+                  <div style={{ position: 'sticky', top: '80px' }}>
+                    <Space h="xl" />
+                    <Card p="xl" radius={5}>
+                      {userProfileData?.result?.metadata.profile.cover_image ? (
+                        <Card.Section
+                          sx={{
+                            backgroundImage: `url(${userProfileData?.result?.metadata.profile.cover_image})`,
+                            height: 140,
+                          }} />
+                      ) : (
+                        <Card.Section sx={{ backgroundColor: '#25262B', height: 140 }} />
+                      )}
+                      <Avatar
+                        src={userProfileData?.result?.metadata.profile.profile_image}
+                        size={80}
+                        radius={80}
+                        mx="auto"
+                        mt={-30}
+                        className={classes.avatar} />
+                      <Text align="center" size="lg" weight={500} mt="sm">
+                        {author}
+                      </Text>
+                      <Text align="center" size="sm" color="dimmed">
+                        {userProfileData?.result?.metadata.profile.about}
+                      </Text>
+                      <Grid grow pt={25}>
+                        <Grid.Col span={4}>
+                          <Stack spacing={4}>
+                            <Text align="center" size="sm" color="dimmed">
+                              Followers
+                            </Text>
+                            <Text align="center" size="lg" weight={500} pt={0}>
+                              {userProfileData?.result?.stats.followers}
+                            </Text>
+                          </Stack>
+                        </Grid.Col>
+                        <Grid.Col span={4}>
+                          <Stack spacing={4}>
+                            <Text align="center" size="sm" color="dimmed">
+                              Follows
+                            </Text>
+                            <Text align="center" size="lg" weight={500}>
+                              {userProfileData?.result?.stats.following}
+                            </Text>
+                          </Stack>
+                        </Grid.Col>
+                        <Grid.Col span={4}>
+                          <Stack spacing={4}>
+                            <Text align="center" size="sm" color="dimmed">
+                              Posts
+                            </Text>
+                            <Text align="center" size="lg" weight={500}>
+                              {userProfileData?.result?.post_count}
+                            </Text>
+                          </Stack>
+                        </Grid.Col>
+                      </Grid>
+                      <Button
+                        disabled={!authorized || username === author}
+                        fullWidth
+                        radius="md"
+                        mt="xl"
+                        size="md"
+                        color={'dark'}
+                        onClick={() => handlePostFollow.mutate()}
+                      >
+                        {following?.includes(author) ? 'Unfollow' : 'Follow'}
+                      </Button>
+                    </Card>
+                  </div>
+
+                </Grid.Col>
+              </Grid></>
+            )
+          }
         </>
       )}
     </>
