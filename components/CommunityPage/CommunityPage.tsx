@@ -1,12 +1,12 @@
 'use client'
 
-import { CommunityBar } from '@/components/CommunityBar/CommunityBar'
 import { FeedSection } from '@/components/Sections/Feed/FeedSection'
 import { comumnityData } from '@/data/communityData'
 import { tagToTwitterAccount } from '@/data/twitterData'
-import { Card, Container, Grid, Space } from '@mantine/core'
+import { Card, Grid, Space } from '@mantine/core'
 import { useMediaQuery } from '@mantine/hooks'
 import { Timeline } from 'react-twitter-widgets'
+import { CommunityBar } from '../CommunityBar/CommunityBar'
 
 import useStyles from './style'
 
@@ -22,35 +22,43 @@ export function CommunityPage({ image, tag }: Props) {
   const name = tagToTwitterAccount[tag];
 
   return (
-    <Container fluid bg={`linear-gradient(to bottom, #072f37 0%, #072f37 10%, #f3f3f3 30%, #f3f3f3 100%)`}>
-      <Container size="xl">
+    isMd ?
+      (
+        <>
+          <FeedSection sort={'created'} tag={tag} isCommunity={true} />
+          {
+            name ? (
+              <CommunityBar communityLogo={result.image} tag={result.tag} />
+            ) : <CommunityBar communityLogo={result.image} tag={result.tag} />
+          }
+        </>
+      )
+      : (
         <Grid>
-          <Grid.Col span={isMd ? 12 : 9}>
+          <Grid.Col span={9}>
             <FeedSection sort={'created'} tag={tag} isCommunity={true} />
           </Grid.Col>
-          <Grid.Col span={isMd ? 12 : 3}>
+          <Grid.Col span={3}>
             {name ? (
               <>
-                <Space h="xl" />
                 <CommunityBar communityLogo={result.image} tag={result.tag} />
-                {!isMd &&
-                  <div style={{ position: 'sticky', top: 80 }}>
-                    <Space h="xl" />
-                    <Card withBorder p={0} radius={5} sx={{
-                      borderColor: '#e2e8f0d2',
-                      borderWidth: 1
-                    }}>
-                      <Timeline
-                        dataSource={{ sourceType: "profile", screenName: name }}
-                        options={{ height: "600", chrome: "noborders, transparent" }}
-                      />
-                    </Card>
-                  </div>
-                }
+                <div style={{ position: 'sticky', top: 80 }}>
+                  <Space h="xl" />
+                  <Card withBorder p={0} radius={5} sx={{
+                    borderColor: '#e2e8f0d2',
+                    borderWidth: 1
+                  }}>
+                    <Timeline
+                      dataSource={{ sourceType: "profile", screenName: name }}
+                      options={{ height: "600", chrome: "noborders, transparent" }}
+                    />
+                  </Card>
+                </div>
+
               </>
             ) :
               (
-                <div style={!isMd ? { position: 'sticky', top: 80 } : {}}>
+                <div style={{ position: 'sticky', top: 80 }}>
                   <Space h="xl" />
                   <CommunityBar communityLogo={result.image} tag={result.tag} />
                 </div>
@@ -58,7 +66,6 @@ export function CommunityPage({ image, tag }: Props) {
             }
           </Grid.Col>
         </Grid>
-      </Container>
-    </Container >
+      )
   )
 }

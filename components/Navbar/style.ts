@@ -28,7 +28,7 @@ const useStyles = createStyles((theme) => ({
   navbar: {
     padding: 0,
     paddingBottom: 0,
-    [theme.fn.smallerThan('sm')]: {
+    [theme.fn.smallerThan('md')]: {
       padding: 5,
       paddingBottom: 15,
       paddingTop: 10,
