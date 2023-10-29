@@ -1,14 +1,14 @@
 import { createStyles } from '@mantine/styles'
 
 const useStyles = createStyles((theme) => ({
-  default: {
-    minHeight: '85vh',
-  },
 
   cardHeader: {
     borderColor: '#e2e8f0d2',
     borderWidth: 1,
     borderRadius: '5px 5px 0 0',
+    [theme.fn.smallerThan('md')]: {
+      borderRadius: 0,
+    },
   },
 
   card: {
@@ -20,6 +20,9 @@ const useStyles = createStyles((theme) => ({
     borderColor: '#e2e8f0d2',
     borderWidth: 1,
     borderRadius: '0 0 5px 5px',
+    [theme.fn.smallerThan('md')]: {
+      borderRadius: 0,
+    },
   },
 
   text: {

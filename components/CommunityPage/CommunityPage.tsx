@@ -34,7 +34,7 @@ export function CommunityPage({ image, tag }: Props) {
         </>
       )
       : (
-        <Grid>
+        <Grid grow>
           <Grid.Col span={9}>
             <FeedSection sort={'created'} tag={tag} isCommunity={true} />
           </Grid.Col>

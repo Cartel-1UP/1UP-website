@@ -29,12 +29,9 @@ export default function Comment({ comments }: Props) {
 
   useMemo(() => {
     const newIdMapping: Record<string, number> = updatedCommentArray?.reduce((acc, el, i = 0) => {
-      console.log(el)
       acc[el.permlink] = i
       return acc
     }, {})
-
-    console.log(newIdMapping)
     setIdMapping(newIdMapping)
   }, [])
 
@@ -52,5 +49,5 @@ export default function Comment({ comments }: Props) {
     })
   }, [idMapping, root])
 
-  return <div id="comments-container">{root && <CommentThread comments={root} />}</div>
+  return <div>{root && <CommentThread comments={root} />}</div>
 }

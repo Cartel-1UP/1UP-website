@@ -9,6 +9,7 @@ const useStyles = createStyles((theme) => ({
 
   body: {
     paddingLeft: 30,
+    paddingRight: 15,
     paddingTop: theme.spacing.md,
     fontSize: theme.fontSizes.sm,
   },
