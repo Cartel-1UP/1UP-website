@@ -34,15 +34,11 @@ export default function Home() {
       {isMd ? (
         <>
           <FeedSection sort={'created'} tag={'hive-102223'} />
-          <Container fluid bg={'linear-gradient(to bottom, #f3f3f3, #072f37)'}>
-            <Space h="xl" />
-            <CommunityBar communityLogo={oneuplogo2.src} tag={'hive-102223'} />
-            <RecommendedSection />
-          </Container>
+          <CommunityBar communityLogo={oneuplogo2.src} tag={'hive-102223'} />
+          <RecommendedSection />
         </>
       ) : (
         <>
-
           <Container fluid bg={'#f3f3f3'}>
             <Container size="xl">
               <Grid>
@@ -82,6 +78,7 @@ export default function Home() {
           </Container>
           <Container fluid bg={'linear-gradient(to bottom, #f3f3f3, #f3f3f3 10%, #072f37 100%)'}>
             <Container size="xl">
+              <Space h="xl" />
               <RecommendedSection />
             </Container>
           </Container>
