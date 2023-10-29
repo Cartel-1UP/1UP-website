@@ -1,10 +1,11 @@
 'use client'
 
+import { comumnityData } from '@/data/communityData'
 import { logoutUser } from '@/zustand/stores/useAuthorizationStore'
-import { Menu } from '@mantine/core'
-import { IconBookmark, IconLogout, IconUser } from '@tabler/icons'
+import { Avatar, Menu, NavLink, ScrollArea } from '@mantine/core'
+import { IconBookmark, IconChevronDown, IconChevronUp, IconLogout, IconUser, IconUsers } from '@tabler/icons'
 import { useRouter } from 'next/navigation'
-import { Dispatch, SetStateAction } from 'react'
+import { Dispatch, SetStateAction, useState } from 'react'
 import { UserButton } from '../UserButton/UserButton'
 import useStyles from './style'
 
@@ -18,6 +19,7 @@ type Props = {
 export function UserMenu({ userImage, username, userReputation, setUserMenuOpened }: Props) {
     const { classes, theme } = useStyles()
     const router = useRouter();
+    const [showCommunityMenu, setShowCommunityMenu] = useState(false);
 
     return (
         <>
@@ -36,7 +38,7 @@ export function UserMenu({ userImage, username, userReputation, setUserMenuOpene
                         reputation={userReputation}
                     />
                 </Menu.Target>
-                <Menu.Dropdown bg={'#072f37'} sx={{ borderColor: '#031418' }}>
+                <Menu.Dropdown bg={'#072f37'} sx={{ borderColor: '#031418' }} >
                     <Menu.Item
                         className={classes.subLink}
                         onClick={() => window.open(`https://www.peakd.com/@${username}`, '_blank')}
@@ -51,6 +53,41 @@ export function UserMenu({ userImage, username, userReputation, setUserMenuOpene
                     >
                         Bookmarks
                     </Menu.Item>
+                    <Menu.Divider />
+                    <NavLink
+                        label="Communities"
+                        className={classes.subLink}
+                        onClick={(e) => {
+                            setShowCommunityMenu(!showCommunityMenu);
+                        }}
+                        icon={<IconUsers color={'white'} size={20} stroke={1.5} />}
+                        rightSection={!showCommunityMenu ? <IconChevronDown size={20} stroke={1.5} /> : <IconChevronUp size={20} stroke={1.5} />}
+                    />
+                    {showCommunityMenu &&
+                        <ScrollArea
+                            h={250}
+                            styles={(theme) => ({
+                                scrollbar: {
+                                    '&:hover': {
+                                        background: '#06272e',
+                                    },
+                                }
+                            })}>
+                            {comumnityData.map((item) => (
+                                <NavLink
+                                    className={classes.subLink}
+                                    label={item.name}
+                                    key={item.name}
+                                    icon={<Avatar radius="xl" src={item.image} />}
+                                    onClick={() => {
+                                        router.push(`/community/` + item.tag)
+                                    }
+                                    }
+                                    disabled={item.tag === 'none'}
+                                />
+                            ))}
+                        </ScrollArea>}
+
                     <Menu.Divider />
                     <Menu.Item
                         className={classes.subLink}

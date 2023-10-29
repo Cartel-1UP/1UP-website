@@ -80,3 +80,8 @@ export type HiveArticleComments = {
   id: number
   result: HiveArticle[]
 }
+
+export type Bookmark = {
+  author: string;
+  permlink: string;
+}

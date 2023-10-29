@@ -1,15 +1,15 @@
 'use client'
 
-import { comumnityData } from '@/data/communityData'
-import { logoutUser, useAuthorizationStore } from '@/zustand/stores/useAuthorizationStore'
-import { Avatar, Badge, Burger, Center, Container, Divider, Drawer, Grid, Group, Header, Image, Menu, NavLink, ScrollArea, Text } from '@mantine/core'
+import { useAuthorizationStore } from '@/zustand/stores/useAuthorizationStore'
+import { Burger, Center, Container, Grid, Group, Header, Image } from '@mantine/core'
 import { useDisclosure, useMediaQuery } from '@mantine/hooks'
-import { IconBookmark, IconExchange, IconLogout, IconPhoto, IconUser, IconUsers } from '@tabler/icons'
+import { IconBookmark, IconExchange, IconPhoto, IconUser } from '@tabler/icons'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import oneuplogo from '../../images/oneup1.png'
 import LoginButton from '../LoginButton/LoginButton'
+import { NavDrawer } from './NavDrawer'
 import { NavLinkSection } from './NavLinkSection'
 import useStyles from './style'
 import { UserMenu } from './UserMenu'
@@ -124,92 +124,15 @@ export function Navbar() {
             </Grid>
           </Header>
         </Container>
-        <Drawer
-          styles={{
-            closeButton: {
-              '& svg': {
-                width: 50,
-                height: 50,
-                color: '#f3f3f3'
-              }
-            }
-          }}
+        <NavDrawer
           opened={opened}
-          onClose={closeDrawer}
-          size="100%"
-          padding="md"
-          zIndex={100000}
-          className={classes.drawer}
-        >
-          <>
-            {authorized &&
-              <>
-                <Group pl={10}>
-                  <Avatar src={userImage} radius="xl" />
-                  <div style={{ flex: 1 }}>
-                    <Text size="md" weight={400} color="#f3f3f3">
-                      {username}{' '}
-                      <Badge
-                        sx={(theme) => ({ padding: 5 })}
-                        ml={5}
-                        radius="sm"
-                        color="gray"
-                        variant="outline"
-                      >
-                        {userReputation.toFixed()}
-                      </Badge>
-                    </Text>
-                  </div>
-                </Group>
-                <Divider mt={20} mb={10} />
-              </>
-            }
-            <NavLinkSection navLinks={navLinksMobile} authorized={authorized} />
-            <Menu.Divider />
-            <NavLink
-              className={classes.subLink}
-              label="Partners"
-              childrenOffset={28}
-              icon={<IconUsers color={'white'} size={20} stroke={1.5} />}
-            >
-              <ScrollArea
-                h={250}
-                styles={(theme) => ({
-                  scrollbar: {
-                    '&:hover': {
-                      background: '#06272e',
-                    },
-                  }
-                })}>
-                {comumnityData.map((item) => (
-                  <NavLink
-                    className={classes.subLink}
-                    label={item.name}
-                    key={item.name}
-                    icon={<Avatar radius="xl" src={item.image} />}
-                    onClick={() => {
-                      closeDrawer()
-                      router.push(`/community/` + item.tag)
-                    }
-                    }
-                    disabled={item.tag === 'none'}
-                  />
-                ))}
-              </ScrollArea>
-            </NavLink>
-            <Menu.Divider />
-            {authorized ?
-              <NavLink
-                label="Log out"
-                className={classes.subLink}
-                icon={<IconLogout color={'white'} size={20} stroke={1.5} />}
-                onClick={() => { closeDrawer(), logoutUser() }}
-              />
-              :
-              <LoginButton closeDrawer={closeDrawer} />
-            }
-          </>
-        </Drawer>
+          closeDrawer={closeDrawer}
+          authorized={authorized}
+          userImage={userImage}
+          userReputation={userReputation}
+          username={username}
+          navLinksMobile={navLinksMobile}
+        />
       </Container>
     </div>
   )

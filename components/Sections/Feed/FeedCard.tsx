@@ -3,7 +3,7 @@
 import CommentEditor from '@/components/ui/CommentEditor/CommentEditor'
 import { NotificationText } from '@/components/ui/ProgressBar/ProgressBar'
 import { VoteSlider } from '@/components/ui/VoteSlider/VoteSlider'
-import { HiveArticle } from '@/types/blog.type'
+import { Bookmark, HiveArticle } from '@/types/blog.type'
 import { formatedDate } from '@/utils/methods/formateDate'
 import { useAuthorizationStore } from '@/zustand/stores/useAuthorizationStore'
 import {
@@ -46,6 +46,8 @@ export function FeedCard({ article }: Props) {
   const formattedCurrency = `$${roundedValue.toFixed(2)}`
 
   const isSm = useMediaQuery(`(max-width: ${theme.breakpoints.sm}px)`)
+  const isMd = useMediaQuery(`(max-width: ${theme.breakpoints.md}px)`)
+
   const date = new Date(article.created)
   const forbiddenChars = ['!', '<', '>', '[', ']', '#']
   const body = article.body.split(' ')
@@ -56,10 +58,6 @@ export function FeedCard({ article }: Props) {
   })
   const bodyOfArticle = filteredBody.join(' ')
 
-  type Bookmark = {
-    author: string;
-    permlink: string;
-  }
 
   const toggleBookmark = () => {
     const bookmarks: Bookmark[] = JSON.parse(localStorage.getItem('bookmarks') || '[]');
@@ -172,10 +170,6 @@ export function FeedCard({ article }: Props) {
               {`${article?.author} • ${formatedDate(date)}`}
             </Text>
           </Container>
-          {/* <Link
-            href={`community/${article.community}/post/` + article.author + '/' + article.permlink}
-           
-          > */}
           <Container className={classes.link} ml={0} onClick={() => router.push(`/community/${article.community}/post/` + article.author + '/' + article.permlink)}>
             <Text fw={700} mt={20} sx={{
               fontFamily: 'Greycliff CF, sans-serif',
@@ -188,7 +182,6 @@ export function FeedCard({ article }: Props) {
               {bodyOfArticle}
             </Text>
           </Container>
-          {/* </Link> */}
         </Grid.Col>
         {!isSm && (
           <Grid.Col span={5}>
@@ -342,19 +335,30 @@ export function FeedCard({ article }: Props) {
         </Grid.Col>
       </Grid>
       {isVote && (
-        <Grid.Col span={12}>
+        isMd ? (
           <VoteSlider permlink={article.permlink} author={article.author} setIsVote={setIsVote} />
-        </Grid.Col>
+        ) :
+          <Grid.Col span={12}>
+            <VoteSlider permlink={article.permlink} author={article.author} setIsVote={setIsVote} />
+          </Grid.Col>
       )}
       {isComment && (
-        <Grid.Col span={12}>
+        isMd ? (
           <CommentEditor
             setIsComment={setIsComment}
             permlink={article.permlink}
             parentAuthor={article.author}
             parentPermlink={article?.parent_permlink}
           />
-        </Grid.Col>
+        ) :
+          <Grid.Col span={12}>
+            <CommentEditor
+              setIsComment={setIsComment}
+              permlink={article.permlink}
+              parentAuthor={article.author}
+              parentPermlink={article?.parent_permlink}
+            />
+          </Grid.Col>
       )}
     </Card>
   )

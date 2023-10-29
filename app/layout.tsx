@@ -16,7 +16,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <MantineProvider>
           <MantineUIProvider>
             <NotificationsProvider limit={3}>
-
               <html lang="en">
                 <head />
                 <body>
@@ -25,7 +24,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                   <Footer links={[]} />
                 </body>
               </html>
-
             </NotificationsProvider>
           </MantineUIProvider>
         </MantineProvider>
