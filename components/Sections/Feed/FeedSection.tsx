@@ -35,7 +35,7 @@ export function FeedSection({ sort, tag, isCommunity }: Props) {
   const [posts, setPosts] = useState<any[]>([])
   const [postType, setPostType] = useState(sort)
   const [data, setData] = useState<any>([])
-
+  const [loading, setLoading] = useState(false);
   const { scrollIntoView, targetRef } = useScrollIntoView<HTMLDivElement>({ offset: 60 })
 
   const [username, setUsername] = useState('')
@@ -47,6 +47,7 @@ export function FeedSection({ sort, tag, isCommunity }: Props) {
 
   const loadPosts = useMutation(
     async () => {
+      setLoading(true);
       let queryData
       switch (postType) {
         case 'feed':
@@ -63,6 +64,7 @@ export function FeedSection({ sort, tag, isCommunity }: Props) {
             limit: 10,
           })
       }
+      setLoading(false);
       return queryData
     },
     {
@@ -161,8 +163,11 @@ export function FeedSection({ sort, tag, isCommunity }: Props) {
             isCommunity={isCommunity}
           />
         </Card>
-        {!data ? <FeedCardSkeleton />
-          : data?.map((item: HiveArticle) => <FeedCard article={item} key={item.post_id} />)}
+        {
+          loading || !data || data.length === 0 ?
+            <FeedCardSkeleton />
+            : data?.map((item: HiveArticle) => <FeedCard article={item} key={item.post_id} />)
+        }
         {posts?.map((item: HiveArticle) => (
           <FeedCard article={item} key={item.post_id} />
         ))}
