@@ -2,7 +2,8 @@
 
 import { useGetUsersChoice } from '@/actions/database/get-userschoice'
 import { UsersChoiceCard } from '@/types/blog.type'
-import { Card, SimpleGrid, Space, Text } from '@mantine/core'
+import { Card, SimpleGrid, Text } from '@mantine/core'
+import { useMediaQuery } from '@mantine/hooks'
 import { RecommendedCard } from './RecommendedCard'
 import { RecommendedCardSkeleton } from './RecommendedCardSkeleton'
 import useStyles from './style'
@@ -10,10 +11,10 @@ import useStyles from './style'
 export function RecommendedSection() {
   const { classes, theme } = useStyles()
   const { isLoading, data } = useGetUsersChoice()
+  const isMd = useMediaQuery(`(max-width: ${theme.breakpoints.md}px)`)
 
   return (
     <>
-      <Space h="xl" />
       <Card withBorder p="md" radius={0} className={classes.cardHeader}>
         <Text size={24} fw={700} sx={{ fontFamily: 'Greycliff CF, sans-serif' }}>
           Cartel users choice
@@ -33,9 +34,11 @@ export function RecommendedSection() {
             <></>
           )}
       </SimpleGrid>
-      <Card withBorder p="md" radius={0} className={classes.cardFooter}>
+      {!isMd && (
+        <Card withBorder p="md" radius={0} className={classes.cardFooter}>
 
-      </Card>
+        </Card>)
+      }
     </>
   )
 }

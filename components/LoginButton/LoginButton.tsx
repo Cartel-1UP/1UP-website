@@ -40,6 +40,7 @@ function LoginButton({ closeDrawer }: Props) {
     }
 
     if (isKeychain()) {
+      closeDrawer && closeDrawer()
       loginKeychain(value)
     } else {
       showNotification({
@@ -83,7 +84,6 @@ function LoginButton({ closeDrawer }: Props) {
               fullWidth
               variant="outline"
               onClick={() => {
-                closeDrawer && closeDrawer()
                 loginUser()
               }}
               color="gray"
