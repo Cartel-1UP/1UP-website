@@ -5,13 +5,13 @@ import dcity from '../images/dcity.png'
 import dcrops from '../images/dcrops.svg'
 import gls from '../images/gls.png'
 import hk from '../images/hk.png'
+import holozing from '../images/holozing.png'
 import kod from '../images/kod.png'
 import mu from '../images/mu.png'
 import psyber from '../images/psyber.png'
 import risingstar from '../images/risingstar.png'
 import splinterlands from '../images/splinterlands.svg'
 import woo from '../images/woo.png'
-import holozing from '../images/holozing.png'
 
 export const comumnityData = [
   {
@@ -49,6 +49,12 @@ export const comumnityData = [
     image: woo.src,
     tag: 'hive-191258',
     value: 'Woo',
+  },
+  {
+    name: 'HoloZing',
+    image: holozing.src,
+    tag: 'hive-131131',
+    value: 'HoloZing',
   },
   {
     name: 'CryptoCompany',
@@ -93,12 +99,7 @@ export const comumnityData = [
     tag: 'none',
     value: 'KOD',
   },
-  {
-    name: 'HoloZing',
-    image: holozing.src,
-    tag: 'hive-131131',
-    value: 'HoloZing',
-  },
+
 
 ]
 
@@ -168,6 +169,11 @@ export const communityAssetsData = [
     image: kod.src,
     label: 'KOD',
     value: 'KOD',
+  },
+  {
+    image: holozing.src,
+    label: 'HoloZing',
+    value: 'HoloZing',
   },
   {
     image: holozing.src,

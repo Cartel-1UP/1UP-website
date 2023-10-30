@@ -45,17 +45,17 @@ export default function AddCardModal({ opened, close, refetch }: Props) {
 
   return (
     <>
-      <Modal opened={opened} onClose={close} title="Add main card">
+      <Modal opened={opened} onClose={close} title="Add main card" zIndex={100000} size={'xl'}>
         <form onSubmit={form.onSubmit(handleSubmit)}>
           <TextInput label="Author" placeholder="Author" {...form.getInputProps('author')} />
           <TextInput label="Category" placeholder="Category" {...form.getInputProps('category')} />
           <TextInput label="Title" placeholder="Title" {...form.getInputProps('title')} />
-          <TextInput label="Image" placeholder="Image" {...form.getInputProps('image')} />
+          <TextInput label="Image url" placeholder="Image url" {...form.getInputProps('image')} />
           <TextInput label="Permlink" placeholder="Permlink" {...form.getInputProps('permlink')} />
           <Group position="right" mt="md">
             <Button
               variant="outline"
-              radius="md"
+              radius={5}
               size="sm"
               color={theme.colorScheme === 'dark' ? undefined : 'dark'}
               type="submit"

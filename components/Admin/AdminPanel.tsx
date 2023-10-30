@@ -12,11 +12,9 @@ export function AdminPanel({ children }: Props) {
   return (
     <Container fluid className={classes.default}>
       <Container size="xl" color={theme.colorScheme === 'dark' ? 'dark.5' : 'gray.1'}>
-        <Container>
-          <Grid>
-            <Grid.Col span={12}>{children}</Grid.Col>
-          </Grid>
-        </Container>
+        <Grid>
+          <Grid.Col span={12}>{children}</Grid.Col>
+        </Grid>
       </Container>
     </Container>
   )
