@@ -2,6 +2,7 @@
 import { Card, SimpleGrid, Space, Tabs, Title } from '@mantine/core'
 import { useState } from 'react'
 import { AdminMainCards } from '../AdminMainCards/AdminMainCards'
+import { UserChoiceCards } from '../UsersChoiceCards/UsersChoiceCards'
 import useStyles from './style'
 
 export function AdminPage() {
@@ -25,8 +26,7 @@ export function AdminPage() {
               <AdminMainCards />
             </Tabs.Panel>
             <Tabs.Panel value="second">
-              {/* <UserChoiceCards /> */}
-              In progres...
+              <UserChoiceCards />
             </Tabs.Panel>
           </Tabs>
         </Card>

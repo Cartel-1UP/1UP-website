@@ -4,7 +4,7 @@ import { useQuery } from 'react-query'
 
 const getMaincards = async (): Promise<Maincard[]> => {
   try {
-    const { data } = await supabase.from('maincards').select('*')
+    const { data } = await supabase.from('maincards').select('*').order('id', { ascending: false })
 
     if (data === null) {
       return []

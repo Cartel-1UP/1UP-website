@@ -1,25 +1,24 @@
 'use client'
-import { fetchMaincards } from '@/utils/actions/cartel'
+import { useGetMaincards } from '@/actions/database/get-maincards'
+import ConfirmModal from '@/components/ui/ConfirmModal/ConfirmModal'
+import { deleteMaincard } from '@/utils/actions/cartel'
 import { ActionIcon, Button, SimpleGrid, Skeleton, Space, Table } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
-import { IconPencil } from '@tabler/icons'
+import { IconPencil, IconTrash } from '@tabler/icons'
 import { useState } from 'react'
-import { useQuery } from 'react-query'
+import { useMutation, useQueryClient } from 'react-query'
 import AddCardModal from '../AddCardModal/AddCardModal'
 import EditMainCardModal from '../EditCardModal/EditCardModal'
 import useStyles from './style'
 
 export function AdminMainCards() {
   const { classes, theme } = useStyles()
-  const {
-    isLoading,
-    error,
-    data,
-    refetch: refetchCarouselData,
-  } = useQuery('carouselData', () => fetchMaincards())
+  const queryCache = useQueryClient()
+  const { data, isLoading, error } = useGetMaincards()
 
   const [opened, { open: open, close: close }] = useDisclosure(false)
   const [openedEdit, { open: openEdit, close: closeEdit }] = useDisclosure(false)
+  const [openedDelete, { open: openDelete, close: closeDelete }] = useDisclosure(false)
 
   const [editValues, setEditValues] = useState({
     author: '',
@@ -28,6 +27,22 @@ export function AdminMainCards() {
     image: '',
     permlink: '',
   })
+
+  const [deletedValues, setDeletedValues] = useState('')
+
+  const deleteMaincardMutation = useMutation(deleteMaincard, {
+    onSuccess: () => {
+      queryCache.refetchQueries('maincards-data')
+    },
+    onError: (error) => {
+      console.error('Error deleting main card:', error)
+    },
+  })
+
+  if (error) {
+    return null
+  }
+
 
   if (isLoading)
     return (
@@ -115,6 +130,18 @@ export function AdminMainCards() {
                       >
                         <IconPencil size="1.125rem" />
                       </ActionIcon>
+                      <ActionIcon
+                        color="dark"
+                        variant="outline"
+                        size="sm"
+                        radius="sm"
+                        onClick={() => {
+                          setDeletedValues(element.permlink)
+                          openDelete()
+                        }}
+                      >
+                        <IconTrash size="1.125rem" />
+                      </ActionIcon>
                     </span>
                   </td>
                 </tr>
@@ -123,12 +150,21 @@ export function AdminMainCards() {
         </Table>
       </SimpleGrid>
       <Space h="xl" />
-      <AddCardModal opened={opened} close={close} refetch={refetchCarouselData} />
+      <AddCardModal opened={opened} close={close} />
       <EditMainCardModal
         opened={openedEdit}
         close={closeEdit}
-        refetch={refetchCarouselData}
         data={editValues}
+      />
+      <ConfirmModal
+        title='Are you sure you want to delete this card?'
+        message='This action cannot be undone.'
+        onConfirm={() => {
+          deleteMaincardMutation.mutateAsync(deletedValues)
+        }
+        }
+        opened={openedDelete}
+        close={closeDelete}
       />
     </>
   )

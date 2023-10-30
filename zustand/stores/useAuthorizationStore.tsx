@@ -3,6 +3,7 @@ import { immer } from 'zustand/middleware/immer'
 
 type AuthorizationStoreState = {
   authorized: boolean
+  role: string
   username: string
   balance: string
   hbd_balance: string
@@ -11,6 +12,7 @@ type AuthorizationStoreState = {
   mana: number
   logoutUser: () => void
   setUsername: (name: string) => void
+  setRole: (role: string) => void
   setAuthorized: (flag: boolean) => void
   setBalance: (bal: string) => void
   setHBDBalance: (bal: string) => void
@@ -21,6 +23,7 @@ type AuthorizationStoreState = {
 
 export const useAuthorizationStore = create<AuthorizationStoreState>()(
   immer((set) => ({
+    role: '',
     username: '',
     authorized: false,
     balance: '',
@@ -37,6 +40,11 @@ export const useAuthorizationStore = create<AuthorizationStoreState>()(
     setUsername: (name) => {
       set((state) => {
         state.username = name
+      })
+    },
+    setRole: (role) => {
+      set((state) => {
+        state.role = role
       })
     },
     setAuthorized: (flag) => {
@@ -81,4 +89,5 @@ export const {
   setProfileImage,
   setReputation,
   setMana,
+  setRole,
 } = useAuthorizationStore.getState()
