@@ -69,9 +69,9 @@ export function VoteSlider({
     {
       onSuccess: () => {
         showNotification({
-          autoClose: 10000,
+          autoClose: 7000,
           title: "Success",
-          message: <NotificationText message={`Your upvote was sent correctly`} time={10000} />,
+          message: <NotificationText message={`Your upvote was sent correctly`} time={7000} />,
           styles: (theme) => ({
             root: {
               backgroundColor: '#072f37',
