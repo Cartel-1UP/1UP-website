@@ -1,33 +1,42 @@
 'use client'
-import { fetchMaincards } from '@/utils/actions/cartel'
+
+import { useGetUsersChoice } from '@/actions/database/get-userschoice'
+import { deleteMaincard } from '@/utils/actions/cartel'
 import { ActionIcon, Button, SimpleGrid, Skeleton, Space, Table } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
-import { IconPencil } from '@tabler/icons'
+import { IconPencil, IconTrash } from '@tabler/icons'
 import { useState } from 'react'
-import { useQuery } from 'react-query'
-import AddCardModal from '../AddCardModal/AddCardModal'
-import EditMainCardModal from '../EditCardModal/EditCardModal'
+import { useMutation, useQueryClient } from 'react-query'
 import useStyles from './style'
 
 export function UserChoiceCards() {
   const { classes, theme } = useStyles()
-  const {
-    isLoading,
-    error,
-    data,
-    refetch: refetchCarouselData,
-  } = useQuery('carouselData', () => fetchMaincards())
+  const queryCache = useQueryClient()
+  const { data, isLoading, error } = useGetUsersChoice()
 
   const [opened, { open: open, close: close }] = useDisclosure(false)
   const [openedEdit, { open: openEdit, close: closeEdit }] = useDisclosure(false)
+  const [openedDelete, { open: openDelete, close: closeDelete }] = useDisclosure(false)
 
   const [editValues, setEditValues] = useState({
-    author: '',
-    category: '',
-    title: '',
-    image: '',
-    permlink: '',
+    result: '',
   })
+
+  const [deletedValues, setDeletedValues] = useState('')
+
+  const deleteMaincardMutation = useMutation(deleteMaincard, {
+    onSuccess: () => {
+      queryCache.refetchQueries('maincards-data')
+    },
+    onError: (error) => {
+      console.error('Error deleting main card:', error)
+    },
+  })
+
+  if (error) {
+    return null
+  }
+
 
   if (isLoading)
     return (
@@ -37,11 +46,7 @@ export function UserChoiceCards() {
           <Table highlightOnHover withColumnBorders>
             <thead>
               <tr>
-                <th>Author</th>
-                <th>Category</th>
-                <th>Title</th>
-                <th>Image</th>
-                <th>Permlink</th>
+                <th>Userpost</th>
                 <th>Actions</th>
               </tr>
             </thead>
@@ -50,12 +55,8 @@ export function UserChoiceCards() {
                 <td>
                   <Skeleton height={8} mt={6} radius="xl" />
                 </td>
-                <td>
-                  <Skeleton height={8} mt={6} radius="xl" />
-                </td>
-                <td>
-                  <Skeleton height={8} mt={6} radius="xl" />
-                </td>
+              </tr>
+              <tr>
                 <td>
                   <Skeleton height={8} mt={6} radius="xl" />
                 </td>
@@ -84,24 +85,16 @@ export function UserChoiceCards() {
         <Table highlightOnHover withColumnBorders>
           <thead>
             <tr>
-              <th>Author</th>
-              <th>Category</th>
-              <th>Title</th>
-              <th>Image</th>
-              <th>Permlink</th>
+              <th>Userpost</th>
               <th>Actions</th>
             </tr>
           </thead>
           <tbody>
             {data &&
-              data.map((element) => (
+              data.map((element: any) => (
                 <tr key={element.id}>
-                  <td>{element.author}</td>
-                  <td>{element.category}</td>
-                  <td>{element.title}</td>
-                  <td className={classes.turncate}>{element.image}</td>
-                  <td>{element.permlink}</td>
-                  <td>
+                  <td className={classes.turncate}>{JSON.stringify(element.userpost)}</td>
+                  <td style={{ width: 120 }}>
                     <span style={{ display: 'flex', gap: '4px' }}>
                       <ActionIcon
                         color="dark"
@@ -115,6 +108,18 @@ export function UserChoiceCards() {
                       >
                         <IconPencil size="1.125rem" />
                       </ActionIcon>
+                      <ActionIcon
+                        color="dark"
+                        variant="outline"
+                        size="sm"
+                        radius="sm"
+                        onClick={() => {
+                          setDeletedValues(element.permlink)
+                          openDelete()
+                        }}
+                      >
+                        <IconTrash size="1.125rem" />
+                      </ActionIcon>
                     </span>
                   </td>
                 </tr>
@@ -123,13 +128,22 @@ export function UserChoiceCards() {
         </Table>
       </SimpleGrid>
       <Space h="xl" />
-      <AddCardModal opened={opened} close={close} refetch={refetchCarouselData} />
+      {/* <AddCardModal opened={opened} close={close} />
       <EditMainCardModal
         opened={openedEdit}
         close={closeEdit}
-        refetch={refetchCarouselData}
         data={editValues}
-      />
+      /> */}
+      {/* <ConfirmModal
+        title='Are you sure you want to delete this card?'
+        message='This action cannot be undone.'
+        onConfirm={() => {
+          deleteMaincardMutation.mutateAsync(deletedValues)
+        }
+        }
+        opened={openedDelete}
+        close={closeDelete}
+      /> */}
     </>
   )
 }

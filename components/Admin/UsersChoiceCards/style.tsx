@@ -30,7 +30,9 @@ const useStyles = createStyles((theme, _params, getRef) => ({
     whiteSpace: 'normal',
     overflow: 'hidden',
     display: '-webkit-box',
+    WebkitLineClamp: 2,
     WebkitBoxOrient: 'vertical',
+    maxHeight: '4em',
   },
 }))
 

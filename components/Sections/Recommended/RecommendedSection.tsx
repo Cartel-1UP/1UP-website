@@ -10,8 +10,12 @@ import useStyles from './style'
 
 export function RecommendedSection() {
   const { classes, theme } = useStyles()
-  const { isLoading, data } = useGetUsersChoice()
+  const { isLoading, data, error } = useGetUsersChoice()
   const isMd = useMediaQuery(`(max-width: ${theme.breakpoints.md}px)`)
+
+  if (error) {
+    return null
+  }
 
   return (
     <>

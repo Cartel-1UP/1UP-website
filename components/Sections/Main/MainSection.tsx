@@ -10,13 +10,17 @@ export function MainSection() {
   const theme = useMantineTheme()
 
   const isMd = useMediaQuery(`(max-width: ${theme.breakpoints.md}px)`)
-  const { data, isLoading } = useGetMaincards()
+  const { data, isLoading, error } = useGetMaincards()
 
   const simpleData = [
     { image: null, title: null, category: null, permlink: null, author: null },
     { image: null, title: null, category: null, permlink: null, author: null },
     { image: null, title: null, category: null, permlink: null, author: null }
   ]
+
+  if (error || data?.length === 0) {
+    return null
+  }
 
   return (
     <Carousel

@@ -2,15 +2,12 @@ import { editMaincard } from '@/utils/actions/cartel'
 import { Button, Group, Modal, TextInput } from '@mantine/core'
 import { useForm } from '@mantine/form'
 import { useEffect } from 'react'
-import { QueryObserverResult, RefetchOptions, RefetchQueryFilters, useMutation } from 'react-query'
+import { useMutation, useQueryClient } from 'react-query'
 import useStyles from '../style'
 
 type Props = {
   opened: boolean
   close: () => void
-  refetch: <TPageData>(
-    options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined
-  ) => Promise<QueryObserverResult<any[] | null | undefined, unknown>>
   data: {
     author: string
     category: string
@@ -20,9 +17,9 @@ type Props = {
   }
 }
 
-export default function EditMainCardModal({ opened, close, refetch, data }: Props) {
+export default function EditMainCardModal({ opened, close, data }: Props) {
   const { classes, theme } = useStyles()
-
+  const queryCache = useQueryClient()
   const form = useForm({
     initialValues: data,
   })
@@ -37,7 +34,7 @@ export default function EditMainCardModal({ opened, close, refetch, data }: Prop
 
   const editMaincardMutation = useMutation(editMaincard, {
     onSuccess: () => {
-      refetch()
+      queryCache.refetchQueries('maincards-data')
       close()
       form.reset()
     },

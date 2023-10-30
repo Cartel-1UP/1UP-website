@@ -2,7 +2,6 @@
 
 import { galleryData } from "@/data/galleryData";
 import { Center, Container, Flex, Grid, Image, Stack, Text } from "@mantine/core";
-import { useMediaQuery } from "@mantine/hooks";
 
 const notFoundPageStyles = {
     display: 'flex',
@@ -14,7 +13,6 @@ const notFoundPageStyles = {
 
 
 export default function NotFound() {
-    const isMd = useMediaQuery(`(max-width: 1000px)`)
     return (
         <Flex
             mih={'100vh'}

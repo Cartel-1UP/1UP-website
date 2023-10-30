@@ -1,8 +1,10 @@
+import { authorizedData } from '@/data/authorizedData'
 import {
   setAuthorized,
   setProfileImage,
   setReputation,
-  setUsername,
+  setRole,
+  setUsername
 } from '@/zustand/stores/useAuthorizationStore'
 import api from '../api'
 import { getUserDataProfile } from './user'
@@ -35,6 +37,9 @@ function loginKeychain(username: string | null) {
 
           setProfileImage(userImage)
           setUsername(data.result[0].name)
+          if (authorizedData.some((user) => user.username === username)) {
+            setRole('admin')
+          }
         })
       }
     }

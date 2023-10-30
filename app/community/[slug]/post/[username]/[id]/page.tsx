@@ -12,7 +12,7 @@ export default function Page({ params }: { params: { id: string; username: strin
   const isMd = useMediaQuery(`(max-width: 1000px)`)
   return (
     <>
-      <div style={{ minHeight: '85vh' }}>
+      <div style={{ minHeight: '100vh' }}>
         {isMd ? (
           <BlogContent permlink={permlink} author={author} />
         ) : (

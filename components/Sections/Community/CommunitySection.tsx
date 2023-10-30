@@ -33,7 +33,7 @@ export function CommunitySection() {
             dragFree={true}
             speed={0.01}
           >
-            {comumnityData.map((item, index) => (
+            {comumnityData?.map((item, index) => (
               <Carousel.Slide key={index}>
                 <CommunityCard {...item} />
               </Carousel.Slide>
