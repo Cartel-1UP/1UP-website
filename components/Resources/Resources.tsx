@@ -36,8 +36,6 @@ export function Resources() {
                     <Center>
                       <Image src={item.image} alt={item.name} fit="contain" withPlaceholder />
                     </Center>
-
-
                   </Card>
                 </Grid.Col>
               )

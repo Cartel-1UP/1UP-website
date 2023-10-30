@@ -55,7 +55,7 @@ export default function EditMainCardModal({ opened, close, refetch, data }: Prop
   }
 
   return (
-    <Modal opened={opened} onClose={close} title="Edit main card">
+    <Modal opened={opened} onClose={close} title="Edit main card" zIndex={100000} size={'xl'}>
       <form onSubmit={form.onSubmit(handleSubmit)}>
         <TextInput label="Author" placeholder="Author" {...form.getInputProps('author')} />
         <TextInput label="Category" placeholder="Category" {...form.getInputProps('category')} />

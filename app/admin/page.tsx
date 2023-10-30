@@ -5,6 +5,7 @@ import { AdminPanel } from '@/components/Admin/AdminPanel'
 
 export const runtime = 'experimental-edge'
 
+
 export default function Page() {
   return (
     <>
