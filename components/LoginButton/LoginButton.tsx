@@ -108,11 +108,12 @@ function LoginButton({ closeDrawer }: Props) {
             withCloseButton
             onClose={() => setOpened(false)}
             size="lg"
-            radius="md"
+            radius={5}
             position={{ top: 10, right: 10 }}
+            zIndex={1000000}
           >
             <Text size="sm" style={{ marginBottom: 10 }} weight={500}>
-              Put your Hive username
+              Input your Hive username
             </Text>
             <Group align="flex-end">
               <TextInput
