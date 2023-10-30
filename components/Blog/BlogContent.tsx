@@ -73,9 +73,9 @@ export function BlogContent({ permlink, author }: Props) {
       onSuccess: () => {
         const isFollowing = following?.includes(author)
         showNotification({
-          autoClose: 10000,
+          autoClose: 7000,
           title: "Success",
-          message: <NotificationText message={`You ${isFollowing ? 'unfollowed' : 'followed'}: ${author}`} time={10000} />,
+          message: <NotificationText message={`You ${isFollowing ? 'unfollowed' : 'followed'}: ${author}`} time={7000} />,
           styles: (theme) => ({
             root: {
               backgroundColor: '#072f37',
@@ -97,9 +97,9 @@ export function BlogContent({ permlink, author }: Props) {
       },
       onError: (e: any) => {
         showNotification({
-          autoClose: 3000,
+          autoClose: 7000,
           title: "Warning",
-          message: <NotificationText message={`You already upvoted this post with same wieght`} time={10000} />,
+          message: <NotificationText message={`You already upvoted this post with same wieght`} time={7000} />,
           styles: (theme) => ({
             root: {
               backgroundColor: '#072f37',

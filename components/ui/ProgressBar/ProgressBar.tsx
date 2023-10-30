@@ -7,7 +7,7 @@ interface Props {
   time?: number
 }
 
-export function NotificationText({ message, time = 10000 }: Props) {
+export function NotificationText({ message, time = 7000 }: Props) {
   const { classes, theme } = useStyles()
 
 
