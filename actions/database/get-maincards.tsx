@@ -2,7 +2,7 @@ import { supabase } from '@/lib/supabaseClient'
 import { Maincard } from '@/types/blog.type'
 import { useQuery } from 'react-query'
 
-const getMaincards = async (): Promise<Maincard[]> => {
+const getMainCards = async (): Promise<Maincard[]> => {
   try {
     const { data } = await supabase.from('maincards').select('*').order('id', { ascending: false })
 
@@ -20,6 +20,6 @@ const getMaincards = async (): Promise<Maincard[]> => {
 export const useGetMaincards = () => {
   return useQuery({
     queryKey: 'maincards-data',
-    queryFn: getMaincards,
+    queryFn: getMainCards,
   })
 }

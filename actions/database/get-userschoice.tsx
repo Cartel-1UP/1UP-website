@@ -2,7 +2,7 @@ import { supabase } from '@/lib/supabaseClient'
 import { UsersChoiceCard } from '@/types/blog.type'
 import { useQuery } from 'react-query'
 
-const getUsersChoice = async (): Promise<UsersChoiceCard[]> => {
+const getUsersChoiceCards = async (): Promise<UsersChoiceCard[]> => {
   try {
     const { data } = await supabase.from('userschoice').select('*')
 
@@ -20,6 +20,6 @@ const getUsersChoice = async (): Promise<UsersChoiceCard[]> => {
 export const useGetUsersChoice = () => {
   return useQuery({
     queryKey: 'userschoice-data',
-    queryFn: getUsersChoice,
+    queryFn: getUsersChoiceCards,
   })
 }

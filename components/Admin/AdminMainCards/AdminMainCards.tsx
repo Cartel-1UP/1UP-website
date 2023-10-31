@@ -1,7 +1,7 @@
 'use client'
+import { deleteMainCard } from '@/actions/database/delete-maincard'
 import { useGetMaincards } from '@/actions/database/get-maincards'
 import ConfirmModal from '@/components/ui/ConfirmModal/ConfirmModal'
-import { deleteMaincard } from '@/utils/actions/cartel'
 import { ActionIcon, Button, SimpleGrid, Skeleton, Space, Table } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
 import { IconPencil, IconTrash } from '@tabler/icons'
@@ -30,7 +30,7 @@ export function AdminMainCards() {
 
   const [deletedValues, setDeletedValues] = useState('')
 
-  const deleteMaincardMutation = useMutation(deleteMaincard, {
+  const deleteMaincardMutation = useMutation(deleteMainCard, {
     onSuccess: () => {
       queryCache.refetchQueries('maincards-data')
     },
