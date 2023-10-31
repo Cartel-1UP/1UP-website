@@ -1,4 +1,4 @@
-import { editMaincard } from '@/utils/actions/cartel'
+import { editMaincard } from '@/actions/database/put-maincards'
 import { Button, Group, Modal, TextInput } from '@mantine/core'
 import { useForm } from '@mantine/form'
 import { useEffect } from 'react'
@@ -25,10 +25,10 @@ export default function EditMainCardModal({ opened, close, data }: Props) {
   })
 
   useEffect(() => {
-    form.setValues(data) // Load the initial values into the form
+    form.setValues(data)
 
     return () => {
-      form.reset() // Reset the form when the component unmounts
+      form.reset()
     }
   }, [data])
 

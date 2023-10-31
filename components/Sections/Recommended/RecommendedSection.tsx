@@ -1,7 +1,6 @@
 'use client'
 
 import { useGetUsersChoice } from '@/actions/database/get-userschoice'
-import { UsersChoiceCard } from '@/types/blog.type'
 import { Card, SimpleGrid, Text } from '@mantine/core'
 import { useMediaQuery } from '@mantine/hooks'
 import { RecommendedCard } from './RecommendedCard'
@@ -33,7 +32,7 @@ export function RecommendedSection() {
       >
         {
           isLoading ? <RecommendedCardSkeleton /> : data ? (
-            data?.map?.((item: UsersChoiceCard) => <RecommendedCard article={item} key={item.id} />)
+            data?.map?.((item: any) => <RecommendedCard article={item} key={item.id} />)
           ) : (
             <></>
           )}
