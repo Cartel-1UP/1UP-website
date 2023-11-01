@@ -1,6 +1,6 @@
 import { HiveArticle, Post } from '@/types/blog.type';
-import { readTime } from '@/utils/actions/posts';
 import apiHive from '@/utils/apiHive';
+import { readTime } from '@/utils/methods/readTime';
 import { useQuery } from 'react-query';
 
 export const getBlog = async ({

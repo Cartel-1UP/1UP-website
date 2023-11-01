@@ -1,6 +1,6 @@
 'use client'
 
-import loginKeychain from '@/utils/actions/login'
+import loginKeychain from '@/actions/hive/login'
 import { isKeychain } from '@/utils/methods/checkKeychain'
 import { useAuthorizationStore } from '@/zustand/stores/useAuthorizationStore'
 import { Button, Container, Dialog, Group, Stack, Text, TextInput } from '@mantine/core'
