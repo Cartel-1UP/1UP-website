@@ -1,3 +1,4 @@
+import { getUserProfile } from '@/actions/hive/get-userprofile'
 import { authorizedData } from '@/data/authorizedData'
 import {
   setAuthorized,
@@ -6,8 +7,7 @@ import {
   setRole,
   setUsername
 } from '@/zustand/stores/useAuthorizationStore'
-import api from '../api'
-import { getUserDataProfile } from './user'
+import api from '../../utils/api'
 
 function loginKeychain(username: string | null) {
   if (!username) {
@@ -49,11 +49,13 @@ function loginKeychain(username: string | null) {
 async function processLogin({ username, ts, sig, smartlock = false }: any) {
   const { data } = await api.post('auth', { username, ts, sig, smartlock })
 
+
   localStorage.setItem('username', data.username)
   localStorage.setItem('smartlock', data.smartlock)
 
   setAuthorized(data.authorized)
-  getUserDataProfile(data.username).then((data: any) => {
+
+  getUserProfile(data.username).then((data: any) => {
     setReputation(data.result.reputation)
   })
 }

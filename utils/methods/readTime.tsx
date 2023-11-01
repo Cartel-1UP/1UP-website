@@ -1,9 +1,3 @@
-
-interface Post {
-  author: string
-  permlink: string
-}
-
 export function readTime(content: string) {
   const WPS = 275 / 60
 
