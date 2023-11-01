@@ -5,12 +5,12 @@ import { useGetUsersChoice } from '@/actions/database/get-userschoice'
 import { addUserChoiceCard } from '@/actions/database/post-userchoicecard'
 import { editUsersChoiceCard } from '@/actions/database/put-userschoicecard'
 import ConfirmModal from '@/components/ui/ConfirmModal/ConfirmModal'
+import CRUDModal from '@/components/ui/CRUDModal/CRUDModal'
 import { ActionIcon, Button, SimpleGrid, Skeleton, Space, Table } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
 import { IconPencil, IconTrash } from '@tabler/icons'
 import { useState } from 'react'
 import { useMutation, useQueryClient } from 'react-query'
-import UserChoiceModal from '../UserChoiceModal/UserChoiceModal'
 import useStyles from './style'
 
 export function UserChoiceCards() {
@@ -113,7 +113,7 @@ export function UserChoiceCards() {
               <th>Author</th>
               <th>Title</th>
               <th>Image</th>
-              <th>Community Title</th>
+              <th>Tag</th>
               <th>Permlink</th>
               <th>LvL</th>
               <th>Actions</th>
@@ -127,7 +127,7 @@ export function UserChoiceCards() {
                   <td>{element.author}</td>
                   <td>{element.title}</td>
                   <td className={classes.turncate}>{element.image}</td>
-                  <td>{element.community_title}</td>
+                  <td>{element.tag}</td>
                   <td>{element.permlink}</td>
                   <td>{element.lvl}</td>
                   <td style={{ width: 120 }}>
@@ -164,18 +164,22 @@ export function UserChoiceCards() {
         </Table>
       </SimpleGrid>
       <Space h="xl" />
-      <UserChoiceModal
+      <CRUDModal
+        title='Add card'
         action='Add'
         opened={opened}
         close={close}
         mutation={addUserChoiceCard}
+        rows={['Community', 'Author', 'Title', 'Image', 'Tag', 'Permlink', 'LvL']}
       />
-      <UserChoiceModal
+      <CRUDModal
+        title='Edit card'
         action='Edit'
         opened={openedEdit}
         close={closeEdit}
         data={editValues}
         mutation={editUsersChoiceCard}
+        rows={['Community', 'Author', 'Title', 'Image', 'Tag', 'Permlink', 'LvL']}
       />
       <ConfirmModal
         title='Are you sure you want to delete this card?'
