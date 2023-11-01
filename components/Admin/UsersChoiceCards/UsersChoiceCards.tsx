@@ -60,30 +60,13 @@ export function UserChoiceCards() {
             </thead>
             <tbody>
               <tr>
-                <td>
-                  <Skeleton height={8} mt={6} radius="xl" />
-                </td>
-                <td>
-                  <Skeleton height={8} mt={6} radius="xl" />
-                </td>
-                <td>
-                  <Skeleton height={8} mt={6} radius="xl" />
-                </td>
-                <td>
-                  <Skeleton height={8} mt={6} radius="xl" />
-                </td>
-                <td>
-                  <Skeleton height={8} mt={6} radius="xl" />
-                </td>
-                <td>
-                  <Skeleton height={8} mt={6} radius="xl" />
-                </td>
-                <td>
-                  <Skeleton height={8} mt={6} radius="xl" />
-                </td>
-                <td>
-                  <Skeleton height={8} mt={6} radius="xl" />
-                </td>
+                {
+                  Array.from({ length: 8 }).map((_, index) => (
+                    <td key={index}>
+                      <Skeleton height={8} mt={6} radius="xl" />
+                    </td>
+                  ))
+                }
               </tr>
             </tbody>
           </Table>

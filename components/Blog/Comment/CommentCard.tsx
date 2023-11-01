@@ -76,7 +76,7 @@ export default function CommentCard({ comment, nestedComments, isVisible }: Prop
             </Text>
           </Stack>
         </Group>
-        <TypographyStylesProvider className={classes.body} pt={30}>
+        <TypographyStylesProvider className={classes.body} pt={30} pb={15}>
           <Markdown text={comment.body} />
         </TypographyStylesProvider>
 

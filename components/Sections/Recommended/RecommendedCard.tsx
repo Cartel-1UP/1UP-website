@@ -87,7 +87,7 @@ export function RecommendedCard({ article }: CardProps) {
             <Container>
               <Group position="right">
                 <Badge c={'#072f37'} bg={'#072f371A'} radius={5}>
-                  {article.community_title}
+                  {article.tag}
                 </Badge>
               </Group>
             </Container>
