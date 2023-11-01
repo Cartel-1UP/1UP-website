@@ -1,14 +1,15 @@
 'use client'
 import { deleteMainCard } from '@/actions/database/delete-maincard'
 import { useGetMaincards } from '@/actions/database/get-maincards'
+import { addMainCard } from '@/actions/database/post-maincards'
+import { editMainCard } from '@/actions/database/put-maincards'
 import ConfirmModal from '@/components/ui/ConfirmModal/ConfirmModal'
+import CRUDModal from '@/components/ui/CRUDModal/CRUDModal'
 import { ActionIcon, Button, SimpleGrid, Skeleton, Space, Table } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
 import { IconPencil, IconTrash } from '@tabler/icons'
 import { useState } from 'react'
 import { useMutation, useQueryClient } from 'react-query'
-import AddCardModal from '../AddCardModal/AddCardModal'
-import EditMainCardModal from '../EditCardModal/EditCardModal'
 import useStyles from './style'
 
 export function AdminMainCards() {
@@ -150,11 +151,21 @@ export function AdminMainCards() {
         </Table>
       </SimpleGrid>
       <Space h="xl" />
-      <AddCardModal opened={opened} close={close} />
-      <EditMainCardModal
+      <CRUDModal
+        title='Add card'
+        action='Add'
+        opened={opened}
+        close={close}
+        mutation={addMainCard}
+        rows={['Community', 'Author', 'Title', 'Image', 'Tag', 'Permlink', 'LvL']}
+      />
+      <CRUDModal
+        title='Edit card'
+        action='Edit'
         opened={openedEdit}
         close={closeEdit}
-        data={editValues}
+        mutation={editMainCard}
+        rows={['Community', 'Author', 'Title', 'Image', 'Tag', 'Permlink', 'LvL']}
       />
       <ConfirmModal
         title='Are you sure you want to delete this card?'
