@@ -158,7 +158,7 @@ export function BlogContent({ permlink, author }: Props) {
                       </Grid>
                     </Container>
                   </Card>
-                  <Card withBorder p="md" pt={0} radius={0} className={classes.card}>
+                  <Card withBorder p="md" pt={25} radius={0} className={classes.card}>
                     <Container>
                       {blogData?.data?.result?.body ?
                         <Markdown text={blogData?.data?.result?.body} /> : 'Error'}
@@ -309,7 +309,7 @@ export function BlogContent({ permlink, author }: Props) {
                         </Grid>
                       </Container>
                     </Card>
-                    <Card withBorder p="md" pt={0} radius={0} className={classes.card}>
+                    <Card withBorder p="md" pt={25} radius={0} className={classes.card}>
                       <Container>
                         {blogData?.data?.result?.body ?
                           <Markdown text={blogData?.data?.result?.body} /> : 'Error'}

@@ -8,7 +8,7 @@ export function FeedCardSkeleton() {
     return (
         <>
             {
-                Array.from({ length: 5 }).map((_, index) => (
+                Array.from({ length: 10 }).map((_, index) => (
                     <Card withBorder p="md" radius={0} className={classes.card} key={index}>
                         <Grid grow>
                             <Grid.Col span={7}>
