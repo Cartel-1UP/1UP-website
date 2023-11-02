@@ -6,7 +6,9 @@ import {
   Container,
   Grid,
   Group,
-  Image, Indicator, Text
+  Image,
+  Indicator,
+  Text,
 } from '@mantine/core'
 import Link from 'next/link'
 import useStyles from './style'
@@ -20,12 +22,7 @@ export function RecommendedCard({ article }: CardProps) {
 
   return (
     <Link
-      href={
-        `community/${article.community}/post/` +
-        article.author +
-        '/' +
-        article.permlink
-      }
+      href={`community/${article.community}/post/` + article.author + '/' + article.permlink}
       className={classes.link}
     >
       <Card
@@ -66,13 +63,7 @@ export function RecommendedCard({ article }: CardProps) {
           <Grid.Col span={12} mt={5}>
             <Container>
               <AspectRatio ratio={5 / 3}>
-                <Image
-                  radius={0}
-                  src={article.image}
-                  withPlaceholder
-                  fit='fill'
-                  h={200}
-                />
+                <Image radius={0} src={article.image} withPlaceholder fit="fill" h={200} />
               </AspectRatio>
             </Container>
           </Grid.Col>

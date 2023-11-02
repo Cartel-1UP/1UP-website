@@ -1,11 +1,9 @@
 import { createStyles } from '@mantine/styles'
 
 const useStyles = createStyles((theme) => ({
-
   default: {
     minHeight: '80vh',
   },
-
 
   card: {
     borderColor: '#e2e8f0d2',
@@ -36,7 +34,6 @@ const useStyles = createStyles((theme) => ({
       color: '#16093fbc',
     },
   },
-
 
   peakdLink: {
     color: '#228be6',

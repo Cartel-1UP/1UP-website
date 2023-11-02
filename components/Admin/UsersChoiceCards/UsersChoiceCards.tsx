@@ -39,7 +39,6 @@ export function UserChoiceCards() {
     return null
   }
 
-
   if (isLoading)
     return (
       <>
@@ -60,13 +59,11 @@ export function UserChoiceCards() {
             </thead>
             <tbody>
               <tr>
-                {
-                  Array.from({ length: 8 }).map((_, index) => (
-                    <td key={index}>
-                      <Skeleton height={8} mt={6} radius="xl" />
-                    </td>
-                  ))
-                }
+                {Array.from({ length: 8 }).map((_, index) => (
+                  <td key={index}>
+                    <Skeleton height={8} mt={6} radius="xl" />
+                  </td>
+                ))}
               </tr>
             </tbody>
           </Table>
@@ -148,16 +145,16 @@ export function UserChoiceCards() {
       </SimpleGrid>
       <Space h="xl" />
       <CRUDModal
-        title='Add card'
-        action='Add'
+        title="Add card"
+        action="Add"
         opened={opened}
         close={close}
         mutation={addUserChoiceCard}
         rows={['Community', 'Author', 'Title', 'Image', 'Tag', 'Permlink', 'LvL']}
       />
       <CRUDModal
-        title='Edit card'
-        action='Edit'
+        title="Edit card"
+        action="Edit"
         opened={openedEdit}
         close={closeEdit}
         data={editValues}
@@ -165,12 +162,11 @@ export function UserChoiceCards() {
         rows={['Community', 'Author', 'Title', 'Image', 'Tag', 'Permlink', 'LvL']}
       />
       <ConfirmModal
-        title='Are you sure you want to delete this card?'
-        message='This action cannot be undone.'
+        title="Are you sure you want to delete this card?"
+        message="This action cannot be undone."
         onConfirm={() => {
           deleteCarddMutation.mutateAsync(deletedValues)
-        }
-        }
+        }}
         opened={openedDelete}
         close={closeDelete}
       />

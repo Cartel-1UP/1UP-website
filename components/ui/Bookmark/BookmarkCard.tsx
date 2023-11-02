@@ -5,15 +5,7 @@ import { NotificationText } from '@/components/ui/ProgressBar/ProgressBar'
 import { VoteSlider } from '@/components/ui/VoteSlider/VoteSlider'
 import { HiveArticle } from '@/types/blog.type'
 import { useAuthorizationStore } from '@/zustand/stores/useAuthorizationStore'
-import {
-  Avatar,
-  Badge,
-  Card,
-  Container,
-  Grid, Group, Indicator,
-  Space,
-  Text
-} from '@mantine/core'
+import { Avatar, Badge, Card, Container, Grid, Group, Indicator, Space, Text } from '@mantine/core'
 import { showNotification } from '@mantine/notifications'
 import { IconHeart, IconMessage, IconX } from '@tabler/icons'
 import Link from 'next/link'
@@ -28,7 +20,12 @@ interface Props {
   setStoredBookmarksJSON: any
 }
 
-export function BookmarkCard({ article, refetch, storedBookmarksJSON, setStoredBookmarksJSON }: Props) {
+export function BookmarkCard({
+  article,
+  refetch,
+  storedBookmarksJSON,
+  setStoredBookmarksJSON,
+}: Props) {
   const { classes, theme } = useStyles()
   const [isVote, setIsVote] = useState(false)
   const [isComment, setIsComment] = useState(false)
@@ -46,26 +43,33 @@ export function BookmarkCard({ article, refetch, storedBookmarksJSON, setStoredB
     year: 'numeric',
   })
 
-
-  const isInBookmarks = storedBookmarksJSON.map((bookmark: any) => bookmark.permlink).includes(article.permlink);
-
-
+  const isInBookmarks = storedBookmarksJSON
+    .map((bookmark: any) => bookmark.permlink)
+    .includes(article.permlink)
 
   // Function to add or delete a bookmark
   const toggleBookmark = () => {
-    const isInBookmarks = storedBookmarksJSON.map((bookmark: any) => bookmark.permlink).includes(article.permlink);
+    const isInBookmarks = storedBookmarksJSON
+      .map((bookmark: any) => bookmark.permlink)
+      .includes(article.permlink)
 
     if (isInBookmarks) {
-      const updatedBookmarks = storedBookmarksJSON.filter((bookmark: any) => bookmark.permlink !== article.permlink);
+      const updatedBookmarks = storedBookmarksJSON.filter(
+        (bookmark: any) => bookmark.permlink !== article.permlink
+      )
 
-
-      localStorage.setItem('bookmarks', JSON.stringify(updatedBookmarks));
-      setStoredBookmarksJSON(updatedBookmarks); // Update the storedBookmarksJSON
+      localStorage.setItem('bookmarks', JSON.stringify(updatedBookmarks))
+      setStoredBookmarksJSON(updatedBookmarks) // Update the storedBookmarksJSON
       console.log(storedBookmarksJSON)
       showNotification({
         autoClose: 3000,
-        title: "Bookmark deleted",
-        message: <NotificationText message="You've successfully deleted this blog post from your bookmarks" time={3000} />,
+        title: 'Bookmark deleted',
+        message: (
+          <NotificationText
+            message="You've successfully deleted this blog post from your bookmarks"
+            time={3000}
+          />
+        ),
         styles: (theme) => ({
           root: {
             backgroundColor: '#072f37',
@@ -82,7 +86,7 @@ export function BookmarkCard({ article, refetch, storedBookmarksJSON, setStoredB
         loading: false,
       })
     }
-  };
+  }
 
   useEffect(() => {
     if (Array.isArray(article?.json_metadata.image) && article?.json_metadata.image.length === 0) {
@@ -114,46 +118,52 @@ export function BookmarkCard({ article, refetch, storedBookmarksJSON, setStoredB
                 src={`https://images.hive.blog/u/${article?.author}/avatar`}
               />
             </Indicator>
-            <Group position='apart' style={{ flex: 1 }}>
+            <Group position="apart" style={{ flex: 1 }}>
               <Text pl={20} color="dimmed" size="xs" transform="uppercase" weight={600}>
                 {`${article?.author} - ${formatedDate}`}
               </Text>
               <span className={classes.icon}>
-                {isInBookmarks &&
+                {isInBookmarks && (
                   <IconX
                     size={'1.3rem'}
                     onClick={() =>
                       authorized
-                        ?
-                        toggleBookmark() :
-                        showNotification({
-                          autoClose: 3000,
-                          title: "Warning",
-                          message: <NotificationText message='You have to login to delete bookmark!' time={3000} />,
-                          styles: (theme) => ({
-                            root: {
-                              backgroundColor: '#072f37',
-                              borderColor: '#072f37',
-                              '&::before': { backgroundColor: theme.white },
-                            },
-                            title: { color: theme.white },
-                            description: { color: theme.white },
-                            closeButton: {
-                              color: theme.white,
-                              '&:hover': { backgroundColor: '#04191d' },
-                            },
-                          }),
-                          loading: false,
-                        })
+                        ? toggleBookmark()
+                        : showNotification({
+                            autoClose: 3000,
+                            title: 'Warning',
+                            message: (
+                              <NotificationText
+                                message="You have to login to delete bookmark!"
+                                time={3000}
+                              />
+                            ),
+                            styles: (theme) => ({
+                              root: {
+                                backgroundColor: '#072f37',
+                                borderColor: '#072f37',
+                                '&::before': { backgroundColor: theme.white },
+                              },
+                              title: { color: theme.white },
+                              description: { color: theme.white },
+                              closeButton: {
+                                color: theme.white,
+                                '&:hover': { backgroundColor: '#04191d' },
+                              },
+                            }),
+                            loading: false,
+                          })
                     }
                   />
-                }
+                )}
               </span>
             </Group>
           </Container>
           <Container fluid sx={{ display: 'flex', alignItems: 'start' }}>
             <Link
-              href={`community/${article.community}/post/` + article.author + '/' + article.permlink}
+              href={
+                `community/${article.community}/post/` + article.author + '/' + article.permlink
+              }
               className={classes.link}
             >
               <Text weight={600} mt={25}>
@@ -161,16 +171,15 @@ export function BookmarkCard({ article, refetch, storedBookmarksJSON, setStoredB
               </Text>
             </Link>
           </Container>
-
         </Grid.Col>
         <Grid.Col span={12}>
           <Container fluid>
             {article?.json_metadata.tags
               ? article?.json_metadata.tags.slice(0, 3).map?.((item: string) => (
-                <Badge mr={5} radius={5} color="gray" key={item}>
-                  {item}
-                </Badge>
-              ))
+                  <Badge mr={5} radius={5} color="gray" key={item}>
+                    {item}
+                  </Badge>
+                ))
               : null}
           </Container>
         </Grid.Col>
@@ -183,24 +192,29 @@ export function BookmarkCard({ article, refetch, storedBookmarksJSON, setStoredB
                   authorized
                     ? setIsVote(!isVote)
                     : showNotification({
-                      autoClose: 3000,
-                      title: "Warning",
-                      message: <NotificationText message='You have to login to upvote post!' time={3000} />,
-                      styles: (theme) => ({
-                        root: {
-                          backgroundColor: '#072f37',
-                          borderColor: '#072f37',
-                          '&::before': { backgroundColor: theme.white },
-                        },
-                        title: { color: theme.white },
-                        description: { color: theme.white },
-                        closeButton: {
-                          color: theme.white,
-                          '&:hover': { backgroundColor: '#04191d' },
-                        },
-                      }),
-                      loading: false,
-                    })
+                        autoClose: 3000,
+                        title: 'Warning',
+                        message: (
+                          <NotificationText
+                            message="You have to login to upvote post!"
+                            time={3000}
+                          />
+                        ),
+                        styles: (theme) => ({
+                          root: {
+                            backgroundColor: '#072f37',
+                            borderColor: '#072f37',
+                            '&::before': { backgroundColor: theme.white },
+                          },
+                          title: { color: theme.white },
+                          description: { color: theme.white },
+                          closeButton: {
+                            color: theme.white,
+                            '&:hover': { backgroundColor: '#04191d' },
+                          },
+                        }),
+                        loading: false,
+                      })
                 }
               />
             </span>
@@ -213,24 +227,29 @@ export function BookmarkCard({ article, refetch, storedBookmarksJSON, setStoredB
                   authorized
                     ? setIsComment(!isComment)
                     : showNotification({
-                      autoClose: 3000,
-                      title: "Warning",
-                      message: <NotificationText message='You have to login to add comment!' time={3000} />,
-                      styles: (theme) => ({
-                        root: {
-                          backgroundColor: '#072f37',
-                          borderColor: '#072f37',
-                          '&::before': { backgroundColor: theme.white },
-                        },
-                        title: { color: theme.white },
-                        description: { color: theme.white },
-                        closeButton: {
-                          color: theme.white,
-                          '&:hover': { backgroundColor: '#04191d' },
-                        },
-                      }),
-                      loading: false,
-                    })
+                        autoClose: 3000,
+                        title: 'Warning',
+                        message: (
+                          <NotificationText
+                            message="You have to login to add comment!"
+                            time={3000}
+                          />
+                        ),
+                        styles: (theme) => ({
+                          root: {
+                            backgroundColor: '#072f37',
+                            borderColor: '#072f37',
+                            '&::before': { backgroundColor: theme.white },
+                          },
+                          title: { color: theme.white },
+                          description: { color: theme.white },
+                          closeButton: {
+                            color: theme.white,
+                            '&:hover': { backgroundColor: '#04191d' },
+                          },
+                        }),
+                        loading: false,
+                      })
                 }
               />
             </span>
@@ -243,26 +262,21 @@ export function BookmarkCard({ article, refetch, storedBookmarksJSON, setStoredB
           </Container>
         </Grid.Col>
       </Grid>
-      {
-        isVote && (
-          <Grid.Col span={12}>
-            <VoteSlider permlink={article.permlink} author={article.author} setIsVote={setIsVote} />
-          </Grid.Col>
-        )
-      }
-      {
-        isComment && (
-          <Grid.Col span={12}>
-            <CommentEditor
-              setIsComment={setIsComment}
-              permlink={article.permlink}
-              parentAuthor={article.author}
-              parentPermlink={article?.parent_permlink}
-            />
-          </Grid.Col>
-        )
-      }
-
-    </Card >
+      {isVote && (
+        <Grid.Col span={12}>
+          <VoteSlider permlink={article.permlink} author={article.author} setIsVote={setIsVote} />
+        </Grid.Col>
+      )}
+      {isComment && (
+        <Grid.Col span={12}>
+          <CommentEditor
+            setIsComment={setIsComment}
+            permlink={article.permlink}
+            parentAuthor={article.author}
+            parentPermlink={article?.parent_permlink}
+          />
+        </Grid.Col>
+      )}
+    </Card>
   )
 }

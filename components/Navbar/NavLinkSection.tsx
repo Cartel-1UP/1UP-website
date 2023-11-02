@@ -5,52 +5,50 @@ import React from 'react'
 import useStyles from './style'
 
 type Props = {
-    navLinks: {
-        label: string
-        icon?: React.ReactNode
-        loggedIn?: boolean,
-        handleAction: () => void
-        closeDrawer?: () => void
-    }[]
-    authorized?: boolean
+  navLinks: {
+    label: string
+    icon?: React.ReactNode
+    loggedIn?: boolean
+    handleAction: () => void
+    closeDrawer?: () => void
+  }[]
+  authorized?: boolean
 }
 
 export function NavLinkSection({ navLinks, authorized }: Props) {
-    const { classes, theme } = useStyles()
+  const { classes, theme } = useStyles()
 
-    return (
-        <>
-            {
-                authorized ?
-                    navLinks.map((link) => (
-                        <div key={link.label}>
-                            <NavLink
-                                icon={link.icon}
-                                label={link.label}
-                                className={classes.subLink}
-                                onClick={() => {
-                                    link.handleAction()
-                                    link.closeDrawer && link.closeDrawer()
-                                }}
-                            />
-                        </div>
-                    ))
-                    :
-                    navLinks.map((link) => (
-                        !link.loggedIn &&
-                        <div key={link.label}>
-                            <NavLink
-                                icon={link.icon}
-                                label={link.label}
-                                className={classes.subLink}
-                                onClick={() => {
-                                    link.handleAction()
-                                }}
-                            />
-                        </div>
-                    ))
-            }
-
-        </>
-    )
+  return (
+    <>
+      {authorized
+        ? navLinks.map((link) => (
+            <div key={link.label}>
+              <NavLink
+                icon={link.icon}
+                label={link.label}
+                className={classes.subLink}
+                onClick={() => {
+                  link.handleAction()
+                  link.closeDrawer && link.closeDrawer()
+                }}
+              />
+            </div>
+          ))
+        : navLinks.map(
+            (link) =>
+              !link.loggedIn && (
+                <div key={link.label}>
+                  <NavLink
+                    icon={link.icon}
+                    label={link.label}
+                    className={classes.subLink}
+                    onClick={() => {
+                      link.handleAction()
+                    }}
+                  />
+                </div>
+              )
+          )}
+    </>
+  )
 }

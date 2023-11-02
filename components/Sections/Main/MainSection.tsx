@@ -15,7 +15,7 @@ export function MainSection() {
   const simpleData = [
     { image: null, title: null, category: null, permlink: null, author: null },
     { image: null, title: null, category: null, permlink: null, author: null },
-    { image: null, title: null, category: null, permlink: null, author: null }
+    { image: null, title: null, category: null, permlink: null, author: null },
   ]
 
   if (error || data?.length === 0) {
@@ -33,15 +33,15 @@ export function MainSection() {
     >
       {isLoading
         ? simpleData.map((item: any, index: any) => (
-          <Carousel.Slide key={index}>
-            <Card {...item} />
-          </Carousel.Slide>
-        ))
+            <Carousel.Slide key={index}>
+              <Card {...item} />
+            </Carousel.Slide>
+          ))
         : data?.map?.((item: any, index: any) => (
-          <Carousel.Slide key={index}>
-            <Card {...item} />
-          </Carousel.Slide>
-        ))}
+            <Carousel.Slide key={index}>
+              <Card {...item} />
+            </Carousel.Slide>
+          ))}
     </Carousel>
   )
 }

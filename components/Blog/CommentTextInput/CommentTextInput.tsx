@@ -63,8 +63,6 @@ const Editor = () => {
     setPreviewModalOpen(true)
   }
 
-
-
   return (
     <>
       <SimpleGrid cols={1} mt={1} spacing={2}>

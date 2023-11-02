@@ -17,11 +17,20 @@ type Props = {
   mutation: (cardData: any) => Promise<undefined[] | undefined>
 }
 
-export default function CRUDModal({ title, action, opened, close, data, queryKey, mutation, rows }: Props) {
+export default function CRUDModal({
+  title,
+  action,
+  opened,
+  close,
+  data,
+  queryKey,
+  mutation,
+  rows,
+}: Props) {
   const { classes, theme } = useStyles()
   const queryCache = useQueryClient()
   const form = useForm({
-    initialValues: data
+    initialValues: data,
   })
 
   console.log(data)
@@ -57,13 +66,16 @@ export default function CRUDModal({ title, action, opened, close, data, queryKey
     <>
       <Modal opened={opened} onClose={close} title={title} zIndex={100000} size={'xl'}>
         <form onSubmit={form.onSubmit(handleSubmit)}>
-          {
-            rows?.map((row) => {
-              return (
-                <TextInput key={row} label={row} placeholder={row} {...form.getInputProps(row.toLowerCase())} />)
-            }
+          {rows?.map((row) => {
+            return (
+              <TextInput
+                key={row}
+                label={row}
+                placeholder={row}
+                {...form.getInputProps(row.toLowerCase())}
+              />
             )
-          }
+          })}
           <Group position="right" mt="md">
             <Button
               variant="outline"

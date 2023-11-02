@@ -6,13 +6,7 @@ import { NotificationText } from '@/components/ui/ProgressBar/ProgressBar'
 import { Tabs } from '@/enums/blog.enum'
 import { HiveArticle } from '@/types/blog.type'
 import { useAuthorizationStore } from '@/zustand/stores/useAuthorizationStore'
-import {
-  ActionIcon,
-  Avatar,
-  Box,
-  Button,
-  Card, Group, SimpleGrid
-} from '@mantine/core'
+import { ActionIcon, Avatar, Box, Button, Card, Group, SimpleGrid } from '@mantine/core'
 import { useMediaQuery, useScrollIntoView } from '@mantine/hooks'
 import { showNotification } from '@mantine/notifications'
 import { IconArrowBarRight, IconArrowUp } from '@tabler/icons'
@@ -37,8 +31,8 @@ export function FeedSection({ sort, tag, isCommunity, communityLogo }: Props) {
   const [posts, setPosts] = useState<any[]>([])
   const [postType, setPostType] = useState(sort)
   const [data, setData] = useState<any>([])
-  const [loading, setLoading] = useState(false);
-  const [loadingMorePosts, setLoadingMorePosts] = useState(false);
+  const [loading, setLoading] = useState(false)
+  const [loadingMorePosts, setLoadingMorePosts] = useState(false)
   const { scrollIntoView, targetRef } = useScrollIntoView<HTMLDivElement>({ offset: 60 })
   const isMd = useMediaQuery(`(max-width: ${theme.breakpoints.md}px)`)
   const [username, setUsername] = useState('')
@@ -52,7 +46,7 @@ export function FeedSection({ sort, tag, isCommunity, communityLogo }: Props) {
 
   const loadPosts = useMutation(
     async () => {
-      setLoading(true);
+      setLoading(true)
       let queryData
       switch (postType) {
         case 'feed':
@@ -69,7 +63,7 @@ export function FeedSection({ sort, tag, isCommunity, communityLogo }: Props) {
             limit: 10,
           })
       }
-      setLoading(false);
+      setLoading(false)
       return queryData
     },
     {
@@ -114,8 +108,10 @@ export function FeedSection({ sort, tag, isCommunity, communityLogo }: Props) {
         if (newArticles.length < 1) {
           return showNotification({
             autoClose: 3000,
-            title: "Warning",
-            message: <NotificationText message={`There is no more ${postType} posts!`} time={3000} />,
+            title: 'Warning',
+            message: (
+              <NotificationText message={`There is no more ${postType} posts!`} time={3000} />
+            ),
             styles: (theme) => ({
               root: {
                 backgroundColor: '#072f37',
@@ -172,22 +168,14 @@ export function FeedSection({ sort, tag, isCommunity, communityLogo }: Props) {
                 isCommunity={isCommunity}
               />
             </div>
-            {
-              isMd && <Avatar
-                size={48}
-                color="blue"
-                radius="xl"
-                src={communityLogo}
-              />
-            }
-
+            {isMd && <Avatar size={48} color="blue" radius="xl" src={communityLogo} />}
           </Group>
         </Card>
-        {
-          loading || !data || data.length === 0 ?
-            <FeedCardSkeleton />
-            : data?.map((item: HiveArticle) => <FeedCard article={item} key={item.post_id} />)
-        }
+        {loading || !data || data.length === 0 ? (
+          <FeedCardSkeleton />
+        ) : (
+          data?.map((item: HiveArticle) => <FeedCard article={item} key={item.post_id} />)
+        )}
         {posts?.map((item: HiveArticle) => (
           <FeedCard article={item} key={item.post_id} />
         ))}

@@ -44,7 +44,6 @@ export function AdminMainCards() {
     return null
   }
 
-
   if (isLoading)
     return (
       <>
@@ -63,13 +62,11 @@ export function AdminMainCards() {
             </thead>
             <tbody>
               <tr>
-                {
-                  Array.from({ length: 8 }).map((_, index) => (
-                    <td key={index}>
-                      <Skeleton height={8} mt={6} radius="xl" />
-                    </td>
-                  ))
-                }
+                {Array.from({ length: 8 }).map((_, index) => (
+                  <td key={index}>
+                    <Skeleton height={8} mt={6} radius="xl" />
+                  </td>
+                ))}
               </tr>
             </tbody>
           </Table>
@@ -147,28 +144,27 @@ export function AdminMainCards() {
       </SimpleGrid>
       <Space h="xl" />
       <CRUDModal
-        title='Add card'
-        action='Add'
+        title="Add card"
+        action="Add"
         opened={opened}
         close={close}
         mutation={addMainCard}
         rows={['Community', 'Author', 'Title', 'Image', 'Tag', 'Permlink', 'LvL']}
       />
       <CRUDModal
-        title='Edit card'
-        action='Edit'
+        title="Edit card"
+        action="Edit"
         opened={openedEdit}
         close={closeEdit}
         mutation={editMainCard}
         rows={['Community', 'Author', 'Title', 'Image', 'Tag', 'Permlink', 'LvL']}
       />
       <ConfirmModal
-        title='Are you sure you want to delete this card?'
-        message='This action cannot be undone.'
+        title="Are you sure you want to delete this card?"
+        message="This action cannot be undone."
         onConfirm={() => {
           deleteMaincardMutation.mutateAsync(deletedValues)
-        }
-        }
+        }}
         opened={openedDelete}
         close={closeDelete}
       />

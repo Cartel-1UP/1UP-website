@@ -1,7 +1,6 @@
 import { createStyles } from '@mantine/styles'
 
 const useStyles = createStyles((theme) => ({
-
   card: {
     borderColor: '#e2e8f0d2',
     borderWidth: 1,
@@ -17,7 +16,6 @@ const useStyles = createStyles((theme) => ({
     borderWidth: 1,
     borderRadius: '0 0 5px 5px',
   },
-
 }))
 
 export default useStyles

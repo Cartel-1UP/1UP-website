@@ -1,12 +1,9 @@
 import { createStyles } from '@mantine/styles'
 
 const useStyles = createStyles((theme) => ({
-  card: {
-
-  },
+  card: {},
 
   item: {
-
     '&:focus': {
       backgroundColor: '#165865',
     },
@@ -20,11 +17,11 @@ const useStyles = createStyles((theme) => ({
     '*::before': {
       content: '""',
       position: 'absolute',
-      top: '-4px', /* Adjust the top offset as needed */
-      left: '-4px', /* Adjust the left offset as needed */
-      right: '-4px', /* Adjust the right offset as needed */
-      bottom: '-4px', /* Adjust the bottom offset as needed */
-      border: '5px solid transparent', /* Set the border to transparent */
+      top: '-4px' /* Adjust the top offset as needed */,
+      left: '-4px' /* Adjust the left offset as needed */,
+      right: '-4px' /* Adjust the right offset as needed */,
+      bottom: '-4px' /* Adjust the bottom offset as needed */,
+      border: '5px solid transparent' /* Set the border to transparent */,
       borderImage: `linear-gradient(to bottom, #165865, #80aab3) 1`,
       pointerEvents: 'none',
       clipPath: `polygon(
@@ -43,7 +40,7 @@ const useStyles = createStyles((theme) => ({
   },
 
   default: {
-    backgroundColor: '#f3f3f3'
+    backgroundColor: '#f3f3f3',
   },
 
   title: {
@@ -61,13 +58,11 @@ const useStyles = createStyles((theme) => ({
     minWidth: '100%',
     maxWidth: '100%',
     height: '300px',
-    background: "#072f37",
+    background: '#072f37',
     [theme.fn.smallerThan('sm')]: {
       height: '250px',
-    }
-
+    },
   },
-
 }))
 
 export default useStyles

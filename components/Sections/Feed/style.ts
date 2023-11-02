@@ -32,13 +32,11 @@ const useStyles = createStyles((theme) => ({
     textDecoration: 'none',
     color: '#000000',
 
-
     '&:hover': {
       color: '#16093fbc',
       cursor: 'pointer',
     },
   },
-
 
   peakdLink: {
     color: '#228be6',

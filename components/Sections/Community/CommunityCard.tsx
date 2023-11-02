@@ -25,8 +25,8 @@ export default function CommunityCard({ image, tag }: Props) {
           onClick={() => {
             showNotification({
               autoClose: 3000,
-              title: "Warning",
-              message: <NotificationText message='There is no comunity page!' time={3000} />,
+              title: 'Warning',
+              message: <NotificationText message="There is no comunity page!" time={3000} />,
               styles: (theme) => ({
                 root: {
                   backgroundColor: '#072f37',
@@ -41,7 +41,7 @@ export default function CommunityCard({ image, tag }: Props) {
                 },
               }),
               loading: false,
-            });
+            })
           }}
         />
       )}

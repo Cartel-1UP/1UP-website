@@ -1,18 +1,15 @@
 'use client'
 
-import { communityAssetsData } from '@/data/communityData';
-import { Avatar, Card, Center, Container, Grid, Group, Select, Space, Text } from '@mantine/core';
-import { forwardRef, useState } from 'react';
-import { CommunityStats } from '../CommunityStats';
-import Line from '../Line';
-import useStyles from '../style';
-
-
-
+import { communityAssetsData } from '@/data/communityData'
+import { Avatar, Card, Center, Container, Grid, Group, Select, Space, Text } from '@mantine/core'
+import { forwardRef, useState } from 'react'
+import { CommunityStats } from '../CommunityStats'
+import Line from '../Line'
+import useStyles from '../style'
 
 interface ItemProps extends React.ComponentPropsWithoutRef<'div'> {
-  image: string;
-  label: string;
+  image: string
+  label: string
 }
 
 const SelectItem = forwardRef<HTMLDivElement, ItemProps>(
@@ -27,11 +24,11 @@ const SelectItem = forwardRef<HTMLDivElement, ItemProps>(
       </Group>
     </div>
   )
-);
+)
 
 export function AssetsPage() {
   const { classes, theme } = useStyles()
-  const [searchValue, onSearchChange] = useState(communityAssetsData[0].value);
+  const [searchValue, onSearchChange] = useState(communityAssetsData[0].value)
 
   return (
     <>
@@ -39,14 +36,18 @@ export function AssetsPage() {
       <Grid grow>
         <Grid.Col span={12}>
           <Card bg={'#072f37'} className={classes.card}>
-            <Container size='xl'>
-              <Center><Text size={18} fw={400} c={'#ffffff'}>Total amount of vault</Text></Center>
+            <Container size="xl">
+              <Center>
+                <Text size={18} fw={400} c={'#ffffff'}>
+                  Total amount of vault
+                </Text>
+              </Center>
               <Line />
             </Container>
           </Card>
           <Space h="xl" />
           <Card className={classes.card} bg={'#072f37'}>
-            <Container size='xl' h={400}>
+            <Container size="xl" h={400}>
               <Grid grow>
                 <Grid.Col span={12}>
                   <Select
@@ -62,14 +63,15 @@ export function AssetsPage() {
                     maxDropdownHeight={220}
                     nothingFound="Nobody here"
                     filter={(value, item) =>
-                      Boolean(item.label && item.label.toLowerCase().includes(value.toLowerCase().trim()))
+                      Boolean(
+                        item.label && item.label.toLowerCase().includes(value.toLowerCase().trim())
+                      )
                     }
                   />
                   <Grid grow>
                     <Grid.Col span={12}>
                       <CommunityStats value={searchValue} />
                     </Grid.Col>
-
                   </Grid>
                 </Grid.Col>
               </Grid>

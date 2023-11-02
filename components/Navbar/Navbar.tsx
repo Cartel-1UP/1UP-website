@@ -16,7 +16,7 @@ import { UserMenu } from './UserMenu'
 
 export function Navbar() {
   const { classes, theme } = useStyles()
-  const router = useRouter();
+  const router = useRouter()
 
   const authorized = useAuthorizationStore((state: { authorized: boolean }) => state.authorized)
   const userImage = useAuthorizationStore((state: { profile_image: string }) => state.profile_image)
@@ -26,20 +26,20 @@ export function Navbar() {
   const isMd = useMediaQuery(`(max-width: ${theme.breakpoints.md}px)`)
 
   const [userMenuOpened, setUserMenuOpened] = useState(false)
-  const [opened, { open, close: closeDrawer }] = useDisclosure(false);
+  const [opened, { open, close: closeDrawer }] = useDisclosure(false)
 
   const navLinks = [
     {
       label: 'Swap',
       handleAction: () => {
         window.open(`https://swap.oneup-cartel.com/`, '_blank')
-      }
+      },
     },
     {
       label: 'Resources',
       handleAction: () => {
         router.push('/resources')
-      }
+      },
     },
   ]
 
@@ -51,7 +51,7 @@ export function Navbar() {
       handleAction: () => {
         closeDrawer()
         window.open(`https://www.peakd.com/@${username}`, '_blank')
-      }
+      },
     },
     {
       label: 'Bookmarks',
@@ -60,7 +60,7 @@ export function Navbar() {
       handleAction: () => {
         closeDrawer()
         router.push('/bookmarks')
-      }
+      },
     },
     {
       label: 'Swap',
@@ -68,7 +68,7 @@ export function Navbar() {
       handleAction: () => {
         closeDrawer()
         window.open(`https://swap.oneup-cartel.com/`, '_blank')
-      }
+      },
     },
     {
       label: 'Resources',
@@ -76,7 +76,7 @@ export function Navbar() {
       handleAction: () => {
         closeDrawer()
         router.push('/resources')
-      }
+      },
     },
   ]
 
@@ -99,14 +99,25 @@ export function Navbar() {
                 </Center>
               </Grid.Col>
               <Grid.Col span={isMd ? 8 : 6}>
-                {isMd ?
-                  <Image src={oneuplogo.src} alt="Logo" fit="contain" onClick={() => router.push('/')} sx={{ cursor: 'pointer' }} /> :
+                {isMd ? (
+                  <Image
+                    src={oneuplogo.src}
+                    alt="Logo"
+                    fit="contain"
+                    onClick={() => router.push('/')}
+                    sx={{ cursor: 'pointer' }}
+                  />
+                ) : (
                   <Link href="/">
                     <Image src={oneuplogo.src} alt="Logo" fit="contain" height={70} />
                   </Link>
-                }
+                )}
               </Grid.Col>
-              <Grid.Col span={isMd ? 4 : 3} pr={20} sx={{ display: 'flex', justifyContent: 'right' }}>
+              <Grid.Col
+                span={isMd ? 4 : 3}
+                pr={20}
+                sx={{ display: 'flex', justifyContent: 'right' }}
+              >
                 <Group className={classes.hiddenSm}>
                   {authorized ? (
                     <UserMenu
@@ -119,7 +130,12 @@ export function Navbar() {
                     <LoginButton />
                   )}
                 </Group>
-                <Burger opened={opened} onClick={open} className={classes.hiddenDesktop} color={'#f3f3f3'} />
+                <Burger
+                  opened={opened}
+                  onClick={open}
+                  className={classes.hiddenDesktop}
+                  color={'#f3f3f3'}
+                />
               </Grid.Col>
             </Grid>
           </Header>
