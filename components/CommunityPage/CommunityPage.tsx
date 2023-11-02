@@ -19,13 +19,12 @@ export function CommunityPage({ image, tag }: Props) {
   const { classes, theme } = useStyles()
   const isMd = useMediaQuery(`(max-width: ${theme.breakpoints.md}px)`)
   const result = comumnityData.filter((data) => data.tag === tag)[0]
-  console.log(result)
   const name = tagToTwitterAccount[tag];
 
   return (
     isMd ?
       <>
-        <FeedSection sort={'created'} tag={tag} isCommunity={true} />
+        <FeedSection sort={'created'} tag={tag} isCommunity={true} communityLogo={result.image} />
         {
           <CommunityBar communityLogo={result.image} tag={result.tag} />
         }
