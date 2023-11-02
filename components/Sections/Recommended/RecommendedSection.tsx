@@ -30,18 +30,15 @@ export function RecommendedSection() {
         mt={0}
         breakpoints={[{ maxWidth: 'md', cols: 1 }]}
       >
-        {
-          isLoading ? <RecommendedCardSkeleton /> : data ? (
-            data?.map?.((item: any) => <RecommendedCard article={item} key={item.id} />)
-          ) : (
-            <></>
-          )}
+        {isLoading ? (
+          <RecommendedCardSkeleton />
+        ) : data ? (
+          data?.map?.((item: any) => <RecommendedCard article={item} key={item.id} />)
+        ) : (
+          <></>
+        )}
       </SimpleGrid>
-      {!isMd && (
-        <Card withBorder p="md" radius={0} className={classes.cardFooter}>
-
-        </Card>)
-      }
+      {!isMd && <Card withBorder p="md" radius={0} className={classes.cardFooter}></Card>}
     </>
   )
 }

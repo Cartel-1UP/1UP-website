@@ -35,180 +35,168 @@ export const galleryData = [
   {
     name: 'boss',
     image: boss.src,
-    span: 3
+    span: 3,
   },
   {
     name: 'blue',
     image: blue.src,
-    span: 3
+    span: 3,
   },
   {
     name: 'green',
     image: green.src,
-    span: 3
+    span: 3,
   },
   {
     name: 'red',
     image: red.src,
-    span: 3
+    span: 3,
   },
   {
     name: 'bang',
     image: bang.src,
-    span: 3
+    span: 3,
   },
   {
     name: 'juggle',
     image: juggle.src,
-    span: 3
+    span: 3,
   },
   {
     name: 'manager',
     image: manager.src,
-    span: 3
+    span: 3,
   },
   {
     name: 'wrestler',
     image: wrestler.src,
-    span: 3
+    span: 3,
   },
   {
     name: 'pizza',
     image: pizza.src,
-    span: 3
+    span: 3,
   },
   {
     name: 'psyberx',
     image: psyberx.src,
-    span: 3
+    span: 3,
   },
   {
     name: 'ragnarok',
     image: ragnarok.src,
-    span: 3
+    span: 3,
   },
   {
     name: 'shroominaut',
     image: shroominaut.src,
-    span: 3
+    span: 3,
   },
   {
     name: 'zoombie',
     image: zoombie.src,
-    span: 3
+    span: 3,
   },
 
   {
     name: 'tamer_2',
     image: tamer_2.src,
-    span: 3
+    span: 3,
   },
   {
     name: 'rising',
     image: rising.src,
-    span: 3
+    span: 3,
   },
 
   {
     name: 'Atanvardo',
     image: atanvardo.src,
-    span: 3
+    span: 3,
   },
-
 
   {
     name: 'tamer',
     image: tamer.src,
-    span: 3
+    span: 3,
   },
   {
     name: 'Game Scrooge',
     image: game_scrooge.src,
-    span: 3
+    span: 3,
   },
-
 
   {
     name: 'soccer',
     image: soccer.src,
-    span: 3
+    span: 3,
   },
-
 
   {
     name: 'Astral',
     image: astral.src,
-    span: 3
+    span: 3,
   },
   {
     name: 'cheers',
     image: cheers.src,
-    span: 3
+    span: 3,
   },
-
-
-
-
-
-
-
-
-
 
   {
     name: 'King 1UP 4',
     image: king_4.src,
-    span: 3
+    span: 3,
   },
   {
     name: 'grafiti',
     image: grafiti.src,
-    span: 6
+    span: 6,
   },
   {
     name: 'Cartel Logo 1',
     image: cartel1.src,
-    span: 3
+    span: 3,
   },
   {
     name: 'Cartel Logo 2',
     image: cartel2.src,
-    span: 3
+    span: 3,
   },
   {
     name: 'Cartel Logo 3',
     image: cartel3.src,
-    span: 3
+    span: 3,
   },
   {
     name: 'Cartel Logo 4',
     image: cartel4.src,
-    span: 3
+    span: 3,
   },
   {
     name: 'Cartel Logo 5',
     image: cartel5.src,
-    span: 3
+    span: 3,
   },
   {
     name: 'Cartel Logo 6',
     image: cartel6.src,
-    span: 3
+    span: 3,
   },
   {
     name: 'King 1UP 1',
     image: king_1.src,
-    span: 3
+    span: 3,
   },
   {
     name: 'King 1UP 2',
     image: king_2.src,
-    span: 3
+    span: 3,
   },
 
   {
     name: 'King 1UP 3',
     image: king_3.src,
-    span: 6
+    span: 6,
   },
 ]

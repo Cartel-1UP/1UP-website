@@ -18,12 +18,18 @@ export default function Home() {
   return (
     <>
       {isMd ? (
-        <div style={{ background: 'linear-gradient(to top, #275c672d, #072f37 90%, #072f37 100%)' }}>
+        <div
+          style={{ background: 'linear-gradient(to top, #275c672d, #072f37 90%, #072f37 100%)' }}
+        >
           <MainSection />
         </div>
       ) : (
         <>
-          <Container fluid bg={'linear-gradient(to top, #275c672d, #072f37 90%, #072f37 100%)'} pb={25}>
+          <Container
+            fluid
+            bg={'linear-gradient(to top, #275c672d, #072f37 90%, #072f37 100%)'}
+            pb={25}
+          >
             <Container size="xl" pt={0}>
               <MainSection />
             </Container>
@@ -51,24 +57,34 @@ export default function Home() {
                   <CommunityBar communityLogo={oneuplogo2.src} tag={'hive-102223'} />
                   <div style={{ position: 'sticky', top: '85px' }}>
                     <Space h={20} />
-                    <Card withBorder p={10} radius={5} sx={{
-                      borderColor: '#f3f3f3',
-                      borderWidth: 1
-                    }}>
+                    <Card
+                      withBorder
+                      p={10}
+                      radius={5}
+                      sx={{
+                        borderColor: '#f3f3f3',
+                        borderWidth: 1,
+                      }}
+                    >
                       <NavLink
                         label={'Check our Discord'}
-                        icon={<IconBrandDiscord size={24} stroke={1.5} color='#7289da' />}
+                        icon={<IconBrandDiscord size={24} stroke={1.5} color="#7289da" />}
                         onClick={() => window.open('https://discord.gg/f7sHEHYZJZ', '_blank')}
                       />
                     </Card>
                     <Space h={20} />
-                    <Card withBorder p={0} radius={5} sx={{
-                      borderColor: '#f3f3f3',
-                      borderWidth: 1
-                    }}>
+                    <Card
+                      withBorder
+                      p={0}
+                      radius={5}
+                      sx={{
+                        borderColor: '#f3f3f3',
+                        borderWidth: 1,
+                      }}
+                    >
                       <Timeline
-                        dataSource={{ sourceType: "profile", screenName: 'CartelOneup' }}
-                        options={{ height: "600", chrome: "noborders, transparent" }}
+                        dataSource={{ sourceType: 'profile', screenName: 'CartelOneup' }}
+                        options={{ height: '600', chrome: 'noborders, transparent' }}
                       />
                     </Card>
                   </div>

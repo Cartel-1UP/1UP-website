@@ -10,14 +10,15 @@ import {
   AspectRatio,
   Avatar,
   Badge,
-  Card, Container,
+  Card,
+  Container,
   Grid,
   Group,
   Image,
   Indicator,
   Space,
   Text,
-  ThemeIcon
+  ThemeIcon,
 } from '@mantine/core'
 import { useMediaQuery } from '@mantine/hooks'
 import { showNotification } from '@mantine/notifications'
@@ -33,13 +34,13 @@ interface Props {
 
 export function FeedCard({ article }: Props) {
   const { classes, theme } = useStyles()
-  const router = useRouter();
+  const router = useRouter()
   const authorized = useAuthorizationStore((state: { authorized: boolean }) => state.authorized)
 
   const [isVote, setIsVote] = useState(false)
   const [isComment, setIsComment] = useState(false)
   const [isImageExists, setIsImageExists] = useState(false)
-  const [isToggle, setIsToggle] = useState(false);
+  const [isToggle, setIsToggle] = useState(false)
 
   const numericalValue = parseFloat(article?.pending_payout_value)
   const roundedValue = Math.ceil(numericalValue * 100) / 100
@@ -58,18 +59,17 @@ export function FeedCard({ article }: Props) {
   })
   const bodyOfArticle = filteredBody.join(' ')
 
-
   const toggleBookmark = () => {
-    const bookmarks: Bookmark[] = JSON.parse(localStorage.getItem('bookmarks') || '[]');
+    const bookmarks: Bookmark[] = JSON.parse(localStorage.getItem('bookmarks') || '[]')
     if (!bookmarks.some((bookmark: Bookmark) => bookmark.permlink === article.permlink)) {
-      const newBookmark = { author: article.author, permlink: article.permlink };
+      const newBookmark = { author: article.author, permlink: article.permlink }
 
-      localStorage.setItem('bookmarks', JSON.stringify([...bookmarks, newBookmark]));
+      localStorage.setItem('bookmarks', JSON.stringify([...bookmarks, newBookmark]))
       setIsToggle(!isToggle)
       showNotification({
         autoClose: 3000,
-        title: "Bookmark",
-        message: <NotificationText message='Post correctly added to boomarks' time={3000} />,
+        title: 'Bookmark',
+        message: <NotificationText message="Post correctly added to boomarks" time={3000} />,
         styles: (theme) => ({
           root: {
             backgroundColor: '#072f37',
@@ -86,13 +86,15 @@ export function FeedCard({ article }: Props) {
         loading: false,
       })
     } else {
-      const updatedBookmarks = bookmarks.filter((bookmark: any) => bookmark.permlink !== article.permlink);
-      localStorage.setItem('bookmarks', JSON.stringify(updatedBookmarks));
+      const updatedBookmarks = bookmarks.filter(
+        (bookmark: any) => bookmark.permlink !== article.permlink
+      )
+      localStorage.setItem('bookmarks', JSON.stringify(updatedBookmarks))
       setIsToggle(!isToggle)
       showNotification({
         autoClose: 3000,
-        title: "Bookmark",
-        message: <NotificationText message='Post correctly deleted from boomarks' time={3000} />,
+        title: 'Bookmark',
+        message: <NotificationText message="Post correctly deleted from boomarks" time={3000} />,
         styles: (theme) => ({
           root: {
             backgroundColor: '#072f37',
@@ -109,7 +111,7 @@ export function FeedCard({ article }: Props) {
         loading: false,
       })
     }
-  };
+  }
 
   useEffect(() => {
     if (Array.isArray(article?.json_metadata.image) && article?.json_metadata.image.length === 0) {
@@ -135,7 +137,14 @@ export function FeedCard({ article }: Props) {
                   <Text size={'sm'} weight={400}>
                     Rebbloged by{' '}
                     <Text span c="blue" inherit>
-                      <a href={`https://peakd.com/@${article.reblogged_by[0]}`} className={classes.peakdLink} target="_blank" rel="noopener noreferrer">@{article.reblogged_by[0]}</a>
+                      <a
+                        href={`https://peakd.com/@${article.reblogged_by[0]}`}
+                        className={classes.peakdLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        @{article.reblogged_by[0]}
+                      </a>
                     </Text>
                   </Text>
                 </Group>
@@ -170,13 +179,30 @@ export function FeedCard({ article }: Props) {
               {`${article?.author} • ${formatedDate(date)}`}
             </Text>
           </Container>
-          <Container className={classes.link} ml={0} onClick={() => router.push(`/community/${article.community}/post/` + article.author + '/' + article.permlink)}>
-            <Text fw={700} mt={20} sx={{
-              fontFamily: 'Greycliff CF, sans-serif',
-            }}>
+          <Container
+            className={classes.link}
+            ml={0}
+            onClick={() =>
+              router.push(
+                `/community/${article.community}/post/` + article.author + '/' + article.permlink
+              )
+            }
+          >
+            <Text
+              fw={700}
+              mt={20}
+              sx={{
+                fontFamily: 'Greycliff CF, sans-serif',
+              }}
+            >
               {article?.title}
             </Text>
-            <Text color="dimmed" size="sm" fw={500} mt={5} className={classes.turncate}
+            <Text
+              color="dimmed"
+              size="sm"
+              fw={500}
+              mt={5}
+              className={classes.turncate}
               sx={{ fontFamily: 'Greycliff CF, sans-serif' }}
             >
               {bodyOfArticle}
@@ -188,7 +214,13 @@ export function FeedCard({ article }: Props) {
             <Container>
               <AspectRatio ratio={5 / 3}>
                 {isImageExists ? (
-                  <Image radius={0} src={article?.json_metadata.image[0]} withPlaceholder fit='fill' h={200} />
+                  <Image
+                    radius={0}
+                    src={article?.json_metadata.image[0]}
+                    withPlaceholder
+                    fit="fill"
+                    h={200}
+                  />
                 ) : (
                   <Image src={null} withPlaceholder radius={10} />
                 )}
@@ -200,10 +232,10 @@ export function FeedCard({ article }: Props) {
           <Container>
             {article?.json_metadata.tags
               ? article?.json_metadata.tags.slice(0, 3).map?.((item: string) => (
-                <Badge mr={5} radius={5} color="gray" key={item}>
-                  {item}
-                </Badge>
-              ))
+                  <Badge mr={5} radius={5} color="gray" key={item}>
+                    {item}
+                  </Badge>
+                ))
               : null}
           </Container>
         </Grid.Col>
@@ -216,24 +248,29 @@ export function FeedCard({ article }: Props) {
                   authorized
                     ? setIsVote(!isVote)
                     : showNotification({
-                      autoClose: 3000,
-                      title: "Warning",
-                      message: <NotificationText message='You have to login to upvote post!' time={3000} />,
-                      styles: (theme) => ({
-                        root: {
-                          backgroundColor: '#072f37',
-                          borderColor: '#072f37',
-                          '&::before': { backgroundColor: theme.white },
-                        },
-                        title: { color: theme.white },
-                        description: { color: theme.white },
-                        closeButton: {
-                          color: theme.white,
-                          '&:hover': { backgroundColor: '#04191d' },
-                        },
-                      }),
-                      loading: false,
-                    })
+                        autoClose: 3000,
+                        title: 'Warning',
+                        message: (
+                          <NotificationText
+                            message="You have to login to upvote post!"
+                            time={3000}
+                          />
+                        ),
+                        styles: (theme) => ({
+                          root: {
+                            backgroundColor: '#072f37',
+                            borderColor: '#072f37',
+                            '&::before': { backgroundColor: theme.white },
+                          },
+                          title: { color: theme.white },
+                          description: { color: theme.white },
+                          closeButton: {
+                            color: theme.white,
+                            '&:hover': { backgroundColor: '#04191d' },
+                          },
+                        }),
+                        loading: false,
+                      })
                 }
               />
             </span>
@@ -246,24 +283,29 @@ export function FeedCard({ article }: Props) {
                   authorized
                     ? setIsComment(!isComment)
                     : showNotification({
-                      autoClose: 3000,
-                      title: "Warning",
-                      message: <NotificationText message='You have to login to comment post!' time={3000} />,
-                      styles: (theme) => ({
-                        root: {
-                          backgroundColor: '#072f37',
-                          borderColor: '#072f37',
-                          '&::before': { backgroundColor: theme.white },
-                        },
-                        title: { color: theme.white },
-                        description: { color: theme.white },
-                        closeButton: {
-                          color: theme.white,
-                          '&:hover': { backgroundColor: '#04191d' },
-                        },
-                      }),
-                      loading: false,
-                    })
+                        autoClose: 3000,
+                        title: 'Warning',
+                        message: (
+                          <NotificationText
+                            message="You have to login to comment post!"
+                            time={3000}
+                          />
+                        ),
+                        styles: (theme) => ({
+                          root: {
+                            backgroundColor: '#072f37',
+                            borderColor: '#072f37',
+                            '&::before': { backgroundColor: theme.white },
+                          },
+                          title: { color: theme.white },
+                          description: { color: theme.white },
+                          closeButton: {
+                            color: theme.white,
+                            '&:hover': { backgroundColor: '#04191d' },
+                          },
+                        }),
+                        loading: false,
+                      })
                 }
               />
             </span>
@@ -274,83 +316,94 @@ export function FeedCard({ article }: Props) {
             </Text>
             <Space w="sm" />
             <span className={classes.icon}>
-              {JSON.parse(localStorage.getItem('bookmarks') || '[]').some((bookmark: any) => bookmark.permlink === article.permlink) ?
+              {JSON.parse(localStorage.getItem('bookmarks') || '[]').some(
+                (bookmark: any) => bookmark.permlink === article.permlink
+              ) ? (
                 <IconBookmarkOff
                   size={'1.1rem'}
                   onClick={() =>
                     authorized
-                      ?
-                      toggleBookmark() :
-                      showNotification({
-                        autoClose: 3000,
-                        title: "Warning",
-                        message: <NotificationText message='You have to login to delete bookmark!' time={3000} />,
-                        styles: (theme) => ({
-                          root: {
-                            backgroundColor: '#072f37',
-                            borderColor: '#072f37',
-                            '&::before': { backgroundColor: theme.white },
-                          },
-                          title: { color: theme.white },
-                          description: { color: theme.white },
-                          closeButton: {
-                            color: theme.white,
-                            '&:hover': { backgroundColor: '#04191d' },
-                          },
-                        }),
-                        loading: false,
-                      })
+                      ? toggleBookmark()
+                      : showNotification({
+                          autoClose: 3000,
+                          title: 'Warning',
+                          message: (
+                            <NotificationText
+                              message="You have to login to delete bookmark!"
+                              time={3000}
+                            />
+                          ),
+                          styles: (theme) => ({
+                            root: {
+                              backgroundColor: '#072f37',
+                              borderColor: '#072f37',
+                              '&::before': { backgroundColor: theme.white },
+                            },
+                            title: { color: theme.white },
+                            description: { color: theme.white },
+                            closeButton: {
+                              color: theme.white,
+                              '&:hover': { backgroundColor: '#04191d' },
+                            },
+                          }),
+                          loading: false,
+                        })
                   }
                 />
-                :
+              ) : (
                 <IconBookmark
                   size={'1.1rem'}
                   onClick={() =>
                     authorized
-                      ?
-                      toggleBookmark() :
-                      showNotification({
-                        autoClose: 3000,
-                        title: "Warning",
-                        message: <NotificationText message='You have to login to add bookmark!' time={3000} />,
-                        styles: (theme) => ({
-                          root: {
-                            backgroundColor: '#072f37',
-                            borderColor: '#072f37',
-                            '&::before': { backgroundColor: theme.white },
-                          },
-                          title: { color: theme.white },
-                          description: { color: theme.white },
-                          closeButton: {
-                            color: theme.white,
-                            '&:hover': { backgroundColor: '#04191d' },
-                          },
-                        }),
-                        loading: false,
-                      })
+                      ? toggleBookmark()
+                      : showNotification({
+                          autoClose: 3000,
+                          title: 'Warning',
+                          message: (
+                            <NotificationText
+                              message="You have to login to add bookmark!"
+                              time={3000}
+                            />
+                          ),
+                          styles: (theme) => ({
+                            root: {
+                              backgroundColor: '#072f37',
+                              borderColor: '#072f37',
+                              '&::before': { backgroundColor: theme.white },
+                            },
+                            title: { color: theme.white },
+                            description: { color: theme.white },
+                            closeButton: {
+                              color: theme.white,
+                              '&:hover': { backgroundColor: '#04191d' },
+                            },
+                          }),
+                          loading: false,
+                        })
                   }
-                />}
+                />
+              )}
             </span>
           </Container>
         </Grid.Col>
       </Grid>
-      {isVote && (
-        isMd ? (
+      {isVote &&
+        (isMd ? (
           <VoteSlider permlink={article.permlink} author={article.author} setIsVote={setIsVote} />
-        ) :
+        ) : (
           <Grid.Col span={12}>
             <VoteSlider permlink={article.permlink} author={article.author} setIsVote={setIsVote} />
           </Grid.Col>
-      )}
-      {isComment && (
-        isMd ? (
+        ))}
+      {isComment &&
+        (isMd ? (
           <CommentEditor
             setIsComment={setIsComment}
             permlink={article.permlink}
             parentAuthor={article.author}
             parentPermlink={article?.parent_permlink}
           />
-        ) :
+        ) : (
           <Grid.Col span={12}>
             <CommentEditor
               setIsComment={setIsComment}
@@ -359,7 +412,7 @@ export function FeedCard({ article }: Props) {
               parentPermlink={article?.parent_permlink}
             />
           </Grid.Col>
-      )}
+        ))}
     </Card>
   )
 }

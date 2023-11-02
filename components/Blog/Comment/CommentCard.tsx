@@ -1,6 +1,5 @@
 'use client'
 
-
 import CommentEditor from '@/components/ui/CommentEditor/CommentEditor'
 import { Markdown } from '@/components/ui/Markdown/Markdown'
 import { VoteSlider } from '@/components/ui/VoteSlider/VoteSlider'
@@ -9,13 +8,14 @@ import { useAuthorizationStore } from '@/zustand/stores/useAuthorizationStore'
 import {
   ActionIcon,
   Avatar,
-  Container, Group,
+  Container,
+  Group,
   Indicator,
   Paper,
   Space,
   Stack,
   Text,
-  TypographyStylesProvider
+  TypographyStylesProvider,
 } from '@mantine/core'
 import { IconChevronDown, IconChevronUp, IconHeart, IconMessage } from '@tabler/icons'
 import { useState } from 'react'
@@ -48,7 +48,12 @@ export default function CommentCard({ comment, nestedComments, isVisible }: Prop
   }
 
   return (
-    <Paper withBorder={comment.depth == 1} p={comment.depth == 1 ? 25 : 0} radius={0} className={classes.comment}>
+    <Paper
+      withBorder={comment.depth == 1}
+      p={comment.depth == 1 ? 25 : 0}
+      radius={0}
+      className={classes.comment}
+    >
       <Container p={0} m={comment.depth == 1 ? 10 : 0} size="lg">
         <Group spacing={5}>
           <Indicator
@@ -68,10 +73,10 @@ export default function CommentCard({ comment, nestedComments, isVisible }: Prop
           </Indicator>
 
           <Stack spacing={0}>
-            <Text pl={20} size="xs" transform="uppercase" weight={500} >
+            <Text pl={20} size="xs" transform="uppercase" weight={500}>
               {comment.author}
             </Text>
-            <Text pl={20} color="dimmed" size="xs" weight={500} >
+            <Text pl={20} color="dimmed" size="xs" weight={500}>
               {getTimeAgo(comment.created)}
             </Text>
           </Stack>
@@ -107,17 +112,14 @@ export default function CommentCard({ comment, nestedComments, isVisible }: Prop
         </Container>
 
         {isVote && (
-
           <VoteSlider
             permlink={comment.permlink}
             author={comment.author}
             setIsVote={setIsVote}
             queryKey={'comments-data'}
           />
-
         )}
         {isComment && (
-
           <CommentEditor
             setIsComment={setIsComment}
             permlink={comment.permlink}
@@ -125,7 +127,6 @@ export default function CommentCard({ comment, nestedComments, isVisible }: Prop
             parentPermlink={comment?.parent_permlink}
             queryKey={'comments-data'}
           />
-
         )}
         {areChildrenVisible && (
           <>
@@ -139,7 +140,6 @@ export default function CommentCard({ comment, nestedComments, isVisible }: Prop
                     isVisible={true}
                   />
                 </div>
-
               ))}
           </>
         )}

@@ -23,7 +23,6 @@ function LoginButton({ closeDrawer }: Props) {
 
   const authorized = useAuthorizationStore((state: { authorized: boolean }) => state.authorized)
 
-
   const isSm = useMediaQuery(`(max-width: ${theme.breakpoints.sm}px)`)
 
   useEffect(() => {
@@ -67,7 +66,7 @@ function LoginButton({ closeDrawer }: Props) {
 
   return (
     <>
-      {isSm ?
+      {isSm ? (
         <Container size={'xs'} pt={25}>
           <Stack spacing="xl">
             <TextInput
@@ -92,11 +91,11 @@ function LoginButton({ closeDrawer }: Props) {
             </Button>
           </Stack>
         </Container>
-        :
+      ) : (
         <>
           <Group position="center">
             <Button
-              variant='outline'
+              variant="outline"
               className={classes.button}
               onClick={() => setOpened((o) => !o)}
             >
@@ -123,7 +122,7 @@ function LoginButton({ closeDrawer }: Props) {
                 onChange={(event) => setValue(event.currentTarget.value)}
               />
               <Button
-                variant='outline'
+                variant="outline"
                 className={classes.buttonLogin}
                 onClick={() => {
                   setOpened(false)
@@ -135,7 +134,7 @@ function LoginButton({ closeDrawer }: Props) {
             </Group>
           </Dialog>
         </>
-      }
+      )}
     </>
   )
 }

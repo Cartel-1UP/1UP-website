@@ -20,9 +20,9 @@ const useStyles = createStyles((theme) => ({
   },
 
   header: {
-      position: 'sticky', 
-      top: '0' ,
-      zIndex: 1000,
+    position: 'sticky',
+    top: '0',
+    zIndex: 1000,
   },
 
   navbar: {
@@ -33,7 +33,7 @@ const useStyles = createStyles((theme) => ({
       paddingBottom: 15,
       paddingTop: 10,
       paddaingBottom: 25,
-    }
+    },
   },
 
   subLink: {
@@ -57,8 +57,7 @@ const useStyles = createStyles((theme) => ({
 
   drawer: {
     backgroundColor: '#06272e',
-  }
-
+  },
 }))
 
 export default useStyles

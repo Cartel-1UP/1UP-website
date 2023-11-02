@@ -9,7 +9,6 @@ import { MantineProvider } from '@mantine/core'
 import { NotificationsProvider } from '@mantine/notifications'
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-
   return (
     <ReactQueryProvider>
       <ColorProvider>

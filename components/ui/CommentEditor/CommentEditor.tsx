@@ -2,9 +2,28 @@
 
 import { generateRandomLetters } from '@/utils/methods/generateRandom'
 import { useAuthorizationStore } from '@/zustand/stores/useAuthorizationStore'
-import { ActionIcon, Button, Card, Container, Divider, Grid, Group, Space, Text, Textarea } from '@mantine/core'
+import {
+  ActionIcon,
+  Button,
+  Card,
+  Container,
+  Divider,
+  Grid,
+  Group,
+  Space,
+  Text,
+  Textarea,
+} from '@mantine/core'
 import { showNotification } from '@mantine/notifications'
-import { IconBold, IconHeading, IconItalic, IconLink, IconList, IconPhotoDown, IconQuote } from '@tabler/icons'
+import {
+  IconBold,
+  IconHeading,
+  IconItalic,
+  IconLink,
+  IconList,
+  IconPhotoDown,
+  IconQuote,
+} from '@tabler/icons'
 import { KeychainSDK, Post } from 'keychain-sdk'
 import React, { Dispatch, SetStateAction, useRef, useState } from 'react'
 import { useMutation, useQueryClient } from 'react-query'
@@ -104,7 +123,7 @@ const CommentEditor = ({ setIsComment, permlink, parentAuthor, queryKey }: Props
       onSuccess: () => {
         showNotification({
           autoClose: 7000,
-          title: "Success",
+          title: 'Success',
           message: <NotificationText message={`Your comment was sent correctly`} time={7000} />,
           styles: (theme) => ({
             root: {
@@ -128,12 +147,12 @@ const CommentEditor = ({ setIsComment, permlink, parentAuthor, queryKey }: Props
           setIsComment(false)
           setMarkdown('')
         }, 4000)
-          ; () => clearTimeout(timeout)
+        ;() => clearTimeout(timeout)
       },
       onError: (e: any) => {
         showNotification({
           autoClose: 3000,
-          title: "Error",
+          title: 'Error',
           message: <NotificationText message={`Something went wrong`} time={3000} />,
           styles: (theme) => ({
             root: {
@@ -154,7 +173,7 @@ const CommentEditor = ({ setIsComment, permlink, parentAuthor, queryKey }: Props
           setIsComment(false)
           setMarkdown('')
         }, 2500)
-          ; () => clearTimeout(timeout)
+        ;() => clearTimeout(timeout)
       },
     }
   )
@@ -215,8 +234,7 @@ const CommentEditor = ({ setIsComment, permlink, parentAuthor, queryKey }: Props
                   <Markdown text={markdown} />
                 </Card>
               </>
-            )
-            }
+            )}
           </Grid.Col>
           <Grid.Col>
             <Group className={classes.buttonContainer}>

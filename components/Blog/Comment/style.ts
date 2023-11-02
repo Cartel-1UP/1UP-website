@@ -36,9 +36,6 @@ const useStyles = createStyles((theme) => ({
     alignItems: 'center',
     alignContent: 'left',
   },
-
-
-
 }))
 
 export default useStyles

@@ -2,7 +2,17 @@
 
 import { comumnityData } from '@/data/communityData'
 import { logoutUser } from '@/zustand/stores/useAuthorizationStore'
-import { Avatar, Badge, Divider, Drawer, Group, Menu, NavLink, ScrollArea, Text } from '@mantine/core'
+import {
+  Avatar,
+  Badge,
+  Divider,
+  Drawer,
+  Group,
+  Menu,
+  NavLink,
+  ScrollArea,
+  Text,
+} from '@mantine/core'
 import { IconLogout, IconUsers } from '@tabler/icons'
 import { useRouter } from 'next/navigation'
 import LoginButton from '../LoginButton/LoginButton'
@@ -10,18 +20,26 @@ import { NavLinkSection } from './NavLinkSection'
 import useStyles from './style'
 
 type Props = {
-  opened: boolean;
-  closeDrawer: () => void;
-  authorized: boolean;
-  userImage: string;
-  userReputation: number;
-  username: string;
-  navLinksMobile: any;
+  opened: boolean
+  closeDrawer: () => void
+  authorized: boolean
+  userImage: string
+  userReputation: number
+  username: string
+  navLinksMobile: any
 }
 
-export function NavDrawer({ opened, closeDrawer, authorized, userImage, userReputation, username, navLinksMobile }: Props) {
+export function NavDrawer({
+  opened,
+  closeDrawer,
+  authorized,
+  userImage,
+  userReputation,
+  username,
+  navLinksMobile,
+}: Props) {
   const { classes, theme } = useStyles()
-  const router = useRouter();
+  const router = useRouter()
 
   return (
     <Drawer
@@ -30,9 +48,9 @@ export function NavDrawer({ opened, closeDrawer, authorized, userImage, userRepu
           '& svg': {
             width: 50,
             height: 50,
-            color: '#f3f3f3'
-          }
-        }
+            color: '#f3f3f3',
+          },
+        },
       }}
       opened={opened}
       onClose={closeDrawer}
@@ -42,7 +60,7 @@ export function NavDrawer({ opened, closeDrawer, authorized, userImage, userRepu
       className={classes.drawer}
     >
       <>
-        {authorized &&
+        {authorized && (
           <>
             <Group pl={10}>
               <Avatar src={userImage} radius="xl" />
@@ -63,7 +81,7 @@ export function NavDrawer({ opened, closeDrawer, authorized, userImage, userRepu
             </Group>
             <Divider mt={20} mb={10} />
           </>
-        }
+        )}
         <NavLinkSection navLinks={navLinksMobile} authorized={authorized} />
         <Menu.Divider />
         <NavLink
@@ -79,8 +97,9 @@ export function NavDrawer({ opened, closeDrawer, authorized, userImage, userRepu
                 '&:hover': {
                   background: '#06272e',
                 },
-              }
-            })}>
+              },
+            })}
+          >
             {comumnityData.map((item) => (
               <NavLink
                 className={classes.subLink}
@@ -90,24 +109,25 @@ export function NavDrawer({ opened, closeDrawer, authorized, userImage, userRepu
                 onClick={() => {
                   closeDrawer()
                   router.push(`/community/` + item.tag)
-                }
-                }
+                }}
                 disabled={item.tag === 'none'}
               />
             ))}
           </ScrollArea>
         </NavLink>
         <Menu.Divider />
-        {authorized ?
+        {authorized ? (
           <NavLink
             label="Log out"
             className={classes.subLink}
             icon={<IconLogout color={'white'} size={20} stroke={1.5} />}
-            onClick={() => { closeDrawer(), logoutUser() }}
+            onClick={() => {
+              closeDrawer(), logoutUser()
+            }}
           />
-          :
+        ) : (
           <LoginButton closeDrawer={closeDrawer} />
-        }
+        )}
       </>
     </Drawer>
   )

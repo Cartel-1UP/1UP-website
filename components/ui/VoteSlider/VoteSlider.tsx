@@ -8,7 +8,6 @@ import { useMutation, useQueryClient } from 'react-query'
 import { NotificationText } from '../ProgressBar/ProgressBar'
 import useStyles from './style'
 
-
 type Props = {
   setIsVote?: Dispatch<SetStateAction<boolean>>
   permlink: string
@@ -46,7 +45,6 @@ export function VoteSlider({
     { value: 100, label: '100%' },
   ]
 
-
   const handleRequestVote = useMutation<void, any, void, unknown>(
     async () => {
       const keychain = new KeychainSDK(window)
@@ -59,18 +57,21 @@ export function VoteSlider({
         },
       }
       return new Promise((resolve, reject) => {
-        keychain.vote(formParamsAsObject.data as Vote).then((response: any) => {
-          resolve(response)
-        }).catch((error: any) => {
-          reject(error)
-        })
+        keychain
+          .vote(formParamsAsObject.data as Vote)
+          .then((response: any) => {
+            resolve(response)
+          })
+          .catch((error: any) => {
+            reject(error)
+          })
       })
     },
     {
       onSuccess: () => {
         showNotification({
           autoClose: 7000,
-          title: "Success",
+          title: 'Success',
           message: <NotificationText message={`Your upvote was sent correctly`} time={7000} />,
           styles: (theme) => ({
             root: {
@@ -95,13 +96,18 @@ export function VoteSlider({
           setIsVote && setIsVote(false)
           setSuccessfullUpvoted && setSuccessfullUpvoted(true)
         }, 10500)
-          ; () => clearTimeout(timeout)
+        ;() => clearTimeout(timeout)
       },
       onError: (e: any) => {
         showNotification({
           autoClose: 3000,
-          title: "Error",
-          message: <NotificationText message={`You already upvoted this post wit same wieght!`} time={3000} />,
+          title: 'Error',
+          message: (
+            <NotificationText
+              message={`You already upvoted this post wit same wieght!`}
+              time={3000}
+            />
+          ),
           styles: (theme) => ({
             root: {
               backgroundColor: '#072f37',

@@ -99,10 +99,7 @@ export const comumnityData = [
     tag: 'none',
     value: 'KOD',
   },
-
-
 ]
-
 
 export const communityAssetsData = [
   {
@@ -180,6 +177,4 @@ export const communityAssetsData = [
     label: 'HoloZing',
     value: 'HoloZing',
   },
-
-
 ]

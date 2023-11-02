@@ -12,16 +12,16 @@ type Props = {
 }
 
 function isImageUrl(url: string): boolean {
-  const imageExtensions = ['jpeg', 'jpg', 'gif', 'bmp', 'svg', 'webp'];
-  return imageExtensions.some(ext => url.endsWith(`.${ext}`));
+  const imageExtensions = ['jpeg', 'jpg', 'gif', 'bmp', 'svg', 'webp']
+  return imageExtensions.some((ext) => url.endsWith(`.${ext}`))
 }
 
 function isValidUrl(url: string): boolean {
   try {
-    new URL(url);
-    return true;
+    new URL(url)
+    return true
   } catch (error) {
-    return false;
+    return false
   }
 }
 
@@ -35,9 +35,9 @@ function matchesCustomImageRegex(url: string): boolean {
     /^(https?:\/\/)?(www\.)?(images\.hive\.blog)\/.+/,
     /^(https?:\/\/)?(files\.peakd\.com)\/.+/,
     /^(https?:\/\/)?(media\.tenor\.com)\/.+/,
-  ];
+  ]
 
-  return customImageRegexes.some(regex => regex.test(url));
+  return customImageRegexes.some((regex) => regex.test(url))
 }
 
 export function Markdown({ text }: Props) {
@@ -52,16 +52,15 @@ export function Markdown({ text }: Props) {
   const media = /^(https?:\/\/)?(media\.tenor\.com)\/.+/
 
   const markdownBody = useMemo(() => {
-    const replacedBody = text.replace(imageRegex, (match, alt, url) => {
-      if (url.match(/\.(png|jpe?g|gif|bmp|svg|webp)$/i) || url.match(media)) {
-        return `<div class="${classes.image}"><Image alt="${alt}" src="${url}" className="${classes.responsiveImage}" /></div>`
-      } else {
-        return match
-      }
-    }).replace(
-      /<center>(.*?)<\/center>/gs,
-      '<center>$1</center>'.replace(/"/g, '')
-    )
+    const replacedBody = text
+      .replace(imageRegex, (match, alt, url) => {
+        if (url.match(/\.(png|jpe?g|gif|bmp|svg|webp)$/i) || url.match(media)) {
+          return `<div class="${classes.image}"><Image alt="${alt}" src="${url}" className="${classes.responsiveImage}" /></div>`
+        } else {
+          return match
+        }
+      })
+      .replace(/<center>(.*?)<\/center>/gs, '<center>$1</center>'.replace(/"/g, ''))
 
     return (
       <ReactMarkdown
@@ -92,9 +91,7 @@ export function Markdown({ text }: Props) {
                   />
                 </div>
               )
-            }
-
-            else if (href.match(/^https:\/\/twitter\.com\/[^/]+\/status\/\d+$/)) {
+            } else if (href.match(/^https:\/\/twitter\.com\/[^/]+\/status\/\d+$/)) {
               const tweetId = href.match(/\/status\/(\d+)$/)[1]
               return (
                 <div className={classes.tweet}>
@@ -120,7 +117,12 @@ export function Markdown({ text }: Props) {
             } else if (href.startsWith('@')) {
               const username = href.slice(1)
               return (
-                <a href={`https://twitter.com/${username}`} target="_blank" rel="noreferrer" className={classes.link}>
+                <a
+                  href={`https://twitter.com/${username}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className={classes.link}
+                >
                   {children}
                 </a>
               )
@@ -163,23 +165,23 @@ export function Markdown({ text }: Props) {
           figure: ({ children, ...props }: any) => <figure {...props}>{children}</figure>,
           p: ({ children }: any) => <div>{children}</div>,
           center: ({ children }: any) => {
-            const firstChild = children[0];
+            const firstChild = children[0]
             const width = 'auto'
             const height = 'auto'
 
-
-
             if (typeof firstChild === 'string') {
-              const urlMatch = firstChild.match(/\[(.*?)\]\(([^)]+)\)/);
+              const urlMatch = firstChild.match(/\[(.*?)\]\(([^)]+)\)/)
 
               if (urlMatch) {
-                const linkText = urlMatch[1];
-                const linkUrl = urlMatch[2];
+                const linkText = urlMatch[1]
+                const linkUrl = urlMatch[2]
                 return (
                   <center>
-                    <a href={linkUrl} target='_blank' rel="noreferrer">{linkText}</a>
+                    <a href={linkUrl} target="_blank" rel="noreferrer">
+                      {linkText}
+                    </a>
                   </center>
-                );
+                )
               } else if (isImageUrl(firstChild) || matchesCustomImageRegex(firstChild)) {
                 return (
                   <center>
@@ -190,13 +192,15 @@ export function Markdown({ text }: Props) {
                       style={{ width, height, borderRadius: 5 }}
                     />
                   </center>
-                );
+                )
               } else if (isValidUrl(firstChild)) {
                 return (
                   <center>
-                    <a href={firstChild} target='_blank' rel="noreferrer">{firstChild}</a>
+                    <a href={firstChild} target="_blank" rel="noreferrer">
+                      {firstChild}
+                    </a>
                   </center>
-                );
+                )
               }
             }
 
@@ -205,8 +209,7 @@ export function Markdown({ text }: Props) {
               <div>
                 <center>{firstChild}</center>
               </div>
-            );
-
+            )
           },
         }}
       >

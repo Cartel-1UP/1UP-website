@@ -1,5 +1,3 @@
-import { ArticleMetaData, Vote } from './blog.interface'
-
 export type Maincard = {
   id: number
   author: string
@@ -24,6 +22,25 @@ export type Posts = {
 export type Post = {
   author: string
   permlink: string
+}
+
+export type Tag = {
+  name: string
+  type: 'link' | 'heading' | 'bold' | 'italic' | 'image'
+}
+
+export type Vote = {
+  rshares: number
+  voter: string
+}
+
+export type ArticleMetaData = {
+  app: string
+  description: string
+  format: string
+  image: string[]
+  image_ratios: number[]
+  tags: string[]
 }
 
 export type HiveArticle = {
@@ -82,6 +99,6 @@ export type HiveArticleComments = {
 }
 
 export type Bookmark = {
-  author: string;
-  permlink: string;
+  author: string
+  permlink: string
 }

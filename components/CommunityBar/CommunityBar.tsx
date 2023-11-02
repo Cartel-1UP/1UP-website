@@ -8,9 +8,11 @@ import {
   Card,
   Divider,
   Group,
-  Image, Skeleton, Text,
+  Image,
+  Skeleton,
+  Text,
   ThemeIcon,
-  Tooltip
+  Tooltip,
 } from '@mantine/core'
 import { IconMessage2, IconPigMoney, IconUsers } from '@tabler/icons'
 import { Markdown } from '../ui/Markdown/Markdown'
@@ -24,16 +26,17 @@ type Props = {
 export function CommunityBar({ communityLogo, tag }: Props) {
   const { classes, theme } = useStyles()
 
-  const { data: community, isLoading } = useGetCommunity(tag);
+  const { data: community, isLoading } = useGetCommunity(tag)
 
   const communityInfo = community?.data?.result
 
   return (
     <>
-      {isLoading ?
-        <Card withBorder p="md" radius={5} className={classes.card} >
+      {isLoading ? (
+        <Card withBorder p="md" radius={5} className={classes.card}>
           <Skeleton width={'100%'} height={200} />
-        </Card> :
+        </Card>
+      ) : (
         communityInfo && (
           <>
             <Card withBorder p="md" radius={5} className={classes.card}>
@@ -70,7 +73,7 @@ export function CommunityBar({ communityLogo, tag }: Props) {
               <Text fw={700} mb={5} mt={10} sx={{ fontFamily: 'Greycliff CF, sans-serif' }}>
                 {communityInfo?.title}
               </Text>
-              <Text fz={'sm'} >{communityInfo?.about}</Text>
+              <Text fz={'sm'}>{communityInfo?.about}</Text>
               <Divider my="xs" />
               <Text fw={700} mb={5} mt={10} sx={{ fontFamily: 'Greycliff CF, sans-serif' }}>
                 Description
@@ -113,7 +116,8 @@ export function CommunityBar({ communityLogo, tag }: Props) {
               })}
             </Card>
           </>
-        )}
+        )
+      )}
     </>
   )
 }

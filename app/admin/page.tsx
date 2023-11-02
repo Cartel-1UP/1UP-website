@@ -7,21 +7,18 @@ import NotFound from '../not-found'
 
 export const runtime = 'experimental-edge'
 
-
-
 export default function Page() {
-
   const role = useAuthorizationStore((state: { role: string }) => state.role)
-
 
   return (
     <>
-      {role == 'admin' ?
+      {role == 'admin' ? (
         <AdminPanel>
           <AdminPage />
         </AdminPanel>
-        : <NotFound />
-      }
+      ) : (
+        <NotFound />
+      )}
     </>
   )
 }

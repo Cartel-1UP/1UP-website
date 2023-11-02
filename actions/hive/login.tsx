@@ -5,7 +5,7 @@ import {
   setProfileImage,
   setReputation,
   setRole,
-  setUsername
+  setUsername,
 } from '@/zustand/stores/useAuthorizationStore'
 import api from '../../utils/api'
 
@@ -48,7 +48,6 @@ function loginKeychain(username: string | null) {
 
 async function processLogin({ username, ts, sig, smartlock = false }: any) {
   const { data } = await api.post('auth', { username, ts, sig, smartlock })
-
 
   localStorage.setItem('username', data.username)
   localStorage.setItem('smartlock', data.smartlock)
