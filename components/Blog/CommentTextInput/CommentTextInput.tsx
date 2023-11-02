@@ -1,14 +1,12 @@
 'use client'
 
+import { Tag } from '@/types/blog.type'
 import { ActionIcon, Button, Card, Grid, Group, SimpleGrid, Space, Textarea } from '@mantine/core'
 import { IconBold, IconHeading, IconItalic, IconLink, IconPhotoDown } from '@tabler/icons'
 import React, { useRef, useState } from 'react'
 import useStyles from './style'
 
-type Tag = {
-  name: string
-  type: 'link' | 'heading' | 'bold' | 'italic' | 'image'
-}
+
 
 const Editor = () => {
   const { classes, theme } = useStyles()
