@@ -8,11 +8,12 @@ import { HiveArticle } from '@/types/blog.type'
 import { useAuthorizationStore } from '@/zustand/stores/useAuthorizationStore'
 import {
   ActionIcon,
+  Avatar,
   Box,
   Button,
-  Card, SimpleGrid
+  Card, Group, SimpleGrid
 } from '@mantine/core'
-import { useScrollIntoView } from '@mantine/hooks'
+import { useMediaQuery, useScrollIntoView } from '@mantine/hooks'
 import { showNotification } from '@mantine/notifications'
 import { IconArrowBarRight, IconArrowUp } from '@tabler/icons'
 import { useEffect, useState } from 'react'
@@ -25,9 +26,10 @@ type Props = {
   sort: string
   tag?: string
   isCommunity?: boolean
+  communityLogo?: string
 }
 
-export function FeedSection({ sort, tag, isCommunity }: Props) {
+export function FeedSection({ sort, tag, isCommunity, communityLogo }: Props) {
   const { classes, theme } = useStyles()
 
   const [startAuthor, setStartAuthor] = useState('')
@@ -38,13 +40,15 @@ export function FeedSection({ sort, tag, isCommunity }: Props) {
   const [loading, setLoading] = useState(false);
   const [loadingMorePosts, setLoadingMorePosts] = useState(false);
   const { scrollIntoView, targetRef } = useScrollIntoView<HTMLDivElement>({ offset: 60 })
-
+  const isMd = useMediaQuery(`(max-width: ${theme.breakpoints.md}px)`)
   const [username, setUsername] = useState('')
   const authorized = useAuthorizationStore((state: { authorized: boolean }) => state.authorized)
 
   const handleTabChange = (tab: string) => {
     setPostType(tab)
   }
+
+  console.log(communityLogo)
 
   const loadPosts = useMutation(
     async () => {
@@ -159,12 +163,25 @@ export function FeedSection({ sort, tag, isCommunity }: Props) {
     <>
       <SimpleGrid cols={1} mt={0} spacing={0} breakpoints={[{ maxWidth: 'sm', cols: 1 }]}>
         <Card withBorder p="md" radius={0} className={classes.cardHeader}>
-          <TabButtons
-            authorized={authorized}
-            defaultTab={Tabs.New}
-            onChange={handleTabChange}
-            isCommunity={isCommunity}
-          />
+          <Group position="apart">
+            <div>
+              <TabButtons
+                authorized={authorized}
+                defaultTab={Tabs.New}
+                onChange={handleTabChange}
+                isCommunity={isCommunity}
+              />
+            </div>
+            {
+              isMd && <Avatar
+                size={48}
+                color="blue"
+                radius="xl"
+                src={communityLogo}
+              />
+            }
+
+          </Group>
         </Card>
         {
           loading || !data || data.length === 0 ?
