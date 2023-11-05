@@ -39,7 +39,7 @@ export default function Home() {
       )}
       {isMd ? (
         <>
-          <FeedSection sort={'created'} tag={'hive-102223'} />
+          <FeedSection sort={'created'} tag={'hive-102223'} communityLogo={oneuplogo2.src} />
           <CommunityBar communityLogo={oneuplogo2.src} tag={'hive-102223'} />
           <RecommendedSection />
         </>
@@ -50,7 +50,7 @@ export default function Home() {
               <Grid>
                 <Grid.Col span={9}>
                   <Space h="xl" />
-                  <FeedSection sort={'created'} tag={'hive-102223'} />
+                  <FeedSection sort={'created'} tag={'hive-102223'} communityLogo={oneuplogo2.src} />
                 </Grid.Col>
                 <Grid.Col span={3}>
                   <Space h="xl" />
