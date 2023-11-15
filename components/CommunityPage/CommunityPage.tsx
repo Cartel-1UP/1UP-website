@@ -52,7 +52,7 @@ export function CommunityPage({ image, tag }: Props) {
                   >
                     <Timeline
                       dataSource={{ sourceType: 'profile', screenName: name }}
-                      options={{ height: '600', chrome: 'noborders, transparent' }}
+                      options={{ height: '500', chrome: 'noborders, transparent' }}
                     />
                   </Card>
                 </div>
