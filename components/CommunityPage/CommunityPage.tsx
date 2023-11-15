@@ -3,7 +3,7 @@
 import { FeedSection } from '@/components/Sections/Feed/FeedSection'
 import { comumnityData } from '@/data/communityData'
 import { tagToTwitterAccount } from '@/data/twitterData'
-import { Card, Grid, Space } from '@mantine/core'
+import { Card, Container, Grid, Space } from '@mantine/core'
 import { useMediaQuery } from '@mantine/hooks'
 import { Timeline } from 'react-twitter-widgets'
 import { CommunityBar } from '../CommunityBar/CommunityBar'
@@ -24,43 +24,41 @@ export function CommunityPage({ image, tag }: Props) {
   return isMd ? (
     <>
       <FeedSection sort={'created'} tag={tag} isCommunity={true} communityLogo={result.image} />
-      {<CommunityBar communityLogo={result.image} tag={result.tag} />}
+      <CommunityBar communityLogo={result.image} tag={result.tag} />
     </>
   ) : (
     <>
-      <Grid grow>
-        <Grid.Col span={9}>
-          <Space h="xl" />
-          <FeedSection sort={'created'} tag={tag} isCommunity={true} />
-        </Grid.Col>
-        <Grid.Col span={3}>
-          {
-            <>
-              <Space h="xl" />
-              <CommunityBar communityLogo={result.image} tag={result.tag} />
-              {name && (
-                <div style={{ position: 'sticky', top: 90 }}>
-                  <Space h="md" />
-                  <Card
-                    withBorder
-                    p={0}
-                    radius={5}
-                    sx={{
-                      borderColor: '#e2e8f0d2',
-                      borderWidth: 1,
-                    }}
-                  >
-                    <Timeline
-                      dataSource={{ sourceType: 'profile', screenName: name }}
-                      options={{ height: '500', chrome: 'noborders, transparent' }}
-                    />
-                  </Card>
-                </div>
-              )}
-            </>
-          }
-        </Grid.Col>
-      </Grid>
+      <Container fluid>
+
+        <Grid>
+          <Grid.Col span={9}>
+            <Space h="xl" />
+            <FeedSection sort={'created'} communityLogo={result.image} tag={result.tag} />
+          </Grid.Col>
+          <Grid.Col span={3}>
+            <Space h="xl" />
+            <CommunityBar communityLogo={result.image} tag={result.tag} />
+            <div style={{ position: 'sticky', top: '85px' }}>
+              <Space h={20} />
+              <Card
+                withBorder
+                p={0}
+                radius={5}
+                sx={{
+                  borderColor: '#f3f3f3',
+                  borderWidth: 1,
+                }}
+              >
+                <Timeline
+                  dataSource={{ sourceType: 'profile', screenName: name }}
+                  options={{ height: '500', chrome: 'noborders, transparent' }}
+                />
+              </Card>
+            </div>
+          </Grid.Col>
+        </Grid>
+
+      </Container>
     </>
   )
 }
