@@ -84,7 +84,7 @@ export default function Home() {
                     >
                       <Timeline
                         dataSource={{ sourceType: 'profile', screenName: 'CartelOneup' }}
-                        options={{ height: '400', chrome: 'noborders, transparent' }}
+                        options={{ height: '500', chrome: 'noborders, transparent' }}
                       />
                     </Card>
                   </div>
