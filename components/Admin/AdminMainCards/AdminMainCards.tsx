@@ -149,7 +149,7 @@ export function AdminMainCards() {
         opened={opened}
         close={close}
         mutation={addMainCard}
-        rows={['Community', 'Author', 'Title', 'Image', 'Tag', 'Permlink', 'LvL']}
+        rows={['Author', 'Category', 'Title', 'Image', 'Permlink']}
       />
       <CRUDModal
         title="Edit card"
@@ -157,7 +157,7 @@ export function AdminMainCards() {
         opened={openedEdit}
         close={closeEdit}
         mutation={editMainCard}
-        rows={['Community', 'Author', 'Title', 'Image', 'Tag', 'Permlink', 'LvL']}
+        rows={['Author', 'Category', 'Title', 'Image', 'Permlink']}
       />
       <ConfirmModal
         title="Are you sure you want to delete this card?"

@@ -73,6 +73,7 @@ export default function CRUDModal({
                 label={row}
                 placeholder={row}
                 {...form.getInputProps(row.toLowerCase())}
+                required
               />
             )
           })}
