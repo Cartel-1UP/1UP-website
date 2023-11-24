@@ -4,7 +4,7 @@ const useStyles = createStyles((theme) => ({
   cardHeader: {
     borderColor: '#e2e8f0d2',
     borderWidth: 1,
-    borderRadius: '5px 5px 0 0',
+    borderRadius: theme.fn.smallerThan('md') ? 0 : '5px 5px 0 0',
   },
 
   card: {

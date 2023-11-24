@@ -12,7 +12,7 @@ import {
   Skeleton,
   Text,
   ThemeIcon,
-  Tooltip,
+  Tooltip
 } from '@mantine/core'
 import { IconMessage2, IconPigMoney, IconUsers } from '@tabler/icons'
 import { Markdown } from '../ui/Markdown/Markdown'
@@ -39,7 +39,7 @@ export function CommunityBar({ communityLogo, tag }: Props) {
       ) : (
         communityInfo && (
           <>
-            <Card withBorder p="md" radius={5} className={classes.card}>
+            <Card withBorder p="md" radius={theme.fn.smallerThan('md') ? 0 : 5} className={classes.card}>
               <AspectRatio ratio={1 / 1} sx={{ maxWidth: 200 }} mx="auto">
                 <Image src={communityLogo} alt="Logo" fit="contain" withPlaceholder />
               </AspectRatio>

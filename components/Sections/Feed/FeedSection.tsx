@@ -10,7 +10,7 @@ import { ActionIcon, Avatar, Box, Button, Card, Group, SimpleGrid } from '@manti
 import { useMediaQuery, useScrollIntoView } from '@mantine/hooks'
 import { showNotification } from '@mantine/notifications'
 import { IconArrowBarRight, IconArrowUp } from '@tabler/icons'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useMutation } from 'react-query'
 import { FeedCard } from './FeedCard'
 import { FeedCardSkeleton } from './FeedCardSkeleton'
@@ -40,9 +40,14 @@ export function FeedSection({ sort, tag, isCommunity, communityLogo }: Props) {
 
   const handleTabChange = (tab: string) => {
     setPostType(tab)
+    if (scrollRef.current) {
+      window.scrollTo({
+        top: 0,
+      });
+    }
   }
 
-  console.log(communityLogo)
+  const scrollRef = useRef<HTMLDivElement>(null);
 
   const loadPosts = useMutation(
     async () => {
@@ -157,20 +162,23 @@ export function FeedSection({ sort, tag, isCommunity, communityLogo }: Props) {
 
   return (
     <>
-      <SimpleGrid cols={1} mt={0} spacing={0} breakpoints={[{ maxWidth: 'sm', cols: 1 }]}>
-        <Card withBorder p="md" radius={0} className={classes.cardHeader}>
-          <Group position="apart">
-            <div>
-              <TabButtons
-                authorized={authorized}
-                defaultTab={Tabs.New}
-                onChange={handleTabChange}
-                isCommunity={isCommunity}
-              />
-            </div>
-            {isMd && <Avatar size={48} color="blue" radius="xl" src={communityLogo} />}
-          </Group>
-        </Card>
+      <SimpleGrid cols={1} mt={0} ref={scrollRef} spacing={0} breakpoints={[{ maxWidth: 'sm', cols: 1 }]}>
+        {!isMd && (
+
+          <Card withBorder p="md" radius={0} className={classes.cardHeader}>
+            <Group position="apart">
+              <div>
+                <TabButtons
+                  authorized={authorized}
+                  defaultTab={Tabs.New}
+                  onChange={handleTabChange}
+                  isCommunity={isCommunity}
+                />
+              </div>
+              {isMd && <Avatar size={48} color="blue" radius="xl" src={communityLogo} />}
+            </Group>
+          </Card>
+        )}
         {loading || !data || data.length === 0 ? (
           <FeedCardSkeleton />
         ) : (
@@ -179,6 +187,23 @@ export function FeedSection({ sort, tag, isCommunity, communityLogo }: Props) {
         {posts?.map((item: HiveArticle) => (
           <FeedCard article={item} key={item.post_id} />
         ))}
+        {isMd && (
+          <div style={{ position: 'sticky', bottom: '0px', zIndex: '999' }}>
+            <Card withBorder p="md" radius={0} className={classes.cardHeader}>
+              <Group position="apart">
+                <div>
+                  <TabButtons
+                    authorized={authorized}
+                    defaultTab={Tabs.New}
+                    onChange={handleTabChange}
+                    isCommunity={isCommunity}
+                  />
+                </div>
+                {isMd && <Avatar size={48} color="blue" radius="xl" src={communityLogo} />}
+              </Group>
+            </Card>
+          </div>
+        )}
         <Card withBorder p="md" radius={0} className={classes.cardFooter}>
           <Box
             sx={{
