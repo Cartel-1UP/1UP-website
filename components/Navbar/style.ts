@@ -29,6 +29,7 @@ const useStyles = createStyles((theme) => ({
     padding: 0,
     paddingBottom: 0,
     [theme.fn.smallerThan('md')]: {
+      paddingBottom: 10,
       paddingTop: 10,
     },
   },
