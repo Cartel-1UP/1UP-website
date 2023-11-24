@@ -155,6 +155,7 @@ export function AdminMainCards() {
         title="Edit card"
         action="Edit"
         opened={openedEdit}
+        data={editValues}
         close={closeEdit}
         mutation={editMainCard}
         rows={['Author', 'Category', 'Title', 'Image', 'Permlink']}
