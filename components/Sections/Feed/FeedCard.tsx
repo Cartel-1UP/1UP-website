@@ -131,10 +131,10 @@ export function FeedCard({ article }: Props) {
             <>
               <Container>
                 <Group spacing={'xs'}>
-                  <ThemeIcon variant="light" color="gray" size={'sm'} radius="xl">
+                  <ThemeIcon variant="light" color="gray" size={isSm ? 'xs' : 'sm'} radius="xl">
                     <IconArrowBack />
                   </ThemeIcon>
-                  <Text size={'sm'} weight={400}>
+                  <Text size={isSm ? 'xs' : 'sm'} weight={400}>
                     Rebbloged by{' '}
                     <Text span c="blue" inherit>
                       <a
@@ -148,7 +148,7 @@ export function FeedCard({ article }: Props) {
                     </Text>
                   </Text>
                 </Group>
-                <Space h={'md'} />
+                <Space h={isSm ? 0 : 'md'} />
               </Container>
             </>
           )}
@@ -159,24 +159,32 @@ export function FeedCard({ article }: Props) {
               color={'#114f5c'}
               inline
               label={`${article.author_reputation.toFixed()}`}
-              size={30}
+              size={isSm ? 25 : 30}
               position="bottom-end"
               withBorder
             >
               <Avatar
                 color="gray"
-                size={45}
+                size={isSm ? 35 : 45}
                 radius="xl"
                 src={`https://images.hive.blog/u/${article?.author}/avatar`}
               />
             </Indicator>
             {article.stats.is_pinned && (
-              <Badge ml={10} color="red" variant="outline">
+              <Badge ml={isSm ? 20 : 10} color="red" variant="outline" size={isSm ? 'xs' : 'md'}>
                 Pinned
               </Badge>
             )}
-            <Text pl={20} size="xs" transform="uppercase" color={'dimmed'} fw={500}>
-              {`${article?.author} • ${formatedDate(date)}`}
+            <Text pl={article.stats.is_pinned ? 10 : 20} size="xs" transform="uppercase" color={'dimmed'} fw={500}>
+              {isSm ? (
+                <>
+                  {article?.author && <span>{article.author}</span>}
+                  {article?.author && <br />}
+                  {date && <span>{formatedDate(date)}</span>}
+                </>
+              ) : (
+                `${article?.author} • ${formatedDate(date)}`
+              )}
             </Text>
           </Container>
           <Container
@@ -189,49 +197,58 @@ export function FeedCard({ article }: Props) {
             }
           >
             <Text
-              fw={700}
+              fw={isSm ? 600 : 700}
+              color={theme.colors.dark[5]}
               mt={20}
               sx={{
                 fontFamily: 'Greycliff CF, sans-serif',
+
               }}
+              size={isSm ? 'sm' : 'md'}
+              className={classes.turncateTitle}
             >
               {article?.title}
             </Text>
-            <Text
-              color="dimmed"
-              size="sm"
-              fw={500}
-              mt={5}
-              className={classes.turncate}
-              sx={{ fontFamily: 'Greycliff CF, sans-serif' }}
-            >
-              {bodyOfArticle}
-            </Text>
+            {!isSm &&
+              <Text
+                color="dimmed"
+                size={'sm'}
+                fw={500}
+                mt={5}
+                className={classes.turncate}
+                sx={{ fontFamily: 'Greycliff CF, sans-serif' }}
+              >
+                {bodyOfArticle}
+              </Text>
+            }
+
           </Container>
         </Grid.Col>
-        {!isSm && (
-          <Grid.Col span={5}>
-            <Container>
-              <AspectRatio ratio={5 / 3}>
-                {isImageExists ? (
-                  <Image
-                    radius={0}
-                    src={article?.json_metadata.image[0]}
-                    withPlaceholder
-                    fit="fill"
-                    h={200}
-                  />
-                ) : (
-                  <Image src={null} withPlaceholder radius={10} />
-                )}
-              </AspectRatio>
-            </Container>
-          </Grid.Col>
-        )}
-        <Grid.Col span={isSm ? 12 : 7}>
+        <Grid.Col span={isSm ? 4 : 5}>
+          <Container mah={isSm ? 80 : '100%'}>
+            <AspectRatio ratio={isSm ? 1 : 5 / 3}>
+              {isImageExists ? (
+                <Image
+                  radius={0}
+                  src={article?.json_metadata.image[0]}
+                  withPlaceholder
+                  fit={isSm ? "cover" : "fill"} // Adjust fit based on condition
+                  h={isSm ? '100%' : 200} // Set height to 100% if isSm is true, else set to 200
+                />
+              ) : (
+                <Image src={null} withPlaceholder radius={10} />
+              )}
+            </AspectRatio>
+          </Container>
+        </Grid.Col>
+        {isSm && (
+          <Grid.Col span={12}>
+          </Grid.Col>)
+        }
+        <Grid.Col span={isSm ? 3 : 7} mt={5}>
           <Container>
             {article?.json_metadata.tags
-              ? article?.json_metadata.tags.slice(0, 3).map?.((item: string) => (
+              ? article?.json_metadata.tags.slice(0, parseInt(`${isSm ? 1 : 3}`)).map?.((item: string) => (
                 <Badge mr={5} radius={5} color="gray" key={item}>
                   {item}
                 </Badge>
@@ -239,7 +256,7 @@ export function FeedCard({ article }: Props) {
               : null}
           </Container>
         </Grid.Col>
-        <Grid.Col span={isSm ? 12 : 5} display="flex">
+        <Grid.Col span={5} display="flex" mt={5}>
           <Container mr={0} className={classes.metadataContainer}>
             <span className={classes.icon}>
               <IconHeart
