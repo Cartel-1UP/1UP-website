@@ -52,6 +52,20 @@ const useStyles = createStyles((theme) => ({
     alignItems: 'center',
   },
 
+  turncateTitle: {
+    textOverflow: 'ellipsis',
+    overflowWrap: 'break-word',
+    wordWrap: 'break-word',
+    wordBreak: 'break-word',
+    hyphens: 'auto',
+    whiteSpace: 'normal',
+    overflow: 'hidden',
+    display: '-webkit-box',
+    WebkitLineClamp: 2,
+    WebkitBoxOrient: 'vertical',
+    maxHeight: '3em',
+  },
+
   turncate: {
     textOverflow: 'ellipsis',
     overflowWrap: 'break-word',
