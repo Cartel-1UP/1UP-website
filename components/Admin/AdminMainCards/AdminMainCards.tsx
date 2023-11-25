@@ -27,6 +27,7 @@ export function AdminMainCards() {
     title: '',
     image: '',
     permlink: '',
+    community: ''
   })
 
   const [deletedValues, setDeletedValues] = useState('')
@@ -57,6 +58,7 @@ export function AdminMainCards() {
                 <th>Title</th>
                 <th>Image</th>
                 <th>Permlink</th>
+                <th>Community</th>
                 <th>Actions</th>
               </tr>
             </thead>
@@ -95,8 +97,9 @@ export function AdminMainCards() {
               <th>Author</th>
               <th>Category</th>
               <th>Title</th>
-              <th>Image</th>
+              {/* <th>Image</th> */}
               <th>Permlink</th>
+              <th>Community</th>
               <th>Actions</th>
             </tr>
           </thead>
@@ -107,8 +110,9 @@ export function AdminMainCards() {
                   <td>{element.author}</td>
                   <td>{element.category}</td>
                   <td>{element.title}</td>
-                  <td className={classes.turncate}>{element.image}</td>
+                  {/* <td className={classes.turncate}>{element.image}</td> */}
                   <td>{element.permlink}</td>
+                  <td>{element.community}</td>
                   <td>
                     <span style={{ display: 'flex', gap: '4px' }}>
                       <ActionIcon
@@ -149,8 +153,7 @@ export function AdminMainCards() {
         opened={opened}
         close={close}
         mutation={addMainCard}
-        rows={['Author', 'Category', 'Title', 'Image', 'Permlink']}
-      />
+        rows={['Author', 'Category', 'Title', 'Image', 'Permlink', 'Community']} />
       <CRUDModal
         title="Edit card"
         action="Edit"
@@ -158,8 +161,7 @@ export function AdminMainCards() {
         data={editValues}
         close={closeEdit}
         mutation={editMainCard}
-        rows={['Author', 'Category', 'Title', 'Image', 'Permlink']}
-      />
+        rows={['Author', 'Category', 'Title', 'Image', 'Permlink', 'Community']} />
       <ConfirmModal
         title="Are you sure you want to delete this card?"
         message="This action cannot be undone."

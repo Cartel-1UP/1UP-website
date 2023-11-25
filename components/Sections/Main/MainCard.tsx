@@ -8,13 +8,16 @@ interface Props {
   category: string
   permlink: string
   author: string
+  community?: string
 }
 
-export function Card({ image, title, category, author, permlink }: Props) {
+export function Card({ image, title, category, author, permlink, community }: Props) {
   const { classes } = useStyles()
 
+  const communityLink = community ? community : ''
+
   return (
-    <Link href={`/hive-102223/@${author}/${permlink}`}>
+    <Link href={`/${communityLink}/@${author}/${permlink}`}>
       <Box
         mt={30}
         mb={30}
