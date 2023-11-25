@@ -14,7 +14,7 @@ export function Card({ image, title, category, author, permlink }: Props) {
   const { classes } = useStyles()
 
   return (
-    <Link href={`community/hive-102223/post/` + author + '/' + permlink}>
+    <Link href={`/hive-102223/@${author}/${permlink}`}>
       <Box
         mt={30}
         mb={30}

@@ -11,7 +11,7 @@ import {
   Menu,
   NavLink,
   ScrollArea,
-  Text,
+  Text
 } from '@mantine/core'
 import { IconLogout, IconUsers } from '@tabler/icons'
 import { useRouter } from 'next/navigation'
@@ -108,7 +108,7 @@ export function NavDrawer({
                 icon={<Avatar radius="xl" src={item.image} />}
                 onClick={() => {
                   closeDrawer()
-                  router.push(`/community/` + item.tag)
+                  router.push(`/` + item.tag)
                 }}
                 disabled={item.tag === 'none'}
               />

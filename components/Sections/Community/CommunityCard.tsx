@@ -15,7 +15,7 @@ export default function CommunityCard({ image, tag }: Props) {
   return (
     <AspectRatio ratio={1 / 1} sx={{ maxWidth: '5em' }}>
       {tag != 'none' ? (
-        <Link href={'community/' + tag}>
+        <Link href={tag}>
           <Image src={image} className={classes.card} />
         </Link>
       ) : (
