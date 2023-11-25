@@ -8,7 +8,7 @@ import {
   Group,
   Image,
   Indicator,
-  Text,
+  Text
 } from '@mantine/core'
 import Link from 'next/link'
 import useStyles from './style'
@@ -22,7 +22,7 @@ export function RecommendedCard({ article }: CardProps) {
 
   return (
     <Link
-      href={`community/${article.community}/post/` + article.author + '/' + article.permlink}
+      href={`/${article.community}/@${article.author}/${article.permlink}`}
       className={classes.link}
     >
       <Card

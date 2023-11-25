@@ -9,7 +9,7 @@ import {
   IconChevronUp,
   IconLogout,
   IconUser,
-  IconUsers,
+  IconUsers
 } from '@tabler/icons'
 import { useRouter } from 'next/navigation'
 import { Dispatch, SetStateAction, useState } from 'react'
@@ -90,7 +90,7 @@ export function UserMenu({ userImage, username, userReputation, setUserMenuOpene
                   key={item.name}
                   icon={<Avatar radius="xl" src={item.image} />}
                   onClick={() => {
-                    router.push(`/community/` + item.tag)
+                    router.push(`/` + item.tag)
                   }}
                   disabled={item.tag === 'none'}
                 />

@@ -8,7 +8,8 @@ export const runtime = 'experimental-edge'
 
 export default function Page({ params }: { params: { id: string; username: string } }) {
   const permlink = params.id
-  const author = params.username
+  const author = params.username.replace('@', '').replace('%40', '')
+  console.log(author)
   const isMd = useMediaQuery(`(max-width: 1000px)`)
   return (
     <>
