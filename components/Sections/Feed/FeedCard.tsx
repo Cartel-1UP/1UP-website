@@ -225,15 +225,15 @@ export function FeedCard({ article }: Props) {
           </Container>
         </Grid.Col>
         <Grid.Col span={isSm ? 4 : 5}>
-          <Container mah={isSm ? 80 : '100%'}>
+          <Container>
             <AspectRatio ratio={isSm ? 1 : 5 / 3}>
               {isImageExists ? (
                 <Image
                   radius={0}
                   src={article?.json_metadata.image[0]}
                   withPlaceholder
-                  fit={isSm ? "cover" : "fill"} // Adjust fit based on condition
-                  h={isSm ? '100%' : 200} // Set height to 100% if isSm is true, else set to 200
+                  fit={"fill"} // Adjust fit based on condition
+                  h={200} // Set height to 100% if isSm is true, else set to 200
                 />
               ) : (
                 <Image src={null} withPlaceholder radius={10} />
@@ -241,11 +241,7 @@ export function FeedCard({ article }: Props) {
             </AspectRatio>
           </Container>
         </Grid.Col>
-        {isSm && (
-          <Grid.Col span={12}>
-          </Grid.Col>)
-        }
-        <Grid.Col span={isSm ? 3 : 7} mt={5}>
+        <Grid.Col span={isSm ? 3 : 7}>
           <Container>
             {article?.json_metadata.tags
               ? article?.json_metadata.tags.slice(0, parseInt(`${isSm ? 1 : 3}`)).map?.((item: string) => (
