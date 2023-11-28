@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import useStyles from './style'
 
 interface Props {
-  message: string
+  message: any
   time?: number
 }
 
@@ -14,7 +14,7 @@ export function NotificationText({ message, time = 7000 }: Props) {
   const incrementInterval = 50
 
   useEffect(() => {
-    const timeout = setTimeout(() => {}, time)
+    const timeout = setTimeout(() => { }, time)
 
     const interval = setInterval(() => {
       // Increment the progress value by the percentage of the time passed
