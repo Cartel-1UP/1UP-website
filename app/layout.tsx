@@ -7,6 +7,7 @@ import { MantineUIProvider } from '@/providers/mantine-provider'
 import { ReactQueryProvider } from '@/providers/reactquery-provider'
 import { MantineProvider } from '@mantine/core'
 import { NotificationsProvider } from '@mantine/notifications'
+import { Analytics } from '@vercel/analytics/react'
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -21,6 +22,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                   <Navbar />
                   {children}
                   <Footer links={[]} />
+                  <Analytics />
                 </body>
               </html>
             </NotificationsProvider>
