@@ -16,6 +16,8 @@ const useStyles = createStyles((theme) => ({
     borderRadius: '5px 5px 0 0',
     [theme.fn.smallerThan('md')]: {
       borderRadius: 0,
+      margin: 0,
+      padding: '5px 10px 5px 10px',
     },
   },
 
