@@ -4,7 +4,29 @@ const useStyles = createStyles((theme) => ({
   cardHeader: {
     borderColor: '#e2e8f0d2',
     borderWidth: 1,
-    borderRadius: theme.fn.smallerThan('md') ? 0 : '5px 5px 0 0',
+    [theme.fn.largerThan('md')]: {
+      borderRadius: '5px 5px 0 0',
+    },
+  },
+
+  discordLink: {
+    color: '#228be6', // Example usage of a color from the theme
+    textDecoration: 'none',
+    '&:hover': {
+      // color: theme.color.red,
+      textDecoration: 'underline',
+    },
+  },
+
+  icon: {
+    margin: '0',
+    color: '#072f37',
+    fontSize: '1px',
+    '&:hover': {
+      cursor: 'pointer',
+      color: 'grey',
+    },
+    paddingBottom: '10px',
   },
 
   card: {
