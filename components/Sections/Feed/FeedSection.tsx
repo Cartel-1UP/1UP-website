@@ -37,6 +37,7 @@ export function FeedSection({ sort, tag, isCommunity, communityLogo }: Props) {
   const isMd = useMediaQuery(`(max-width: ${theme.breakpoints.md}px)`)
   const [username, setUsername] = useState('')
   const authorized = useAuthorizationStore((state: { authorized: boolean }) => state.authorized)
+  const userZustand = useAuthorizationStore((state: { username: string }) => state.username)
 
   const handleTabChange = (tab: string) => {
     setPostType(tab)
@@ -56,7 +57,7 @@ export function FeedSection({ sort, tag, isCommunity, communityLogo }: Props) {
       switch (postType) {
         case 'feed':
           queryData = await getFeedBlogs({
-            account: username || '',
+            account: username || userZustand,
             sort: postType,
             limit: 10,
           })
@@ -89,7 +90,7 @@ export function FeedSection({ sort, tag, isCommunity, communityLogo }: Props) {
       switch (postType) {
         case 'feed':
           queryData = await getFeedBlogs({
-            account: username || '',
+            account: username || userZustand,
             sort: 'feed',
             limit: 10,
             start_author: startAuthor,
