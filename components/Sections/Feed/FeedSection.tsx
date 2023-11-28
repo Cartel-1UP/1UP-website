@@ -189,7 +189,7 @@ export function FeedSection({ sort, tag, isCommunity, communityLogo }: Props) {
         ))}
         {isMd && (
           <div style={{ position: 'sticky', bottom: '0px', zIndex: '999' }}>
-            <Card withBorder p="md" radius={0} className={classes.cardHeader}>
+            <Card withBorder p="sm" radius={0} className={classes.cardHeader}>
               <Group position="apart">
                 <div>
                   <TabButtons
