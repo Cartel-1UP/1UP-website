@@ -14,7 +14,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <ColorProvider>
         <MantineProvider>
           <MantineUIProvider>
-            <NotificationsProvider limit={3}>
+            <NotificationsProvider limit={3} zIndex={999}>
               <html lang="en">
                 <head />
                 <body>
