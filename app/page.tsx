@@ -5,11 +5,11 @@ import { CommunitySection } from '@/components/Sections/Community/CommunitySecti
 import { FeedSection } from '@/components/Sections/Feed/FeedSection'
 import { MainSection } from '@/components/Sections/Main/MainSection'
 import { RecommendedSection } from '@/components/Sections/Recommended/RecommendedSection'
+import XTimeline from '@/components/XTimline/XTimeline'
 import oneuplogo2 from '@/images/oneup2.png'
 import { Card, Container, Grid, NavLink, Space } from '@mantine/core'
 import { useMediaQuery } from '@mantine/hooks'
 import { IconBrandDiscord } from '@tabler/icons'
-import { Timeline } from 'react-twitter-widgets'
 
 export const runtime = 'experimental-edge'
 
@@ -82,10 +82,7 @@ export default function Home() {
                         borderWidth: 1,
                       }}
                     >
-                      <Timeline
-                        dataSource={{ sourceType: 'profile', screenName: 'CartelOneup' }}
-                        options={{ height: '400', chrome: 'noborders, transparent' }}
-                      />
+                      <XTimeline />
                     </Card>
                   </div>
                 </Grid.Col>
