@@ -26,7 +26,7 @@ const useStyles = createStyles((theme) => ({
       cursor: 'pointer',
       color: 'grey',
     },
-    paddingBottom: '10px',
+    paddingBottom: '15px',
   },
 
   card: {
