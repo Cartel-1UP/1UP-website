@@ -9,7 +9,7 @@ import {
   IconChevronUp,
   IconLogout,
   IconUser,
-  IconUsers
+  IconUsers,
 } from '@tabler/icons'
 import { useRouter } from 'next/navigation'
 import { Dispatch, SetStateAction, useState } from 'react'

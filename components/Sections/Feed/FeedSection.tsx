@@ -44,11 +44,11 @@ export function FeedSection({ sort, tag, isCommunity, communityLogo }: Props) {
     if (scrollRef.current) {
       window.scrollTo({
         top: 0,
-      });
+      })
     }
   }
 
-  const scrollRef = useRef<HTMLDivElement>(null);
+  const scrollRef = useRef<HTMLDivElement>(null)
 
   const loadPosts = useMutation(
     async () => {
@@ -163,9 +163,14 @@ export function FeedSection({ sort, tag, isCommunity, communityLogo }: Props) {
 
   return (
     <>
-      <SimpleGrid cols={1} mt={0} ref={scrollRef} spacing={0} breakpoints={[{ maxWidth: 'sm', cols: 1 }]}>
+      <SimpleGrid
+        cols={1}
+        mt={0}
+        ref={scrollRef}
+        spacing={0}
+        breakpoints={[{ maxWidth: 'sm', cols: 1 }]}
+      >
         {!isMd && (
-
           <Card withBorder p="md" radius={0} className={classes.cardHeader}>
             <Group position="apart">
               <div>

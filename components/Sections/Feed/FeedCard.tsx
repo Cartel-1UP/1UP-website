@@ -18,7 +18,7 @@ import {
   Indicator,
   Space,
   Text,
-  ThemeIcon
+  ThemeIcon,
 } from '@mantine/core'
 import { useMediaQuery } from '@mantine/hooks'
 import { showNotification } from '@mantine/notifications'
@@ -175,7 +175,13 @@ export function FeedCard({ article }: Props) {
                 Pinned
               </Badge>
             )}
-            <Text pl={article.stats.is_pinned ? 10 : 20} size="xs" transform="uppercase" color={'dimmed'} fw={500}>
+            <Text
+              pl={article.stats.is_pinned ? 10 : 20}
+              size="xs"
+              transform="uppercase"
+              color={'dimmed'}
+              fw={500}
+            >
               {isSm ? (
                 <>
                   {article?.author && <span>{article.author}</span>}
@@ -191,9 +197,7 @@ export function FeedCard({ article }: Props) {
             className={classes.link}
             ml={0}
             onClick={() =>
-              router.push(
-                `/${article.community}/@${article.author}/${article.permlink}`
-              )
+              router.push(`/${article.community}/@${article.author}/${article.permlink}`)
             }
           >
             <Text
@@ -202,14 +206,13 @@ export function FeedCard({ article }: Props) {
               mt={20}
               sx={{
                 fontFamily: 'Greycliff CF, sans-serif',
-
               }}
               size={isSm ? 'sm' : 'md'}
               className={classes.turncateTitle}
             >
               {article?.title}
             </Text>
-            {!isSm &&
+            {!isSm && (
               <Text
                 color="dimmed"
                 size={'sm'}
@@ -220,8 +223,7 @@ export function FeedCard({ article }: Props) {
               >
                 {bodyOfArticle}
               </Text>
-            }
-
+            )}
           </Container>
         </Grid.Col>
         <Grid.Col span={isSm ? 4 : 5}>
@@ -232,7 +234,7 @@ export function FeedCard({ article }: Props) {
                   radius={0}
                   src={article?.json_metadata.image[0]}
                   withPlaceholder
-                  fit={"fill"} // Adjust fit based on condition
+                  fit={'fill'} // Adjust fit based on condition
                   h={200} // Set height to 100% if isSm is true, else set to 200
                 />
               ) : (
@@ -244,11 +246,13 @@ export function FeedCard({ article }: Props) {
         <Grid.Col span={isSm ? 3 : 7}>
           <Container>
             {article?.json_metadata.tags
-              ? article?.json_metadata.tags.slice(0, parseInt(`${isSm ? 1 : 3}`)).map?.((item: string) => (
-                <Badge mr={5} radius={5} color="gray" key={item}>
-                  {item}
-                </Badge>
-              ))
+              ? article?.json_metadata.tags
+                  .slice(0, parseInt(`${isSm ? 1 : 3}`))
+                  .map?.((item: string) => (
+                    <Badge mr={5} radius={5} color="gray" key={item}>
+                      {item}
+                    </Badge>
+                  ))
               : null}
           </Container>
         </Grid.Col>
@@ -261,29 +265,29 @@ export function FeedCard({ article }: Props) {
                   authorized
                     ? setIsVote(!isVote)
                     : showNotification({
-                      autoClose: 3000,
-                      title: 'Warning',
-                      message: (
-                        <NotificationText
-                          message="You have to login to upvote post!"
-                          time={3000}
-                        />
-                      ),
-                      styles: (theme) => ({
-                        root: {
-                          backgroundColor: '#072f37',
-                          borderColor: '#072f37',
-                          '&::before': { backgroundColor: theme.white },
-                        },
-                        title: { color: theme.white },
-                        description: { color: theme.white },
-                        closeButton: {
-                          color: theme.white,
-                          '&:hover': { backgroundColor: '#04191d' },
-                        },
-                      }),
-                      loading: false,
-                    })
+                        autoClose: 3000,
+                        title: 'Warning',
+                        message: (
+                          <NotificationText
+                            message="You have to login to upvote post!"
+                            time={3000}
+                          />
+                        ),
+                        styles: (theme) => ({
+                          root: {
+                            backgroundColor: '#072f37',
+                            borderColor: '#072f37',
+                            '&::before': { backgroundColor: theme.white },
+                          },
+                          title: { color: theme.white },
+                          description: { color: theme.white },
+                          closeButton: {
+                            color: theme.white,
+                            '&:hover': { backgroundColor: '#04191d' },
+                          },
+                        }),
+                        loading: false,
+                      })
                 }
               />
             </span>
@@ -296,29 +300,29 @@ export function FeedCard({ article }: Props) {
                   authorized
                     ? setIsComment(!isComment)
                     : showNotification({
-                      autoClose: 3000,
-                      title: 'Warning',
-                      message: (
-                        <NotificationText
-                          message="You have to login to comment post!"
-                          time={3000}
-                        />
-                      ),
-                      styles: (theme) => ({
-                        root: {
-                          backgroundColor: '#072f37',
-                          borderColor: '#072f37',
-                          '&::before': { backgroundColor: theme.white },
-                        },
-                        title: { color: theme.white },
-                        description: { color: theme.white },
-                        closeButton: {
-                          color: theme.white,
-                          '&:hover': { backgroundColor: '#04191d' },
-                        },
-                      }),
-                      loading: false,
-                    })
+                        autoClose: 3000,
+                        title: 'Warning',
+                        message: (
+                          <NotificationText
+                            message="You have to login to comment post!"
+                            time={3000}
+                          />
+                        ),
+                        styles: (theme) => ({
+                          root: {
+                            backgroundColor: '#072f37',
+                            borderColor: '#072f37',
+                            '&::before': { backgroundColor: theme.white },
+                          },
+                          title: { color: theme.white },
+                          description: { color: theme.white },
+                          closeButton: {
+                            color: theme.white,
+                            '&:hover': { backgroundColor: '#04191d' },
+                          },
+                        }),
+                        loading: false,
+                      })
                 }
               />
             </span>
@@ -338,29 +342,29 @@ export function FeedCard({ article }: Props) {
                     authorized
                       ? toggleBookmark()
                       : showNotification({
-                        autoClose: 3000,
-                        title: 'Warning',
-                        message: (
-                          <NotificationText
-                            message="You have to login to delete bookmark!"
-                            time={3000}
-                          />
-                        ),
-                        styles: (theme) => ({
-                          root: {
-                            backgroundColor: '#072f37',
-                            borderColor: '#072f37',
-                            '&::before': { backgroundColor: theme.white },
-                          },
-                          title: { color: theme.white },
-                          description: { color: theme.white },
-                          closeButton: {
-                            color: theme.white,
-                            '&:hover': { backgroundColor: '#04191d' },
-                          },
-                        }),
-                        loading: false,
-                      })
+                          autoClose: 3000,
+                          title: 'Warning',
+                          message: (
+                            <NotificationText
+                              message="You have to login to delete bookmark!"
+                              time={3000}
+                            />
+                          ),
+                          styles: (theme) => ({
+                            root: {
+                              backgroundColor: '#072f37',
+                              borderColor: '#072f37',
+                              '&::before': { backgroundColor: theme.white },
+                            },
+                            title: { color: theme.white },
+                            description: { color: theme.white },
+                            closeButton: {
+                              color: theme.white,
+                              '&:hover': { backgroundColor: '#04191d' },
+                            },
+                          }),
+                          loading: false,
+                        })
                   }
                 />
               ) : (
@@ -370,29 +374,29 @@ export function FeedCard({ article }: Props) {
                     authorized
                       ? toggleBookmark()
                       : showNotification({
-                        autoClose: 3000,
-                        title: 'Warning',
-                        message: (
-                          <NotificationText
-                            message="You have to login to add bookmark!"
-                            time={3000}
-                          />
-                        ),
-                        styles: (theme) => ({
-                          root: {
-                            backgroundColor: '#072f37',
-                            borderColor: '#072f37',
-                            '&::before': { backgroundColor: theme.white },
-                          },
-                          title: { color: theme.white },
-                          description: { color: theme.white },
-                          closeButton: {
-                            color: theme.white,
-                            '&:hover': { backgroundColor: '#04191d' },
-                          },
-                        }),
-                        loading: false,
-                      })
+                          autoClose: 3000,
+                          title: 'Warning',
+                          message: (
+                            <NotificationText
+                              message="You have to login to add bookmark!"
+                              time={3000}
+                            />
+                          ),
+                          styles: (theme) => ({
+                            root: {
+                              backgroundColor: '#072f37',
+                              borderColor: '#072f37',
+                              '&::before': { backgroundColor: theme.white },
+                            },
+                            title: { color: theme.white },
+                            description: { color: theme.white },
+                            closeButton: {
+                              color: theme.white,
+                              '&:hover': { backgroundColor: '#04191d' },
+                            },
+                          }),
+                          loading: false,
+                        })
                   }
                 />
               )}

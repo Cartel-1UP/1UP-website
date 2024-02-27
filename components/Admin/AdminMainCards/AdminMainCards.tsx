@@ -27,7 +27,7 @@ export function AdminMainCards() {
     title: '',
     image: '',
     permlink: '',
-    community: ''
+    community: '',
   })
 
   const [deletedValues, setDeletedValues] = useState('')
@@ -153,7 +153,8 @@ export function AdminMainCards() {
         opened={opened}
         close={close}
         mutation={addMainCard}
-        rows={['Author', 'Category', 'Title', 'Image', 'Permlink', 'Community']} />
+        rows={['Author', 'Category', 'Title', 'Image', 'Permlink', 'Community']}
+      />
       <CRUDModal
         title="Edit card"
         action="Edit"
@@ -161,7 +162,8 @@ export function AdminMainCards() {
         data={editValues}
         close={closeEdit}
         mutation={editMainCard}
-        rows={['Author', 'Category', 'Title', 'Image', 'Permlink', 'Community']} />
+        rows={['Author', 'Category', 'Title', 'Image', 'Permlink', 'Community']}
+      />
       <ConfirmModal
         title="Are you sure you want to delete this card?"
         message="This action cannot be undone."

@@ -33,15 +33,15 @@ export function MainSection() {
     >
       {isLoading
         ? simpleData.map((item: any, index: any) => (
-          <Carousel.Slide key={index}>
-            <Card {...item} />
-          </Carousel.Slide>
-        ))
+            <Carousel.Slide key={index}>
+              <Card {...item} />
+            </Carousel.Slide>
+          ))
         : data?.map?.((item: any, index: any) => (
-          <Carousel.Slide key={index}>
-            <Card {...item} />
-          </Carousel.Slide>
-        ))}
+            <Carousel.Slide key={index}>
+              <Card {...item} />
+            </Carousel.Slide>
+          ))}
     </Carousel>
   )
 }
