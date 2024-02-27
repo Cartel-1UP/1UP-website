@@ -35,12 +35,20 @@ export function RecommendedSection() {
                   title: 'Info',
                   message: (
                     <NotificationText
-                      message={<>
-
-                        If you want to vote for weekly users choice, you can check out our <a href={'https://discord.gg/f7sHEHYZJZ'} target="_blank" className={classes.discordLink} rel="noreferrer">
-                          discord
-                        </a> server!
-                      </>}
+                      message={
+                        <>
+                          If you want to vote for weekly users choice, you can check out our{' '}
+                          <a
+                            href={'https://discord.gg/f7sHEHYZJZ'}
+                            target="_blank"
+                            className={classes.discordLink}
+                            rel="noreferrer"
+                          >
+                            discord
+                          </a>{' '}
+                          server!
+                        </>
+                      }
                       time={7000}
                     />
                   ),
@@ -63,7 +71,6 @@ export function RecommendedSection() {
             />
           </span>
         </Group>
-
       </Card>
       <SimpleGrid
         className={classes.card}
@@ -80,8 +87,7 @@ export function RecommendedSection() {
           <></>
         )}
       </SimpleGrid>
-      {!isMd && <Card withBorder p="md" radius={0} className={classes.cardFooter}>
-      </Card>}
+      {!isMd && <Card withBorder p="md" radius={0} className={classes.cardFooter}></Card>}
     </>
   )
 }

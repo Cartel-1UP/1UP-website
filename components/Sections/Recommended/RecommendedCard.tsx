@@ -8,7 +8,7 @@ import {
   Group,
   Image,
   Indicator,
-  Text
+  Text,
 } from '@mantine/core'
 import Link from 'next/link'
 import useStyles from './style'

@@ -6,8 +6,6 @@ import { IconBold, IconHeading, IconItalic, IconLink, IconPhotoDown } from '@tab
 import React, { useRef, useState } from 'react'
 import useStyles from './style'
 
-
-
 const Editor = () => {
   const { classes, theme } = useStyles()
   const [markdown, setMarkdown] = useState('')

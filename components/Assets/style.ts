@@ -63,6 +63,13 @@ const useStyles = createStyles((theme) => ({
       height: '250px',
     },
   },
+
+  link: {
+    textDecoration: 'none',
+    '&:hover': {
+      textDecoration: 'underline',
+    },
+  },
 }))
 
 export default useStyles

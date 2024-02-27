@@ -1,7 +1,6 @@
 'use client'
 
 import { CommunityPage } from '@/components/CommunityPage/CommunityPage'
-import { RecommendedSection } from '@/components/Sections/Recommended/RecommendedSection'
 import { Container, Space } from '@mantine/core'
 import { useMediaQuery } from '@mantine/hooks'
 
@@ -14,7 +13,7 @@ export default function Page({ params }: { params: { slug: string } }) {
       {isMd ? (
         <>
           <CommunityPage tag={params.slug} image={params.slug} />
-          <RecommendedSection />
+          {/* <RecommendedSection /> */}
         </>
       ) : (
         <>
@@ -25,12 +24,14 @@ export default function Page({ params }: { params: { slug: string } }) {
             <Container size="xl">
               <Space h="xl" />
               <CommunityPage tag={params.slug} image={params.slug} />
+              <Space h={40} />
             </Container>
           </Container>
-          <Container fluid bg={'linear-gradient(to bottom, #f3f3f3, #072f37)'}>
+          <Container fluid bg={'#072f37'}>
+            {/* <Container fluid bg={'linear-gradient(to bottom, #f3f3f3, #072f37)'}> */}
             <Container size="xl">
               <Space h="md" />
-              <RecommendedSection />
+              {/* <RecommendedSection /> */}
             </Container>
           </Container>
         </>

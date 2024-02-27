@@ -1,16 +1,14 @@
 'use client'
 
-import { AssetsPage } from '@/components/Assets/AssetsPage/AssetsPage'
-import { AssetsSection } from '@/components/Assets/AssetsSection'
+import { AssetsPage } from '@/components/Assets/AssetsPage'
+import { Container } from '@mantine/core'
 
 export const runtime = 'experimental-edge'
 
 export default function Page() {
   return (
-    <div>
-      <AssetsSection>
-        <AssetsPage />
-      </AssetsSection>
-    </div>
+    <Container fluid bg={'linear-gradient(to top, #275c672d, #072f37 90%, #072f37 100%)'} pb={25}>
+      <AssetsPage />
+    </Container>
   )
 }
