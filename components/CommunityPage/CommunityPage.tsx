@@ -44,7 +44,7 @@ export function CommunityPage({ image, tag }: Props) {
               radius={5}
               sx={{
                 borderColor: '#f3f3f3',
-                borderWidth: 1,
+                borderWidth: 0,
               }}
             >
               <Timeline

@@ -4,7 +4,6 @@ import { CommunityBar } from '@/components/CommunityBar/CommunityBar'
 import { CommunitySection } from '@/components/Sections/Community/CommunitySection'
 import { FeedSection } from '@/components/Sections/Feed/FeedSection'
 import { MainSection } from '@/components/Sections/Main/MainSection'
-import { RecommendedSection } from '@/components/Sections/Recommended/RecommendedSection'
 import XTimeline from '@/components/XTimline/XTimeline'
 import oneuplogo2 from '@/images/oneup2.png'
 import { Card, Container, Grid, NavLink, Space } from '@mantine/core'
@@ -41,7 +40,7 @@ export default function Home() {
         <>
           <FeedSection sort={'created'} tag={'hive-102223'} communityLogo={oneuplogo2.src} />
           <CommunityBar communityLogo={oneuplogo2.src} tag={'hive-102223'} />
-          <RecommendedSection />
+          {/* <RecommendedSection /> */}
         </>
       ) : (
         <>
@@ -50,7 +49,11 @@ export default function Home() {
               <Grid>
                 <Grid.Col span={9}>
                   <Space h="xl" />
-                  <FeedSection sort={'created'} tag={'hive-102223'} communityLogo={oneuplogo2.src} />
+                  <FeedSection
+                    sort={'created'}
+                    tag={'hive-102223'}
+                    communityLogo={oneuplogo2.src}
+                  />
                 </Grid.Col>
                 <Grid.Col span={3}>
                   <Space h="xl" />
@@ -87,12 +90,14 @@ export default function Home() {
                   </div>
                 </Grid.Col>
               </Grid>
+              <Space h={40} />
             </Container>
           </Container>
-          <Container fluid bg={'linear-gradient(to bottom, #f3f3f3, #f3f3f3 10%, #072f37 100%)'}>
+          {/* <Container fluid bg={'linear-gradient(to bottom, #f3f3f3, #f3f3f3 10%, #072f37 100%)'}> */}
+          <Container fluid bg={'#072f37'}>
             <Container size="xl">
               <Space h="md" />
-              <RecommendedSection />
+              {/* <RecommendedSection /> */}
             </Container>
           </Container>
         </>

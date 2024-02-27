@@ -11,7 +11,7 @@ import {
   Menu,
   NavLink,
   ScrollArea,
-  Text
+  Text,
 } from '@mantine/core'
 import { IconLogout, IconUsers } from '@tabler/icons'
 import { useRouter } from 'next/navigation'
