@@ -3,8 +3,6 @@
 import { galleryData } from '@/data/galleryData'
 import { Center, Container, Flex, Grid, Image, Stack, Text } from '@mantine/core'
 
-
-
 export default function NotFound() {
   return (
     <Flex
