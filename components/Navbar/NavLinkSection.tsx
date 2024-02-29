@@ -22,33 +22,33 @@ export function NavLinkSection({ navLinks, authorized }: Props) {
     <>
       {authorized
         ? navLinks.map((link) => (
-            <div key={link.label}>
-              <NavLink
-                icon={link.icon}
-                label={link.label}
-                className={classes.subLink}
-                onClick={() => {
-                  link.handleAction()
-                  link.closeDrawer && link.closeDrawer()
-                }}
-              />
-            </div>
-          ))
+          <div key={link.label}>
+            <NavLink
+              icon={link.icon}
+              label={link.label}
+              className={classes.subLink}
+              onClick={() => {
+                link.handleAction()
+                link.closeDrawer && link.closeDrawer()
+              }}
+            />
+          </div>
+        ))
         : navLinks.map(
-            (link) =>
-              !link.loggedIn && (
-                <div key={link.label}>
-                  <NavLink
-                    icon={link.icon}
-                    label={link.label}
-                    className={classes.subLink}
-                    onClick={() => {
-                      link.handleAction()
-                    }}
-                  />
-                </div>
-              )
-          )}
+          (link) =>
+            !link.loggedIn && (
+              <div key={link.label}>
+                <NavLink
+                  icon={link.icon}
+                  label={link.label}
+                  className={classes.subLink}
+                  onClick={() => {
+                    link.handleAction()
+                  }}
+                />
+              </div>
+            )
+        )}
     </>
   )
 }
