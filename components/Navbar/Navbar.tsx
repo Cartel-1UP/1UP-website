@@ -11,8 +11,8 @@ import oneuplogo from '../../images/oneup1.png'
 import LoginButton from '../LoginButton/LoginButton'
 import { NavDrawer } from './NavDrawer'
 import { NavLinkSection } from './NavLinkSection'
-import useStyles from './style'
 import { UserMenu } from './UserMenu'
+import useStyles from './style'
 
 export function Navbar() {
   const { classes, theme } = useStyles()
@@ -29,6 +29,12 @@ export function Navbar() {
   const [opened, { open, close: closeDrawer }] = useDisclosure(false)
 
   const navLinks = [
+    {
+      label: 'Community',
+      handleAction: () => {
+        router.push('/blog')
+      },
+    },
     {
       label: 'Swap',
       handleAction: () => {
