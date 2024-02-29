@@ -1,5 +1,5 @@
 'use client'
-import AnimatedImages from '@/components/AnimatedImages'
+import AnimatedImages from '@/components/AnimatedImages/AnimatedImages'
 import { Button, Grid, Text } from '@mantine/core'
 
 
