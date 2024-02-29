@@ -1,7 +1,7 @@
 'use client'
 import { Card, Center, Grid, Space, Stack, Text } from '@mantine/core'
 import { IconArrowsExchange, IconCards, IconDeviceGamepad2, IconUsers } from '@tabler/icons'
-import useStyles from '../style'
+import useStyles from './style'
 
 export function Owned() {
   const { classes } = useStyles()
