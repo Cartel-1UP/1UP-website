@@ -3,7 +3,7 @@
 import { AssetsPage } from '@/components/Assets/AssetsPage'
 import { Container } from '@mantine/core'
 
-export const runtime = 'experimental-edge'
+
 
 export default function Page() {
   return (

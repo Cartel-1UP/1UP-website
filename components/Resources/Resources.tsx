@@ -1,17 +1,16 @@
 'use client'
 
 import { galleryData } from '@/data/galleryData'
+import useSettings from '@/utils/methods/useSettings'
 import { ActionIcon, Box, Card, Center, Grid, Image, Space, Text } from '@mantine/core'
-import { useMediaQuery, useScrollIntoView } from '@mantine/hooks'
+import { useScrollIntoView } from '@mantine/hooks'
 import { IconArrowUp } from '@tabler/icons'
-
 import useStyles from './style'
 
 export function Resources() {
   const { classes, theme } = useStyles()
-
+  const { ...settings } = useSettings();
   const { scrollIntoView, targetRef } = useScrollIntoView<HTMLDivElement>({ offset: 60 })
-  const isMd = useMediaQuery(`(max-width: 1000px)`)
 
   return (
     <>
@@ -29,7 +28,7 @@ export function Resources() {
         <Grid gutter={0}>
           {galleryData.map((item, index) => {
             return (
-              <Grid.Col span={isMd ? item.span * 2 : item.span} key={index}>
+              <Grid.Col span={settings.isMd ? item.span * 2 : item.span} key={index}>
                 <Card p={10} radius={0} key={index}>
                   <Center>
                     <Image src={item.image} alt={item.name} fit="contain" withPlaceholder />

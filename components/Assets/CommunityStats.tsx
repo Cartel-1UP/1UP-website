@@ -1,9 +1,9 @@
 'use client'
-import { Container, Grid, Image, Text } from '@mantine/core'
-import useStyles from './style'
 
-import { useMediaQuery } from '@mantine/hooks'
+import useSettings from '@/utils/methods/useSettings'
+import { Container, Grid, Image, Text } from '@mantine/core'
 import splinterlands from '../../images/splinterland_1.jpg'
+import useStyles from './style'
 
 type Props = {
   value: string
@@ -11,10 +11,10 @@ type Props = {
 
 export function CommunityStats({ value }: Props) {
   const { classes, theme } = useStyles()
-  const isMd = useMediaQuery(`(max-width: 1000px)`)
+  const { ...settings } = useSettings();
   return (
     <>
-      {isMd ? (
+      {settings.isMd ? (
         <>
           <Grid grow pt={20}>
             <Grid.Col span={12}>
