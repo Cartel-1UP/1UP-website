@@ -13,7 +13,7 @@ import { useEffect, useState } from 'react'
 
 import useStyles from './style'
 
-interface Props {
+type Props = {
   article: HiveArticle
   refetch: () => void
   storedBookmarksJSON: any
@@ -130,29 +130,29 @@ export function BookmarkCard({
                       authorized
                         ? toggleBookmark()
                         : showNotification({
-                            autoClose: 3000,
-                            title: 'Warning',
-                            message: (
-                              <NotificationText
-                                message="You have to login to delete bookmark!"
-                                time={3000}
-                              />
-                            ),
-                            styles: (theme) => ({
-                              root: {
-                                backgroundColor: '#072f37',
-                                borderColor: '#072f37',
-                                '&::before': { backgroundColor: theme.white },
-                              },
-                              title: { color: theme.white },
-                              description: { color: theme.white },
-                              closeButton: {
-                                color: theme.white,
-                                '&:hover': { backgroundColor: '#04191d' },
-                              },
-                            }),
-                            loading: false,
-                          })
+                          autoClose: 3000,
+                          title: 'Warning',
+                          message: (
+                            <NotificationText
+                              message="You have to login to delete bookmark!"
+                              time={3000}
+                            />
+                          ),
+                          styles: (theme) => ({
+                            root: {
+                              backgroundColor: '#072f37',
+                              borderColor: '#072f37',
+                              '&::before': { backgroundColor: theme.white },
+                            },
+                            title: { color: theme.white },
+                            description: { color: theme.white },
+                            closeButton: {
+                              color: theme.white,
+                              '&:hover': { backgroundColor: '#04191d' },
+                            },
+                          }),
+                          loading: false,
+                        })
                     }
                   />
                 )}
@@ -174,10 +174,10 @@ export function BookmarkCard({
           <Container fluid>
             {article?.json_metadata.tags
               ? article?.json_metadata.tags.slice(0, 3).map?.((item: string) => (
-                  <Badge mr={5} radius={5} color="gray" key={item}>
-                    {item}
-                  </Badge>
-                ))
+                <Badge mr={5} radius={5} color="gray" key={item}>
+                  {item}
+                </Badge>
+              ))
               : null}
           </Container>
         </Grid.Col>
@@ -190,29 +190,29 @@ export function BookmarkCard({
                   authorized
                     ? setIsVote(!isVote)
                     : showNotification({
-                        autoClose: 3000,
-                        title: 'Warning',
-                        message: (
-                          <NotificationText
-                            message="You have to login to upvote post!"
-                            time={3000}
-                          />
-                        ),
-                        styles: (theme) => ({
-                          root: {
-                            backgroundColor: '#072f37',
-                            borderColor: '#072f37',
-                            '&::before': { backgroundColor: theme.white },
-                          },
-                          title: { color: theme.white },
-                          description: { color: theme.white },
-                          closeButton: {
-                            color: theme.white,
-                            '&:hover': { backgroundColor: '#04191d' },
-                          },
-                        }),
-                        loading: false,
-                      })
+                      autoClose: 3000,
+                      title: 'Warning',
+                      message: (
+                        <NotificationText
+                          message="You have to login to upvote post!"
+                          time={3000}
+                        />
+                      ),
+                      styles: (theme) => ({
+                        root: {
+                          backgroundColor: '#072f37',
+                          borderColor: '#072f37',
+                          '&::before': { backgroundColor: theme.white },
+                        },
+                        title: { color: theme.white },
+                        description: { color: theme.white },
+                        closeButton: {
+                          color: theme.white,
+                          '&:hover': { backgroundColor: '#04191d' },
+                        },
+                      }),
+                      loading: false,
+                    })
                 }
               />
             </span>
@@ -225,29 +225,29 @@ export function BookmarkCard({
                   authorized
                     ? setIsComment(!isComment)
                     : showNotification({
-                        autoClose: 3000,
-                        title: 'Warning',
-                        message: (
-                          <NotificationText
-                            message="You have to login to add comment!"
-                            time={3000}
-                          />
-                        ),
-                        styles: (theme) => ({
-                          root: {
-                            backgroundColor: '#072f37',
-                            borderColor: '#072f37',
-                            '&::before': { backgroundColor: theme.white },
-                          },
-                          title: { color: theme.white },
-                          description: { color: theme.white },
-                          closeButton: {
-                            color: theme.white,
-                            '&:hover': { backgroundColor: '#04191d' },
-                          },
-                        }),
-                        loading: false,
-                      })
+                      autoClose: 3000,
+                      title: 'Warning',
+                      message: (
+                        <NotificationText
+                          message="You have to login to add comment!"
+                          time={3000}
+                        />
+                      ),
+                      styles: (theme) => ({
+                        root: {
+                          backgroundColor: '#072f37',
+                          borderColor: '#072f37',
+                          '&::before': { backgroundColor: theme.white },
+                        },
+                        title: { color: theme.white },
+                        description: { color: theme.white },
+                        closeButton: {
+                          color: theme.white,
+                          '&:hover': { backgroundColor: '#04191d' },
+                        },
+                      }),
+                      loading: false,
+                    })
                 }
               />
             </span>

@@ -3,7 +3,7 @@
 import { useMemo, useState } from 'react'
 import CommentThread from './CommentThread'
 
-interface Props {
+type Props = {
   comments: any
 }
 

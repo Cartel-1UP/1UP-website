@@ -54,14 +54,13 @@ export function BlogContent({ permlink, author }: Props) {
     localStorage.getItem('username') ? localStorage.getItem('username') : ''
   )
 
-  console.log(username)
-
   const { data: blogData, isLoading: isLodingBlogData } = useGetBlog({ permlink, author })
   const {
     data: commentsData,
     isLoading: isLodingCommentsData,
     isFetching: isFetchingData,
   } = useGetComments({ permlink, author })
+
   const { data: userProfileData, isLoading: isLodingUserProfileData } = useGetUserProfile(author)
   const { data: following } = useGetFollowing(username ? username : '')
 
