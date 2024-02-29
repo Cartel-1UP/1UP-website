@@ -9,7 +9,7 @@ import { CommunityBar } from '../CommunityBar/CommunityBar'
 
 import useSettings from '@/utils/methods/useSettings'
 
-interface Props {
+type Props = {
   image: string
   tag: string
 }

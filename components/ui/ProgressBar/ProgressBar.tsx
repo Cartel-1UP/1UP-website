@@ -2,7 +2,7 @@ import { Progress, Text } from '@mantine/core'
 import { useEffect, useState } from 'react'
 import useStyles from './style'
 
-interface Props {
+type Props = {
   message: any
   time?: number
 }
