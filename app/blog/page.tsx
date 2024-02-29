@@ -6,17 +6,15 @@ import { FeedSection } from '@/components/Sections/Feed/FeedSection'
 import { MainSection } from '@/components/Sections/Main/MainSection'
 import XTimeline from '@/components/XTimline/XTimeline'
 import oneuplogo2 from '@/images/oneup2.png'
+import useSettings from '@/utils/methods/useSettings'
 import { Card, Container, Grid, NavLink, Space } from '@mantine/core'
-import { useMediaQuery } from '@mantine/hooks'
 import { IconBrandDiscord } from '@tabler/icons'
 
-export const runtime = 'experimental-edge'
-
 export default function Home() {
-  const isMd = useMediaQuery(`(max-width: 1000px)`)
+  const { ...settings } = useSettings();
   return (
     <>
-      {isMd ? (
+      {settings.isMd ? (
         <div
           style={{ background: 'linear-gradient(to top, #275c672d, #072f37 90%, #072f37 100%)' }}
         >
@@ -36,7 +34,7 @@ export default function Home() {
           <CommunitySection />
         </>
       )}
-      {isMd ? (
+      {settings.isMd ? (
         <>
           <FeedSection sort={'created'} tag={'hive-102223'} communityLogo={oneuplogo2.src} />
           <CommunityBar communityLogo={oneuplogo2.src} tag={'hive-102223'} />
