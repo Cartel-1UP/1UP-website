@@ -3,7 +3,7 @@
 import { Anchor, Group, Text } from '@mantine/core'
 import useStyles from './style'
 
-interface Props {
+type Props = {
   links: {
     link: string
     label: string

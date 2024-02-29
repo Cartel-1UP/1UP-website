@@ -1,17 +1,13 @@
 'use client'
-
-
 import { comumnityData } from '@/data/communityData'
 import { tagToTwitterAccount } from '@/data/twitterData'
+import useSettings from '@/utils/methods/useSettings'
 import { Card, Grid, Space } from '@mantine/core'
 import { Timeline } from 'react-twitter-widgets'
 import { CommunityBar } from '../CommunityBar/CommunityBar'
-
-
-import useSettings from '@/utils/methods/useSettings'
 import { FeedSection } from '../Sections/Feed/FeedSection'
 
-interface Props {
+type Props = {
   image: string
   tag: string
 }

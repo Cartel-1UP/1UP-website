@@ -2,7 +2,7 @@ import { Box, Text, Title } from '@mantine/core'
 import Link from 'next/link'
 import useStyles from './style'
 
-interface Props {
+type Props = {
   image: string
   title: string
   category: string

@@ -4,7 +4,7 @@ import { showNotification } from '@mantine/notifications'
 import Link from 'next/link'
 import useStyles from './style'
 
-interface Props {
+type Props = {
   image: string
   tag: string
 }
