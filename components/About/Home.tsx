@@ -2,6 +2,8 @@
 import AnimatedImages from '@/components/AnimatedImages'
 import { Button, Grid, Text } from '@mantine/core'
 
+export const runtime = 'experimental-edge'
+
 export function Home() {
   return (
     <>

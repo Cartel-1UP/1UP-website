@@ -1,7 +1,6 @@
 'use client'
 import { Text } from '@mantine/core'
-import useStyles from '../style'
-
+import useStyles from './style'
 
 export function Join() {
   const { classes } = useStyles()

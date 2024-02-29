@@ -24,18 +24,18 @@ export function CommunityPage({ image, tag }: Props) {
   return isMd ? (
     <>
       <FeedSection sort={'created'} tag={tag} isCommunity={true} communityLogo={result.image} />
-      <CommunityBar communityLogo={result.image} tag={result.tag} />
+      <CommunityBar communityLogo={result?.image} tag={result?.tag} />
     </>
   ) : (
     <>
       <Grid>
         <Grid.Col span={9}>
           <Space h="xl" />
-          <FeedSection sort={'created'} communityLogo={result.image} tag={result.tag} />
+          <FeedSection sort={'created'} communityLogo={result?.image} tag={result?.tag} />
         </Grid.Col>
         <Grid.Col span={3}>
           <Space h="xl" />
-          <CommunityBar communityLogo={result.image} tag={result.tag} />
+          <CommunityBar communityLogo={result?.image} tag={result?.tag} />
           <div style={{ position: 'sticky', top: '85px' }}>
             <Space h={20} />
             <Card
