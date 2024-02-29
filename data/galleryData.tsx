@@ -200,3 +200,76 @@ export const galleryData = [
     span: 6,
   },
 ]
+
+export const galleryData2 = [
+  {
+    name: 'boss',
+    image: boss.src,
+    span: 3,
+  },
+  {
+    name: 'blue',
+    image: blue.src,
+    span: 3,
+  },
+  {
+    name: 'green',
+    image: green.src,
+    span: 3,
+  },
+  {
+    name: 'red',
+    image: red.src,
+    span: 3,
+  },
+  {
+    name: 'bang',
+    image: bang.src,
+    span: 3,
+  },
+  {
+    name: 'juggle',
+    image: juggle.src,
+    span: 3,
+  },
+  {
+    name: 'manager',
+    image: manager.src,
+    span: 3,
+  },
+  {
+    name: 'wrestler',
+    image: wrestler.src,
+    span: 3,
+  },
+  {
+    name: 'pizza',
+    image: pizza.src,
+    span: 3,
+  },
+  {
+    name: 'psyberx',
+    image: psyberx.src,
+    span: 3,
+  },
+  {
+    name: 'ragnarok',
+    image: ragnarok.src,
+    span: 3,
+  },
+  {
+    name: 'shroominaut',
+    image: shroominaut.src,
+    span: 3,
+  },
+  {
+    name: 'zoombie',
+    image: zoombie.src,
+    span: 3,
+  },
+  {
+    name: 'tamer_2',
+    image: tamer_2.src,
+    span: 3,
+  },
+]
