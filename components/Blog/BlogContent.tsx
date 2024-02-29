@@ -7,6 +7,7 @@ import { useGetUserProfile } from '@/actions/hive/get-userprofile'
 import CommentEditor from '@/components/ui/CommentEditor/CommentEditor'
 import { VoteSlider } from '@/components/ui/VoteSlider/VoteSlider'
 import { formatedDate } from '@/utils/methods/formateDate'
+import useSettings from '@/utils/methods/useSettings'
 import { useAuthorizationStore } from '@/zustand/stores/useAuthorizationStore'
 import {
   ActionIcon,
@@ -22,7 +23,6 @@ import {
   Stack,
   Text,
 } from '@mantine/core'
-import { useMediaQuery } from '@mantine/hooks'
 import { showNotification } from '@mantine/notifications'
 import { IconArrowDown, IconHeart, IconMessage } from '@tabler/icons'
 import { Custom, KeychainKeyTypes, KeychainSDK } from 'keychain-sdk'
@@ -41,8 +41,9 @@ type Props = {
 
 export function BlogContent({ permlink, author }: Props) {
   const { classes, theme } = useStyles()
+  const { ...settings } = useSettings();
+
   const queryCache = useQueryClient()
-  const isMd = useMediaQuery(`(max-width: ${theme.breakpoints.md}px)`)
   const endElementRef = useRef<HTMLDivElement>(null)
   const authorized = useAuthorizationStore((state: { authorized: boolean }) => state.authorized)
 
@@ -79,9 +80,8 @@ export function BlogContent({ permlink, author }: Props) {
           username: `${username}`,
           id: 'follow',
           method: KeychainKeyTypes.posting,
-          json: `[    "follow",    {       "follower": "${username}",       "following": "${author}",       "what": [          \"${
-            isFollowing ? '' : 'blog'
-          }\"       ]    } ]`,
+          json: `[    "follow",    {       "follower": "${username}",       "following": "${author}",       "what": [          \"${isFollowing ? '' : 'blog'
+            }\"       ]    } ]`,
           required_posting_auths: [`${username}`],
           display_msg: isFollowing ? 'Unfollow' : 'Follow',
         },
@@ -159,7 +159,7 @@ export function BlogContent({ permlink, author }: Props) {
         </>
       ) : (
         <>
-          {isMd ? (
+          {settings.isMd ? (
             <>
               <SimpleGrid cols={1} mt={0} spacing={0} breakpoints={[{ maxWidth: 'sm', cols: 1 }]}>
                 <Card p="md" radius={0} className={classes.cardHeader}>
@@ -209,29 +209,29 @@ export function BlogContent({ permlink, author }: Props) {
                               authorized
                                 ? setIsVote(!isVote)
                                 : showNotification({
-                                    autoClose: 3000,
-                                    title: 'Warning',
-                                    message: (
-                                      <NotificationText
-                                        message="You have to login to upvote post!"
-                                        time={3000}
-                                      />
-                                    ),
-                                    styles: (theme) => ({
-                                      root: {
-                                        backgroundColor: '#072f37',
-                                        borderColor: '#072f37',
-                                        '&::before': { backgroundColor: theme.white },
-                                      },
-                                      title: { color: theme.white },
-                                      description: { color: theme.white },
-                                      closeButton: {
-                                        color: theme.white,
-                                        '&:hover': { backgroundColor: '#04191d' },
-                                      },
-                                    }),
-                                    loading: false,
-                                  })
+                                  autoClose: 3000,
+                                  title: 'Warning',
+                                  message: (
+                                    <NotificationText
+                                      message="You have to login to upvote post!"
+                                      time={3000}
+                                    />
+                                  ),
+                                  styles: (theme) => ({
+                                    root: {
+                                      backgroundColor: '#072f37',
+                                      borderColor: '#072f37',
+                                      '&::before': { backgroundColor: theme.white },
+                                    },
+                                    title: { color: theme.white },
+                                    description: { color: theme.white },
+                                    closeButton: {
+                                      color: theme.white,
+                                      '&:hover': { backgroundColor: '#04191d' },
+                                    },
+                                  }),
+                                  loading: false,
+                                })
                             }
                           />
                         </span>
@@ -244,29 +244,29 @@ export function BlogContent({ permlink, author }: Props) {
                               authorized
                                 ? setIsComment(!isComment)
                                 : showNotification({
-                                    autoClose: 3000,
-                                    title: 'Warning',
-                                    message: (
-                                      <NotificationText
-                                        message="You have to login to comment post!"
-                                        time={3000}
-                                      />
-                                    ),
-                                    styles: (theme) => ({
-                                      root: {
-                                        backgroundColor: '#072f37',
-                                        borderColor: '#072f37',
-                                        '&::before': { backgroundColor: theme.white },
-                                      },
-                                      title: { color: theme.white },
-                                      description: { color: theme.white },
-                                      closeButton: {
-                                        color: theme.white,
-                                        '&:hover': { backgroundColor: '#04191d' },
-                                      },
-                                    }),
-                                    loading: false,
-                                  })
+                                  autoClose: 3000,
+                                  title: 'Warning',
+                                  message: (
+                                    <NotificationText
+                                      message="You have to login to comment post!"
+                                      time={3000}
+                                    />
+                                  ),
+                                  styles: (theme) => ({
+                                    root: {
+                                      backgroundColor: '#072f37',
+                                      borderColor: '#072f37',
+                                      '&::before': { backgroundColor: theme.white },
+                                    },
+                                    title: { color: theme.white },
+                                    description: { color: theme.white },
+                                    closeButton: {
+                                      color: theme.white,
+                                      '&:hover': { backgroundColor: '#04191d' },
+                                    },
+                                  }),
+                                  loading: false,
+                                })
                             }
                           />
                         </span>
@@ -368,29 +368,29 @@ export function BlogContent({ permlink, author }: Props) {
                                 authorized
                                   ? setIsVote(!isVote)
                                   : showNotification({
-                                      autoClose: 3000,
-                                      title: 'Warning',
-                                      message: (
-                                        <NotificationText
-                                          message="You have to login to upvote post!"
-                                          time={3000}
-                                        />
-                                      ),
-                                      styles: (theme) => ({
-                                        root: {
-                                          backgroundColor: '#072f37',
-                                          borderColor: '#072f37',
-                                          '&::before': { backgroundColor: theme.white },
-                                        },
-                                        title: { color: theme.white },
-                                        description: { color: theme.white },
-                                        closeButton: {
-                                          color: theme.white,
-                                          '&:hover': { backgroundColor: '#04191d' },
-                                        },
-                                      }),
-                                      loading: false,
-                                    })
+                                    autoClose: 3000,
+                                    title: 'Warning',
+                                    message: (
+                                      <NotificationText
+                                        message="You have to login to upvote post!"
+                                        time={3000}
+                                      />
+                                    ),
+                                    styles: (theme) => ({
+                                      root: {
+                                        backgroundColor: '#072f37',
+                                        borderColor: '#072f37',
+                                        '&::before': { backgroundColor: theme.white },
+                                      },
+                                      title: { color: theme.white },
+                                      description: { color: theme.white },
+                                      closeButton: {
+                                        color: theme.white,
+                                        '&:hover': { backgroundColor: '#04191d' },
+                                      },
+                                    }),
+                                    loading: false,
+                                  })
                               }
                             />
                           </span>
@@ -403,29 +403,29 @@ export function BlogContent({ permlink, author }: Props) {
                                 authorized
                                   ? setIsComment(!isComment)
                                   : showNotification({
-                                      autoClose: 3000,
-                                      title: 'Warning',
-                                      message: (
-                                        <NotificationText
-                                          message="You have to login to comment post!"
-                                          time={3000}
-                                        />
-                                      ),
-                                      styles: (theme) => ({
-                                        root: {
-                                          backgroundColor: '#072f37',
-                                          borderColor: '#072f37',
-                                          '&::before': { backgroundColor: theme.white },
-                                        },
-                                        title: { color: theme.white },
-                                        description: { color: theme.white },
-                                        closeButton: {
-                                          color: theme.white,
-                                          '&:hover': { backgroundColor: '#04191d' },
-                                        },
-                                      }),
-                                      loading: false,
-                                    })
+                                    autoClose: 3000,
+                                    title: 'Warning',
+                                    message: (
+                                      <NotificationText
+                                        message="You have to login to comment post!"
+                                        time={3000}
+                                      />
+                                    ),
+                                    styles: (theme) => ({
+                                      root: {
+                                        backgroundColor: '#072f37',
+                                        borderColor: '#072f37',
+                                        '&::before': { backgroundColor: theme.white },
+                                      },
+                                      title: { color: theme.white },
+                                      description: { color: theme.white },
+                                      closeButton: {
+                                        color: theme.white,
+                                        '&:hover': { backgroundColor: '#04191d' },
+                                      },
+                                    }),
+                                    loading: false,
+                                  })
                               }
                             />
                           </span>
@@ -476,7 +476,7 @@ export function BlogContent({ permlink, author }: Props) {
                   </div>
                   <div ref={endElementRef}></div>
                   {!isFetchingData && <Comment comments={commentsData} />}
-                  {!isMd && (
+                  {!settings.isMd && (
                     <Card withBorder p="xl" className={classes.cardFooter}>
                       <Container></Container>
                     </Card>

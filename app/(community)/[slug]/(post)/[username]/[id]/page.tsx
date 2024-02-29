@@ -1,20 +1,18 @@
 'use client'
 
-import { BlogContent } from '@/components/Blog/BlogContent'
-import { Container, Space } from '@mantine/core'
-import { useMediaQuery } from '@mantine/hooks'
+import { BlogContent } from '@/components/Blog/BlogContent';
+import useSettings from '@/utils/methods/useSettings';
+import { Container, Space } from '@mantine/core';
 
-export const runtime = 'experimental-edge'
 
 export default function Page({ params }: { params: { id: string; username: string } }) {
   const permlink = params.id
   const author = params.username.replace('@', '').replace('%40', '')
-  console.log(author)
-  const isMd = useMediaQuery(`(max-width: 1000px)`)
+  const { ...settings } = useSettings();
   return (
     <>
       <div style={{ minHeight: '100vh' }}>
-        {isMd ? (
+        {settings.isMd ? (
           <BlogContent permlink={permlink} author={author} />
         ) : (
           <Container

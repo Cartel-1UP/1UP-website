@@ -14,10 +14,9 @@ export function NotificationText({ message, time = 7000 }: Props) {
   const incrementInterval = 50
 
   useEffect(() => {
-    const timeout = setTimeout(() => {}, time)
+    const timeout = setTimeout(() => { }, time)
 
     const interval = setInterval(() => {
-      // Increment the progress value by the percentage of the time passed
       const elapsedTime = incrementInterval / time
       setProgressValue((prevValue) => prevValue - elapsedTime * 100)
     }, incrementInterval)

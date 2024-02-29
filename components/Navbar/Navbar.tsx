@@ -1,14 +1,15 @@
 'use client'
 
+import useSettings from '@/utils/methods/useSettings'
 import { useAuthorizationStore } from '@/zustand/stores/useAuthorizationStore'
 import { Burger, Center, Container, Grid, Group, Header, Image } from '@mantine/core'
-import { useDisclosure, useMediaQuery } from '@mantine/hooks'
+import { useDisclosure } from '@mantine/hooks'
 import { IconBookmark, IconExchange, IconPhoto, IconUser } from '@tabler/icons'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import oneuplogo from '../../images/oneup1.png'
-import LoginButton from '../LoginButton/LoginButton'
+import LoginButton from '../ui/LoginButton/LoginButton'
 import { NavDrawer } from './NavDrawer'
 import { NavLinkSection } from './NavLinkSection'
 import { UserMenu } from './UserMenu'
@@ -16,14 +17,14 @@ import useStyles from './style'
 
 export function Navbar() {
   const { classes, theme } = useStyles()
+  const { ...settings } = useSettings();
   const router = useRouter()
+
 
   const authorized = useAuthorizationStore((state: { authorized: boolean }) => state.authorized)
   const userImage = useAuthorizationStore((state: { profile_image: string }) => state.profile_image)
   const userReputation = useAuthorizationStore((state: { reputation: number }) => state.reputation)
   const username = useAuthorizationStore((state: { username: string }) => state.username)
-
-  const isMd = useMediaQuery(`(max-width: ${theme.breakpoints.md}px)`)
 
   const [userMenuOpened, setUserMenuOpened] = useState(false)
   const [opened, { open, close: closeDrawer }] = useDisclosure(false)
@@ -92,8 +93,8 @@ export function Navbar() {
         <Container size={'xl'}>
           <Header height={'100%'} bg={'#072f37'} sx={{ border: 0 }}>
             <Grid align="left">
-              <Grid.Col span={isMd ? 8 : 3}>
-                {isMd ? (
+              <Grid.Col span={settings.isMd ? 8 : 3}>
+                {settings.isMd ? (
                   <Image
                     src={oneuplogo.src}
                     alt="Logo"
@@ -121,7 +122,7 @@ export function Navbar() {
               </Grid.Col>
 
               <Grid.Col
-                span={isMd ? 4 : 2}
+                span={settings.isMd ? 4 : 2}
                 pr={20}
                 sx={{ display: 'flex', justifyContent: 'right' }}
               >
