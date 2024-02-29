@@ -2,8 +2,7 @@
 import { comumnityData } from '@/data/communityData'
 import { Card, Grid, Image, Space, Text } from '@mantine/core'
 import Link from 'next/link'
-import useStyles from '../style'
-
+import useStyles from './style'
 
 export function Communities() {
   const { classes } = useStyles()

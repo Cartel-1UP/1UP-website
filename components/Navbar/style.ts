@@ -36,9 +36,9 @@ const useStyles = createStyles((theme) => ({
 
   subLink: {
     width: '100%',
-    padding: `${theme.spacing.xs}px ${theme.spacing.md}px`,
     borderRadius: theme.radius.md,
     color: '#ffffff',
+
     ...theme.fn.hover({
       backgroundColor: '#06272e',
     }),
