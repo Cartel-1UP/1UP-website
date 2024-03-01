@@ -17,6 +17,21 @@ const useStyles = createStyles((theme, _params) => ({
     },
   },
 
+  textButton1: {
+    border: 0,
+    background: 'linear-gradient(-45deg, #162947, #2ecde6)',
+    '&:hover': {
+      background: 'linear-gradient(-45deg, #162947 10%, #2ecde6 140%)',
+    },
+  },
+  textButton2: {
+    border: 0,
+    background: 'linear-gradient(45deg, #162947, #2ecde6)',
+    '&:hover': {
+      background: 'linear-gradient(45deg, #162947 10%, #2ecde6 140%)',
+    },
+  },
+
   card2: {
     borderRadius: '8px',
     boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.2)',
@@ -24,7 +39,7 @@ const useStyles = createStyles((theme, _params) => ({
     transition: 'box-shadow 0.3s, background 0.4s',
     '&:hover': {
       boxShadow: '0 4px 20px rgba(0, 0, 0, 0.5)', // Adjust shadow properties as needed
-      background: 'linear-gradient(#2fcde7 10%, #172848 70%)', // Adjust the gradient color slightly
+      background: 'linear-gradient(#2ecde6 -10%, #162947 60%)', // Adjust the gradient color slightly
     },
   },
 
