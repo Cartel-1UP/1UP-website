@@ -1,14 +1,16 @@
 'use client'
 import AnimatedImages from '@/components/AnimatedImages/AnimatedImages'
-import { Button, Grid, Text } from '@mantine/core'
+import useSettings from '@/utils/methods/useSettings'
+import { Button, Grid, Group, Text } from '@mantine/core'
 
 
 
 export function Home() {
+  const { ...settings } = useSettings()
   return (
     <>
       <Grid>
-        <Grid.Col span={8}>
+        <Grid.Col span={settings.isMd ? 12 : 8}>
           <Text
             variant="gradient"
             gradient={{ from: 'white', to: 'cyan', deg: 45 }}
@@ -16,7 +18,7 @@ export function Home() {
               fontFamily: 'Segoe UI, sans-serif',
             }}
             ta="left"
-            fz={64}
+            fz={settings.isMd ? 32 : 64}
             fw={700}
           >
             Hive Gaming Guild<br />where players matters.
@@ -28,42 +30,47 @@ export function Home() {
               fontFamily: 'Segoe UI, sans-serif',
             }}
             ta="left"
-            fz={32}
+            fz={settings.isMd ? 16 : 32}
             fw={500}
             mt={20}
           >
-            Introducing the Cartel Guild. As a guild, we foster collaboration with top gaming developers across various Hive projects.
+            As a guild, we foster collaboration with top gaming developers across various Hive projects.
           </Text>
-          <Button
-            variant="gradient"
-            gradient={{ from: '#162947', to: '#2ecde6', deg: 45 }}
-            radius="md"
-            size="xl"
-            mt={'xl'}
-            style={{
-              boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.3)', // Adjust the shadow properties as needed
-            }}
-            onClick={() => window.open('https://discord.gg/f7sHEHYZJZ', '_blank')}
-          >
-            Join Discord
-          </Button>
-          <Button
-            variant="gradient"
-            gradient={{ from: '#162947', to: '#2ecde6', deg: -45 }}
-            radius="md"
-            size="xl"
-            mt={'xl'}
-            style={{
-              boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.3)', // Adjust the shadow properties as needed
-            }}
-            ml={'lg'}
-          >
-            Check Community
-          </Button>
+          <Group spacing={'lg'}>
+            <Button
+              variant="gradient"
+              gradient={{ from: '#162947', to: '#2ecde6', deg: 45 }}
+              radius="md"
+              size={settings.isMd ? "sm" : "xl"}
+              mt={'xl'}
+              style={{
+                boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.3)', // Adjust the shadow properties as needed
+              }}
+              onClick={() => window.open('https://discord.gg/f7sHEHYZJZ', '_blank')}
+            >
+              Join Discord
+            </Button>
+            <Button
+              variant="gradient"
+              gradient={{ from: '#162947', to: '#2ecde6', deg: -45 }}
+              radius="md"
+              size={settings.isMd ? "sm" : "xl"}
+              mt={'xl'}
+              style={{
+                boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.3)', // Adjust the shadow properties as needed
+              }}
+            >
+              Check Community
+            </Button>
+          </Group>
+
         </Grid.Col>
-        <Grid.Col span={4}>
-          <AnimatedImages />
-        </Grid.Col>
+        {settings.isMd ? null :
+          <Grid.Col span={4}>
+            <AnimatedImages />
+          </Grid.Col>
+        }
+
       </Grid>
     </>
   )

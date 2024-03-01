@@ -1,9 +1,11 @@
 'use client'
+import useSettings from '@/utils/methods/useSettings'
 import { Text } from '@mantine/core'
 import useStyles from './style'
 
 export function Join() {
   const { classes } = useStyles()
+  const { ...settings } = useSettings()
 
   return (
     <>
@@ -14,9 +16,9 @@ export function Join() {
           fontFamily: 'Segoe UI, sans-serif',
         }}
         ta="left"
-        fz={48}
+        fz={settings.isMd ? 28 : 48}
         fw={700}
-        mt={100}
+        mt={settings.isMd ? 30 : 100}
       >
         How to join CARTEL?
       </Text>
@@ -28,9 +30,9 @@ export function Join() {
           fontFamily: 'Segoe UI, sans-serif',
         }}
         ta="left"
-        fz={32}
+        fz={settings.isMd ? 16 : 20}
         fw={500}
-        mt={20}
+        mt={settings.isMd ? 15 : 20}
       >
         It is simple, all you have to do is get $CARTEL from <a href={"https://beeswap.dcity.io/tokens/CARTEL"} target="_blank" rel="noreferrer" className={classes.link}>HIVE market</a>.<br />
         Then you can join our community and start earning rewards.

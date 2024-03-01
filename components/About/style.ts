@@ -2,20 +2,25 @@ import { createStyles } from '@mantine/styles'
 
 const useStyles = createStyles((theme, _params) => ({
   card: {
-    boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.2)',
+    background: ' rgba(255, 255, 255, 0.25)',
+    // borderRadius: '16px',
+    boxShadow: '0 4px 30px rgba(0, 0, 0, 0.1)',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
     height: '100%',
+    border: '1px solid rgba(255, 255, 255, 0.5)',
     transition: 'box-shadow 0.3s, background 0.4s',
     '&:hover': {
       boxShadow: '0 4px 20px rgba(0, 0, 0, 0.5)', // Adjust shadow properties as needed
-      background: 'radial-gradient(#2fcde7 20%, #172848 110%)', // Adjust the gradient color slightly
+      background: 'radial-gradient(rgba(47,205,231,0.8) 20%, rgba(23,40,72,0.8) 110%)',
     },
   },
 
   card2: {
+    borderRadius: '8px',
     boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.2)',
+    border: '1px solid rgba(255, 255, 255, 0.5)',
     transition: 'box-shadow 0.3s, background 0.4s',
     '&:hover': {
       boxShadow: '0 4px 20px rgba(0, 0, 0, 0.5)', // Adjust shadow properties as needed

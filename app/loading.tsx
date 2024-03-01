@@ -1,8 +1,7 @@
-
 import cartel1 from '../images/cartel_logo_5.png';
 
 export default function Loading() {
-  const loaderContainerStyle = {
+  const loaderContainerStyle: React.CSSProperties = {
     position: 'fixed',
     top: 0,
     left: 0,
@@ -14,7 +13,7 @@ export default function Loading() {
     alignItems: 'center',
   };
 
-  const loaderStyle = {
+  const loaderStyle: React.CSSProperties = {
     width: '250px',
     height: '250px',
     backgroundImage: `url(${cartel1.src})`,
