@@ -51,7 +51,7 @@ export function Owned() {
         {
           cards.map((item, index) => (
             <Grid.Col span={settings.isMd ? 6 : 3} key={index}>
-              <Card bg={'linear-gradient(#2ecde6 -80%, #162947 95%)'} className={classes.card2} mih={'100%'} pt={settings.isMd ? 20 : 40} pb={settings.isMd ? 20 : 40}>
+              <Card bg={'linear-gradient(#2ecde6 -20%, #162947 100%)'} className={classes.card2} mih={'100%'} pt={settings.isMd ? 20 : 40} pb={settings.isMd ? 20 : 40}>
                 <Center>
                   <Stack spacing={0} align="center">
                     <>

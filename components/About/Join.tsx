@@ -30,7 +30,7 @@ export function Join() {
           fontFamily: 'Segoe UI, sans-serif',
         }}
         ta="left"
-        fz={settings.isMd ? 16 : 20}
+        fz={settings.isMd ? 16 : 32}
         fw={500}
         mt={settings.isMd ? 15 : 20}
       >
