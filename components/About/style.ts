@@ -9,7 +9,7 @@ const useStyles = createStyles((theme, _params) => ({
     justifyContent: 'center',
     alignItems: 'center',
     height: '100%',
-    border: '1px solid rgba(255, 255, 255, 0.5)',
+    border: '1px solid rgba(255, 255, 255, 0.3)',
     transition: 'box-shadow 0.3s, background 0.4s',
     '&:hover': {
       boxShadow: '0 4px 20px rgba(0, 0, 0, 0.5)', // Adjust shadow properties as needed
@@ -35,7 +35,7 @@ const useStyles = createStyles((theme, _params) => ({
   card2: {
     borderRadius: '8px',
     boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.2)',
-    border: '1px solid rgba(255, 255, 255, 0.5)',
+    border: '1px solid rgba(255, 255, 255, 0.2)',
     transition: 'box-shadow 0.3s, background 0.4s',
     '&:hover': {
       boxShadow: '0 4px 20px rgba(0, 0, 0, 0.5)', // Adjust shadow properties as needed

@@ -19,7 +19,7 @@ export function Communities() {
         }}
         ta="left"
         fz={settings.isMd ? 28 : 48}
-        fw={700}
+        fw={600}
         mt={settings.isMd ? 30 : 100}
       >
         We are working with
