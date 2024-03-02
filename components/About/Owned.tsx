@@ -1,7 +1,6 @@
 'use client'
 import useSettings from '@/utils/methods/useSettings'
-import { Card, Center, Grid, Space, Stack, Text } from '@mantine/core'
-import { IconArrowsExchange, IconCards, IconDeviceGamepad2, IconUsers } from '@tabler/icons'
+import { Card, Center, Grid, Image, Space, Stack, Text } from '@mantine/core'
 import useStyles from './style'
 
 export function Owned() {
@@ -11,24 +10,26 @@ export function Owned() {
   const cards = [
     {
       title: 'Curators',
-      description: 'Our Hive curators use a specialized system to meticulously curate top-quality blogs.',
-      icon: <IconUsers color='white' size={settings.isMd ? 80 : 120} stroke={1} />
+      description: 'These are the people who reliably check the content and choose only the most valuable ones.',
+      icon: <Image src={'https://cdn-icons-png.flaticon.com/512/554/554795.png'} fit='fill' maw={settings.isMd ? 80 : 110} />
     },
     {
       title: 'NFT\'s',
-      description: 'We have hundreds of assets from all the games on the Hive network.',
-      icon: <IconCards color='white' size={settings.isMd ? 80 : 120} stroke={1} />
+      description: 'We select promising projects and then successively buy up the digital assets appearing in them.',
+      icon: <Image src={'https://cdn-icons-png.flaticon.com/512/7747/7747255.png'} fit='fill' maw={settings.isMd ? 80 : 110} />
     },
     {
-      title: 'Hive SWAP',
-      description: 'In order to help the Hive exchange, we created our own swap, for our community.',
-      icon: <IconArrowsExchange color='white' size={settings.isMd ? 80 : 120} stroke={1} />
+      title: 'Rankers',
+      description: 'These are players who are in the business of getting the best results to maximize game profits.',
+      // icon: <IconDeviceGamepad2 color='white' size={settings.isMd ? 80 : 120} stroke={1} />
+      icon: <Image src={'https://cdn-icons-png.flaticon.com/512/3097/3097980.png'} fit='fill' maw={settings.isMd ? 80 : 110} />
     },
     {
-      title: 'Players',
-      description: 'Our team includes talented players fighting for top positions in the games.',
-      icon: <IconDeviceGamepad2 color='white' size={settings.isMd ? 80 : 120} stroke={1} />
-    }
+      title: 'Cartel.SWAP',
+      description: 'This is our app that allows guild members to swap HIVE at the best price.',
+      icon: <Image src={'https://cdn-icons-png.flaticon.com/512/11497/11497943.png'} fit='fill' maw={settings.isMd ? 80 : 110} />
+    },
+
   ]
 
   return (
@@ -41,17 +42,34 @@ export function Owned() {
         }}
         ta="left"
         fz={settings.isMd ? 28 : 48}
-        fw={700}
+        fw={600}
         mt={settings.isMd ? 30 : 100}
       >
-        Why should you join us?
+        What does Cartel do?
       </Text>
-      <Space h={30} />
+      <Grid>
+        <Grid.Col span={8}>
+          <Text
+            c={'#fff'}
+            sx={{
+              fontFamily: 'Segoe UI, sans-serif',
+            }}
+            ta="left"
+            fz={settings.isMd ? 16 : 24}
+            fw={400}
+            mt={settings.isMd ? 15 : 20}
+          >
+            Our guild does not only deal with the games themselves on the network. We try to work with the entire Hive ecosystem by having our own curators and systems to help users collect tokens more efficiently.
+          </Text>
+        </Grid.Col>
+      </Grid>
+
+      <Space h={60} />
       <Grid>
         {
           cards.map((item, index) => (
             <Grid.Col span={settings.isMd ? 6 : 3} key={index}>
-              <Card bg={'linear-gradient(#2ecde6 -20%, #162947 100%)'} className={classes.card2} mih={'100%'} pt={settings.isMd ? 20 : 40} pb={settings.isMd ? 20 : 40}>
+              <Card bg={'linear-gradient(#2ecde6 -20%, #162947 100%)'} className={classes.card2} mih={'100%'} pt={settings.isMd ? 20 : 30} pb={settings.isMd ? 20 : 35}>
                 <Center>
                   <Stack spacing={0} align="center">
                     <>
@@ -65,6 +83,7 @@ export function Owned() {
                         ta="center"
                         fz={settings.isMd ? 24 : 32}
                         fw={700}
+                        mt={10}
                       >
                         {item.title}
                       </Text>

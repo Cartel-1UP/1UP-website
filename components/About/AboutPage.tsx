@@ -8,9 +8,12 @@ export function AboutPage() {
   return (
     <>
       <Home />
-      <Communities />
       <Owned />
       <Join />
+
+      <Communities />
+
+
     </>
   )
 }

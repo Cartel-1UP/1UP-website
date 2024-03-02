@@ -21,9 +21,10 @@ export function Home() {
             }}
             ta="left"
             fz={settings.isMd ? 32 : 64}
-            fw={700}
+            fw={600}
+            lh={1.35}
           >
-            Hive Gaming Guild<br />where players matters.
+            Hive Gaming Guild<br />where <Text span c="blue" inherit>players</Text> matters.
           </Text>
           <Text
             variant="gradient"
@@ -38,29 +39,25 @@ export function Home() {
           >
             As a guild, we foster collaboration with top gaming developers across various Hive projects.
           </Text>
-          <Group spacing={'lg'}>
+          <Group spacing={'lg'} mt={'xl'}>
             <Button
               className={classes.textButton2}
-              // variant="gradient"
-              // gradient={{ from: '#162947', to: '#2ecde6', deg: 45 }}
               radius="md"
               size={settings.isMd ? "sm" : "xl"}
               mt={'xl'}
               style={{
-                boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.3)', // Adjust the shadow properties as needed
+                boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.3)',
               }}
               onClick={() => window.open('https://discord.gg/f7sHEHYZJZ', '_blank')}
             >
               Join Discord
             </Button>
             <Button
-              // variant="gradient"
-              // gradient={{ from: '#162947', to: '#2ecde6', deg: -45 }}
               radius="md"
               size={settings.isMd ? "sm" : "xl"}
               mt={'xl'}
               style={{
-                boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.3)', // Adjust the shadow properties as needed
+                boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.3)',
 
               }}
               className={classes.textButton1}
@@ -68,14 +65,12 @@ export function Home() {
               Check Community
             </Button>
           </Group>
-
         </Grid.Col>
         {settings.isMd ? null :
           <Grid.Col span={4}>
             <AnimatedImages />
           </Grid.Col>
         }
-
       </Grid>
     </>
   )
