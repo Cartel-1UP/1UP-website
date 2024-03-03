@@ -9,7 +9,7 @@ import useStyles from './style'
 
 export function Resources() {
   const { classes, theme } = useStyles()
-  const { ...settings } = useSettings();
+  const { ...settings } = useSettings()
   const { scrollIntoView, targetRef } = useScrollIntoView<HTMLDivElement>({ offset: 60 })
 
   return (

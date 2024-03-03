@@ -1,10 +1,10 @@
-import useSettings from '@/utils/methods/useSettings';
-import { Card, Center, Container, Grid, SimpleGrid, Skeleton } from '@mantine/core';
-import useStyles from './style';
+import useSettings from '@/utils/methods/useSettings'
+import { Card, Center, Container, Grid, SimpleGrid, Skeleton } from '@mantine/core'
+import useStyles from './style'
 
 export function BlogContentSkeleton() {
   const { classes, theme } = useStyles()
-  const { ...settings } = useSettings();
+  const { ...settings } = useSettings()
 
   return (
     <>

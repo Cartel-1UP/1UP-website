@@ -12,12 +12,11 @@ import { useEffect, useState } from 'react'
 import Loading from './loading'
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
-    setLoading(true);
-  }, []);
+    setLoading(true)
+  }, [])
 
   return (
     <ReactQueryProvider>
@@ -28,15 +27,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <html lang="en">
                 <head />
                 <body>
-                  {loading ?
+                  {loading ? (
                     <>
                       <Navbar />
                       {children}
                       <Footer links={[]} />
                     </>
-                    :
+                  ) : (
                     <Loading />
-                  }
+                  )}
                   <Analytics />
                 </body>
               </html>

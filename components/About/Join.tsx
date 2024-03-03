@@ -1,7 +1,7 @@
 'use client'
 import useSettings from '@/utils/methods/useSettings'
 import { Grid, Text } from '@mantine/core'
-import CoinCard from '../ui/CoinCard/CoinCard'
+import CoinCard from '../ui/Cards/CoinCard'
 import useStyles from './style'
 
 import oneup from '@/images/1up.png'
@@ -38,15 +38,24 @@ export function Join() {
         fw={400}
         mt={settings.isMd ? 15 : 20}
       >
-        It is simple, all you have to do is get $CARTEL from <a href={"https://beeswap.dcity.io/tokens/CARTEL"} target="_blank" rel="noreferrer" className={classes.link}>HIVE market</a>.<br />
+        It is simple, all you have to do is get $CARTEL from{' '}
+        <a
+          href={'https://beeswap.dcity.io/tokens/CARTEL'}
+          target="_blank"
+          rel="noreferrer"
+          className={classes.link}
+        >
+          HIVE market
+        </a>
+        .<br />
         Then you can join our community and start earning rewards.
       </Text>
       <Grid mt={20}>
-        <Grid.Col span={6}>
-          <CoinCard name={'Preatoria CARTEL'} price={1.0073308} change={'+20'} image={cartel1} />
+        <Grid.Col span={settings.isMd ? 12 : 6}>
+          <CoinCard name={'CARTEL'} image={cartel1} />
         </Grid.Col>
-        <Grid.Col span={6}>
-          <CoinCard name={'1UP'} price={0.0002896} change={'+2'} image={oneup} />
+        <Grid.Col span={settings.isMd ? 12 : 6}>
+          <CoinCard name={'ONEUP'} image={oneup} />
         </Grid.Col>
       </Grid>
     </>

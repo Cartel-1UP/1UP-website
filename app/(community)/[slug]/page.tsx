@@ -1,12 +1,12 @@
 'use client'
 
-import { CommunityPage } from '@/components/CommunityPage/CommunityPage';
-import useSettings from '@/utils/methods/useSettings';
+import { CommunityPage } from '@/components/CommunityPage/CommunityPage'
+import useSettings from '@/utils/methods/useSettings'
 
-import { Container, Space } from '@mantine/core';
+import { Container, Space } from '@mantine/core'
 
 export default function Page({ params }: { params: { slug: string } }) {
-  const { ...settings } = useSettings();
+  const { ...settings } = useSettings()
   return (
     <>
       {settings.isMd ? (

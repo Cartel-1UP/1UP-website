@@ -12,7 +12,7 @@ import useStyles from './style'
 
 export function RecommendedSection() {
   const { classes, theme } = useStyles()
-  const { ...settings } = useSettings();
+  const { ...settings } = useSettings()
   const { isLoading, data, error } = useGetUsersChoice()
 
   if (error) {
@@ -87,7 +87,11 @@ export function RecommendedSection() {
           <></>
         )}
       </SimpleGrid>
-      {!settings.isMd && <Card withBorder p="md" radius={0} className={classes.cardFooter}> </Card>}
+      {!settings.isMd && (
+        <Card withBorder p="md" radius={0} className={classes.cardFooter}>
+          {' '}
+        </Card>
+      )}
     </>
   )
 }

@@ -22,45 +22,45 @@ export function NavLinkSection({ navLinks, authorized }: Props) {
     <>
       {authorized
         ? navLinks.map((link) => (
-          <div key={link.label}>
-            <NavLink
-              icon={link.icon}
-              label={link.label}
-              className={classes.subLink}
-              onClick={() => {
-                link.handleAction()
-                link.closeDrawer && link.closeDrawer()
-              }}
-            />
-          </div>
-        ))
+            <div key={link.label}>
+              <NavLink
+                icon={link.icon}
+                label={link.label}
+                className={classes.subLink}
+                onClick={() => {
+                  link.handleAction()
+                  link.closeDrawer && link.closeDrawer()
+                }}
+              />
+            </div>
+          ))
         : navLinks.map(
-          (link) =>
-            !link.loggedIn && (
-              <div key={link.label}>
-                <Button
-
-                  leftIcon={link.icon}
-                  variant="subtle"
-                  className={classes.subLink}
-                  onClick={() => {
-                    link.handleAction()
-                    link.closeDrawer && link.closeDrawer()
-                  }}
-                >
-                  <Text
-                    c={'#fff'}
-                    sx={{
-                      fontFamily: 'Segoe UI',
+            (link) =>
+              !link.loggedIn && (
+                <div key={link.label}>
+                  <Button
+                    leftIcon={link.icon}
+                    variant="subtle"
+                    className={classes.subLink}
+                    onClick={() => {
+                      link.handleAction()
+                      link.closeDrawer && link.closeDrawer()
                     }}
-
-                    fz={16}
-                    fw={400}
-                  >{link.label}</Text>
-                </Button>
-              </div>
-            )
-        )}
+                  >
+                    <Text
+                      c={'#fff'}
+                      sx={{
+                        fontFamily: 'Segoe UI',
+                      }}
+                      fz={16}
+                      fw={400}
+                    >
+                      {link.label}
+                    </Text>
+                  </Button>
+                </div>
+              )
+          )}
     </>
   )
 }

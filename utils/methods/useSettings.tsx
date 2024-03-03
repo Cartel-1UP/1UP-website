@@ -1,15 +1,15 @@
-import { useMediaQuery } from "@mantine/hooks";
+import { useMediaQuery } from '@mantine/hooks'
 
 const useSettings = () => {
-    const isMd = useMediaQuery(`(max-width: 1000px)`);
-    const isSm = useMediaQuery(`(max-width: 768px)`);
+  const isMd = useMediaQuery(`(max-width: 1000px)`)
+  const isSm = useMediaQuery(`(max-width: 768px)`)
 
-    const settings = {
-        isMd,
-        isSm
-    };
+  const settings = {
+    isMd,
+    isSm,
+  }
 
-    return settings;
+  return settings
 }
 
-export default useSettings;
+export default useSettings

@@ -26,7 +26,7 @@ type Props = {
 
 export function FeedSection({ sort, tag, isCommunity, communityLogo }: Props) {
   const { classes, theme } = useStyles()
-  const { ...settings } = useSettings();
+  const { ...settings } = useSettings()
 
   const [startAuthor, setStartAuthor] = useState('')
   const [startPermlink, setStartPermlink] = useState('')

@@ -1,10 +1,10 @@
-import { useGetMaincards } from '@/actions/database/get-maincards';
-import useSettings from '@/utils/methods/useSettings';
-import { Carousel } from '@mantine/carousel';
-import { Card } from './MainCard';
+import { useGetMaincards } from '@/actions/database/get-maincards'
+import useSettings from '@/utils/methods/useSettings'
+import { Carousel } from '@mantine/carousel'
+import { Card } from './MainCard'
 
 export function MainSection() {
-  const { ...settings } = useSettings();
+  const { ...settings } = useSettings()
   const { data, isLoading, error } = useGetMaincards()
 
   const simpleData = [
@@ -28,15 +28,15 @@ export function MainSection() {
     >
       {isLoading
         ? simpleData.map((item: any, index: any) => (
-          <Carousel.Slide key={index}>
-            <Card {...item} />
-          </Carousel.Slide>
-        ))
+            <Carousel.Slide key={index}>
+              <Card {...item} />
+            </Carousel.Slide>
+          ))
         : data?.map?.((item: any, index: any) => (
-          <Carousel.Slide key={index}>
-            <Card {...item} />
-          </Carousel.Slide>
-        ))}
+            <Carousel.Slide key={index}>
+              <Card {...item} />
+            </Carousel.Slide>
+          ))}
     </Carousel>
   )
 }

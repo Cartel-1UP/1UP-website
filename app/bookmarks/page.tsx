@@ -1,12 +1,12 @@
 'use client'
 
-import { BookmarkSection } from '@/components/ui/Bookmark/BookmarkSection';
-import useSettings from '@/utils/methods/useSettings';
+import { BookmarkSection } from '@/components/ui/Bookmark/BookmarkSection'
+import useSettings from '@/utils/methods/useSettings'
 
-import { Container } from '@mantine/core';
+import { Container } from '@mantine/core'
 
 export default function Page() {
-  const { ...settings } = useSettings();
+  const { ...settings } = useSettings()
   return (
     <>
       <Container
