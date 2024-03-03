@@ -12,7 +12,7 @@ type Props = {
 
 const TabButtons = ({ authorized, defaultTab, isCommunity, onChange }: Props) => {
   const [activeTab, setActiveTab] = useState(defaultTab)
-  const { ...settings } = useSettings();
+  const { ...settings } = useSettings()
 
   const handleTabClick = (tab: Tabs) => {
     setActiveTab(tab)

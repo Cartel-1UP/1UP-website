@@ -11,7 +11,7 @@ import { Card, Container, Grid, NavLink, Space } from '@mantine/core'
 import { IconBrandDiscord } from '@tabler/icons'
 
 export default function Home() {
-  const { ...settings } = useSettings();
+  const { ...settings } = useSettings()
   return (
     <>
       {settings.isMd ? (
