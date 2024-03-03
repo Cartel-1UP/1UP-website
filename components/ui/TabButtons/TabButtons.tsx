@@ -1,8 +1,7 @@
 import { Tabs } from '@/enums/blog.enum'
+import useSettings from '@/utils/methods/useSettings'
 import { Button } from '@mantine/core'
-import { useMediaQuery } from '@mantine/hooks'
 import { useState } from 'react'
-import useStyles from '../Admin/style'
 
 type Props = {
   authorized: boolean
@@ -13,8 +12,7 @@ type Props = {
 
 const TabButtons = ({ authorized, defaultTab, isCommunity, onChange }: Props) => {
   const [activeTab, setActiveTab] = useState(defaultTab)
-  const { classes, theme } = useStyles()
-  const isMd = useMediaQuery(`(max-width: ${theme.breakpoints.md}px)`)
+  const { ...settings } = useSettings()
 
   const handleTabClick = (tab: Tabs) => {
     setActiveTab(tab)
@@ -32,8 +30,8 @@ const TabButtons = ({ authorized, defaultTab, isCommunity, onChange }: Props) =>
           (!isCommunity || tabValue !== Tabs.Following) &&
           (authorized || tabValue !== Tabs.Following) && (
             <Button
-              m={isMd ? 1 : 2}
-              size={isMd ? 'xs' : 'sm'}
+              m={settings.isMd ? 1 : 2}
+              size={settings.isMd ? 'xs' : 'sm'}
               key={tabKey}
               variant="subtle"
               sx={{

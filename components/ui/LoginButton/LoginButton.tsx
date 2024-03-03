@@ -2,12 +2,12 @@
 
 import loginKeychain from '@/actions/hive/login'
 import { isKeychain } from '@/utils/methods/checkKeychain'
+import useSettings from '@/utils/methods/useSettings'
 import { useAuthorizationStore } from '@/zustand/stores/useAuthorizationStore'
 import { Button, Container, Dialog, Group, Stack, Text, TextInput } from '@mantine/core'
-import { useMediaQuery } from '@mantine/hooks'
 import { showNotification } from '@mantine/notifications'
 import { useEffect, useState } from 'react'
-import { NotificationText } from '../ui/ProgressBar/ProgressBar'
+import { NotificationText } from '../ProgressBar/ProgressBar'
 import useStyles from './style'
 
 type Props = {
@@ -16,14 +16,13 @@ type Props = {
 
 function LoginButton({ closeDrawer }: Props) {
   const { classes, theme } = useStyles()
+  const { ...settings } = useSettings()
 
   const [opened, setOpened] = useState(false)
   const [value, setValue] = useState('')
   const [error, setError] = useState(false)
 
   const authorized = useAuthorizationStore((state: { authorized: boolean }) => state.authorized)
-
-  const isSm = useMediaQuery(`(max-width: ${theme.breakpoints.sm}px)`)
 
   useEffect(() => {
     if (isKeychain() && localStorage.getItem('username') && !authorized) {
@@ -66,7 +65,7 @@ function LoginButton({ closeDrawer }: Props) {
 
   return (
     <>
-      {isSm ? (
+      {settings.isSm ? (
         <Container size={'xs'} pt={25}>
           <Stack spacing="xl">
             <TextInput

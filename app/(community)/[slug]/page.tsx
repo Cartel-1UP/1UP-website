@@ -1,16 +1,15 @@
 'use client'
 
 import { CommunityPage } from '@/components/CommunityPage/CommunityPage'
-import { Container, Space } from '@mantine/core'
-import { useMediaQuery } from '@mantine/hooks'
+import useSettings from '@/utils/methods/useSettings'
 
-export const runtime = 'experimental-edge'
+import { Container, Space } from '@mantine/core'
 
 export default function Page({ params }: { params: { slug: string } }) {
-  const isMd = useMediaQuery(`(max-width: 1000px)`)
+  const { ...settings } = useSettings()
   return (
     <>
-      {isMd ? (
+      {settings.isMd ? (
         <>
           <CommunityPage tag={params.slug} image={params.slug} />
           {/* <RecommendedSection /> */}

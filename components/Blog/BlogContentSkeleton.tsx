@@ -1,14 +1,14 @@
+import useSettings from '@/utils/methods/useSettings'
 import { Card, Center, Container, Grid, SimpleGrid, Skeleton } from '@mantine/core'
-import { useMediaQuery } from '@mantine/hooks'
 import useStyles from './style'
 
 export function BlogContentSkeleton() {
   const { classes, theme } = useStyles()
-  const isMd = useMediaQuery(`(max-width: ${theme.breakpoints.md}px)`)
+  const { ...settings } = useSettings()
 
   return (
     <>
-      {isMd ? (
+      {settings.isMd ? (
         <>
           <Card withBorder p="md" radius={0} className={classes.cardHeader}>
             <Grid grow>
@@ -30,7 +30,7 @@ export function BlogContentSkeleton() {
       ) : (
         <Container fluid>
           <Grid grow>
-            <Grid.Col span={isMd ? 12 : 9}>
+            <Grid.Col span={settings.isMd ? 12 : 9}>
               <SimpleGrid cols={1} pt={25} spacing={0} breakpoints={[{ maxWidth: 'sm', cols: 1 }]}>
                 <Card withBorder p="md" radius={0} className={classes.cardHeader}>
                   <Grid grow>

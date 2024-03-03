@@ -1,13 +1,14 @@
 'use client'
 
 import { getFeedBlogs, getRecentBlogs } from '@/actions/hive/get-blogs'
-import TabButtons from '@/components/TabButtons/TabButtons'
 import { NotificationText } from '@/components/ui/ProgressBar/ProgressBar'
+import TabButtons from '@/components/ui/TabButtons/TabButtons'
 import { Tabs } from '@/enums/blog.enum'
 import { HiveArticle } from '@/types/blog.type'
+import useSettings from '@/utils/methods/useSettings'
 import { useAuthorizationStore } from '@/zustand/stores/useAuthorizationStore'
 import { ActionIcon, Avatar, Box, Button, Card, Group, SimpleGrid } from '@mantine/core'
-import { useMediaQuery, useScrollIntoView } from '@mantine/hooks'
+import { useScrollIntoView } from '@mantine/hooks'
 import { showNotification } from '@mantine/notifications'
 import { IconArrowBarRight, IconArrowUp } from '@tabler/icons'
 import { useEffect, useRef, useState } from 'react'
@@ -25,6 +26,7 @@ type Props = {
 
 export function FeedSection({ sort, tag, isCommunity, communityLogo }: Props) {
   const { classes, theme } = useStyles()
+  const { ...settings } = useSettings()
 
   const [startAuthor, setStartAuthor] = useState('')
   const [startPermlink, setStartPermlink] = useState('')
@@ -34,7 +36,7 @@ export function FeedSection({ sort, tag, isCommunity, communityLogo }: Props) {
   const [loading, setLoading] = useState(false)
   const [loadingMorePosts, setLoadingMorePosts] = useState(false)
   const { scrollIntoView, targetRef } = useScrollIntoView<HTMLDivElement>({ offset: 60 })
-  const isMd = useMediaQuery(`(max-width: ${theme.breakpoints.md}px)`)
+
   const [username, setUsername] = useState('')
   const authorized = useAuthorizationStore((state: { authorized: boolean }) => state.authorized)
   const userZustand = useAuthorizationStore((state: { username: string }) => state.username)
@@ -170,7 +172,7 @@ export function FeedSection({ sort, tag, isCommunity, communityLogo }: Props) {
         spacing={0}
         breakpoints={[{ maxWidth: 'sm', cols: 1 }]}
       >
-        {!isMd && (
+        {!settings.isMd && (
           <Card withBorder p="md" radius={0} className={classes.cardHeader}>
             <Group position="apart">
               <div>
@@ -181,7 +183,7 @@ export function FeedSection({ sort, tag, isCommunity, communityLogo }: Props) {
                   isCommunity={isCommunity}
                 />
               </div>
-              {isMd && <Avatar size={48} color="blue" radius="xl" src={communityLogo} />}
+              {settings.isMd && <Avatar size={48} color="blue" radius="xl" src={communityLogo} />}
             </Group>
           </Card>
         )}
@@ -193,7 +195,7 @@ export function FeedSection({ sort, tag, isCommunity, communityLogo }: Props) {
         {posts?.map((item: HiveArticle) => (
           <FeedCard article={item} key={item.post_id} />
         ))}
-        {isMd && (
+        {settings.isMd && (
           <div style={{ position: 'sticky', bottom: '0px', zIndex: '999' }}>
             <Card withBorder p="sm" radius={0} className={classes.cardHeader}>
               <Group position="apart">
@@ -205,7 +207,7 @@ export function FeedSection({ sort, tag, isCommunity, communityLogo }: Props) {
                     isCommunity={isCommunity}
                   />
                 </div>
-                {isMd && <Avatar size={48} color="blue" radius="xl" src={communityLogo} />}
+                {settings.isMd && <Avatar size={48} color="blue" radius="xl" src={communityLogo} />}
               </Group>
             </Card>
           </div>

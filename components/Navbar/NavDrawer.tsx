@@ -15,7 +15,7 @@ import {
 } from '@mantine/core'
 import { IconLogout, IconUsers } from '@tabler/icons'
 import { useRouter } from 'next/navigation'
-import LoginButton from '../LoginButton/LoginButton'
+import LoginButton from '../ui/LoginButton/LoginButton'
 import { NavLinkSection } from './NavLinkSection'
 import useStyles from './style'
 

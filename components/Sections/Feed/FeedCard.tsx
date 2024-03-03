@@ -5,6 +5,7 @@ import { NotificationText } from '@/components/ui/ProgressBar/ProgressBar'
 import { VoteSlider } from '@/components/ui/VoteSlider/VoteSlider'
 import { Bookmark, HiveArticle } from '@/types/blog.type'
 import { formatedDate } from '@/utils/methods/formateDate'
+import useSettings from '@/utils/methods/useSettings'
 import { useAuthorizationStore } from '@/zustand/stores/useAuthorizationStore'
 import {
   AspectRatio,
@@ -20,20 +21,19 @@ import {
   Text,
   ThemeIcon,
 } from '@mantine/core'
-import { useMediaQuery } from '@mantine/hooks'
 import { showNotification } from '@mantine/notifications'
 import { IconArrowBack, IconBookmark, IconBookmarkOff, IconHeart, IconMessage } from '@tabler/icons'
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
-
 import useStyles from './style'
 
-interface Props {
+type Props = {
   article: HiveArticle
 }
 
 export function FeedCard({ article }: Props) {
   const { classes, theme } = useStyles()
+  const { ...settings } = useSettings()
   const router = useRouter()
   const authorized = useAuthorizationStore((state: { authorized: boolean }) => state.authorized)
 
@@ -45,9 +45,6 @@ export function FeedCard({ article }: Props) {
   const numericalValue = parseFloat(article?.pending_payout_value)
   const roundedValue = Math.ceil(numericalValue * 100) / 100
   const formattedCurrency = `$${roundedValue.toFixed(2)}`
-
-  const isSm = useMediaQuery(`(max-width: ${theme.breakpoints.sm}px)`)
-  const isMd = useMediaQuery(`(max-width: ${theme.breakpoints.md}px)`)
 
   const date = new Date(article.created)
   const forbiddenChars = ['!', '<', '>', '[', ']', '#']
@@ -131,10 +128,15 @@ export function FeedCard({ article }: Props) {
             <>
               <Container>
                 <Group spacing={'xs'}>
-                  <ThemeIcon variant="light" color="gray" size={isSm ? 'xs' : 'sm'} radius="xl">
+                  <ThemeIcon
+                    variant="light"
+                    color="gray"
+                    size={settings.isSm ? 'xs' : 'sm'}
+                    radius="xl"
+                  >
                     <IconArrowBack />
                   </ThemeIcon>
-                  <Text size={isSm ? 'xs' : 'sm'} weight={400}>
+                  <Text size={settings.isSm ? 'xs' : 'sm'} weight={400}>
                     Rebbloged by{' '}
                     <Text span c="blue" inherit>
                       <a
@@ -148,7 +150,7 @@ export function FeedCard({ article }: Props) {
                     </Text>
                   </Text>
                 </Group>
-                <Space h={isSm ? 0 : 'md'} />
+                <Space h={settings.isSm ? 0 : 'md'} />
               </Container>
             </>
           )}
@@ -159,19 +161,24 @@ export function FeedCard({ article }: Props) {
               color={'#114f5c'}
               inline
               label={`${article.author_reputation.toFixed()}`}
-              size={isSm ? 25 : 30}
+              size={settings.isSm ? 25 : 30}
               position="bottom-end"
               withBorder
             >
               <Avatar
                 color="gray"
-                size={isSm ? 35 : 45}
+                size={settings.isSm ? 35 : 45}
                 radius="xl"
                 src={`https://images.hive.blog/u/${article?.author}/avatar`}
               />
             </Indicator>
             {article.stats.is_pinned && (
-              <Badge ml={isSm ? 20 : 10} color="red" variant="outline" size={isSm ? 'xs' : 'md'}>
+              <Badge
+                ml={settings.isSm ? 20 : 10}
+                color="red"
+                variant="outline"
+                size={settings.isSm ? 'xs' : 'md'}
+              >
                 Pinned
               </Badge>
             )}
@@ -182,7 +189,7 @@ export function FeedCard({ article }: Props) {
               color={'dimmed'}
               fw={500}
             >
-              {isSm ? (
+              {settings.isSm ? (
                 <>
                   {article?.author && <span>{article.author}</span>}
                   {article?.author && <br />}
@@ -201,18 +208,18 @@ export function FeedCard({ article }: Props) {
             }
           >
             <Text
-              fw={isSm ? 600 : 700}
+              fw={settings.isSm ? 600 : 700}
               color={theme.colors.dark[5]}
               mt={20}
               sx={{
                 fontFamily: 'Greycliff CF, sans-serif',
               }}
-              size={isSm ? 'sm' : 'md'}
+              size={settings.isSm ? 'sm' : 'md'}
               className={classes.turncateTitle}
             >
               {article?.title}
             </Text>
-            {!isSm && (
+            {!settings.isSm && (
               <Text
                 color="dimmed"
                 size={'sm'}
@@ -226,9 +233,9 @@ export function FeedCard({ article }: Props) {
             )}
           </Container>
         </Grid.Col>
-        <Grid.Col span={isSm ? 4 : 5}>
+        <Grid.Col span={settings.isSm ? 4 : 5}>
           <Container>
-            <AspectRatio ratio={isSm ? 1 : 5 / 3}>
+            <AspectRatio ratio={settings.isSm ? 1 : 5 / 3}>
               {isImageExists ? (
                 <Image
                   radius={0}
@@ -243,11 +250,11 @@ export function FeedCard({ article }: Props) {
             </AspectRatio>
           </Container>
         </Grid.Col>
-        <Grid.Col span={isSm ? 3 : 7}>
+        <Grid.Col span={settings.isSm ? 3 : 7}>
           <Container>
             {article?.json_metadata.tags
               ? article?.json_metadata.tags
-                  .slice(0, parseInt(`${isSm ? 1 : 3}`))
+                  .slice(0, parseInt(`${settings.isSm ? 1 : 3}`))
                   .map?.((item: string) => (
                     <Badge mr={5} radius={5} color="gray" key={item}>
                       {item}
@@ -405,7 +412,7 @@ export function FeedCard({ article }: Props) {
         </Grid.Col>
       </Grid>
       {isVote &&
-        (isMd ? (
+        (settings.isMd ? (
           <VoteSlider permlink={article.permlink} author={article.author} setIsVote={setIsVote} />
         ) : (
           <Grid.Col span={12}>
@@ -413,7 +420,7 @@ export function FeedCard({ article }: Props) {
           </Grid.Col>
         ))}
       {isComment &&
-        (isMd ? (
+        (settings.isMd ? (
           <CommentEditor
             setIsComment={setIsComment}
             permlink={article.permlink}

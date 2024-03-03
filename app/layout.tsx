@@ -8,8 +8,16 @@ import { ReactQueryProvider } from '@/providers/reactquery-provider'
 import { MantineProvider } from '@mantine/core'
 import { NotificationsProvider } from '@mantine/notifications'
 import { Analytics } from '@vercel/analytics/react'
+import { useEffect, useState } from 'react'
+import Loading from './loading'
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const [loading, setLoading] = useState(false)
+
+  useEffect(() => {
+    setLoading(true)
+  }, [])
+
   return (
     <ReactQueryProvider>
       <ColorProvider>
@@ -19,9 +27,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <html lang="en">
                 <head />
                 <body>
-                  <Navbar />
-                  {children}
-                  <Footer links={[]} />
+                  {loading ? (
+                    <>
+                      <Navbar />
+                      {children}
+                      <Footer links={[]} />
+                    </>
+                  ) : (
+                    <Loading />
+                  )}
                   <Analytics />
                 </body>
               </html>

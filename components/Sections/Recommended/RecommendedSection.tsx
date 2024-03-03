@@ -2,8 +2,8 @@
 
 import { useGetUsersChoice } from '@/actions/database/get-userschoice'
 import { NotificationText } from '@/components/ui/ProgressBar/ProgressBar'
+import useSettings from '@/utils/methods/useSettings'
 import { Card, Group, SimpleGrid, Text } from '@mantine/core'
-import { useMediaQuery } from '@mantine/hooks'
 import { showNotification } from '@mantine/notifications'
 import { IconInfoCircle } from '@tabler/icons'
 import { RecommendedCard } from './RecommendedCard'
@@ -12,8 +12,8 @@ import useStyles from './style'
 
 export function RecommendedSection() {
   const { classes, theme } = useStyles()
+  const { ...settings } = useSettings()
   const { isLoading, data, error } = useGetUsersChoice()
-  const isMd = useMediaQuery(`(max-width: ${theme.breakpoints.md}px)`)
 
   if (error) {
     return null
@@ -87,7 +87,11 @@ export function RecommendedSection() {
           <></>
         )}
       </SimpleGrid>
-      {!isMd && <Card withBorder p="md" radius={0} className={classes.cardFooter}> </Card>}
+      {!settings.isMd && (
+        <Card withBorder p="md" radius={0} className={classes.cardFooter}>
+          {' '}
+        </Card>
+      )}
     </>
   )
 }

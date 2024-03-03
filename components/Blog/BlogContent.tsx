@@ -7,6 +7,7 @@ import { useGetUserProfile } from '@/actions/hive/get-userprofile'
 import CommentEditor from '@/components/ui/CommentEditor/CommentEditor'
 import { VoteSlider } from '@/components/ui/VoteSlider/VoteSlider'
 import { formatedDate } from '@/utils/methods/formateDate'
+import useSettings from '@/utils/methods/useSettings'
 import { useAuthorizationStore } from '@/zustand/stores/useAuthorizationStore'
 import {
   ActionIcon,
@@ -22,7 +23,6 @@ import {
   Stack,
   Text,
 } from '@mantine/core'
-import { useMediaQuery } from '@mantine/hooks'
 import { showNotification } from '@mantine/notifications'
 import { IconArrowDown, IconHeart, IconMessage } from '@tabler/icons'
 import { Custom, KeychainKeyTypes, KeychainSDK } from 'keychain-sdk'
@@ -41,8 +41,9 @@ type Props = {
 
 export function BlogContent({ permlink, author }: Props) {
   const { classes, theme } = useStyles()
+  const { ...settings } = useSettings()
+
   const queryCache = useQueryClient()
-  const isMd = useMediaQuery(`(max-width: ${theme.breakpoints.md}px)`)
   const endElementRef = useRef<HTMLDivElement>(null)
   const authorized = useAuthorizationStore((state: { authorized: boolean }) => state.authorized)
 
@@ -53,14 +54,13 @@ export function BlogContent({ permlink, author }: Props) {
     localStorage.getItem('username') ? localStorage.getItem('username') : ''
   )
 
-  console.log(username)
-
   const { data: blogData, isLoading: isLodingBlogData } = useGetBlog({ permlink, author })
   const {
     data: commentsData,
     isLoading: isLodingCommentsData,
     isFetching: isFetchingData,
   } = useGetComments({ permlink, author })
+
   const { data: userProfileData, isLoading: isLodingUserProfileData } = useGetUserProfile(author)
   const { data: following } = useGetFollowing(username ? username : '')
 
@@ -159,7 +159,7 @@ export function BlogContent({ permlink, author }: Props) {
         </>
       ) : (
         <>
-          {isMd ? (
+          {settings.isMd ? (
             <>
               <SimpleGrid cols={1} mt={0} spacing={0} breakpoints={[{ maxWidth: 'sm', cols: 1 }]}>
                 <Card p="md" radius={0} className={classes.cardHeader}>
@@ -476,7 +476,7 @@ export function BlogContent({ permlink, author }: Props) {
                   </div>
                   <div ref={endElementRef}></div>
                   {!isFetchingData && <Comment comments={commentsData} />}
-                  {!isMd && (
+                  {!settings.isMd && (
                     <Card withBorder p="xl" className={classes.cardFooter}>
                       <Container></Container>
                     </Card>
