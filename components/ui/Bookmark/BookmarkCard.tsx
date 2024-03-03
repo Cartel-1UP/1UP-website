@@ -13,7 +13,7 @@ import { useEffect, useState } from 'react'
 
 import useStyles from './style'
 
-interface Props {
+type Props = {
   article: HiveArticle
   refetch: () => void
   storedBookmarksJSON: any

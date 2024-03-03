@@ -2,7 +2,7 @@ import { Progress, Text } from '@mantine/core'
 import { useEffect, useState } from 'react'
 import useStyles from './style'
 
-interface Props {
+type Props = {
   message: any
   time?: number
 }
@@ -17,7 +17,6 @@ export function NotificationText({ message, time = 7000 }: Props) {
     const timeout = setTimeout(() => {}, time)
 
     const interval = setInterval(() => {
-      // Increment the progress value by the percentage of the time passed
       const elapsedTime = incrementInterval / time
       setProgressValue((prevValue) => prevValue - elapsedTime * 100)
     }, incrementInterval)

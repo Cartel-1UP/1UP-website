@@ -13,7 +13,7 @@ import {
 } from '@tabler/icons'
 import { useRouter } from 'next/navigation'
 import { Dispatch, SetStateAction, useState } from 'react'
-import { UserButton } from '../UserButton/UserButton'
+import { UserButton } from '../ui/UserButton/UserButton'
 import useStyles from './style'
 
 type Props = {
