@@ -1,11 +1,11 @@
 'use client'
 
-import { Resources } from '@/components/Resources/Resources';
-import useSettings from '@/utils/methods/useSettings';
-import { Container, Space } from '@mantine/core';
+import { Resources } from '@/components/Resources/Resources'
+import useSettings from '@/utils/methods/useSettings'
+import { Container, Space } from '@mantine/core'
 
 export default function Page() {
-  const { ...settings } = useSettings();
+  const { ...settings } = useSettings()
   return (
     <>
       <Container

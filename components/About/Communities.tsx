@@ -33,9 +33,8 @@ export function Communities() {
                 <Card
                   p="md"
                   bg={'radial-gradient(#2ecde6 30%, #162947 130%)'}
-                  radius={settings.isMd ? "md" : "lg"}
+                  radius={settings.isMd ? 'md' : 'lg'}
                   className={classes.card}
-
                 >
                   <Image src={item.image} alt={item.name} fit="scale-down" />
                 </Card>
@@ -46,7 +45,6 @@ export function Communities() {
                 bg={'radial-gradient(#2ecde6 30%, #162947 130%)'}
                 radius="md"
                 className={classes.card}
-
               >
                 <Image src={item.image} alt={item.name} fit="scale-down" />
               </Card>

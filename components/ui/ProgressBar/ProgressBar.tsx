@@ -14,7 +14,7 @@ export function NotificationText({ message, time = 7000 }: Props) {
   const incrementInterval = 50
 
   useEffect(() => {
-    const timeout = setTimeout(() => { }, time)
+    const timeout = setTimeout(() => {}, time)
 
     const interval = setInterval(() => {
       const elapsedTime = incrementInterval / time

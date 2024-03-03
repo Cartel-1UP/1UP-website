@@ -4,8 +4,6 @@ import useSettings from '@/utils/methods/useSettings'
 import { Button, Grid, Group, Text } from '@mantine/core'
 import useStyles from './style'
 
-
-
 export function Home() {
   const { ...settings } = useSettings()
   const { classes } = useStyles()
@@ -24,26 +22,37 @@ export function Home() {
             fw={600}
             lh={1.35}
           >
-            Hive Gaming Guild<br />where <Text span c="blue" inherit>players</Text> matters.
+            Hive Gaming Guild
+            <br />
+            where{' '}
+            <Text span c="blue" inherit>
+              players
+            </Text>{' '}
+            matters.
           </Text>
-          <Text
-            variant="gradient"
-            gradient={{ from: 'white', to: 'white', deg: 45 }}
-            sx={{
-              fontFamily: 'Segoe UI, sans-serif',
-            }}
-            ta="left"
-            fz={settings.isMd ? 16 : 32}
-            fw={500}
-            mt={20}
-          >
-            As a guild, we foster collaboration with top gaming developers across various Hive projects.
-          </Text>
+          <Grid>
+            <Grid.Col span={10}>
+              <Text
+                variant="gradient"
+                gradient={{ from: 'white', to: 'white', deg: 45 }}
+                sx={{
+                  fontFamily: 'Segoe UI, sans-serif',
+                }}
+                ta="left"
+                fz={settings.isMd ? 16 : 32}
+                fw={500}
+                mt={20}
+              >
+                As a guild, we foster collaboration with top gaming developers across various Hive
+                projects.
+              </Text>
+            </Grid.Col>
+          </Grid>
           <Group spacing={'lg'} mt={'xl'}>
             <Button
               className={classes.textButton2}
               radius="md"
-              size={settings.isMd ? "sm" : "xl"}
+              size={settings.isMd ? 'sm' : 'xl'}
               mt={'xl'}
               style={{
                 boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.3)',
@@ -54,11 +63,10 @@ export function Home() {
             </Button>
             <Button
               radius="md"
-              size={settings.isMd ? "sm" : "xl"}
+              size={settings.isMd ? 'sm' : 'xl'}
               mt={'xl'}
               style={{
                 boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.3)',
-
               }}
               className={classes.textButton1}
             >
@@ -66,11 +74,11 @@ export function Home() {
             </Button>
           </Group>
         </Grid.Col>
-        {settings.isMd ? null :
+        {settings.isMd ? null : (
           <Grid.Col span={4}>
             <AnimatedImages />
           </Grid.Col>
-        }
+        )}
       </Grid>
     </>
   )

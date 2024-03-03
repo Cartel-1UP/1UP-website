@@ -24,7 +24,6 @@ function LoginButton({ closeDrawer }: Props) {
 
   const authorized = useAuthorizationStore((state: { authorized: boolean }) => state.authorized)
 
-
   useEffect(() => {
     if (isKeychain() && localStorage.getItem('username') && !authorized) {
       let username = localStorage.getItem('username')

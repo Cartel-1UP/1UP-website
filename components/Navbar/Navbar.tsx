@@ -17,9 +17,8 @@ import useStyles from './style'
 
 export function Navbar() {
   const { classes, theme } = useStyles()
-  const { ...settings } = useSettings();
+  const { ...settings } = useSettings()
   const router = useRouter()
-
 
   const authorized = useAuthorizationStore((state: { authorized: boolean }) => state.authorized)
   const userImage = useAuthorizationStore((state: { profile_image: string }) => state.profile_image)

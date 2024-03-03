@@ -12,8 +12,6 @@ export function AboutPage() {
       <Join />
 
       <Communities />
-
-
     </>
   )
 }

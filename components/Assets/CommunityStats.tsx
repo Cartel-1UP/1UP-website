@@ -11,7 +11,7 @@ type Props = {
 
 export function CommunityStats({ value }: Props) {
   const { classes, theme } = useStyles()
-  const { ...settings } = useSettings();
+  const { ...settings } = useSettings()
   return (
     <>
       {settings.isMd ? (

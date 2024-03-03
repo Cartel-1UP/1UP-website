@@ -17,7 +17,7 @@ type Props = {
 export function CommunityPage({ image, tag }: Props) {
   const result = comumnityData.filter((data) => data.tag === tag)[0]
   const name = tagToTwitterAccount[tag]
-  const { ...settings } = useSettings();
+  const { ...settings } = useSettings()
 
   return settings.isMd ? (
     <>

@@ -1,4 +1,4 @@
-import cartel1 from '../images/cartel_logo_5.png';
+import cartel1 from '../images/cartel_logo_5.png'
 
 export default function Loading() {
   const loaderContainerStyle: React.CSSProperties = {
@@ -11,7 +11,7 @@ export default function Loading() {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-  };
+  }
 
   const loaderStyle: React.CSSProperties = {
     width: '250px',
@@ -19,19 +19,19 @@ export default function Loading() {
     backgroundImage: `url(${cartel1.src})`,
     backgroundSize: 'cover',
     animation: 'spin 2.5s linear infinite',
-  };
+  }
 
   const keyframes = `
     @keyframes spin {
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
     }
-  `;
+  `
 
   return (
     <div style={loaderContainerStyle}>
       <style>{keyframes}</style>
       <div style={loaderStyle}></div>
     </div>
-  );
+  )
 }
