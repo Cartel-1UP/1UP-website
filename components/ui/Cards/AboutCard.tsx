@@ -16,7 +16,9 @@ export default function AboutCard({ title, description, icon }: Props) {
 
   return (
     <>
-      <div className={classes.card2}>
+      <div className={classes.card2}
+        onMouseEnter={() => setIsFlipped(true)}
+        onMouseLeave={() => setIsFlipped(false)}>
         <Card
           bg={'linear-gradient(#2ecde6 -20%, #162947 100%)'}
           className={`${classes.cardInner} ${isFlipped ? classes.cardHover : ''}`}
@@ -24,8 +26,7 @@ export default function AboutCard({ title, description, icon }: Props) {
           h={settings.isMd ? 220 : 350}
           pt={settings.isMd ? 20 : 10}
           pb={settings.isMd ? 20 : 15}
-          onMouseEnter={() => setIsFlipped(true)}
-          onMouseLeave={() => setIsFlipped(false)}
+
         >
           <Center>
             <Stack
