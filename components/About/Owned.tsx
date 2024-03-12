@@ -50,19 +50,19 @@ export function Owned() {
         ta="left"
         fz={settings.isMd ? 28 : 48}
         fw={600}
-        mt={settings.isMd ? 30 : 100}
+        mt={settings.isMd ? 40 : 100}
       >
         What does Cartel do?
       </Text>
       <Grid>
-        <Grid.Col span={10}>
+        <Grid.Col span={settings.isMd ? 12 : 10}>
           <Text
             c={'#fff'}
             sx={{
               fontFamily: 'Segoe UI, sans-serif',
             }}
             ta="left"
-            fz={settings.isMd ? 16 : 24}
+            fz={settings.isMd ? 18 : 24}
             fw={400}
             mt={settings.isMd ? 15 : 20}
           >
@@ -76,7 +76,7 @@ export function Owned() {
       <Space h={60} />
       <Grid>
         {cards.map((item, index) => (
-          <Grid.Col span={settings.isMd ? 6 : 3} key={index}>
+          <Grid.Col span={settings.isMd ? 12 : 3} key={index}>
             <AboutCard title={item.title} description={item.description} icon={item.icon} />
           </Grid.Col>
         ))}

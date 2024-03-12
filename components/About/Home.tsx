@@ -33,7 +33,7 @@ export function Home() {
             matters.
           </Text>
           <Grid>
-            <Grid.Col span={10}>
+            <Grid.Col span={settings.isMd ? 12 : 10}>
               <Text
                 variant="gradient"
                 gradient={{ from: 'white', to: 'white', deg: 45 }}
@@ -41,7 +41,7 @@ export function Home() {
                   fontFamily: 'Segoe UI, sans-serif',
                 }}
                 ta="left"
-                fz={settings.isMd ? 16 : 32}
+                fz={settings.isMd ? 18 : 32}
                 fw={500}
                 mt={20}
               >
@@ -50,12 +50,12 @@ export function Home() {
               </Text>
             </Grid.Col>
           </Grid>
-          <Group spacing={'lg'} mt={'xl'}>
+          <Group spacing={settings.isMd ? 5 : 15} mt={'md'}>
             <Button
               className={classes.textButton2}
-              radius="md"
-              size={settings.isMd ? 'sm' : 'xl'}
-              mt={'xl'}
+              radius="sm"
+              size={settings.isMd ? 'md' : 'xl'}
+              mt={settings.isMd ? 5 : 'xl'}
               style={{
                 boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.3)',
               }}
@@ -64,9 +64,10 @@ export function Home() {
               Join Discord
             </Button>
             <Button
-              radius="md"
-              size={settings.isMd ? 'sm' : 'xl'}
-              mt={'xl'}
+              radius="sm"
+              size={settings.isMd ? 'md' : 'xl'}
+              mt={settings.isMd ? 5 : 'xl'}
+              ml={0}
               style={{
                 boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.3)',
               }}
@@ -74,7 +75,7 @@ export function Home() {
               onClick={() => router.push('/blog')}
 
             >
-              Check Community
+              Our Community
             </Button>
           </Group>
         </Grid.Col>

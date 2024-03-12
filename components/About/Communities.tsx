@@ -20,14 +20,14 @@ export function Communities() {
         ta="left"
         fz={settings.isMd ? 28 : 48}
         fw={600}
-        mt={settings.isMd ? 30 : 100}
+        mt={settings.isMd ? 40 : 100}
       >
         We are working with
       </Text>
       <Space h={20} />
       <Grid>
         {comumnityData.map((item, index) => (
-          <Grid.Col span={settings.isMd ? 3 : 2} key={index}>
+          <Grid.Col span={settings.isMd ? 4 : 2} key={index}>
             {item.tag !== 'none' ? (
               <Link href={item?.tag}>
                 <Card

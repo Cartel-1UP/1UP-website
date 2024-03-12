@@ -22,7 +22,7 @@ export function Join() {
         ta="left"
         fz={settings.isMd ? 28 : 48}
         fw={600}
-        mt={settings.isMd ? 30 : 100}
+        mt={settings.isMd ? 40 : 100}
       >
         How to join CARTEL?
       </Text>
@@ -34,7 +34,7 @@ export function Join() {
           fontFamily: 'Segoe UI, sans-serif',
         }}
         ta="left"
-        fz={settings.isMd ? 16 : 24}
+        fz={settings.isMd ? 18 : 24}
         fw={400}
         mt={settings.isMd ? 15 : 20}
       >
