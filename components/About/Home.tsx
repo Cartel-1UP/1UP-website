@@ -2,11 +2,13 @@
 import AnimatedImages from '@/components/AnimatedImages/AnimatedImages'
 import useSettings from '@/utils/methods/useSettings'
 import { Button, Grid, Group, Text } from '@mantine/core'
+import { useRouter } from 'next/navigation'
 import useStyles from './style'
 
 export function Home() {
   const { ...settings } = useSettings()
   const { classes } = useStyles()
+  const router = useRouter()
   return (
     <>
       <Grid>
@@ -69,6 +71,8 @@ export function Home() {
                 boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.3)',
               }}
               className={classes.textButton1}
+              onClick={() => router.push('/blog')}
+
             >
               Check Community
             </Button>
