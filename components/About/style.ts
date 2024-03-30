@@ -3,7 +3,6 @@ import { createStyles } from '@mantine/styles'
 const useStyles = createStyles((theme, _params) => ({
   card: {
     background: ' rgba(255, 255, 255, 0.25)',
-    // borderRadius: '16px',
     boxShadow: '0 4px 30px rgba(0, 0, 0, 0.1)',
     display: 'flex',
     justifyContent: 'center',
@@ -17,18 +16,36 @@ const useStyles = createStyles((theme, _params) => ({
     },
   },
 
+  glassmorphismCard: {
+    background: 'rgba(255, 255, 255, 0.1)',
+    backdropFilter: 'blur(20px)',
+    border: '1px solid rgba(255, 255, 255, 0.1)',
+    borderRadius: '10px',
+    boxShadow: '0 4px 20px rgba(0, 0, 0, 0.5)',
+    transition: 'box-shadow 0.3s, background 0.4s',
+    '&:hover': {
+      boxShadow: '0 4px 20px rgba(0, 0, 0, 0.7)', // Adjust shadow properties as needed
+    },
+  },
+
+  glassMorphicButton: {
+    border: 0,
+    background: 'rgba(255, 255, 255, 0.15)',
+    backdropFilter: 'blur(20px)',
+    borderRadius: '5px',
+    boxShadow: '0 4px 15px rgba(0, 0, 0, 0.5)',
+    transition: 'box-shadow 0.3s, background 0.4s',
+    '&:hover': {
+      background: 'rgba(255, 255, 255, 0.1)',
+      boxShadow: '0 4px 10px rgba(0, 0, 0, 0.7)', // Adjust shadow properties as needed
+    },
+  },
+
   textButton1: {
     border: 0,
     background: 'linear-gradient(-45deg, #162947, #2ecde6)',
     '&:hover': {
       background: 'linear-gradient(-45deg, #162947 10%, #2ecde6 140%)',
-    },
-  },
-  textButton2: {
-    border: 0,
-    background: 'linear-gradient(45deg, #162947, #2ecde6)',
-    '&:hover': {
-      background: 'linear-gradient(45deg, #162947 10%, #2ecde6 140%)',
     },
   },
 
