@@ -5,7 +5,7 @@ import CoinCard from '../ui/Cards/CoinCard'
 import useStyles from './style'
 
 import oneup from '@/images/1up.png'
-import cartel1 from '@/images/cartel_logo_1.png'
+import cartel1 from '@/images/cartel_logo_2.png'
 
 export function Join() {
   const { classes } = useStyles()
@@ -14,25 +14,16 @@ export function Join() {
   return (
     <>
       <Text
-        variant="gradient"
-        gradient={{ from: 'white', to: 'cyan', deg: 45 }}
-        sx={{
-          fontFamily: 'Segoe UI, sans-serif',
-        }}
         ta="left"
         fz={settings.isMd ? 28 : 48}
         fw={600}
         mt={settings.isMd ? 40 : 100}
+        c={'#fff'}
       >
         How to join CARTEL?
       </Text>
       <Text
-        // variant="gradient"
-        // gradient={{ from: 'white', to: 'white', deg: 45 }}
         c={'#fff'}
-        sx={{
-          fontFamily: 'Segoe UI, sans-serif',
-        }}
         ta="left"
         fz={settings.isMd ? 18 : 24}
         fw={400}

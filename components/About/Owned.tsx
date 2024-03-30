@@ -2,15 +2,13 @@
 import useSettings from '@/utils/methods/useSettings'
 import { Grid, Image, Space, Text } from '@mantine/core'
 import AboutCard from '../ui/Cards/AboutCard'
-import useStyles from './style'
 
-import boss from '@/images/boss.png'
 import swap from '@/images/juggle.png'
+import boss from '@/images/manager.png'
 import rankers from '@/images/ragnarok.png'
 import nft from '@/images/shroominaut.png'
 
 export function Owned() {
-  const { classes } = useStyles()
   const { ...settings } = useSettings()
 
   const cards = [
@@ -18,7 +16,7 @@ export function Owned() {
       title: 'Curators',
       description:
         'These are the people who reliably check the content and choose only the most valuable ones.',
-      icon: <Image src={boss.src} fit="fill" maw={settings.isMd ? 120 : 240} />,
+      icon: <Image src={boss.src} fit="fill" maw={settings.isMd ? 100 : 195} />,
     },
     {
       title: "NFT's",
@@ -42,15 +40,11 @@ export function Owned() {
   return (
     <>
       <Text
-        variant="gradient"
-        gradient={{ from: 'white', to: 'cyan', deg: 45 }}
-        sx={{
-          fontFamily: 'Segoe UI, sans-serif',
-        }}
         ta="left"
         fz={settings.isMd ? 28 : 48}
         fw={600}
         mt={settings.isMd ? 40 : 100}
+        c={'#fff'}
       >
         What does Cartel do?
       </Text>
@@ -58,9 +52,6 @@ export function Owned() {
         <Grid.Col span={settings.isMd ? 12 : 10}>
           <Text
             c={'#fff'}
-            sx={{
-              fontFamily: 'Segoe UI, sans-serif',
-            }}
             ta="left"
             fz={settings.isMd ? 18 : 24}
             fw={400}
@@ -76,7 +67,7 @@ export function Owned() {
       <Space h={60} />
       <Grid>
         {cards.map((item, index) => (
-          <Grid.Col span={settings.isMd ? 12 : 3} key={index}>
+          <Grid.Col span={settings.isMd ? 6 : 3} key={index}>
             <AboutCard title={item.title} description={item.description} icon={item.icon} />
           </Grid.Col>
         ))}

@@ -20,8 +20,7 @@ export default function CoinCard({ name, image }: Props) {
   return (
     <>
       <Card
-        bg={'linear-gradient(#2ecde6 -100%, #162947 80%)'}
-        className={classes.card}
+        className={classes.glassmorphismCard}
         mih={'100%'}
       >
         <Grid>

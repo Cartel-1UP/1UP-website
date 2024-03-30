@@ -12,76 +12,45 @@ type Props = {
 export default function AboutCard({ title, description, icon }: Props) {
   const { classes } = useStyles();
   const { ...settings } = useSettings();
-  const [isFlipped, setIsFlipped] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
 
   return (
     <>
-      <div className={classes.card2}
-        onMouseEnter={() => setIsFlipped(true)}
-        onMouseLeave={() => setIsFlipped(false)}>
-        <Card
-          bg={'linear-gradient(#2ecde6 -20%, #162947 100%)'}
-          className={`${classes.cardInner} ${isFlipped ? classes.cardHover : ''}`}
-          mih={'100%'}
-          h={settings.isMd ? 220 : 350}
-          pt={settings.isMd ? 20 : 10}
-          pb={settings.isMd ? 20 : 15}
-
-        >
-          <Center>
-            <Stack
-              spacing={0}
-              align="center"
-              sx={{
-                transition: 'opacity 0.2s',
-                opacity: isFlipped ? 0 : 1,
-                pointerEvents: isFlipped ? 'none' : 'auto',
+      <Card
+        className={classes.glassmorphismCard}
+        mih={'100%'}
+        h={settings.isMd ? 240 : 350}
+        pt={settings.isMd ? 10 : 20}
+        pb={settings.isMd ? 10 : 25}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        style={{
+          transition: 'transform 0.4s ',
+          transform: isHovered ? 'scale(1.05)' : 'scale(1)',
+        }}
+      >
+        <Center style={{ height: '100%' }}>
+          <Stack
+            align="center"
+            justify="center"
+            style={{ height: '100%' }}
+          >
+            {isHovered ? null : icon}
+            <Text
+              ta="center"
+              fz={settings.isMd ? 24 : 32}
+              fw={600}
+              c={'#fff'}
+              style={{
+                textAlign: 'center',
+                fontSize: isHovered ? (settings.isMd ? 16 : 24) : (settings.isMd ? 24 : 32),
               }}
             >
-              {icon}
-              <Text
-                variant="gradient"
-                gradient={{ from: 'white', to: 'white', deg: 45 }}
-                sx={{
-                  fontFamily: 'Segoe UI, sans-serif',
-                }}
-                ta="center"
-                fz={settings.isMd ? 24 : 32}
-                fw={700}
-                mt={10}
-              >
-                {title}
-              </Text>
-            </Stack>
-            <Stack
-              spacing={0}
-              align="center"
-              sx={{
-                position: 'absolute',
-                transition: 'opacity 0.2s',
-                opacity: isFlipped ? 1 : 0,
-                pointerEvents: isFlipped ? 'auto' : 'none',
-                transform: isFlipped ? 'rotateY(180deg)' : 'none', // Apply flip transformation only when flipped
-
-              }}
-            >
-              <Text
-                variant="gradient"
-                gradient={{ from: 'white', to: 'white', deg: 45 }}
-                sx={{
-                  fontFamily: 'Segoe UI, sans-serif',
-                }}
-                ta="center"
-                fz={settings.isMd ? 16 : 24}
-                fw={500}
-                p={10}
-              >
-                {description}
-              </Text>
-            </Stack>
-          </Center>
-        </Card>
-      </div>
+              {isHovered ? description : title}
+            </Text>
+          </Stack>
+        </Center>
+      </Card>
     </>
   );
 }
