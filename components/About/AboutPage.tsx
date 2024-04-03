@@ -15,16 +15,16 @@ export function AboutPage() {
   return (
     <>
       <Home />
+      <Owned />
       {
         !isLoading && (
           <>
-            <Owned />
             <Join />
             <Pools />
-            <Communities />
           </>
         )
       }
+      <Communities />
 
     </>
   )
