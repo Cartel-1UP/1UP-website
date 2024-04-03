@@ -14,7 +14,7 @@ type Props = {
   data?: any
   queryKey?: string
   close: () => void
-  mutation: (cardData: any) => Promise<undefined[] | undefined>
+  mutation: (cardData: any) => Promise<any>
 }
 
 export default function CRUDModal({
