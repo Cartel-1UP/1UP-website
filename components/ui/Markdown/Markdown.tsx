@@ -1,4 +1,4 @@
-import { Image, Table } from '@mantine/core'
+import { Center, Image, Table } from '@mantine/core'
 import { useMemo } from 'react'
 import ReactMarkdown from 'react-markdown'
 import { Tweet } from 'react-twitter-widgets'
@@ -176,22 +176,22 @@ export function Markdown({ text }: Props) {
                 const linkText = urlMatch[1]
                 const linkUrl = urlMatch[2]
                 return (
-                  <center>
+                  <Center>
                     <a href={linkUrl} target="_blank" rel="noreferrer">
                       {linkText}
                     </a>
-                  </center>
+                  </Center>
                 )
               } else if (isImageUrl(firstChild) || matchesCustomImageRegex(firstChild)) {
                 return (
-                  <center>
+                  <Center>
                     <Image
                       src={firstChild}
                       alt="Image"
                       className={classes.responsiveImage}
                       style={{ width, height, borderRadius: 5 }}
                     />
-                  </center>
+                  </Center>
                 )
               } else if (isValidUrl(firstChild)) {
                 return (
