@@ -35,9 +35,20 @@ export async function getHivePrice() {
   }
 }
 
-export const useGetTokenPrice = (token: string) => {
+export const useGetHivePrice = () => {
   const queryFn = async () => {
     const hivePrice = await getHivePrice()
+    return hivePrice
+  }
+  return useQuery(['hivePrice'], queryFn, {
+    refetchOnWindowFocus: false,
+    retry: false,
+    keepPreviousData: true,
+  })
+}
+
+export const useGetTokenPrice = (token: string, hivePrice: string) => {
+  const queryFn = async () => {
     return getTokenPrice(token, hivePrice)
   }
   return useQuery(['userprofile-data', token], queryFn, {

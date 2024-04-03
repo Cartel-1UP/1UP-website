@@ -1,5 +1,6 @@
 import { useGetTokenPrice } from '@/actions/hive/get-token-price'
 import { Card, Grid, Image, Text } from '@mantine/core'
+import { useQueryClient } from 'react-query'
 import useStyles from './style'
 
 type Props = {
@@ -9,7 +10,8 @@ type Props = {
 
 export default function CoinCard({ name, image }: Props) {
   const { classes, theme } = useStyles()
-  const { data } = useGetTokenPrice(name)
+  const queryCache = useQueryClient()
+  const { data } = useGetTokenPrice(name, queryCache.getQueryData('hivePrice') as string)
 
   const countPrice = () => {
     return (

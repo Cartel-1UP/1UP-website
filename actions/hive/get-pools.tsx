@@ -1,18 +1,18 @@
-import apiHive from '@/utils/apiHive'
+import apiBeeSwap from '@/utils/apiBeeSwap'
 import { useQuery } from 'react-query'
 
 export const getPools = async (): Promise<any> => {
   try {
-    const { data } = await apiHive.post('', {
+    const { data } = await apiBeeSwap.post('contracts', {
       "id": 0,
       "jsonrpc": "2.0",
       "method": "find",
       "params": {
         "contract": "marketpools",
-        "table": "liquidityPositions",
+        "table": "pools",
         "query": {},
         "limit": 1000,
-        "offset": 5000
+        "offset": 0
       }
     })
     return { data }

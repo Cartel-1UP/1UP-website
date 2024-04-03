@@ -1,7 +1,8 @@
 'use client'
-import stellarium from '@/images/stellarium.png'
+import { useGetPools } from '@/actions/hive/get-pools'
+import { Pool } from '@/types/pool.type'
 import useSettings from '@/utils/methods/useSettings'
-import { Grid, Text } from '@mantine/core'
+import { Button, Grid, Text } from '@mantine/core'
 import StakingCard from '../ui/Cards/StakingCard'
 import useStyles from './style'
 
@@ -9,16 +10,14 @@ export function Pools() {
   const { classes } = useStyles()
   const { ...settings } = useSettings()
 
-  const data = [
-    {
-      title: 'Stellarium',
-      liquidity: '100,000',
-      apr: '10',
-      timer: '2 days',
-      icon: stellarium,
-    },
+  const { data: poolsData, isLoading } = useGetPools()
 
-  ]
+
+  const filteredArray: Pool[] = poolsData?.data?.result?.filter((obj: any) => obj.tokenPair.includes("ONEUP"));
+
+
+
+
   return (
     <>
       <Text
@@ -40,15 +39,25 @@ export function Pools() {
         Staking pools are a way to earn passive income by holding your tokens in a wallet.
         You can stake your tokens in a pool and earn rewards for doing so.
       </Text>
+      <Button
+        className={classes.glassMorphicButton}
+        radius="sm"
+        size={settings.isMd ? 'md' : 'xl'}
+        mt={settings.isMd ? 5 : 'xl'}
+        onClick={() => window.open('https://beeswap.dcity.io/pools?search=oneup', '_blank')}
+      >
+        Check pools
+      </Button>
       <Grid mt={20}>
-        {data.map((item, i) => (
+        {filteredArray?.map((item, i) => (
           <Grid.Col span={settings.isMd ? 12 : 6} key={i}>
             <StakingCard
-              title={item.title}
-              liquidity={item.liquidity}
-              apr={item.apr}
-              timer={item.timer}
-              icon={item.icon} />
+              tokenPair={item.tokenPair}
+              baseQuantity={item.baseQuantity}
+              quoteQuantity={item.quoteQuantity}
+              basePrice={item.basePrice}
+              quotePrice={item.quotePrice}
+            />
           </Grid.Col>
         ))}
 
