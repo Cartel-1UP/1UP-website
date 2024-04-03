@@ -65,9 +65,9 @@ export default function StakingCard({ tokenPair, baseQuantity, quoteQuantity, ba
                         </Group>
                     </Text>
                 </Group>
-                <Card mt={20} className={classes.glassmorphismCard}>
-                    <Grid>
-                        <Grid.Col span={settings.isSm ? 6 : 4}>
+                {settings.isSm &&
+                    <Card mt={20} className={classes.glassmorphismCard}>
+                        <Grid.Col span={settings.isSm ? 12 : 4}>
                             <Text c={'#fff'} ta="left" fz={18} fw={400}>
                                 Liquidity
                             </Text>
@@ -82,13 +82,43 @@ export default function StakingCard({ tokenPair, baseQuantity, quoteQuantity, ba
                                         height={'25px'}
                                         fit="contain"
                                     />
+                                    <Text c={'#fff'} ta="left" fz={18} fw={400} ml={10}>
+                                        worth ${countPrice().toFixed(2)}
+                                    </Text>
                                 </Group>
 
-                                <Text c={'#fff'} ta="left" fz={18} fw={400}>
-                                    worth ${countPrice().toFixed(2)}
-                                </Text>
+
                             </Text>
                         </Grid.Col>
+                    </Card>
+                }
+                <Card mt={20} className={classes.glassmorphismCard}>
+                    <Grid>
+                        {settings.isSm ? null : (
+                            <Grid.Col span={4}>
+                                <Text c={'#fff'} ta="left" fz={18} fw={400}>
+                                    Liquidity
+                                </Text>
+                                <Text c={'#fff'} ta="left" fz={22} fw={400}>
+                                    <Group
+                                        spacing={5}
+                                    >
+                                        {(countPrice() / firstTokenData?.hivePrice?.hive?.usd).toFixed(2)}
+                                        <Image
+                                            src={'https://images.hive.blog/p/4PYjjVwJ1UdtC5FGc4dbeF1E4FitPfBjR7UqkAYqBLuRR1wQLaLaSR6TWWXn1z5NTyqnENDBgHLxbXabw2wZXiwUBo1pnCcnjJK7AUJYAK8?format=match&mode=fit'}
+                                            width={'25px'}
+                                            height={'25px'}
+                                            fit="contain"
+                                        />
+                                    </Group>
+
+                                    <Text c={'#fff'} ta="left" fz={18} fw={400}>
+                                        worth ${countPrice().toFixed(2)}
+                                    </Text>
+                                </Text>
+                            </Grid.Col>
+                        )}
+
                         <Grid.Col span={settings.isSm ? 6 : 4}>
                             <Text c={'#fff'} ta="left" fz={18} fw={400}>
 
@@ -107,9 +137,8 @@ export default function StakingCard({ tokenPair, baseQuantity, quoteQuantity, ba
                             </Text>
                         </Grid.Col>
                     </Grid>
-
-
                 </Card>
+
             </Card >
         </>
     );
