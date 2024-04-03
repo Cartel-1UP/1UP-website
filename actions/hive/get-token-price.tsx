@@ -1,9 +1,9 @@
-import apiRPC from '@/utils/apiRPC'
+import apiBeeSwap from '@/utils/apiBeeSwap'
 import { useQuery } from 'react-query'
 
 export async function getTokenPrice(token: string, hivePrice: any) {
   try {
-    const { data } = await apiRPC.post('contracts', {
+    const { data } = await apiBeeSwap.post('contracts', {
       jsonrpc: '2.0',
       id: 1709478462688,
       method: 'findOne',
