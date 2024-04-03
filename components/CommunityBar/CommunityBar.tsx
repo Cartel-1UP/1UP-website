@@ -30,6 +30,8 @@ export function CommunityBar({ communityLogo, tag }: Props) {
 
   const communityInfo = community?.data?.result
 
+
+
   return (
     <>
       {isLoading ? (
