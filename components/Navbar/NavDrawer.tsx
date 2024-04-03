@@ -8,10 +8,9 @@ import {
   Divider,
   Drawer,
   Group,
-  Menu,
   NavLink,
   ScrollArea,
-  Text,
+  Text
 } from '@mantine/core'
 import { IconLogout, IconUsers } from '@tabler/icons'
 import { useRouter } from 'next/navigation'
@@ -83,7 +82,7 @@ export function NavDrawer({
           </>
         )}
         <NavLinkSection navLinks={navLinksMobile} authorized={authorized} />
-        <Menu.Divider />
+
         <NavLink
           className={classes.subLink}
           label="Partners"
@@ -115,7 +114,7 @@ export function NavDrawer({
             ))}
           </ScrollArea>
         </NavLink>
-        <Menu.Divider />
+
         {authorized ? (
           <NavLink
             label="Log out"
