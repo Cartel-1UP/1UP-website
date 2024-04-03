@@ -195,11 +195,11 @@ export function Markdown({ text }: Props) {
                 )
               } else if (isValidUrl(firstChild)) {
                 return (
-                  <center>
+                  <Center>
                     <a href={firstChild} target="_blank" rel="noreferrer">
                       {firstChild}
                     </a>
-                  </center>
+                  </Center>
                 )
               }
             }
@@ -207,7 +207,7 @@ export function Markdown({ text }: Props) {
             // Default case: render the child as is
             return (
               <div>
-                <center>{firstChild}</center>
+                <Center>{firstChild}</Center>
               </div>
             )
           },
