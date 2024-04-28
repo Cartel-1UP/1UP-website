@@ -36,7 +36,7 @@ export function Communities() {
           slideSize="20%"
           slideGap="xl"
           align="start"
-          slidesToScroll={4}
+          slidesToScroll={1}
           loop
           withControls={false}
           plugins={[autoplay.current]}
