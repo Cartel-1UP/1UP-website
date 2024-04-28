@@ -1,18 +1,15 @@
 'use client'
 
-import { generateRandomLetters } from '@/utils/methods/generateRandom'
 import { useAuthorizationStore } from '@/zustand/stores/useAuthorizationStore'
 import {
   ActionIcon,
   Button,
   Card,
-  Container,
-  Divider,
   Grid,
   Group,
   Space,
-  Text,
-  Textarea,
+  TextInput,
+  Textarea
 } from '@mantine/core'
 import { showNotification } from '@mantine/notifications'
 import {
@@ -23,9 +20,10 @@ import {
   IconList,
   IconPhotoDown,
   IconQuote,
+  IconTable,
 } from '@tabler/icons'
 import { KeychainSDK, Post } from 'keychain-sdk'
-import React, { Dispatch, SetStateAction, useRef, useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { useMutation, useQueryClient } from 'react-query'
 import { Markdown } from '../Markdown/Markdown'
 import { NotificationText } from '../ProgressBar/ProgressBar'
@@ -33,22 +31,16 @@ import useStyles from './style'
 
 type Tag = {
   name: string
-  type: 'link' | 'heading' | 'bold' | 'italic' | 'image' | 'quote' | 'list'
+  type: 'link' | 'heading' | 'bold' | 'italic' | 'image' | 'quote' | 'list' | 'table'
 }
 
-type Props = {
-  setIsComment: Dispatch<SetStateAction<boolean>> | any
-  permlink: string
-  parentAuthor: string
-  parentPermlink: string
-  queryKey?: string
-}
-
-const CommentEditor = ({ setIsComment, permlink, parentAuthor, queryKey }: Props) => {
+const PublishEditor = () => {
   const { classes, theme } = useStyles()
   const queryCache = useQueryClient()
   const [markdown, setMarkdown] = useState('')
   const textareaRef = useRef<HTMLTextAreaElement | null>(null)
+  const [title, setTitle] = useState('')
+  const [summary, setSummary] = useState('')
 
   const username = useAuthorizationStore((state: { username: string }) => state.username)
 
@@ -88,6 +80,9 @@ const CommentEditor = ({ setIsComment, permlink, parentAuthor, queryKey }: Props
         case 'list':
           modifiedValue += `\n - ${selectedText}`
           break
+        case 'table':
+          modifiedValue += `|column1|column2|column3|\n|-|-|-|\n|content1|content2|content3|`
+          break
         default:
           modifiedValue += selectedText
           break
@@ -100,8 +95,6 @@ const CommentEditor = ({ setIsComment, permlink, parentAuthor, queryKey }: Props
     }
   }
 
-  const randomChars = generateRandomLetters(6)
-  const commentPermlink = `re-${permlink}-${randomChars}`
   const handlePostComment = useMutation<void, any, void, unknown>(
     async () => {
       const keychain = new KeychainSDK(window)
@@ -109,12 +102,12 @@ const CommentEditor = ({ setIsComment, permlink, parentAuthor, queryKey }: Props
         data: {
           username: username,
           body: markdown,
-          parent_perm: permlink,
-          parent_username: parentAuthor,
+          parent_perm: 'test',
+          parent_username: 'test',
           json_metadata:
             '{"format":"markdown","description":"Message from Cartel website","tags":["Message"]}',
-          permlink: commentPermlink,
-          comment_options: `{\"author\":\"${username}\",\"permlink\":\"${commentPermlink}\",\"max_accepted_payout\":\"10000.000 HBD\",\"allow_votes\":true,\"allow_curation_rewards\":true,\"extensions\":[],\"percent_hbd\":63}`,
+          permlink: 'test',
+          comment_options: `{\"author\":\"${username}\",\"permlink\":\"test\",\"max_accepted_payout\":\"10000.000 HBD\",\"allow_votes\":true,\"allow_curation_rewards\":true,\"extensions\":[],\"percent_hbd\":63}`,
         },
       }
       await keychain.post(formParamsAsObject.data as Post)
@@ -140,11 +133,10 @@ const CommentEditor = ({ setIsComment, permlink, parentAuthor, queryKey }: Props
           }),
           loading: false,
           onClose: () => {
-            queryCache.refetchQueries(queryKey)
+            // queryCache.refetchQueries(queryKey)
           },
         })
         const timeout = setTimeout(() => {
-          setIsComment(false)
           setMarkdown('')
         }, 4000)
           ; () => clearTimeout(timeout)
@@ -170,7 +162,6 @@ const CommentEditor = ({ setIsComment, permlink, parentAuthor, queryKey }: Props
           loading: false,
         })
         const timeout = setTimeout(() => {
-          setIsComment(false)
           setMarkdown('')
         }, 2500)
           ; () => clearTimeout(timeout)
@@ -180,76 +171,79 @@ const CommentEditor = ({ setIsComment, permlink, parentAuthor, queryKey }: Props
 
   return (
     <>
-      <Divider my="lg" />
       <Space h="xl" />
-      <Container size={'sm'}>
-        <Grid grow>
-          <Grid.Col>
-            <Group spacing={3}>
-              <ActionIcon
-                variant="default"
-                onClick={() => handleTagButtonClick('Heading', 'heading')}
-              >
-                <IconHeading size="1rem" />
-              </ActionIcon>
-              <ActionIcon variant="default" onClick={() => handleTagButtonClick('Bold', 'bold')}>
-                <IconBold size="1rem" />
-              </ActionIcon>
-              <ActionIcon
-                variant="default"
-                onClick={() => handleTagButtonClick('Italic', 'italic')}
-              >
-                <IconItalic size="1rem" />
-              </ActionIcon>
-              <ActionIcon variant="default" onClick={() => handleTagButtonClick('Link', 'link')}>
-                <IconLink size="1rem" />
-              </ActionIcon>
-              <ActionIcon variant="default" onClick={() => handleTagButtonClick('Image', 'image')}>
-                <IconPhotoDown size="1rem" />
-              </ActionIcon>
-              <ActionIcon variant="default" onClick={() => handleTagButtonClick('Quote', 'quote')}>
-                <IconQuote size="1rem" />
-              </ActionIcon>
-              <ActionIcon variant="default" onClick={() => handleTagButtonClick('List', 'list')}>
-                <IconList size="1rem" />
-              </ActionIcon>
-            </Group>
-          </Grid.Col>
-          <Grid.Col>
-            <Space w="sm" />
-            <Textarea
-              value={markdown}
-              onChange={handleMarkdownChange}
-              ref={textareaRef}
-              autosize
-              minRows={4}
-            />
-            <Space w="sm" />
-          </Grid.Col>
-          <Grid.Col>
-            {markdown !== '' && (
-              <>
-                <Text pb={5}>Preview</Text>
-                <Card withBorder radius={4} sx={{ borderColor: '#CED4DA' }}>
-                  <Markdown text={markdown} />
-                </Card>
-              </>
-            )}
-          </Grid.Col>
-          <Grid.Col>
-            <Group className={classes.buttonContainer}>
-              <Button variant="outline" color={'dark'} onClick={() => handlePostComment.mutate()}>
-                Submit
-              </Button>
-              <Button variant="outline" color={'dark'} onClick={() => setIsComment(false)}>
-                Cancel
-              </Button>
-            </Group>
-          </Grid.Col>
-        </Grid>
-      </Container>
+
+      <Grid mih={'80vh'}>
+        <Grid.Col span={6}>
+          <TextInput placeholder="Title" value={title} onChange={(event) => setTitle(event.currentTarget.value)} />
+        </Grid.Col>
+        <Grid.Col span={12}>
+          <Group spacing={3}>
+            <ActionIcon
+              variant="default"
+              onClick={() => handleTagButtonClick('Heading', 'heading')}
+            >
+              <IconHeading size="1rem" />
+            </ActionIcon>
+            <ActionIcon variant="default" onClick={() => handleTagButtonClick('Bold', 'bold')}>
+              <IconBold size="1rem" />
+            </ActionIcon>
+            <ActionIcon
+              variant="default"
+              onClick={() => handleTagButtonClick('Italic', 'italic')}
+            >
+              <IconItalic size="1rem" />
+            </ActionIcon>
+            <ActionIcon variant="default" onClick={() => handleTagButtonClick('Link', 'link')}>
+              <IconLink size="1rem" />
+            </ActionIcon>
+            <ActionIcon variant="default" onClick={() => handleTagButtonClick('Image', 'image')}>
+              <IconPhotoDown size="1rem" />
+            </ActionIcon>
+            <ActionIcon variant="default" onClick={() => handleTagButtonClick('Quote', 'quote')}>
+              <IconQuote size="1rem" />
+            </ActionIcon>
+            <ActionIcon variant="default" onClick={() => handleTagButtonClick('List', 'list')}>
+              <IconList size="1rem" />
+            </ActionIcon>
+            <ActionIcon variant="default" onClick={() => handleTagButtonClick('Table', 'table')}>
+              <IconTable size="1rem" />
+            </ActionIcon>
+          </Group>
+        </Grid.Col>
+        <Grid.Col span={6}>
+          <Textarea
+            value={markdown}
+            onChange={handleMarkdownChange}
+            ref={textareaRef}
+            autosize
+            minRows={20}
+            placeholder='Write your post here...'
+          />
+          <TextInput mt={10} placeholder="Summary" value={summary} onChange={(event) => setSummary(event.currentTarget.value)} />
+          <TextInput mt={10} placeholder="Tags" value={summary} miw={'80%'} />
+          <Button mt={10} variant="outline" color={'dark'} onClick={() => console.log('addTag')}>
+            Add tag
+          </Button>
+        </Grid.Col>
+        <Grid.Col span={6}>
+          <>
+            <Card withBorder radius={4} sx={{ borderColor: '#CED4DA' }}>
+              <Markdown text={markdown} />
+            </Card>
+          </>
+
+        </Grid.Col>
+        <Grid.Col>
+          <Group className={classes.buttonContainer}>
+            <Button variant="outline" color={'dark'} onClick={() => handlePostComment.mutate()}>
+              Publish
+            </Button>
+          </Group>
+        </Grid.Col>
+      </Grid>
     </>
   )
 }
 
-export default CommentEditor
+export default PublishEditor
