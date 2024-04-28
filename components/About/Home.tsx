@@ -2,11 +2,13 @@
 import AnimatedImages from '@/components/AnimatedImages/AnimatedImages'
 import useSettings from '@/utils/methods/useSettings'
 import { Button, Grid, Group, Text } from '@mantine/core'
+import { useRouter } from 'next/navigation'
 import useStyles from './style'
 
 export function Home() {
   const { ...settings } = useSettings()
   const { classes } = useStyles()
+  const router = useRouter()
   return (
     <>
       <Grid>
@@ -46,9 +48,11 @@ export function Home() {
               radius="sm"
               size={settings.isMd ? 'md' : 'xl'}
               mt={settings.isMd ? 5 : 'xl'}
-              onClick={() => window.open('https://discord.gg/f7sHEHYZJZ', '_blank')}
+              onClick={() => {
+                router.push('/blog')
+              }}
             >
-              Join Discord
+              Go to community
             </Button>
           </Group>
         </Grid.Col>
