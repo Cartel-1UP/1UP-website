@@ -12,6 +12,7 @@ import psyber from '../images/psyber.png'
 import risingstar from '../images/risingstar.png'
 import splinterlands from '../images/splinterlands.svg'
 import woo from '../images/woo.png'
+import ragnarok from '../images/ragnarok-logo.png'
 
 export const comumnityData = [
   {
@@ -63,6 +64,12 @@ export const comumnityData = [
     value: 'CryptoCompany',
   },
   {
+    name: 'Ragnarok',
+    image: ragnarok.src,
+    tag: 'hive-100039',
+    value: 'Ragnarok',
+  },
+  {
     name: 'PsyberX',
     image: psyber.src,
     tag: 'hive-168109',
@@ -99,6 +106,7 @@ export const comumnityData = [
     tag: 'none',
     value: 'KOD',
   },
+
 ]
 
 export const communityAssetsData = [
@@ -136,6 +144,11 @@ export const communityAssetsData = [
     image: cryptocompany.src,
     label: 'CryptoCompany',
     value: 'CryptoCompany',
+  },
+  {
+    image: ragnarok.src,
+    label: 'Ragnarok',
+    value: 'Ragnarok',
   },
   {
     image: psyber.src,
